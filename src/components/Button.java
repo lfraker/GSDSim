@@ -64,6 +64,8 @@ public class Button {
 	public void onResize(VectorI tL, VectorI dim) {
 		this.topLeft = tL;
 		this.dimens = dim;
+		this.fontText = new Font("serif", Font.BOLD, (this.dimens.y/3));
+
 	}
 	
 	

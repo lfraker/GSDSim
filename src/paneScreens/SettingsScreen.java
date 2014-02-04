@@ -1,6 +1,7 @@
 package paneScreens;
 
 import gamePanes.Pane;
+import gamePanes.SettingsPane;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -37,6 +38,8 @@ public class SettingsScreen extends Screen {
 	VectorI lineLeft;
 	VectorI lineRight;
 	VectorI dragDimens;
+	int FTSmin;
+	float laborCost;
 	boolean dragging;
 	int timePerDay;
 
@@ -53,7 +56,43 @@ public class SettingsScreen extends Screen {
 		int diff = this.lineRight.x - this.lineLeft.x;
 		int toAdd = ((int)(diff * percent)); 
 		this.slide.updateX((tempX + toAdd));
-		
+		String lC = ((SettingsPane)this.parentPane).laborCost.getText();
+		String fTS = ((SettingsPane)this.parentPane).followTheSun.getText();
+		if (lC.length() > 0) {
+			try {
+				this.laborCost = Float.parseFloat(lC);
+				if (this.laborCost < 1.0f) {
+					String message = "Please enter a positive number with no spaces, default value of 100.00 has been set";
+					this.parentPane.showMessage(message);
+					((SettingsPane)this.parentPane).laborCost.setText("100.00");
+
+				}
+
+			}
+			catch(NumberFormatException e) {
+				String message = "Please enter only numbers with no spaces, default value of 100.00 has been set";
+				this.parentPane.showMessage(message);
+				((SettingsPane)this.parentPane).laborCost.setText("100.00");
+
+			}
+		}
+		if (fTS.length() > 0) {
+			try {
+				this.FTSmin = Integer.parseInt(fTS);
+				if (this.FTSmin < 1 || this.FTSmin > 15) {
+					String message = "Please enter a number between 1-15, default value of 15 has been set";
+					this.parentPane.showMessage(message);
+					((SettingsPane)this.parentPane).followTheSun.setText("15");
+
+				}
+			}
+			catch(NumberFormatException e) {
+				String message = "Please enter a number between 1-15 with no spaces, default value of 15 has been set";
+				this.parentPane.showMessage(message);
+				((SettingsPane)this.parentPane).followTheSun.setText("15");
+			}
+		}
+		writeSettings();
 	}
 
 	@Override
@@ -61,16 +100,16 @@ public class SettingsScreen extends Screen {
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRoundRect(0, 0, screenSize.x, screenSize.y, 25, 25);
 		g.setColor(Color.BLACK);
+		g.drawRoundRect(0, 0, screenSize.x - 2, screenSize.y - 2, 25, 25);
 		g.setFont(fontText);
 		FontMetrics text = g.getFontMetrics();
 		int width = text.stringWidth("Difficulty:");
-		g.drawString("Difficulty:", ((this.screenSize.x/2.0f) - width/2.0f) , 30.0f);
+		g.drawString("Difficulty:", ((this.screenSize.x/2.0f) - width/2.0f) , ((this.screenSize.y/7.0f)*1.0f));
+		int width2 = text.stringWidth("Length of Day: " + this.timePerDay + " minutes per day");
+		g.drawString("Length of Day: " + this.timePerDay + " minutes per day", ((this.screenSize.x/2.0f) - width2/2.0f) , ((this.screenSize.y/7.0f)*3.0f));
 		this.easy.onDraw(g);
 		this.medium.onDraw(g);
 		this.hard.onDraw(g);
-		g.setColor(Color.BLACK);
-		int width2 = text.stringWidth("Length of Day: " + this.timePerDay + " minutes per day");
-		g.drawString("Length of Day: " + this.timePerDay + " minutes per day", ((this.screenSize.x/2.0f) - width2/2.0f) , ((this.screenSize.y/7.0f)*3.0f));
 		g.drawLine(this.lineLeft.x, this.lineLeft.y, this.lineRight.x, this.lineRight.y);
 		this.slide.onDraw(g);
 	}
@@ -93,6 +132,7 @@ public class SettingsScreen extends Screen {
 		if (this.sliderPos == null) {
 			this.sliderPos = new VectorI((this.screenSize.x/4), ((this.screenSize.y/7)*4));
 		}
+		this.fontText = new Font("serif", Font.BOLD, (newSize.y/20));
 		int yCoord = (newSize.y/5);
 		int xCoord = (newSize.x/12);
 		int width = (newSize.x/7);
@@ -179,6 +219,12 @@ System.out.println("THIS RIGHT : " + this.lineRight.x);
 					if (val[0].contains("Minutes Per Day")) {
 						this.timePerDay = Integer.parseInt(val[1]);
 					}
+					if (val[0].contains("Labor Cost")) {
+						((SettingsPane)this.parentPane).laborCost.setText(""+val[1]);
+					}
+					if (val[0].contains("Follow The Sun Handoff Time")) {
+						((SettingsPane)this.parentPane).followTheSun.setText(""+val[1]);
+					}
 				}
 			}
 			
@@ -219,7 +265,9 @@ System.out.println("THIS RIGHT : " + this.lineRight.x);
 		"Do not add any spaces after the colon either, only add the desired value\n" +
 		"*****************************\n" +
 		"Difficulty (1 for easy, 2 for medium, 3 for hard):"+this.difficulty +"\n" +
-		"Minutes Per Day (enter a number between 15-115):"+this.timePerDay;
+		"Minutes Per Day (enter a number between 15-115):"+this.timePerDay+"\n" +
+		"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
+		"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
 		
 		File dir = new File("gameFiles");
 		 

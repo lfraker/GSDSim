@@ -14,6 +14,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 import backend.VectorI;
 
@@ -93,6 +94,12 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	public abstract void doTick(long nanos);
 	
 	public abstract void setupSwingPane();
+
+
+	public void showMessage(String message) {
+		JOptionPane.showMessageDialog(this, message);
+		
+	}
 	
 	
 }
