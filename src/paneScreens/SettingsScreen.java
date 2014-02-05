@@ -51,6 +51,7 @@ public class SettingsScreen extends Screen {
 	
 	@Override
 	public void onTick(float nanosSincePreviousTick) {
+		
 		float percent = ((this.timePerDay - 15)/100.0f);
 		int tempX = this.lineLeft.x;
 		int diff = this.lineRight.x - this.lineLeft.x;
@@ -117,13 +118,11 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onResize(VectorI newSize) {
 		float percent = 0.0f;
-		System.out.println(this.lineRight);
-		System.out.println(this.lineLeft);
+
 		if (this.lineLeft != null && this.lineRight != null) {
 			float diff = (this.lineRight.x - this.lineLeft.x);
 			float pos = (this.sliderPos.x - this.lineLeft.x);
-			System.out.println("DIFF : " + diff);
-			System.out.println("POS : " + pos);
+
 			percent = pos/diff;
 		}
 		
@@ -156,10 +155,6 @@ public class SettingsScreen extends Screen {
 		//float percent = pos/diff;
 		int newDiff = (this.lineRight.x - this.lineLeft.x);
 		float toAdd = (newDiff * percent);
-		System.out.println("TO ADD : " + toAdd);
-		System.out.println("PERCENT : " + percent);
-System.out.println("SLIDER POS x : " + this.sliderPos.x);
-System.out.println("THIS RIGHT : " + this.lineRight.x);
 		VectorI tL = new VectorI(((int)(this.lineLeft.x + (percent * newDiff))), (this.lineLeft.y - 4));
 		VectorI dim = new VectorI(10, 25);
 		this.slide.onResize(tL, dim);
@@ -207,23 +202,57 @@ System.out.println("THIS RIGHT : " + this.lineRight.x);
 		
 	}
 	public void readSettings() {
-		
-		try (BufferedReader buffRead = new BufferedReader(new FileReader("gameFiles/settings.txt"))) {
+		try (BufferedReader buffRead = new BufferedReader(new FileReader("./gameFiles/settings.txt"))) {
 			String currLine;
 			while ((currLine = buffRead.readLine()) != null) {
 				if (currLine.contains(":")) {
 					String [] val = currLine.split(":");
-					if (val[0].contains("Difficulty")) {
-						this.difficulty = Integer.parseInt(val[1]);
-					}
-					if (val[0].contains("Minutes Per Day")) {
-						this.timePerDay = Integer.parseInt(val[1]);
-					}
-					if (val[0].contains("Labor Cost")) {
-						((SettingsPane)this.parentPane).laborCost.setText(""+val[1]);
-					}
-					if (val[0].contains("Follow The Sun Handoff Time")) {
-						((SettingsPane)this.parentPane).followTheSun.setText(""+val[1]);
+					try {
+						if (val[0].contains("Difficulty")) {
+							int v1i = Integer.parseInt(val[1]);
+							this.difficulty = Integer.parseInt(val[1]);
+							if (v1i < 0 || v1i > 2) {
+								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+								this.parentPane.showMessage(message);
+								this.difficulty = 1;
+							}
+						}
+						if (val[0].contains("Minutes Per Day")) {
+							int v1i = Integer.parseInt(val[1]);
+							this.timePerDay = Integer.parseInt(val[1]);
+							if (v1i < 15 || v1i > 115) {
+								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+								this.parentPane.showMessage(message);
+								this.timePerDay = 30;
+							}
+						}
+						if (val[0].contains("Labor Cost")) {
+							float v1 = Float.parseFloat(val[1]);
+							((SettingsPane)this.parentPane).laborCost.setText(""+val[1]);
+							if (v1 < 1.0f || v1 > 100.0f) {
+								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+								this.parentPane.showMessage(message);
+								((SettingsPane)this.parentPane).laborCost.setText("100.00");
+								
+							}
+						}
+						if (val[0].contains("Follow The Sun Handoff Time")) {
+							int v1i = Integer.parseInt(val[1]);
+							((SettingsPane)this.parentPane).followTheSun.setText(""+val[1]);
+							if (v1i < 0 || v1i > 15) {
+								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+								this.parentPane.showMessage(message);
+								((SettingsPane)this.parentPane).followTheSun.setText("15");
+							}
+						}
+					} catch (NumberFormatException e) {
+						String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+						this.parentPane.showMessage(message);
+						this.difficulty = 1;
+						this.timePerDay = 30;
+						((SettingsPane)this.parentPane).laborCost.setText("100.00");
+						((SettingsPane)this.parentPane).followTheSun.setText("15");
+
 					}
 				}
 			}
@@ -300,7 +329,6 @@ System.out.println("THIS RIGHT : " + this.lineRight.x);
 			if (xP >= this.dragDimens.x && xP <= this.dragDimens.y) {
 				this.slide.updateX(e.getPoint().x);
 				this.sliderPos = this.slide.getPos();
-				//System.out.println("DRAGGING");
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
 				this.timePerDay = (((int)((pos/diff) * 100)) + 15);
