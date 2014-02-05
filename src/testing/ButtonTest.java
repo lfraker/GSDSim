@@ -1,10 +1,12 @@
-package components;
+package testing;
 
 import static org.junit.Assert.*;
 
 import java.awt.Point;
 
 import org.junit.Test;
+
+import components.Button;
 
 import backend.VectorI;
 
@@ -14,13 +16,13 @@ public class ButtonTest {
 	@Test
 	public void testSetPressed() {
 		this.toTest.setPressed();
-		assertTrue(this.toTest.pressed);
+		assertTrue(this.toTest.isPressed());
 	}
 
 	@Test
 	public void testRelease() {
 		this.toTest.release();
-		assertTrue(!this.toTest.pressed);
+		assertTrue(!this.toTest.isPressed());
 	}
 
 	@Test

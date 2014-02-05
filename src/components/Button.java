@@ -12,7 +12,7 @@ public class Button {
 	
 	VectorI topLeft;
 	VectorI dimens;
-	boolean pressed = false;
+	private boolean pressed = false;
 	String text;
 	Font fontText = new Font("serif", Font.BOLD, 25);
 
@@ -27,7 +27,7 @@ public class Button {
 		g.setColor(Color.WHITE);
 
 		g.fillRoundRect(this.topLeft.x, this.topLeft.y, this.dimens.x, this.dimens.y, 15, 15);
-		if (this.pressed) {
+		if (this.isPressed()) {
 			g.setColor(Color.GRAY);
 			g.fillRoundRect((this.topLeft.x + 4), (this.topLeft.y + 4), (this.dimens.x - 8), (this.dimens.y - 8), 15, 15);
 
@@ -49,7 +49,7 @@ public class Button {
 	}
 	
 	public void release() {
-		this.pressed = false;
+		this.setPressed(false);
 	}
 	
 	public boolean clickedInside(Point p) {
@@ -66,6 +66,14 @@ public class Button {
 		this.dimens = dim;
 		this.fontText = new Font("serif", Font.BOLD, (this.dimens.y/3));
 
+	}
+
+	public boolean isPressed() {
+		return pressed;
+	}
+
+	public void setPressed(boolean pressed) {
+		this.pressed = pressed;
 	}
 	
 	
