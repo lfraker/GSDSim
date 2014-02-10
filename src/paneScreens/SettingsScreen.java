@@ -19,6 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import components.Button;
+import components.Difficulty;
 import components.Slider;
 
 import backend.VectorI;
@@ -32,7 +33,7 @@ public class SettingsScreen extends Screen {
 	Button easy = new Button(new VectorI(0,0), new VectorI(0,0), "easy");
 	Button medium = new Button(new VectorI(0,0), new VectorI(0,0), "medium");
 	Button hard = new Button(new VectorI(0,0), new VectorI(0,0), "hard");
-	int difficulty;
+	Difficulty difficulty;
 	VectorI sliderPos;
 	Slider slide = new Slider(new VectorI(0,0), new VectorI(0,0));
 	VectorI lineLeft;
@@ -163,22 +164,28 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onMouseReleased(MouseEvent e) {
 		if (this.easy.clickedInside(e.getPoint())) {
-			this.difficulty = 0;
+			this.difficulty = Difficulty.EASY;
 			this.easy.setPressed();
 			this.medium.release();
 			this.hard.release();
+			this.parentPane.setDifficulty(Difficulty.EASY);
+			this.parentPane.setCanPause();
+
 		}
 		if (this.medium.clickedInside(e.getPoint())) {
-			this.difficulty = 1;
+			this.difficulty = Difficulty.MEDIUM;
 			this.medium.setPressed();
 			this.easy.release();
 			this.hard.release();
+			this.parentPane.setDifficulty(Difficulty.MEDIUM);
+
 		}
 		if (this.hard.clickedInside(e.getPoint())) {
-			this.difficulty = 2;
+			this.difficulty = Difficulty.HARD;
 			this.hard.setPressed();
 			this.medium.release();
 			this.easy.release();
+			this.parentPane.setDifficulty(Difficulty.HARD);
 		}
 		
 		writeSettings();
@@ -199,6 +206,7 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onKeyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+	
 		
 	}
 	public void readSettings() {
@@ -209,13 +217,24 @@ public class SettingsScreen extends Screen {
 					String [] val = currLine.split(":");
 					try {
 						if (val[0].contains("Difficulty")) {
-							int v1i = Integer.parseInt(val[1]);
-							this.difficulty = Integer.parseInt(val[1]);
-							if (v1i < 0 || v1i > 2) {
+							switch (val[1]) {
+							case "EASY":	this.difficulty = Difficulty.EASY;
+								this.parentPane.setDifficulty(Difficulty.EASY);	
+								this.parentPane.setCanPause();
+								break;
+							case "MEDIUM":	this.difficulty = Difficulty.MEDIUM;
+								this.parentPane.setDifficulty(Difficulty.MEDIUM);	
+								break;
+							case "HARD":	this.difficulty = Difficulty.HARD;
+								this.parentPane.setDifficulty(Difficulty.HARD);	
+								break;
+							default:		this.difficulty = Difficulty.EASY;
+								this.parentPane.setDifficulty(Difficulty.EASY);	
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
-								this.parentPane.showMessage(message);
-								this.difficulty = 1;
+								this.parentPane.showMessage(message);	
+								break;
 							}
+
 						}
 						if (val[0].contains("Minutes Per Day")) {
 							int v1i = Integer.parseInt(val[1]);
@@ -225,6 +244,7 @@ public class SettingsScreen extends Screen {
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
+							this.parentPane.setTimePerDay(this.timePerDay);
 						}
 						if (val[0].contains("Labor Cost")) {
 							float v1 = Float.parseFloat(val[1]);
@@ -248,7 +268,8 @@ public class SettingsScreen extends Screen {
 					} catch (NumberFormatException e) {
 						String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 						this.parentPane.showMessage(message);
-						this.difficulty = 1;
+						this.difficulty = Difficulty.EASY;
+						this.parentPane.setDifficulty(Difficulty.EASY);	
 						this.timePerDay = 30;
 						((SettingsPane)this.parentPane).laborCost.setText("100.00");
 						((SettingsPane)this.parentPane).followTheSun.setText("15");
@@ -259,18 +280,21 @@ public class SettingsScreen extends Screen {
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			this.difficulty = 0;
+			this.difficulty = Difficulty.EASY;
+			String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+			this.parentPane.showMessage(message);	
+			
 			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		switch (difficulty) {
-			case 0: this.easy.setPressed();
+			case EASY: this.easy.setPressed();
 				break;
-			case 1: this.medium.setPressed();
+			case MEDIUM: this.medium.setPressed();
 				break;
-			case 2: this.hard.setPressed();
+			case HARD: this.hard.setPressed();
 				break;
 		}
 		
@@ -293,7 +317,7 @@ public class SettingsScreen extends Screen {
 		"Do not delete the colon, only edit the value after the colon the field." +
 		"Do not add any spaces after the colon either, only add the desired value\n" +
 		"*****************************\n" +
-		"Difficulty (1 for easy, 2 for medium, 3 for hard):"+this.difficulty +"\n" +
+		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
 		"Minutes Per Day (enter a number between 15-115):"+this.timePerDay+"\n" +
 		"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
 		"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
@@ -332,6 +356,8 @@ public class SettingsScreen extends Screen {
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
 				this.timePerDay = (((int)((pos/diff) * 100)) + 15);
+				this.parentPane.setTimePerDay(this.timePerDay);
+
 			}
 		}
 		

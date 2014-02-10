@@ -1,6 +1,7 @@
 package swingFramework;
 
 import gamePanes.Pane;
+import gamePanes.SetModulesPane;
 import gamePanes.SettingsPane;
 
 import java.awt.Dimension;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
+
+import components.Difficulty;
 
 import backend.VectorI;
 
@@ -24,10 +27,13 @@ public class FrontEndPane {
 	private long lastTickNanos;
 	private Timer timer;
 	private SettingsPane settings;
-	float currTime;
+	private SetModulesPane modules;
+	long currTime;
 	int dayCount;
-	int difficulty;
+	Difficulty difficulty;
 	float dayTime;
+	boolean canPause = false;
+	boolean paused = false;
 	
 	
 	
@@ -38,8 +44,11 @@ public class FrontEndPane {
 		this.frames.setMinimumSize(new Dimension(MINIMUM_WINDOW_SIZE.x, MINIMUM_WINDOW_SIZE.y));
 		this.frames.setPreferredSize(new Dimension(DEFAULT_WINDOW_SIZE.x, DEFAULT_WINDOW_SIZE.y));
 		this.settings = new SettingsPane(this);
+		this.modules = new SetModulesPane(this);
 		this.settings.setupSwingPane();
 		this.frames.add("Settings", this.settings);
+		this.modules.setupSwingPane();
+		this.frames.add("Modules", this.modules);
 		this.window.add(this.frames);
 		
 		
@@ -57,8 +66,15 @@ public class FrontEndPane {
 		doStart();
 	}
 	
-	public float getTime() {
+	public JTabbedPane getFrame() {
+		return this.frames;
+		
+	}
+	public long getTime() {
 		return this.currTime;
+	}
+	public float getDayTime() {
+		return this.dayTime;
 	}
 	public int getDays() {
 		return this.dayCount;
@@ -76,6 +92,10 @@ public class FrontEndPane {
 		lastTickNanos = System.nanoTime();
 	}
 	
+	public Difficulty getDifficulty() {
+		return this.difficulty;
+	}
+	
 	final void doTick() {
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
@@ -90,7 +110,16 @@ public class FrontEndPane {
 //		} catch (Throwable t) {
 //			throwableGenerated("onTick", t);
 //		}
+		//System.out.println("THIS PAUSED : " + this.paused);
+		//System.out.println("THIS CAN PAUSE : " + this.canPause);
 		int currID = this.frames.getSelectedIndex();
+		String currTab = this.frames.getTitleAt(currID);
+		if (!currTab.equals("Settings")) {
+			if (!this.paused) {
+				//System.out.println(this.paused);
+				this.currTime += delta;
+			}
+		}
 		((Pane)this.frames.getComponent(currID)).doTick(delta);
 		this.frames.getComponent(currID).repaint();
 		lastTickNanos = currentNanos;
@@ -100,8 +129,33 @@ public class FrontEndPane {
 		this.dayTime = time;
 		
 	}
+	
+	public void setCanPause() {
+		this.canPause = true;
+	}
+	public void setCantPause() {
+		this.canPause = false;
+	}
+	
+	public void pauseUnpause() {
+		if (this.canPause) {
 
-	public void setDifficulty(int diff) {
+			this.paused = !this.paused;
+		}
+	}
+	public boolean isPaused() {
+		return this.paused;
+	}
+
+	public void setDifficulty(Difficulty diff) {
+		switch (diff) {
+			case EASY: this.canPause = true;
+				break;
+			case MEDIUM: this.canPause = false;
+				break;
+			case HARD: this.canPause = false;
+				break;
+		}
 		this.difficulty = diff;
 		
 	}

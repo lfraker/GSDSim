@@ -7,8 +7,11 @@ import java.awt.GridLayout;
 import java.awt.KeyEventDispatcher;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -57,6 +60,30 @@ public class SettingsPane extends Pane {
 		this.add(new JLabel());
 
 		this.laborCost = new JTextArea();
+		this.laborCost.setEnabled(false);
+//		this.laborCost.addMouseListener(new MouseAdapter()  
+//			{  
+//			@Override  
+//			public void mouseClicked(MouseEvent event)  
+//				{  
+//				laborCost.requestFocus();  
+//				}  
+//			});  
+//  
+//		this.laborCost.addFocusListener(new FocusListener()  
+//        	{  
+//			@Override  
+//			public void focusLost(FocusEvent arg0)  
+//            	{  
+//				laborCost.setEnabled(false);  
+//            	}  
+//  
+//			@Override  
+//			public void focusGained(FocusEvent arg0)  
+//            	{  
+//				//laborCost.setEnabled(true); 
+//            	}  
+//        	}); 
 		this.laborCost.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		JPanel newPanel = new JPanel();
 		newPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -70,6 +97,7 @@ public class SettingsPane extends Pane {
 		this.add(new JLabel());
 
 		this.followTheSun = new JTextArea();
+		this.followTheSun.setEnabled(false);
 		this.followTheSun.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		JPanel newPanel2 = new JPanel();
 		newPanel2.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -85,12 +113,7 @@ public class SettingsPane extends Pane {
 		
 	}
 	
-	public void setTimePerDay(float time) {
-		this.parentComp.setTimePerDay(time);
-	}
-	public void setDifficulty(int diff) {
-		this.parentComp.setDifficulty(diff);
-	}
+
 	
 	@Override
 	public void doTick(long nanos) {
@@ -100,11 +123,10 @@ public class SettingsPane extends Pane {
 		
 	}
 	
-	@Override
-	public boolean dispatchKeyEvent(KeyEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean dispatchKeyEvent(KeyEvent e) {
+//		return false;
+//	}
 
 //	@Override
 //	public void componentResized(ComponentEvent e) {
@@ -138,13 +160,12 @@ public class SettingsPane extends Pane {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		super.keyReleased(e);
 		
 	}
 
