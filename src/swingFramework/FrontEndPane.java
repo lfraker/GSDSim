@@ -7,19 +7,26 @@ import gamePanes.SettingsPane;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 
 import components.Difficulty;
+import components.ProcessSimulator;
 
 import backend.VectorI;
 
-
+/*
+ * Parts of this class were originally written by Luke Fraker, but inspired by Zach Davis's
+ * support code, written for the Brown class, CS195n 2D GameEngines. Permission to use Zach's code in full
+ * has been requested and granted by Zach, so long as he is credited and it is not used for revenue in anyway.
+ */
 public class FrontEndPane {
 	
 	private JFrame window;
+	private ProcessSimulator pSim = new ProcessSimulator();
 	private JTabbedPane frames;
 	static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
 	static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
@@ -96,7 +103,23 @@ public class FrontEndPane {
 		return this.difficulty;
 	}
 	
+	public void testDayEnd() {
+		this.currTime = TimeUnit.NANOSECONDS.convert((((long)this.dayTime) + 1), TimeUnit.MINUTES);
+		
+
+	}
+	
 	final void doTick() {
+		String fTime = TimeUnit.MINUTES.convert(this.currTime, TimeUnit.NANOSECONDS) + "." + (TimeUnit.SECONDS.convert(this.currTime, TimeUnit.NANOSECONDS) % 60);
+		//System.out.println(fTime);
+		if (Float.parseFloat(fTime) >= this.dayTime) {
+			//System.out.println(this.dayTime);
+			this.dayCount++;
+			this.currTime = 0;
+			this.getpSim().endOfDaySim();
+			return;
+		}
+		
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
 		
@@ -158,6 +181,14 @@ public class FrontEndPane {
 		}
 		this.difficulty = diff;
 		
+	}
+
+	public ProcessSimulator getpSim() {
+		return pSim;
+	}
+
+	public void setpSim(ProcessSimulator pSim) {
+		this.pSim = pSim;
 	}
 	
 	

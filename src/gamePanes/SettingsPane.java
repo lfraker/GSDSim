@@ -60,7 +60,7 @@ public class SettingsPane extends Pane {
 		this.add(new JLabel());
 
 		this.laborCost = new JTextArea();
-		this.laborCost.setEnabled(false);
+		//this.laborCost.setEnabled(false);
 //		this.laborCost.addMouseListener(new MouseAdapter()  
 //			{  
 //			@Override  
@@ -97,7 +97,7 @@ public class SettingsPane extends Pane {
 		this.add(new JLabel());
 
 		this.followTheSun = new JTextArea();
-		this.followTheSun.setEnabled(false);
+		//this.followTheSun.setEnabled(false);
 		this.followTheSun.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		JPanel newPanel2 = new JPanel();
 		newPanel2.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -154,7 +154,6 @@ public class SettingsPane extends Pane {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

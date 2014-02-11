@@ -33,6 +33,12 @@ import backend.VectorI;
 import paneScreens.Screen;
 import swingFramework.FrontEndPane;
 
+/*
+ * Parts of this class were originally written by Luke Fraker, but inspired by Zach Davis's
+ * support code, written for the Brown class, CS195n 2D GameEngines. Some parts were also borrowed completely
+ * from the support code. Permission to use Zach's code in full
+ * has been requested and granted by Zach, so long as he is credited and it is not used for revenue in anyway.
+ */
 @SuppressWarnings("serial")
 public abstract class Pane extends JComponent implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener, ComponentListener, KeyEventDispatcher {
 	Screen viewScreen;
@@ -95,6 +101,10 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		doDraw((Graphics2D) g);
 		super.paint(g);
 
+	}
+	
+	public void testDayEnd() {
+		this.parentComp.testDayEnd();
 	}
 	
 	void startListening() {
@@ -178,6 +188,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		}
 		
 	}
+	
 	java.util.List<RealReleaseWaiter> waiters = new ArrayList<RealReleaseWaiter>();
 	
 	private void queueKeyReleased(KeyEvent e) {
@@ -186,6 +197,13 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
+	    char c = e.getKeyChar();
+		if (((c >= '0') && (c <= '9') ||
+		         (c == KeyEvent.VK_BACK_SPACE) ||
+		         (c == KeyEvent.VK_DELETE) ||
+		         (c == KeyEvent.VK_PERIOD))) {
+			return false;
+		}
 		if (!e.isConsumed()) {
 			switch (e.getID()) {
 			case KeyEvent.KEY_PRESSED:
@@ -202,7 +220,11 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		return false;
 	}
 	
-	
+	/*
+	 * This class was written by Zach Davis as a part of the support code, 
+	 * written for the Brown class, CS195n 2D GameEngines. Permission to use Zach's code in full
+	 * has been requested and granted by Zach, so long as he is credited and it is not used for revenue in anyway.
+	 */
 	private class RealReleaseWaiter implements ActionListener {
 		private boolean cancelled = false;
 		private KeyEvent evt;
@@ -232,6 +254,11 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 			cancel();
 			keyReleased(evt);
 		}
+		
+	}
+
+	public void testAddModule() {
+		 
 		
 	}
 }
