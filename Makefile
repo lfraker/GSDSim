@@ -6,6 +6,8 @@ PREFIX=$(DESTDIR)/usr
 BINDIR=$(PREFIX)/bin
 SYSCONFDIR=$(DESTDIR)/etc
 
+JUNIT=/usr/share/java/junit.jar
+
 #####################################################################
 # Project-specific parameters that should not be modified by users.
 #
@@ -42,13 +44,16 @@ INSTALL=install
 SRC := src
 BIN := bin
 
-JFLAGS = -g -cp $(SRC) -d $(BIN)
+JFLAGS = -g -sourcepath $(SRC) -cp $(BIN):$(JUNIT) -d $(BIN)
 JC = javac
 J = java
 
 ENTRY := backend/Main
-SRCS := $(shell find $(SRC) -path '$(SRC)/testing' -prune , -type f -name '*.java' -printf '%P ')
+SRCS := $(shell find $(SRC) -name '*Test.java' -prune -or -type f -name '*.java' -printf '%P ')
 OBJS := $(addprefix $(BIN)/, ${SRCS:.java=.class})
+
+TSRCS := $(shell find $(SRC) -type f -name '*Test.java' -printf '%P ')
+TOBJS := $(addprefix $(BIN)/, ${TSRCS:.java=.class})
 
 $(BIN)/%.class: $(SRC)/%.java | $(BIN)
 	$(JC) $(JFLAGS) $<
@@ -65,8 +70,10 @@ what:
 	@echo "RELEASE_CANDIDATE: " ${RELEASE_CANDIDATE}
 	@echo "RELEASE_NAME: " ${RELEASE_NAME}
 
-# TODO: run tests
-test: build
+test: build $(TOBJS)
+	@echo Running tests...
+	@$(J) -cp $(BIN):$(JUNIT) org.junit.runner.JUnitCore \
+		`echo ${TSRCS:.java=} | tr -t / .`
 
 build: $(BIN)/$(ENTRY).class $(OBJS) $(BIN)/gameFiles
 
