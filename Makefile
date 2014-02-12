@@ -48,7 +48,7 @@ JFLAGS = -g -sourcepath $(SRC) -cp $(BIN):$(JUNIT) -d $(BIN)
 JC = javac
 J = java
 
-ENTRY := backend/Main
+ENTRY := game/backend/Main
 SRCS := $(shell find $(SRC) -name '*Test.java' -prune -or -type f -name '*.java' -printf '%P ')
 OBJS := $(addprefix $(BIN)/, ${SRCS:.java=.class})
 

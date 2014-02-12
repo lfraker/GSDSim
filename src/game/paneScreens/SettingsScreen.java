@@ -210,7 +210,7 @@ public class SettingsScreen extends Screen {
 		
 	}
 	public void readSettings() {
-		try (BufferedReader buffRead = new BufferedReader(new FileReader("../gameFiles/settings.txt"))) {
+		try (BufferedReader buffRead = new BufferedReader(new FileReader("./gameFiles/settings.txt"))) {
 			String currLine;
 			while ((currLine = buffRead.readLine()) != null) {
 				if (currLine.contains(":")) {
@@ -329,7 +329,7 @@ public class SettingsScreen extends Screen {
 		}
 		
 
-		File file = new File("../gameFiles/settings.txt");
+		File file = new File("./gameFiles/settings.txt");
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
