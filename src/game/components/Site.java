@@ -5,13 +5,11 @@ import java.util.List;
 
 //this is the site class, it contains a list of modules
 public class Site {
-	List<Module> modulesToWorkOn = new ArrayList<>();
-
 
 	int noOfWorkers;
 	int timezone;
 
-	List<Module> modules = new ArrayList<>();
+	ArrayList<Module> modules = new ArrayList<>();
 	public Site(ArrayList<Module> modules, int noOfWorkers) {
 		this.modules = modules;
 		this.noOfWorkers = noOfWorkers;
@@ -43,7 +41,13 @@ public class Site {
 		}
 	}
 
+	int getTimezone() {
+		return 0; // TODO
+	}
 
+	ArrayList<Module> getModules() {
+		return modules;
+	}
 
 
 }

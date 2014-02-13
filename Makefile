@@ -17,10 +17,10 @@ PROJECT=group3
 RELEASE=0
 # The tar archive will be identified by version.  Increment this each
 # time you add new functionality.
-RELEASE_CANDIDATE=1
+RELEASE_CANDIDATE=2
 RELEASE_NAME=${PROJECT}_R${RELEASE}_rc${RELEASE_CANDIDATE}
 # Things to be excluded from the tar archive, after the workspace is cleaned.
-TAR_EXCLUDE=--exclude={'.svn','.git','.gitignore',${RELEASE_NAME}.tar.gz}
+TAR_EXCLUDE=--exclude={'.svn','.git','.gitignore','.*.swp',${RELEASE_NAME}.tar.gz}
 
 
 # File creation modes.  Please do not modify these: they work on

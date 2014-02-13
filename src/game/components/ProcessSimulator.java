@@ -52,8 +52,8 @@ public class ProcessSimulator {
 		*/
 
 		//Put these somewhere suitable
-	  	startOfWorkingDay = 9; // 9am
-	  	endOfWorkingDay = 18; //6pm
+	  	int startOfWorkingDay = 9; // 9am
+	  	int endOfWorkingDay = 18; //6pm
 
 		
 		for(Site currentSite : this.allSites)
