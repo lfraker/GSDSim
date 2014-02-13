@@ -6,7 +6,7 @@ PREFIX=$(DESTDIR)/usr
 BINDIR=$(PREFIX)/bin
 SYSCONFDIR=$(DESTDIR)/etc
 
-JUNIT=/usr/share/java/junit.jar
+JUNIT=$(wildcard /usr/share/java/junit*-4*.jar)
 
 #####################################################################
 # Project-specific parameters that should not be modified by users.

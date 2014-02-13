@@ -42,7 +42,7 @@ public class Site {
 	}
 
 	int getTimezone() {
-		return 0; // TODO
+		return timezone;
 	}
 
 	ArrayList<Module> getModules() {
