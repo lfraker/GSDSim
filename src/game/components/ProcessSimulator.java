@@ -9,6 +9,7 @@ import java.util.List;
 public class ProcessSimulator {
 	private List<ModuleWrapper> allModules = new ArrayList<>();
 	private List<Site> allSites = new ArrayList<>();
+	private int currentTime;
 	
 	public void addModule(Module m, String moduleSiteName) {
 		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
@@ -31,6 +32,11 @@ public class ProcessSimulator {
 		}
 		
 	}
+
+	public void updateTime(int newTime)
+	{
+		this.currentTime = newTime;
+	}
 	
 
   public void addSite(Site site)
@@ -40,25 +46,33 @@ public class ProcessSimulator {
 
 
   public void ProcessSites()
-  {	//Tommy - pseudocode
-	  //Loop through all the sites and update
-	  /*
-		 for(Site currentSite : this.allSites)
-		 {
-	  //Check site is currently active
-	  if((currentTime + Site->timezone) > startOfWorkingDay 
-	  && (currentTime + Site->timezone) <= endOfWorkingDay )
-	  {
+  {	
+  		/*	Tommy 
+	  	*	Loop through all the sites and update
+		*/
 
-	  for(Module currentMod : currentSite.getModules())
-	  {
+		//Put these somewhere suitable
+	  	startOfWorkingDay = 9; // 9am
+	  	endOfWorkingDay = 18; //6pm
 
-	  }
+		
+		for(Site currentSite : this.allSites)
+		{
+			int localTime = (currentTime + currentSite.getTimezone());
 
+	  		//Check site is currently active - not all sites active at all times - timezones
+	  		if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
+	  		{
+	
+				ArrayList<Module> siteModules = currentSite.getModules();
+	  			for(Module currentMod : siteModules)
+				{
+					currentMod.doWork();
+				}	
 
-	  }
+	  		}
 
-	  }*/
+	  	}
 
 
   }
