@@ -66,8 +66,7 @@ public class Module {
 		return this.timeEstimate;
 	}
 
-	public void doWork()
-	{
+	public void doWork() {
 		/* T - Computes work done based on number of workers, development methodology, etc */
 
 		//Example... 
@@ -76,56 +75,40 @@ public class Module {
 		float workLeftToDo;
 
 
-		if(this.devMethod == DevelopmentMethod.WATERFALL)
-		{
+		if(this.devMethod == DevelopmentMethod.WATERFALL) {
 			/* Finish one phase before moving to the next */
 
 			methodologyModifier = 1;
 			workPoints *= methodologyModifier;
 
-			if(this.workRemaining() <= workPoints)
-			{
+			if(this.workRemaining() <= workPoints) {
 				this.complete();
-			}
-			else
-			{
-				for(int currentStep = 0; currentStep < 7; currentStep++)
-				{
+			} else {
+				for(int currentStep = 0; currentStep < 7; currentStep++) {
 					workLeftToDo = stepEstimates[currentStep] - workDonePerSection[currentStep];
 
-					if(workDonePerSection[currentStep] <  stepEstimates[currentStep])
-					{
+					if(workDonePerSection[currentStep] <  stepEstimates[currentStep]) {
 						//If the step hasn't been completed yet...
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 
-						if(workLeftToDo <= workPoints)
-						{
+						if(workLeftToDo <= workPoints) {
 							//If the work done is enough to finish the phase
 							workDonePerSection[currentStep] = stepEstimates[currentStep]; //Set section complete
 							workPoints -= workLeftToDo;
-						}
-						else
-						{
+						} else {
 							workDonePerSection[currentStep] += workPoints;
 							break;
 						}
 
-						if(workPoints == 0)
-						{
+						if(workPoints == 0) {
 							break;
 						}
 					}
-				 
 				}
 
 			}
 
-			
-
-
-		}
-		else if(this.devMethod == DevelopmentMethod.FOLLOWTHESUN)
-		{
+		} else if(this.devMethod == DevelopmentMethod.FOLLOWTHESUN) {
 			/* 
 			*	Same as waterfall except number of workers may change on a per site basis.
 			*	
@@ -143,44 +126,33 @@ public class Module {
 
 			workPoints *= methodologyModifier;
 
-			if(this.workRemaining() <= workPoints)
-			{
+			if(this.workRemaining() <= workPoints) {
 				this.complete();
-			}
-			else
-			{
+			} else {
 
-				for(int currentStep = 0; currentStep < 7; currentStep++)
-				{
+				for(int currentStep = 0; currentStep < 7; currentStep++) {
 					workLeftToDo = stepEstimates[currentStep] - workDonePerSection[currentStep];
 
-					if(workDonePerSection[currentStep] <  stepEstimates[currentStep])
-					{
+					if(workDonePerSection[currentStep] <  stepEstimates[currentStep]) {
 						//If the step hasn't been completed yet...
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 
-						if(workLeftToDo <= workPoints)
-						{
+						if(workLeftToDo <= workPoints) {
 							workDonePerSection[currentStep] = stepEstimates[currentStep]; //Set section complete
 							workPoints -= workLeftToDo;
-						}
-						else
-						{
+						} else {
 							workDonePerSection[currentStep] += workPoints;
 							break;
 						}
 
-						if(workPoints == 0)
-						{
+						if(workPoints == 0) {
 							break;
 						}
 					}
-					 
 				}
+
 			}
-		}
-		else if(this.devMethod == DevelopmentMethod.AGILE)
-		{
+		} else if(this.devMethod == DevelopmentMethod.AGILE) {
 			/* Each part is worked on simultaneously */
 
 			methodologyModifier = 1;
@@ -189,22 +161,17 @@ public class Module {
 			float initialPointsAllocation = workPoints;
 
 
-			if(this.workRemaining() <= workPoints)
-			{
+			if(this.workRemaining() <= workPoints) {
 				this.complete();
-			}
-			else
-			{
+			} else {
 
 				float workLeftInModule = this.workRemaining();
 
 
-				for(int currentStep = 0; currentStep < 7; currentStep++)
-				{
+				for(int currentStep = 0; currentStep < 7; currentStep++) {
 					workLeftToDo = stepEstimates[currentStep] - workDonePerSection[currentStep];
 
-					if(workDonePerSection[currentStep] <  stepEstimates[currentStep])
-					{
+					if(workDonePerSection[currentStep] <  stepEstimates[currentStep]) {
 						//If the step hasn't been completed yet...
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 
@@ -214,13 +181,12 @@ public class Module {
 						workDonePerSection[currentStep] += manHoursAvailableToSection;
 						workPoints -= manHoursAvailableToSection;
 
-						if(workPoints == 0)
-						{
+						if(workPoints == 0) {
 							break;
 						}
 					}
-					 
 				}
+
 			}
 
 		}
@@ -232,14 +198,12 @@ public class Module {
 		System.out.println("Completing module");
 	}
 	
-	public void setDevelopmentMethod(DevelopmentMethod dm)
-	{
+	public void setDevelopmentMethod(DevelopmentMethod dm) {
 		//T - Sets development style for the module.. Used when computing work done
 		this.devMethod = dm;
 	}
 
-	public float workRemaining()
-	{
+	public float workRemaining() {
 		//T - Gets number of (hours) work left to do for the module to be complete
 		float workLeft = 0;
 
@@ -251,13 +215,11 @@ public class Module {
 		return workLeft;
 	}
 
-	public void setNumberWorkers(int numWorkers)
-	{
+	public void setNumberWorkers(int numWorkers) {
 		this.numWorkers = numWorkers;
 	}
 	
-	public void setPerformanceModifier(float mod)
-	{
+	public void setPerformanceModifier(float mod) {
 		this.performanceLevel = mod;
 	}
 }
