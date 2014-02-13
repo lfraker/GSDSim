@@ -23,7 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 
+import java.util.ArrayList;
+
 import game.components.Module;
+import game.components.Site;
 
 import game.paneScreens.SetModulesScreen;
 import game.paneScreens.SettingsScreen;
@@ -210,6 +213,9 @@ public class SetModulesPane extends Pane {
 		try {
 			float val = Float.parseFloat(text);
 			Module m = new Module(val);
+			ArrayList<Module> modules = new ArrayList<Module>();
+			modules.add(m);
+			m.addSite(new Site(modules, 1));
 			this.parentComp.getpSim().addModule(m, "Site1");
 		}
 		catch (NumberFormatException e) {

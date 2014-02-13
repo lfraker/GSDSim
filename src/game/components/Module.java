@@ -15,6 +15,7 @@ public class Module {
 	float totalEstimate = 0.0f;
 	float origEstimate;
 	int currentStage;
+	boolean complete = false;
 	
 	public Module(float estimate) {
 		this.currentStage = 0;
@@ -57,6 +58,10 @@ public class Module {
 	
 
 	
+	public void complete() {
+		this.complete = true;
+		System.out.println("Completing module");
+	}
 	
 	
 	
