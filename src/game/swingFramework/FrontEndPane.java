@@ -6,6 +6,7 @@ import game.gamePanes.SetModulesPane;
 import game.gamePanes.SettingsPane;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
@@ -14,8 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.Layer;
+import org.openstreetmap.gui.jmapviewer.LayerGroup;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+
 import game.components.Difficulty;
 import game.components.ProcessSimulator;
+import game.components.SiteModuleController;
 
 import game.backend.VectorI;
 
@@ -27,7 +34,7 @@ import game.backend.VectorI;
 public class FrontEndPane {
 	
 	private JFrame window;
-	private ProcessSimulator pSim = new ProcessSimulator();
+	//private ProcessSimulator pSim = new ProcessSimulator();
 	private JTabbedPane frames;
 	static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
 	static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
@@ -42,22 +49,35 @@ public class FrontEndPane {
 	float dayTime;
 	boolean canPause = false;
 	boolean paused = false;
-	
+	private JMapViewer siteStatus;
+	private VectorI windSize;
+	private SiteModuleController modSiteController = new SiteModuleController();
+	private int zoom;
 	
 	
 	
 	public void setupFrame() {
-		this.window = new JFrame("GSD Sim");
+		this.setWindow(new JFrame("GSD Sim"));
 		this.frames = new JTabbedPane(JTabbedPane.LEFT);
 		this.frames.setMinimumSize(new Dimension(MINIMUM_WINDOW_SIZE.x, MINIMUM_WINDOW_SIZE.y));
 		this.frames.setPreferredSize(new Dimension(DEFAULT_WINDOW_SIZE.x, DEFAULT_WINDOW_SIZE.y));
 		this.settings = new SettingsPane(this);
 		this.modules = new SetModulesPane(this);
+		this.siteStatus = new JMapViewer(this);
+        LayerGroup germanyGroup = new LayerGroup("Germany");
+        
+        Layer germanyWestLayer = germanyGroup.addLayer("Germany West");
+
+        MapMarkerDot ebersheim = new MapMarkerDot(null, "Ebersheim", 49.91, 8.24);
+
+		this.siteStatus.addMapMarker(ebersheim);
 		this.settings.setupSwingPane();
 		this.frames.add("Settings", this.settings);
 		this.modules.setupSwingPane();
 		this.frames.add("Modules", this.modules);
-		this.window.add(this.frames);
+		this.frames.add("Site Status", this.siteStatus);
+		this.getWindow().add(this.frames);
+
 		
 		
 		this.timer = new Timer(DEFAULT_DELAY_MILLIS, new ActionListener() {
@@ -66,11 +86,11 @@ public class FrontEndPane {
 				doTick();
 			}
 		});
-		this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getWindow().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		
-		this.window.pack();
-		this.window.setVisible(true);
+		this.getWindow().pack();
+		this.getWindow().setVisible(true);
 		doStart();
 	}
 	
@@ -90,9 +110,9 @@ public class FrontEndPane {
 	public void doClose() {
 		timer.stop();
 		//this.stopListening();
-		this.window.remove(this.frames);
-		this.window.dispose();
-		this.window = null;
+		this.getWindow().remove(this.frames);
+		this.getWindow().dispose();
+		this.setWindow(null);
 	}
 	
 	public void doStart() {
@@ -111,13 +131,15 @@ public class FrontEndPane {
 	}
 	
 	final void doTick() {
+		
+
 		String fTime = TimeUnit.MINUTES.convert(this.currTime, TimeUnit.NANOSECONDS) + "." + (TimeUnit.SECONDS.convert(this.currTime, TimeUnit.NANOSECONDS) % 60);
 		//System.out.println(fTime);
 		if (Float.parseFloat(fTime) >= this.dayTime) {
 			//System.out.println(this.dayTime);
 			this.dayCount++;
 			this.currTime = 0;
-			this.getpSim().endOfDaySim();
+			this.modSiteController.endDay();
 			return;
 		}
 		
@@ -144,7 +166,9 @@ public class FrontEndPane {
 				this.currTime += delta;
 			}
 		}
-		((Pane)this.frames.getComponent(currID)).doTick(delta);
+		if (!currTab.equals("Site Status")) {
+			((Pane)this.frames.getComponent(currID)).doTick(delta);
+		}
 		this.frames.getComponent(currID).repaint();
 		lastTickNanos = currentNanos;
 	}
@@ -184,15 +208,56 @@ public class FrontEndPane {
 		
 	}
 
-	public ProcessSimulator getpSim() {
-		return pSim;
+//	public ProcessSimulator getpSim() {
+//		return pSim;
+//	}
+
+//	public void setpSim(ProcessSimulator pSim) {
+//		this.pSim = pSim;
+//	}
+
+	public VectorI getWindSize() {
+		// TODO Auto-generated method stub
+		return this.windSize;
 	}
 
-	public void setpSim(ProcessSimulator pSim) {
-		this.pSim = pSim;
+	public void setWindSize(int width, int height) {
+		// TODO Auto-generated method stub
+		this.windSize = new VectorI(width, height);
+	}
+
+	public SiteModuleController getSMController() {
+		// TODO Auto-generated method stub
+		return this.modSiteController;
+	}
+
+	public JFrame getWindow() {
+		return window;
+	}
+
+	public void setWindow(JFrame window) {
+		this.window = window;
 	}
 	
+	public int getZoom () {
+		return this.siteStatus.getZoom();
+	}
 	
+	public Point getCenter() {
+		return this.siteStatus.getCenter();
+	}
+	
+	public int getMapWidth() {
+		return this.siteStatus.getWidth();
+	}
+	
+	public int getMapHeight() {
+		return this.siteStatus.getHeight();
+	}
+	
+	public JMapViewer getMapViewer() {
+		return this.siteStatus;
+	}
 	
 	
 }

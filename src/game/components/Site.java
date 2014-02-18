@@ -10,8 +10,8 @@ public class Site {
 	int timezone;
 
 	ArrayList<Module> modules = new ArrayList<>();
-	public Site(ArrayList<Module> modules, int noOfWorkers) {
-		this.modules = modules;
+	public Site(String name, int noOfWorkers) {
+		//this.modules = modules;
 		this.noOfWorkers = noOfWorkers;
 	}
 

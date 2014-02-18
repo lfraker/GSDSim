@@ -167,6 +167,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	public void componentResized(ComponentEvent e) {
 		Dimension d = e.getComponent().getSize();
 		callOnResize(d.width, d.height);
+		this.parentComp.setWindSize(d.width, d.height);
 	}
 	
 	public abstract void doTick(long nanos);

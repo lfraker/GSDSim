@@ -215,8 +215,8 @@ public class SetModulesPane extends Pane {
 			Module m = new Module(val);
 			ArrayList<Module> modules = new ArrayList<Module>();
 			modules.add(m);
-			m.addSite(new Site(modules, 1));
-			this.parentComp.getpSim().addModule(m, "Site1");
+			//m.addSite(new Site(modules, 1));
+			this.parentComp.getSMController().addModule(m, "Site1");
 		}
 		catch (NumberFormatException e) {
 			System.out.println("ONLY ENTER NUMBER VALUES");
