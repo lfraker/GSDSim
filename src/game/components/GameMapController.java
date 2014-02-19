@@ -28,15 +28,17 @@ import org.openstreetmap.gui.jmapviewer.OsmMercator;
 public class GameMapController extends JMapController implements MouseListener, MouseMotionListener,
 MouseWheelListener {
 
+	private Button mapPause;
     private static final int MOUSE_BUTTONS_MASK = MouseEvent.BUTTON3_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK
     | MouseEvent.BUTTON2_DOWN_MASK;
     
     FrontEndPane parentComp;
 
     private static final int MAC_MOUSE_BUTTON3_MASK = MouseEvent.CTRL_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK;
-    public GameMapController(JMapViewer map, FrontEndPane fP) {
+    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause) {
         super(map);
         this.parentComp = fP;
+        this.mapPause = pause;
     }
 
     private Point lastDragPoint;
@@ -71,10 +73,15 @@ MouseWheelListener {
 
     public void mouseClicked(MouseEvent e) {
     	//System.out.println("CLICKED");
-        if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+    	if (this.mapPause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
+    		this.parentComp.pauseUnpause();
+    		
+    	}
+    	else if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
             map.zoomIn(e.getPoint());
         }
-        if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1) {
+        
+        else if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1) {
         	//Use JDialog?
         	if (this.optionPane != null) {
         		this.optionPane.setVisible(false);
@@ -108,10 +115,12 @@ MouseWheelListener {
            String name = this.optionPane.getSiteName();
            int nEmp = this.optionPane.getNumberEmployees();
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
-            	Site toAdd = new Site(name, nEmp);
+            	MapMarkerDot mDot = new MapMarkerDot(null, name, y, x);
+            	Site toAdd = new Site(name, nEmp, mDot);
 //            	System.out.println(x +" X : Y " + y);
+            	this.parentComp.addSiteToCombo(toAdd);
             	this.parentComp.getSMController().addSite(toAdd);
-            	this.parentComp.getMapViewer().addMapMarker(new MapMarkerDot(null, name, y, x));
+            	this.parentComp.getMapViewer().addMapMarker(mDot);
             }
            // System.exit(0);
 

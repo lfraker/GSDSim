@@ -28,8 +28,6 @@ import game.backend.VectorI;
 public class SettingsScreen extends Screen {
 	
 
-	VectorI screenSize;
-	Font fontText = new Font("serif", Font.BOLD, 25);
 	Button easy = new Button(new VectorI(0,0), new VectorI(0,0), "easy");
 	Button medium = new Button(new VectorI(0,0), new VectorI(0,0), "medium");
 	Button hard = new Button(new VectorI(0,0), new VectorI(0,0), "hard");
@@ -42,10 +40,10 @@ public class SettingsScreen extends Screen {
 	int FTSmin;
 	float laborCost;
 	boolean dragging;
-	int timePerDay;
 
 	public SettingsScreen(Pane pP) {
 		super(pP);
+		this.fontText = new Font("serif", Font.BOLD, 25);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -20,8 +20,10 @@ import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.LayerGroup;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
+import game.components.Button;
 import game.components.Difficulty;
 import game.components.ProcessSimulator;
+import game.components.Site;
 import game.components.SiteModuleController;
 
 import game.backend.VectorI;
@@ -64,13 +66,13 @@ public class FrontEndPane {
 		this.settings = new SettingsPane(this);
 		this.modules = new SetModulesPane(this);
 		this.siteStatus = new JMapViewer(this);
-        LayerGroup germanyGroup = new LayerGroup("Germany");
-        
-        Layer germanyWestLayer = germanyGroup.addLayer("Germany West");
-
-        MapMarkerDot ebersheim = new MapMarkerDot(null, "Ebersheim", 49.91, 8.24);
-
-		this.siteStatus.addMapMarker(ebersheim);
+//        LayerGroup germanyGroup = new LayerGroup("Germany");
+//        
+//        Layer germanyWestLayer = germanyGroup.addLayer("Germany West");
+//
+//        MapMarkerDot ebersheim = new MapMarkerDot(null, "Ebersheim", 49.91, 8.24);
+//
+//		this.siteStatus.addMapMarker(ebersheim);
 		this.settings.setupSwingPane();
 		this.frames.add("Settings", this.settings);
 		this.modules.setupSwingPane();
@@ -160,12 +162,12 @@ public class FrontEndPane {
 		//System.out.println("THIS CAN PAUSE : " + this.canPause);
 		int currID = this.frames.getSelectedIndex();
 		String currTab = this.frames.getTitleAt(currID);
-		if (!currTab.equals("Settings")) {
-			if (!this.paused) {
+		//if (!currTab.equals("Settings")) {
+		if (!this.paused) {
 				//System.out.println(this.paused);
-				this.currTime += delta;
-			}
+			this.currTime += delta;
 		}
+	//	}
 		if (!currTab.equals("Site Status")) {
 			((Pane)this.frames.getComponent(currID)).doTick(delta);
 		}
@@ -200,8 +202,10 @@ public class FrontEndPane {
 			case EASY: this.canPause = true;
 				break;
 			case MEDIUM: this.canPause = false;
+						this.paused = false;
 				break;
 			case HARD: this.canPause = false;
+						this.paused = false;
 				break;
 		}
 		this.difficulty = diff;
@@ -257,6 +261,18 @@ public class FrontEndPane {
 	
 	public JMapViewer getMapViewer() {
 		return this.siteStatus;
+	}
+	
+	public void addSiteToCombo(Site toAdd) {
+		this.modules.addSite(toAdd);
+	}
+	
+	public Button getPauseButton() {
+		return this.siteStatus.getPauseButton();
+	}
+	
+	public boolean canPause() {
+		return this.canPause;
 	}
 	
 	

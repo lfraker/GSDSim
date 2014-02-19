@@ -190,7 +190,7 @@ public class SettingsPane extends Pane {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		super.mouseClicked(e);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class Module {
 	int currentStage;
 	boolean complete = false;
 	
-	public Module(float estimate) {
+	public Module(float estimate, String name, List<Site> allSites) {
 		this.currentStage = 0;
 		this.origEstimate = estimate;
 		this.origStepEstimates[0] = (estimate * 0.15f);

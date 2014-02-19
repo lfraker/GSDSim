@@ -50,4 +50,16 @@ public class MapMarkerDot extends MapMarkerCircle {
     public static Style getDefaultStyle(){
         return new Style(Color.BLACK, Color.YELLOW, null, getDefaultFont());
     }
+    
+    public void setBehind() {
+    	this.getStyle().setBackColor(Color.RED);
+    }
+    
+    public void setOnTime() {
+    	this.getStyle().setBackColor(Color.YELLOW);
+    }
+    
+    public void setAhead() {
+    	this.getStyle().setBackColor(Color.GREEN);
+    }
 }

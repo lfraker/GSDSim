@@ -3,6 +3,7 @@ package org.openstreetmap.gui.jmapviewer;
 //License: GPL. Copyright 2008 by Jan Peter Stotz
 
 import game.backend.VectorI;
+import game.components.Button;
 import game.components.Difficulty;
 import game.components.GameMapController;
 import game.swingFramework.FrontEndPane;
@@ -69,6 +70,8 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
     protected boolean mapMarkersVisible;
     protected boolean mapRectanglesVisible;
     protected boolean mapPolygonsVisible;
+	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
+
 
     protected boolean tileGridVisible;
     protected boolean scrollWrapEnabled;
@@ -113,7 +116,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
      */
     public JMapViewer(FrontEndPane fP) {
         this(new MemoryTileCache(), 8);
-        new GameMapController(this, fP);
+        new GameMapController(this, fP, pause);
         this.parentComp = fP;
     }
 
@@ -680,9 +683,17 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		g2.drawString(toWrite2, xT, 45.0f);
 		g2.drawString(toWrite3, xT, 60.0f);
 		g2.drawString(toWrite4, xT, 75.0f);
-		if (this.parentComp.isPaused()) {
-			g2.drawString("PAUSED", x, 90.0f);
+		if (this.parentComp.canPause()) {
+			this.pause.onResize(new VectorI(((int)xT), 90), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			if (this.parentComp.isPaused()) {
+				this.pause.setPressed();
+			}
+			else {
+				this.pause.release();
+			}
+			this.pause.onDraw(g2);
 		}
+		
     }
 
     private int getDays() {
@@ -1120,6 +1131,10 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
      */
     public TileCache getTileCache() {
         return tileController.getTileCache();
+    }
+    
+    public Button getPauseButton() {
+    	return this.pause;
     }
 
     public void setTileLoader(TileLoader loader) {

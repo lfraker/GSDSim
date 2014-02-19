@@ -15,6 +15,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 
+import game.components.Button;
 import game.components.Difficulty;
 
 import game.backend.VectorI;
@@ -48,6 +50,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	FrontEndPane parentComp;
 	JTabbedPane frameWork;
 	private static final int MILLIS_TO_WAIT_FOR_REPEAT = 5;
+	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
 
 	
 	
@@ -157,10 +160,26 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		g.drawString(toWrite2, x, 45.0f);
 		g.drawString(toWrite3, x, 60.0f);
 		g.drawString(toWrite4, x, 75.0f);
-		if (this.parentComp.isPaused()) {
-			g.drawString("PAUSED", x, 90.0f);
+		if (this.parentComp.canPause()) {
+			this.pause.onResize(new VectorI(((int)x), 90), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			if (this.parentComp.isPaused()) {
+				this.pause.setPressed();
+			}
+			else {
+				this.pause.release();
+			}
+			this.pause.onDraw(g);
 		}
+		
 
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (this.pause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
+    		this.parentComp.pauseUnpause();
+    		
+    	}
 	}
 	
 	@Override
@@ -182,12 +201,13 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_P) {
-
-			if (!this.frameWork.getTitleAt(this.frameWork.getSelectedIndex()).equals("Settings")) { 
-				this.parentComp.pauseUnpause();
-			}
-		}
+//		System.out.println(e.getKeyCode());
+//		if (e.getKeyCode() == KeyEvent.VK_P) {
+//
+//			if (!this.frameWork.getTitleAt(this.frameWork.getSelectedIndex()).equals("Settings")) { 
+//				this.parentComp.pauseUnpause();
+//			}
+//		}
 		
 	}
 	
@@ -210,13 +230,13 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 			switch (e.getID()) {
 			case KeyEvent.KEY_PRESSED:
 				keyPressed(e);
-				return true;
+				return false;
 			case KeyEvent.KEY_RELEASED:
 				queueKeyReleased(e);
-				return true;
+				return false;
 			case KeyEvent.KEY_TYPED:
 				keyTyped(e);
-				return true;
+				return false;
 			}
 		}
 		return false;

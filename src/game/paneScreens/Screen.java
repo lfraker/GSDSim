@@ -3,6 +3,8 @@ package game.paneScreens;
 import game.gamePanes.Pane;
 
 
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
 import java.awt.event.KeyEvent;
@@ -19,6 +21,10 @@ import game.backend.VectorI;
  */
 public abstract class Screen {
 	Pane parentPane;
+	Font fontText;
+	VectorI screenSize;
+	int timePerDay;
+
 	
 	public Screen(Pane pP) {
 		this.parentPane = pP;
