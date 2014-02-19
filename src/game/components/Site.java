@@ -1,9 +1,10 @@
 package game.components;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 //this is the site class, it contains a list of modules
 public class Site {
@@ -14,16 +15,19 @@ public class Site {
 	MapMarkerDot mapMarker;
 
 	ArrayList<Module> modules = new ArrayList<>();
-	public Site(String name, int noOfWorkers, MapMarkerDot mDot) {
+	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone) {
 		//this.modules = modules;
 		this.siteName = name;
 		this.noOfWorkers = noOfWorkers;
 		this.mapMarker = mDot;
+		this.timezone = tZone;
 	}
 
 	public String getName() {
 		return this.siteName;
 	}
+	
+
 	
 	public void addModule(Module m) {
 		this.modules.add(m);
@@ -58,8 +62,8 @@ public class Site {
 		return timezone;
 	}
 
-	ArrayList<Module> getModules() {
-		return modules;
+	public ArrayList<Module> getModules() {
+		return this.modules;
 	}
 	
 	@Override

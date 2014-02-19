@@ -4,6 +4,7 @@ package game.components;
 
 import game.swingFramework.FrontEndPane;
 
+
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,10 +14,10 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.JDialog;
 
-import org.openstreetmap.gui.jmapviewer.JMapController;
-import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.OsmMercator;
+import game.org.openstreetmap.gui.jmapviewer.JMapController;
+import game.org.openstreetmap.gui.jmapviewer.JMapViewer;
+import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import game.org.openstreetmap.gui.jmapviewer.OsmMercator;
 
 /**
  * Default map controller which implements map moving by pressing the right
@@ -114,9 +115,10 @@ MouseWheelListener {
 //            y += center.y + this.parentComp.getMapHeight() * 2;
            String name = this.optionPane.getSiteName();
            int nEmp = this.optionPane.getNumberEmployees();
+           int tZ = this.optionPane.getTimeZone();
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
             	MapMarkerDot mDot = new MapMarkerDot(null, name, y, x);
-            	Site toAdd = new Site(name, nEmp, mDot);
+            	Site toAdd = new Site(name, nEmp, mDot, tZ);
 //            	System.out.println(x +" X : Y " + y);
             	this.parentComp.addSiteToCombo(toAdd);
             	this.parentComp.getSMController().addSite(toAdd);

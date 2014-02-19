@@ -145,6 +145,8 @@ public class SetModulesPane extends Pane {
 				for (Site s: modSites) {
 					s.addModule(newMod);
 				}
+				moduleName.setText("");
+				hoursEstimate.setText("");
 				modSites.clear();
 				
 			}

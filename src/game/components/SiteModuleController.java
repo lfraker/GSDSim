@@ -9,7 +9,6 @@ import java.util.List;
 
 public class SiteModuleController {
 	ProcessSimulator pSim;
-	private List<ModuleWrapper> allModules = new ArrayList<>();
 	private List<Site> allSites = new ArrayList<>();
 	
 	public SiteModuleController() {
@@ -17,15 +16,19 @@ public class SiteModuleController {
 	}
 	
 	public void endDay() {
-		this.pSim.endOfDaySim(this.allModules);
+		
+	}
+	
+	public List<Site> getSites() {
+		return this.allSites;
 	}
 	
 	
 	
-	public void addModule(Module m, String moduleSiteName) {
-		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
-		Collections.sort(this.allModules, new ModuleComparator());
-	}
+//	public void addModule(Module m, String moduleSiteName) {
+//		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
+//		Collections.sort(this.allModules, new ModuleComparator());
+//	}
 	
 	public void addSite(Site site)
 	{

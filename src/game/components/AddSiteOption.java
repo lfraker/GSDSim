@@ -20,6 +20,8 @@ public class AddSiteOption extends JDialog {
 	private JTextField siteN;
 	private String siteName;
 	private JTextField numEmp;
+	private int timeZoneDiff;
+	private JTextField timeZone;
 	private boolean cancelled = true;
 	
 	
@@ -44,11 +46,14 @@ public class AddSiteOption extends JDialog {
 		inputPanel.setLayout(new GridLayout(0,2));
 		this.siteN = new JTextField();
 		this.numEmp = new JTextField();
+		this.timeZone = new JTextField();
 		inputPanel.add(new JLabel("Site Name:"));
 		inputPanel.add(this.siteN);
 		this.siteN.setText("Site 1");
 		inputPanel.add(new JLabel("Number of Workers:"));
 		inputPanel.add(this.numEmp);
+		inputPanel.add(new JLabel("Time Zone Hours Difference:"));
+		inputPanel.add(this.timeZone);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
 
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
@@ -66,10 +71,13 @@ public class AddSiteOption extends JDialog {
 				return;
 			}
 			this.numEmployees = Integer.parseInt(this.numEmp.getText());
+			this.timeZoneDiff = Integer.parseInt(this.timeZone.getText());
 		}
 		catch (NumberFormatException e) {
 			this.numEmployees = 5;
+			this.timeZoneDiff = 0;
 			this.numEmp.setText(this.numEmployees+"");
+			this.timeZone.setText(this.timeZoneDiff+"");
 			return;
 		}
 		this.cancelled = false;
@@ -86,6 +94,10 @@ public class AddSiteOption extends JDialog {
 	
 	public boolean getCancelled() {
 		return this.cancelled;
+	}
+	
+	public int getTimeZone() {
+		return this.timeZoneDiff;
 	}
 		
 }

@@ -2,6 +2,7 @@ package game.swingFramework;
 
 import game.gamePanes.Pane;
 
+
 import game.gamePanes.SetModulesPane;
 import game.gamePanes.SettingsPane;
 
@@ -15,13 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 
-import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.Layer;
-import org.openstreetmap.gui.jmapviewer.LayerGroup;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import game.org.openstreetmap.gui.jmapviewer.JMapViewer;
+import game.org.openstreetmap.gui.jmapviewer.Layer;
+import game.org.openstreetmap.gui.jmapviewer.LayerGroup;
+import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import game.components.Button;
 import game.components.Difficulty;
+import game.components.Module;
 import game.components.ProcessSimulator;
 import game.components.Site;
 import game.components.SiteModuleController;
@@ -36,7 +38,6 @@ import game.backend.VectorI;
 public class FrontEndPane {
 	
 	private JFrame window;
-	//private ProcessSimulator pSim = new ProcessSimulator();
 	private JTabbedPane frames;
 	static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
 	static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
@@ -77,7 +78,7 @@ public class FrontEndPane {
 		this.frames.add("Settings", this.settings);
 		this.modules.setupSwingPane();
 		this.frames.add("Modules", this.modules);
-		this.frames.add("Site Status", this.siteStatus);
+		this.frames.add("Sites", this.siteStatus);
 		this.getWindow().add(this.frames);
 
 		
@@ -133,7 +134,12 @@ public class FrontEndPane {
 	}
 	
 	final void doTick() {
-		
+//		for (Site s : this.modSiteController.getSites()) {
+//			System.out.println("SITE : " + s.getName());
+//			for (Module m: s.getModules()) {
+//				System.out.println("MODULE : " + m.getName());
+//			}
+//		}
 
 		String fTime = TimeUnit.MINUTES.convert(this.currTime, TimeUnit.NANOSECONDS) + "." + (TimeUnit.SECONDS.convert(this.currTime, TimeUnit.NANOSECONDS) % 60);
 		//System.out.println(fTime);
@@ -141,7 +147,7 @@ public class FrontEndPane {
 			//System.out.println(this.dayTime);
 			this.dayCount++;
 			this.currTime = 0;
-			this.modSiteController.endDay();
+			//this.modSiteController.endDay();
 			return;
 		}
 		
@@ -168,7 +174,7 @@ public class FrontEndPane {
 			this.currTime += delta;
 		}
 	//	}
-		if (!currTab.equals("Site Status")) {
+		if (!currTab.equals("Sites")) {
 			((Pane)this.frames.getComponent(currID)).doTick(delta);
 		}
 		this.frames.getComponent(currID).repaint();

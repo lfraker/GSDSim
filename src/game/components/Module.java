@@ -9,6 +9,7 @@ import java.util.Random;
 public class Module {
 	List <Site> sites = new ArrayList<Site>();
 	float timeEstimate;
+	String modName;
 	Random numberGen = new Random();
 	float [] stepEstimates = new float [7];
 	float [] origStepEstimates = new float [7];
@@ -29,6 +30,8 @@ public class Module {
 	public Module(float estimate, String name, List<Site> allSites) {
 		this.currentStage = 0;
 		this.origEstimate = estimate;
+		this.sites = allSites;
+		this.modName = name;
 		this.origStepEstimates[0] = (estimate * 0.15f);
 		this.origStepEstimates[1] = (estimate * 0.15f);
 		this.origStepEstimates[2] = (estimate * 0.10f);
@@ -43,6 +46,14 @@ public class Module {
 		
 
 
+	}
+	
+	public List<Site> getSites() {
+		return this.sites;
+	}
+	
+	public String getName() {
+		return this.modName;
 	}
 	
 	public void addSite(Site newSite) {
