@@ -147,7 +147,7 @@ public class FrontEndPane {
 			//System.out.println(this.dayTime);
 			this.dayCount++;
 			this.currTime = 0;
-			//this.modSiteController.endDay();
+			this.modSiteController.endDay();
 			return;
 		}
 		

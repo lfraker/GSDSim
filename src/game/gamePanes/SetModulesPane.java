@@ -186,6 +186,17 @@ public class SetModulesPane extends Pane {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(temp4);
+		JButton simEndDay = new JButton("Test End of Day Sim");
+		simEndDay.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				parentComp.testDayEnd();
+			}
+			
+		});
+		this.add(simEndDay);
 	
 	
 		this.startListening();

@@ -2,7 +2,7 @@
     
   <target name="compile">
     <mkdir dir="bin"/>
-    <javac srcdir="src/game" destdir="bin" />
+    <javac includeantruntime="false" srcdir="src/game" destdir="bin" />
   </target>
 
   <target name="jar" depends="compile">
@@ -21,9 +21,7 @@
   <target name="clean"
       description="clean up" >
      <!-- Delete the ${build} directory-->
-       <delete>
-           <fileset dir="bin" includes="**/*.class"/>
-        </delete>
+        <delete dir="bin"/>
        <delete file="GSD.jar"/>
   </target>
 

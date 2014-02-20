@@ -16,7 +16,9 @@ public class SiteModuleController {
 	}
 	
 	public void endDay() {
-		
+		for(Site s: allSites) {
+			//this.pSim.endOfDaySim(s.getModules());
+		}
 	}
 	
 	public List<Site> getSites() {
