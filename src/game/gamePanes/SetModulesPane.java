@@ -56,6 +56,10 @@ public class SetModulesPane extends Pane {
 		this.dropDown.addItem(toAdd);
 		
 	}
+
+	public void clearSites() {
+		this.dropDown.removeAllItems();
+	}
 	
 	public List<Site> getSiteList() {
 		return modSites;

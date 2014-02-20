@@ -18,6 +18,10 @@ public class SiteModuleController {
 		this.pSim.setSiteList(this.allSites);
 	}
 
+	public ProcessSimulator getProcessSimulator() {
+		return pSim;
+	}
+
 	public void hourlyUpdate()
 	{
 		this.pSim.ProcessSites();

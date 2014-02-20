@@ -27,7 +27,9 @@ public class Site {
 		return this.siteName;
 	}
 	
-
+	public MapMarkerDot getMarker() {
+		return mapMarker;
+	}
 	
 	public void addModule(Module m) {
 		this.modules.add(m);

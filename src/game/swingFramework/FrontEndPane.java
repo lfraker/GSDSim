@@ -11,6 +11,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -25,8 +26,11 @@ import game.components.Button;
 import game.components.Difficulty;
 import game.components.Module;
 import game.components.ProcessSimulator;
+import game.components.Scenario;
+import game.components.ScenarioLoader;
 import game.components.Site;
 import game.components.SiteModuleController;
+
 
 import game.backend.VectorI;
 
@@ -94,6 +98,9 @@ public class FrontEndPane {
 		
 		this.getWindow().pack();
 		this.getWindow().setVisible(true);
+
+		loadScenario();
+
 		doStart();
 	}
 	
@@ -101,6 +108,25 @@ public class FrontEndPane {
 		return this.frames;
 		
 	}
+
+	public void loadScenario() {
+		Scenario s = ScenarioLoader.load("./gameFiles/scenario1.json");
+		s.print();
+		List<Site> sites = s.process();
+
+		/* Clear existing stuff */
+		modules.clearSites();
+		siteStatus.removeAllMapMarkers();
+
+		/* Load in new stuff */
+		modSiteController.getProcessSimulator().setSiteList(sites); // needed?
+		for (Site site: sites) {
+			addSiteToCombo(site);
+			modSiteController.addSite(site);
+			siteStatus.addMapMarker(site.getMarker());
+		}
+	}
+
 	public long getTime() {
 		return this.currTime;
 	}

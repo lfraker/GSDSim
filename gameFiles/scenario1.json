@@ -1,0 +1,31 @@
+{
+	"sites": [
+	{
+		"name": "Dublin Branch",
+		"location": [53.34, -6.25],
+		"timezone": 0,
+		"workers": 4
+	}, {
+		"name": "Team Australia",
+		"location": [-37.81, 144.96],
+		"timezone": 10,
+		"workers": 30
+	}
+	],
+	"modules": [
+	{
+		"name": "core",
+		"hours": "120",
+		"sites": [
+			"Dublin Branch"
+		]
+	}, {
+		"name": "features",
+		"hours": "160",
+		"sites": [
+			"Team Australia",
+			"Dublin Branch"
+		]
+	}
+	]
+}
