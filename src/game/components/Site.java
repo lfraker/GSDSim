@@ -32,7 +32,8 @@ public class Site {
 	public void addModule(Module m) {
 		this.modules.add(m);
 	}
-	void doWork() {
+
+	public void doWork() {
 		float effortUnits = 100;
 		Module x = modules.get(0);
 		while (effortUnits > 0 && x != null) {

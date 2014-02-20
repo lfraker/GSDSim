@@ -130,6 +130,7 @@ public class FrontEndPane {
 	public void testDayEnd() {
 		this.currTime = TimeUnit.NANOSECONDS.convert((((long)this.dayTime) + 1), TimeUnit.MINUTES);
 		
+		this.modSiteController.hourlyUpdate();
 
 	}
 	

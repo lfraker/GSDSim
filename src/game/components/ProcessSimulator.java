@@ -8,9 +8,11 @@ import java.util.List;
 
 public class ProcessSimulator {
 //	private List<ModuleWrapper> allModules = new ArrayList<>();
-//	private List<Site> allSites = new ArrayList<>();
-	private int currentTime;
+
+	private List<Site> allSites;
+	private int currentTime = 10; //Check out timing
 	
+
 //	public void addModule(Module m, String moduleSiteName) {
 //		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
 //		Collections.sort(this.allModules, new ModuleComparator());
@@ -37,6 +39,12 @@ public class ProcessSimulator {
 	{
 		this.currentTime = newTime;
 	}
+
+	public void setSiteList(List<Site> sites)
+	{
+		// Sets the list of sites to be used
+		this.allSites = sites;
+	}
 	
 
 //  public void addSite(Site site)
@@ -45,37 +53,54 @@ public class ProcessSimulator {
 //  }
 
 
-//  public void ProcessSites()
-//  {	
-//  		/*	Tommy 
-//	  	*	Loop through all the sites and update
-//		*/
-//
-//		//Put these somewhere suitable
-//	  	int startOfWorkingDay = 9; // 9am
-//	  	int endOfWorkingDay = 18; //6pm
-//
-//		
-//		for(Site currentSite : this.allSites)
-//		{
-//			int localTime = (currentTime + currentSite.getTimezone());
-//
-//	  		//Check site is currently active - not all sites active at all times - timezones
-//	  		if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
-//	  		{
-//	
-//				ArrayList<Module> siteModules = currentSite.getModules();
-//	  			for(Module currentMod : siteModules)
-//				{
-//					currentMod.doWork();
-//				}	
-//
-//	  		}
-//
-//	  	}
-//
-//
-//  }
+  	public void ProcessSites()
+  	{	
+	  	/*	Tommy 
+		*	Loop through all the sites and update
+		* 	Run once an hour
+		*/
+
+		//Put these somewhere suitable
+	  	int startOfWorkingDay = 9; // 9am
+	  	int endOfWorkingDay = 18; //6pm
+
+	  	System.out.println("Performing hourly update.");
+		
+		for(Site currentSite : this.allSites)
+		{
+			int localTime = (currentTime + currentSite.getTimezone());
+
+	  		//Check site is currently active - not all sites active at all times - timezones
+	  		//if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
+	  		//{
+	
+				System.out.println("Performing work at site: " + currentSite.getName() + ".");
+
+				ArrayList<Module> siteModules = currentSite.getModules();
+	  			for(Module currentMod : siteModules)
+				{
+					if(currentMod.isComplete())
+					{
+						//Skip complete modules or do something with them here..
+						continue;
+					}
+
+					System.out.println("Performing work on module: " + currentMod.getName() + ".");
+					currentMod.doWork();
+					System.out.println("Completion level: " + (currentMod.getCompletionLevel() * 100));
+
+				}	
+			/*
+	  		}
+	  		else
+	  		{
+	  			System.out.println("Site: " + currentSite.getName() + " currently closed.");
+	  		}*/
+
+	  	}
+
+
+  }
 	
 	
 	

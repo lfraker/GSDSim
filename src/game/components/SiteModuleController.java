@@ -13,6 +13,14 @@ public class SiteModuleController {
 	
 	public SiteModuleController() {
 		this.pSim = new ProcessSimulator();
+
+		//Pass the site list to process simulator
+		this.pSim.setSiteList(this.allSites);
+	}
+
+	public void hourlyUpdate()
+	{
+		this.pSim.ProcessSites();
 	}
 	
 	public void endDay() {
