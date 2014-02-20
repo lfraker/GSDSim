@@ -1,28 +1,45 @@
-<project default="compile">
-    
-  <target name="compile">
+<project default="test">
+
+  <target name="build">
     <mkdir dir="bin"/>
-    <javac includeantruntime="false" srcdir="src/game" destdir="bin" />
+    <javac includeantruntime="false" srcdir="src" destdir="bin">
+      <classpath>
+        <fileset dir="lib" includes="*.jar" />
+      </classpath>
+      <exclude name="**/*Test.java"/>
+    </javac>
   </target>
 
-  <target name="jar" depends="compile">
-
-    <jar destfile="GSD.jar"
-         basedir="bin"
-         includes="**/*.class" />
+  <target name="jar" depends="build">
+    <jar destfile="GSD.jar" basedir="bin">
+      <zipfileset>
+        <fileset dir="lib" includes="*.jar" />
+      </zipfileset>
+      <fileset dir="bin" includes="**/*.class" />
+    </jar>
   </target>
 
   <target name="run" depends="jar">
-    <java classpath="bin" classname="game/backend/Main" fork="true">
-        <classpath path="GSD.jar" />
+    <java classname="game/backend/Main" fork="true">
+      <classpath path="GSD.jar" />
     </java>
   </target>
 
-  <target name="clean"
-      description="clean up" >
-     <!-- Delete the ${build} directory-->
-        <delete dir="bin"/>
-       <delete file="GSD.jar"/>
+  <target name="test" depends="build">
+    <javac includeantruntime="true" srcdir="src" destdir="bin">
+      <include name="**/*Test.java"/>
+    </javac>
+    <junit printsummary="on" fork="true" haltonfailure="yes">
+      <classpath path="bin"/>
+      <batchtest>
+        <fileset dir="bin" includes="**/*Test.class"/>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="clean" description="clean up" >
+    <delete dir="bin"/>
+    <delete file="GSD.jar"/>
   </target>
 
 </project>
