@@ -81,14 +81,17 @@ public class SetModulesPane extends Pane {
 		JPanel temp3 = new JPanel();
 		JPanel temp4 = new JPanel();
 		JPanel temp5 = new JPanel();
-		temp1.setLayout(new GridLayout(6,0));
-		temp1.add(new JLabel());
+		JPanel temp6 = new JPanel();
+		JPanel temp7 = new JPanel();
+		JPanel temp8 = new JPanel();
+		JPanel temp9 = new JPanel();
+		JPanel temp10 = new JPanel();
+		temp1.setLayout(new GridLayout(4,0));
 		temp1.add(new JLabel());
 		temp1.add(new JLabel());
 		temp1.add(moduleName);
 		
-		temp2.setLayout(new GridLayout(6,0));
-		temp2.add(new JLabel());
+		temp2.setLayout(new GridLayout(4,0));
 		temp2.add(new JLabel());
 		temp2.add(new JLabel());
 		temp2.add(hoursEstimate);
@@ -166,30 +169,6 @@ public class SetModulesPane extends Pane {
 		temp5.add(new JLabel());
 		temp5.add(new JLabel());
 		temp5.add(clearSites);
-		
-		this.add(new JLabel());
-		this.add(new JLabel("Select Site:"));
-		this.add(new JLabel());
-		this.add(this.dropDown);
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(temp5);	
-		this.add(new JLabel());	
-		this.add(temp3);
-		this.add(new JLabel());	
-		this.add(new JLabel());
-		this.add(new JLabel("Module Name:"));
-		this.add(new JLabel());
-		this.add(temp1);
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel("Hours Estimate:"));
-		this.add(new JLabel());
-		this.add(temp2);
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(temp4);
 		JButton simEndDay = new JButton("Test End of Day Sim");
 		simEndDay.addActionListener(new ActionListener() {
 
@@ -200,7 +179,57 @@ public class SetModulesPane extends Pane {
 			}
 			
 		});
-		this.add(simEndDay);
+		temp6.setLayout(new GridLayout(4,0));
+		temp6.add(new JLabel());
+		temp6.add(new JLabel());
+		temp6.add(simEndDay);
+		
+		temp7.setLayout(new GridLayout(4,0));
+		temp7.add(new JLabel());
+		temp7.add(new JLabel());
+		temp7.add(dropDown);
+
+		temp8.setLayout(new GridLayout(4,0));
+		temp8.add(new JLabel());
+		temp8.add(new JLabel());
+		temp8.add(new JLabel("Select Site:"));
+		
+		temp9.setLayout(new GridLayout(4,0));
+		temp9.add(new JLabel());
+		temp9.add(new JLabel());
+		temp9.add(new JLabel("Module Name:"));
+		
+		temp10.setLayout(new GridLayout(4,0));
+		temp10.add(new JLabel());
+		temp10.add(new JLabel());
+		temp10.add(new JLabel("Hours Estimate:"));
+
+
+
+		this.add(new JLabel());
+		this.add(temp8);
+		this.add(new JLabel());
+		this.add(temp7);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(temp5);	
+		this.add(new JLabel());	
+		this.add(temp3);
+		this.add(new JLabel());	
+		this.add(new JLabel());
+		this.add(temp9);
+		this.add(new JLabel());
+		this.add(temp1);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(temp10);
+		this.add(new JLabel());
+		this.add(temp2);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(temp4);
+		this.add(new JLabel());
+		this.add(temp6);
 	
 	
 		this.startListening();
