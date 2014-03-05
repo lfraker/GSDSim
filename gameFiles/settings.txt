@@ -1,6 +1,6 @@
 This is the settings file. To change a setting, simply edit the value after the colon mark next to the field. Do not delete the colon, only edit the value after the colon the field.Do not add any spaces after the colon either, only add the desired value
 *****************************
 Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):HARD
-Minutes Per Day (enter a number between 15-115):40
+Minutes Per Day (enter a number between 15-115):15
 Labor Cost(enter a positive decimal):100.0
 Follow The Sun Handoff Time(enter a number between 1-15):10

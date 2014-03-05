@@ -2,7 +2,6 @@ package game.swingFramework;
 
 import game.gamePanes.Pane;
 
-
 import game.gamePanes.SetModulesPane;
 import game.gamePanes.SettingsPane;
 
@@ -22,12 +21,12 @@ import game.org.openstreetmap.gui.jmapviewer.Layer;
 import game.org.openstreetmap.gui.jmapviewer.LayerGroup;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
+import game.components.Scenarios;
+import game.components.ScenarioLoader;
 import game.components.Button;
 import game.components.Difficulty;
 import game.components.Module;
 import game.components.ProcessSimulator;
-import game.components.Scenarios;
-import game.components.ScenarioLoader;
 import game.components.Site;
 import game.components.SiteModuleController;
 
@@ -49,16 +48,16 @@ public class FrontEndPane {
 	private long lastTickNanos;
 	private Timer timer;
 	private SettingsPane settings;
-	private SetModulesPane modules;
+	public static SetModulesPane modules;
 	long currTime;
 	int dayCount;
 	Difficulty difficulty;
 	float dayTime;
 	boolean canPause = false;
 	boolean paused = false;
-	private JMapViewer siteStatus;
+	public static JMapViewer siteStatus;
 	private VectorI windSize;
-	private SiteModuleController modSiteController = new SiteModuleController();
+	public static SiteModuleController modSiteController = new SiteModuleController();
 	private int zoom;
 	
 	
@@ -100,7 +99,6 @@ public class FrontEndPane {
 		this.getWindow().pack();
 		this.getWindow().setVisible(true);
 
-		loadScenario();
 
 		doStart();
 	}
@@ -297,8 +295,8 @@ public class FrontEndPane {
 		return this.siteStatus;
 	}
 	
-	public void addSiteToCombo(Site toAdd) {
-		this.modules.addSite(toAdd);
+	public static void addSiteToCombo(Site toAdd) {
+		modules.addSite(toAdd);
 	}
 	
 	public Button getPauseButton() {
