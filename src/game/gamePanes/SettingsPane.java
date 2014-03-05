@@ -18,6 +18,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -25,14 +27,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
+import javax.swing.JFrame;
 
-import game.paneScreens.SettingsScreen;
+import game.paneScreens.*;
+import game.components.Scenario;
+import game.components.Scenarios;
+import game.components.ScenarioLoader;
 import game.swingFramework.FrontEndPane;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 
 @SuppressWarnings("serial")
 public class SettingsPane extends Pane {
 	public JTextArea laborCost;
 	public JTextArea followTheSun;
+	public JButton loadDefaultSites;
+	public ChooseDefaultPane loadDefaultSitesP;
 //	private JButton easy;
 //	private JButton medium;
 //	private JButton hard;
@@ -59,7 +72,12 @@ public class SettingsPane extends Pane {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
-
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
 		this.laborCost = new JTextArea();
 		//this.laborCost.setEnabled(false);
 //		this.laborCost.addMouseListener(new MouseAdapter()  
@@ -88,7 +106,7 @@ public class SettingsPane extends Pane {
 		this.laborCost.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		JPanel newPanel = new JPanel();
 		newPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		newPanel.add(new JLabel("Laber Cost Per Location:"));
+		newPanel.add(new JLabel("Labor Cost Per Location:"));
 		this.laborCost.setPreferredSize(new Dimension(50,25));
 		newPanel.setOpaque(false);
 		newPanel.add(this.laborCost);
@@ -108,6 +126,21 @@ public class SettingsPane extends Pane {
 		newPanel2.add(this.followTheSun);
 		//newPanel.setPreferredSize(new Dimension(50,50));
 		this.add(newPanel2);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		JPanel newPanel3 = new JPanel();
+		newPanel3.setLayout(new GridLayout(3, 0));
+		newPanel3.add(new JLabel());
+		loadDefaultSites = new JButton("Choose Default Sites");
+		loadDefaultSites.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadDefaultSitesP = new ChooseDefaultPane();
+				loadDefaultSitesP.setVisible(true);
+			}
+		});
+		newPanel3.add(loadDefaultSites);
+		newPanel3.setOpaque(false);
+		this.add(newPanel3);
 		this.startListening();
 		this.viewScreen = new SettingsScreen(this);
 		((SettingsScreen)this.viewScreen).readSettings();
@@ -217,8 +250,73 @@ public class SettingsPane extends Pane {
 	}
 
 
+class ChooseDefaultPane extends JFrame {
+  JRadioButton rB;
+  ButtonGroup bG;
+	JPanel okPanel;
+	JButton ok;
+  String cities;
+	String[] cities1;
+	Scenarios s;
+  public ChooseDefaultPane() {
+		bG = new ButtonGroup();
+		this.setSize(new Dimension(795, 496));
+		this.setLocationRelativeTo(null);
+    this.setLayout(new GridLayout(0,3));
+    this.add(new JLabel());
+    s = ScenarioLoader.load("./gameFiles/scenario1.json");
+		cities1 = new String[s.scenarios.length];
+    for (int i = 0; i < s.scenarios.length; i++) {
+      for (int j = 0; j < s.scenarios[i].sites.length; j++) {
+        if (j == 0) {
+          cities = s.scenarios[i].sites[j].name;
+        } else {
+          cities += ", " + s.scenarios[i].sites[j].name;
+        }
+      }
+			cities1[i] = cities;
+      rB = new JRadioButton(cities);
+      bG.add(rB);
+      add(rB);
+      this.add(new JLabel());
+      this.add(new JLabel());
+    }
+		this.add(new JLabel());
+		okPanel = new JPanel();
+		okPanel.setLayout(new GridLayout(4, 0));
+		okPanel.add(new JLabel());
+		okPanel.add(new JLabel());
+		okPanel.add(new JLabel());
+		ok = new JButton("Ok");
+		okPanel.add(ok);
+		this.add(okPanel);
+		ok.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+				for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) {
+        	AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+							for (int k = 0; k < cities1.length; k++) {
+                if (button.getText().equals(cities1[k])) {
+									game.swingFramework.FrontEndPane.modules.clearSites();
+								  game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
 
+    							/* Load in new stuff */
+    							for (int l = 0; l < s.scenarios[k].sites.length; l++) {
+     								game.swingFramework.FrontEndPane.addSiteToCombo(s.scenarios[k].process().get(l));
+     								game.swingFramework.FrontEndPane.modSiteController.addSite(s.scenarios[k].process().get(l));
+     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(s.scenarios[k].process().get(l).getMarker());
+   								}
+								}
+							}
+	          }
+       		}
+					dispose();
+      	}
+    });
 
+		
+  }
+}
 	
 	
 	
