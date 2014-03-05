@@ -71,9 +71,9 @@ each sites list of modules at the end of the day.
 To test that this works, first add a site by clicking on the “Sites” tab, then
 click anywhere to get the popup to appear that can add a site. After you fill
 out the correct info, click ok to add the site. After you have added a site,
-click on the “Modules” tab, add the site(s) that the module will be worked on
+click on the “Modules” tab, add the site that the module will be worked on
 at, give the module a name and hours estimate, and click add module. This
-module will now exist at the site(s) selected, now once the day ends, endDay()
+module will now exist at the site selected, now once the day ends, endDay()
 will be called in FrontEndPane.java.
 
 As a final note, each site now contains an instance of a MapMarkerDot,
@@ -89,6 +89,9 @@ at all active sites. Should be called on the hour, every hour. At the moment
 you can test it by doing the above and clicking the "Test End Of Day Sim"
 button. Output should appear in the command line for debugging purposes.
 
+Changed the command line output from the module code to be more easily understood.
+
+Modified the FrontEndPane.java class to do hourly updates in addition to daily ones.
 
 
 

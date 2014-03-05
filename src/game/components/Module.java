@@ -194,10 +194,11 @@ public class Module {
 			workPoints *= methodologyModifier;
 			float workLeftInModule = this.workRemaining();
 
-			System.out.println("Total man hours to allocate: " + workPoints);
+			float totalWork = workPoints;
 
 			if(workLeftInModule <= workPoints) 
 			{
+				System.out.println("Completed Module " + this.modName);
 				this.complete();
 			} 
 			else 
@@ -208,7 +209,6 @@ public class Module {
 					//Average number of man hours available for each section
 					float manHoursAvailableToSection = (workPoints / (7 - this.sectionsCompleted()));
 
-
 					for(int currentStep = 0; currentStep < 7; currentStep++) 
 					{
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
@@ -218,18 +218,14 @@ public class Module {
 
 							//If the step hasn't been completed yet...
 							//Recalculated per section as we may have remaining work points from previous sections
-							
-
-							System.out.println("MHAS: " + this.sectionsCompleted() );
-
-
 
 							if(workLeftToDo < manHoursAvailableToSection)
 							{
 								//Section complete.. Reallocate work to next section
 
+								/*
 								System.out.println(	"Allocated " + (stepEstimates[currentStep] - workDonePerSection[currentStep]) + 
-													" hours to section " + (currentStep+1));
+													" hours to section " + (currentStep+1));*/
 
 								workPoints -= (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 								
@@ -239,11 +235,10 @@ public class Module {
 							}
 							else
 							{
-								
 								//Just allocate an equal amount of work for this section
 								workDonePerSection[currentStep] += manHoursAvailableToSection;
 								workPoints -= manHoursAvailableToSection;
-								System.out.println("Allocated " + manHoursAvailableToSection + " hours to section " + (currentStep+1));
+								//System.out.println("Allocated " + manHoursAvailableToSection + " hours to section " + (currentStep+1));
 							}
 
 							if(workPoints <= 0) 
@@ -257,7 +252,7 @@ public class Module {
 
 				}
 
-				
+			System.out.println("Performed " + totalWork + " hours of work on " + this.modName);
 
 			}
 

@@ -52,8 +52,10 @@ public class FrontEndPane {
 	private SetModulesPane modules;
 	long currTime;
 	int dayCount;
+	int hourCount;
 	Difficulty difficulty;
 	float dayTime;
+	float hourTime;
 	boolean canPause = false;
 	boolean paused = false;
 	private JMapViewer siteStatus;
@@ -169,6 +171,8 @@ public class FrontEndPane {
 //			}
 //		}
 
+		/*
+
 		String fTime = TimeUnit.MINUTES.convert(this.currTime, TimeUnit.NANOSECONDS) + "." + (TimeUnit.SECONDS.convert(this.currTime, TimeUnit.NANOSECONDS) % 60);
 		//System.out.println(fTime);
 		if (Float.parseFloat(fTime) >= this.dayTime) {
@@ -181,6 +185,34 @@ public class FrontEndPane {
 		
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
+
+		*/
+
+		String fTime = TimeUnit.MINUTES.convert(this.currTime, TimeUnit.NANOSECONDS) + "." + (TimeUnit.SECONDS.convert(this.currTime, TimeUnit.NANOSECONDS) % 60);
+		//System.out.println(fTime);
+
+		if (Float.parseFloat(fTime) >= this.hourTime) {
+			//System.out.println(this.dayTime);
+			this.hourCount++;
+			this.currTime = 0;
+			this.modSiteController.hourlyUpdate();
+			return;
+		}
+
+
+		if (this.hourCount == 24) {
+			//System.out.println(this.dayTime);
+			this.dayCount++;
+			this.hourCount = 0;
+			//this.currTime = 0;
+			this.modSiteController.endDay();
+			return;
+		}
+		
+		long currentNanos = System.nanoTime();
+		long delta = currentNanos - lastTickNanos;
+
+
 		
 //		tickTimes[tickTimesIndex = (tickTimesIndex + 1) % NUM_FRAMES_TO_AVERAGE] = delta;
 //		if (debug) {
@@ -211,7 +243,7 @@ public class FrontEndPane {
 
 	public void setTimePerDay(float time) {
 		this.dayTime = time;
-		
+		this.hourTime = time / 24;
 	}
 	
 	public void setCanPause() {
