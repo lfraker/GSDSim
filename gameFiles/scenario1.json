@@ -1,31 +1,75 @@
 {
-	"sites": [
-	{
-		"name": "Dublin Branch",
-		"location": [53.34, -6.25],
-		"timezone": 0,
-		"workers": 4
-	}, {
-		"name": "Team Australia",
-		"location": [-37.81, 144.96],
-		"timezone": 10,
-		"workers": 30
-	}
-	],
-	"modules": [
-	{
-		"name": "core",
-		"hours": "120",
-		"sites": [
-			"Dublin Branch"
-		]
-	}, {
-		"name": "features",
-		"hours": "160",
-		"sites": [
-			"Team Australia",
-			"Dublin Branch"
-		]
-	}
+	"scenarios": [
+		{
+			"sites": [
+			{
+				"name": "Dublin",
+				"location": [53.34, -6.25],
+				"timezone": 0,
+				"workers": 4
+			}, {
+				"name": "Eastern Europe",
+				"location": [55.75090, 37.73332],
+				"timezone": 10,
+				"workers": 30
+			}
+			],
+			"modules": [
+			{
+				"name": "core",
+				"hours": "120",
+				"sites": [
+					"Dublin"
+				]
+			}, {
+				"name": "features",
+				"hours": "160",
+				"sites": [
+					"Eastern Europe",
+					"Dublin"
+				]
+			}
+			]
+		},
+		{
+  		"sites": [
+  		{
+    		"name": "Dublin",
+    		"location": [53.34, -6.25],
+    		"timezone": 0,
+    		"workers": 4
+  		}, {
+    		"name": "New York",
+    		"location": [40.74598, -73.97566],
+    		"timezone": 10,
+    		"workers": 30
+  		}, {
+				"name": "Shanghai",
+				"location": [31.31467, 121.58098],
+				"timezone": 15,
+				"workers": 50
+			}
+  		]
+		},
+		{
+  		"sites": [
+  		{
+    		"name": "Dublin",
+    		"location": [53.34, -6.25],
+    		"timezone": 0,
+    		"workers": 4
+  		}, {
+   		 	"name": "San Francisco",
+    		"location": [37.78675, 237.59660],
+    		"timezone": 10,
+    		"workers": 30
+  		}, {
+				"name": "Bangalore",
+				"location": [12.85301, 77.63566],
+				"timezone": 14,
+				"workers": 30
+			}
+  		]
+		}	
 	]
 }

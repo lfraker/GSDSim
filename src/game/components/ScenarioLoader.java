@@ -9,14 +9,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class ScenarioLoader {
-	public static Scenario load(String path) {
-		Scenario scenario = null;
+	public static Scenarios load(String path) {
+		Scenarios scenario = null;
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(path));
 
 			Gson gson = new Gson();
-			scenario = gson.fromJson(br, Scenario.class);
+			scenario = gson.fromJson(br, Scenarios.class);
 
 			br.close();
 		} catch (JsonSyntaxException e) {

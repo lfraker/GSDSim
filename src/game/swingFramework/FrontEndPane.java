@@ -26,7 +26,7 @@ import game.components.Button;
 import game.components.Difficulty;
 import game.components.Module;
 import game.components.ProcessSimulator;
-import game.components.Scenario;
+import game.components.Scenarios;
 import game.components.ScenarioLoader;
 import game.components.Site;
 import game.components.SiteModuleController;
@@ -71,6 +71,7 @@ public class FrontEndPane {
 		this.settings = new SettingsPane(this);
 		this.modules = new SetModulesPane(this);
 		this.siteStatus = new JMapViewer(this);
+		this.siteStatus.setZoom(1);
 //        LayerGroup germanyGroup = new LayerGroup("Germany");
 //        
 //        Layer germanyWestLayer = germanyGroup.addLayer("Germany West");
@@ -78,11 +79,11 @@ public class FrontEndPane {
 //        MapMarkerDot ebersheim = new MapMarkerDot(null, "Ebersheim", 49.91, 8.24);
 //
 //		this.siteStatus.addMapMarker(ebersheim);
+		this.frames.add("Sites", this.siteStatus);
 		this.settings.setupSwingPane();
+		this.frames.add("Modules", this.modules);
 		this.frames.add("Settings", this.settings);
 		this.modules.setupSwingPane();
-		this.frames.add("Modules", this.modules);
-		this.frames.add("Sites", this.siteStatus);
 		this.getWindow().add(this.frames);
 
 		
@@ -110,7 +111,7 @@ public class FrontEndPane {
 	}
 
 	public void loadScenario() {
-		Scenario s = ScenarioLoader.load("./gameFiles/scenario1.json");
+		Scenarios s = ScenarioLoader.load("./gameFiles/scenario1.json");
 		s.print();
 		List<Site> sites = s.process();
 
