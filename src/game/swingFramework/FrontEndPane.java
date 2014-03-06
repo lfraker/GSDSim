@@ -86,9 +86,6 @@ public class FrontEndPane {
 		this.frames.add("Settings", this.settings);
 		this.modules.setupSwingPane();
 		this.getWindow().add(this.frames);
-
-		
-		
 		this.timer = new Timer(DEFAULT_DELAY_MILLIS, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -107,27 +104,7 @@ public class FrontEndPane {
 	
 	public JTabbedPane getFrame() {
 		return this.frames;
-		
 	}
-
-	public void loadScenario() {
-		Scenarios s = ScenarioLoader.load("./gameFiles/scenario1.json");
-		s.print();
-		List<Site> sites = s.process();
-
-		/* Clear existing stuff */
-		modules.clearSites();
-		siteStatus.removeAllMapMarkers();
-
-		/* Load in new stuff */
-		modSiteController.getProcessSimulator().setSiteList(sites); // needed?
-		for (Site site: sites) {
-			addSiteToCombo(site);
-			modSiteController.addSite(site);
-			siteStatus.addMapMarker(site.getMarker());
-		}
-	}
-
 	public long getTime() {
 		return this.currTime;
 	}

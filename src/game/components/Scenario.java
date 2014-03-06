@@ -7,11 +7,9 @@ import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 public class Scenario {
   public SiteInfo[] sites;
-  public ModuleInfo[] modules;
 
-  Scenario(SiteInfo[] sites, ModuleInfo[] modules) {
+  Scenario(SiteInfo[] sites) {
     this.sites = sites;
-    this.modules = modules;
   }
 
   public void print() {
@@ -31,24 +29,6 @@ public class Scenario {
       Site s = new Site(si.name, si.workers, pos, si.timezone);
       sitesMap.put(si.name, s);
     }
-
-/*    for (ModuleInfo mi: modules) {
-
-      List<Site> moduleSites = new ArrayList<>();
-
-      for (String site: mi.sites) {
-        Site s = sitesMap.get(site);
-
-        if (s != null) {
-          moduleSites.add(s);
-        }
-      }
-      Module m = new Module(mi.hours, mi.name, moduleSites);
-      for (Site site: moduleSites) {
-        site.addModule(m);
-      }
-      rModules.add(m);
-    }*/
     return new ArrayList(sitesMap.values());
   }
 	public class SiteInfo {
@@ -56,11 +36,5 @@ public class Scenario {
 		float[] location;
 		int timezone;
 		int workers;
-	}
-
-	public class ModuleInfo {
-		public String name;
-		int hours;
-		String[] sites;
 	}
 }

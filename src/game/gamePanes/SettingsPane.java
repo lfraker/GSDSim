@@ -299,8 +299,7 @@ class ChooseDefaultPane extends JFrame {
                 if (button.getText().equals(cities1[k])) {
 									game.swingFramework.FrontEndPane.modules.clearSites();
 								  game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
-
-    							/* Load in new stuff */
+									game.swingFramework.FrontEndPane.modSiteController.removeSites();
     							for (int l = 0; l < s.scenarios[k].sites.length; l++) {
      								game.swingFramework.FrontEndPane.addSiteToCombo(s.scenarios[k].process().get(l));
      								game.swingFramework.FrontEndPane.modSiteController.addSite(s.scenarios[k].process().get(l));

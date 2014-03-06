@@ -13,22 +13,6 @@
 				"timezone": 10,
 				"workers": 30
 			}
-			],
-			"modules": [
-			{
-				"name": "core",
-				"hours": "120",
-				"sites": [
-					"Dublin"
-				]
-			}, {
-				"name": "features",
-				"hours": "160",
-				"sites": [
-					"Eastern Europe",
-					"Dublin"
-				]
-			}
 			]
 		},
 		{

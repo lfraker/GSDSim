@@ -36,8 +36,7 @@ public class SiteModuleController {
 	public List<Site> getSites() {
 		return this.allSites;
 	}
-	
-	
+		
 	
 //	public void addModule(Module m, String moduleSiteName) {
 //		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
@@ -49,7 +48,10 @@ public class SiteModuleController {
 	  this.allSites.add(site);
 	}
 	
-	
+	public void removeSites()
+	{
+		this.allSites.clear();
+	}
 	
 	
 	
