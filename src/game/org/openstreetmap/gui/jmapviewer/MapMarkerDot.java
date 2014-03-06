@@ -16,6 +16,9 @@ import game.org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  *
  */
 public class MapMarkerDot extends MapMarkerCircle {
+    public enum Status { BEHIND, ONTIME, AHEAD };
+
+    public Status status = Status.ONTIME;
 
     public static final int DOT_RADIUS = 5;
 
@@ -49,18 +52,21 @@ public class MapMarkerDot extends MapMarkerCircle {
     }
 
     public static Style getDefaultStyle(){
-        return new Style(Color.BLACK, Color.YELLOW, null, getDefaultFont());
+        return new Style(Color.BLACK, Color.GREEN, null, getDefaultFont());
     }
     
     public void setBehind() {
-    	this.getStyle().setBackColor(Color.RED);
+        this.getStyle().setBackColor(Color.RED);
+        this.status = Status.BEHIND;
     }
     
     public void setOnTime() {
-    	this.getStyle().setBackColor(Color.YELLOW);
+        this.getStyle().setBackColor(Color.GREEN);
+        this.status = Status.ONTIME;
     }
     
     public void setAhead() {
-    	this.getStyle().setBackColor(Color.GREEN);
+        this.getStyle().setBackColor(new Color(0x00FFAA));
+        this.status = Status.AHEAD;
     }
 }

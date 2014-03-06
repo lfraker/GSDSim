@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+
 
 public class ProcessSimulator {
 //	private List<ModuleWrapper> allModules = new ArrayList<>();
@@ -69,6 +71,7 @@ public class ProcessSimulator {
 		for(Site currentSite : this.allSites)
 		{
 			int localTime = (currentTime + currentSite.getTimezone());
+			boolean behind = false;
 
 	  		//Check site is currently active - not all sites active at all times - timezones
 	  		//if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
@@ -89,7 +92,27 @@ public class ProcessSimulator {
 					currentMod.doWork();
 					System.out.println("Completion level: " + (currentMod.getCompletionLevel() * 100));
 
+					if (currentMod.workDone() > currentMod.origEstimate) {
+						behind = true;
+					}
+
 				}	
+				if (behind)
+				{
+					if (currentSite.mapMarker.status != MapMarkerDot.Status.BEHIND)
+					{
+						System.out.println("Module has missed completion deadline!");
+					}
+					currentSite.mapMarker.setBehind();
+				}
+				else
+				{
+					if (currentSite.mapMarker.status == MapMarkerDot.Status.BEHIND)
+					{
+						System.out.println("Module has somehow caught up!");
+					}
+					currentSite.mapMarker.setOnTime();
+				}
 			/*
 	  		}
 	  		else

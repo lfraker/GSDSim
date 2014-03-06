@@ -32,44 +32,44 @@
 			]
 		},
 		{
-  		"sites": [
-  		{
-    		"name": "Dublin",
-    		"location": [53.34, -6.25],
-    		"timezone": 0,
-    		"workers": 4
-  		}, {
-    		"name": "New York",
-    		"location": [40.74598, -73.97566],
-    		"timezone": 10,
-    		"workers": 30
-  		}, {
+			"sites": [
+			{
+				"name": "Dublin",
+				"location": [53.34, -6.25],
+				"timezone": 0,
+				"workers": 4
+			}, {
+				"name": "New York",
+				"location": [40.74598, -73.97566],
+				"timezone": 10,
+				"workers": 30
+			}, {
 				"name": "Shanghai",
 				"location": [31.31467, 121.58098],
 				"timezone": 15,
 				"workers": 50
 			}
-  		]
+			]
 		},
 		{
-  		"sites": [
-  		{
-    		"name": "Dublin",
-    		"location": [53.34, -6.25],
-    		"timezone": 0,
-    		"workers": 4
-  		}, {
-   		 	"name": "San Francisco",
-    		"location": [37.78675, 237.59660],
-    		"timezone": 10,
-    		"workers": 30
-  		}, {
+			"sites": [
+			{
+				"name": "Dublin",
+				"location": [53.34, -6.25],
+				"timezone": 0,
+				"workers": 4
+			}, {
+				"name": "San Francisco",
+				"location": [37.78675, -122.416667],
+				"timezone": 10,
+				"workers": 30
+			}, {
 				"name": "Bangalore",
 				"location": [12.85301, 77.63566],
 				"timezone": 14,
 				"workers": 30
 			}
-  		]
+			]
 		}	
 	]
 }

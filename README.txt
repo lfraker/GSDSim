@@ -8,7 +8,6 @@ DEPENDENCIES
 
 	Java SE JDK 7
 	Apache Ant
-	JUnit - to run tests, optional
 
 
 **************

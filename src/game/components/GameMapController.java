@@ -148,7 +148,13 @@ MouseWheelListener {
 
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (wheelZoomEnabled) {
-            map.setZoom(map.getZoom() - e.getWheelRotation(), e.getPoint());
+            int newZoom = map.getZoom() - e.getWheelRotation();
+            if (newZoom >= 2) {
+                map.setZoom(newZoom, e.getPoint());
+                if (newZoom == 2) {
+                    map.setDisplayPositionByLatLon(20, 10, 2);
+                }
+            }
         }
     }
 

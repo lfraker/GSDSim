@@ -72,7 +72,7 @@ public class FrontEndPane {
 		this.settings = new SettingsPane(this);
 		this.modules = new SetModulesPane(this);
 		this.siteStatus = new JMapViewer(this);
-		this.siteStatus.setZoom(1);
+		this.siteStatus.setDisplayPositionByLatLon(20, 10, 2);
 //        LayerGroup germanyGroup = new LayerGroup("Germany");
 //        
 //        Layer germanyWestLayer = germanyGroup.addLayer("Germany West");
