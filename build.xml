@@ -26,11 +26,17 @@
   </target>
 
   <target name="test" depends="build">
-    <javac includeantruntime="true" srcdir="src" destdir="bin">
+    <javac includeantruntime="false" srcdir="src" destdir="bin">
       <include name="**/*Test.java"/>
+      <classpath>
+        <fileset dir="src/test" includes="lib/*.jar"/>
+      </classpath>
     </javac>
     <junit printsummary="on" fork="true" haltonfailure="yes">
       <classpath path="bin"/>
+      <classpath>
+        <fileset dir="src/test" includes="lib/*.jar"/>
+      </classpath>
       <batchtest>
         <fileset dir="bin" includes="**/*Test.class"/>
       </batchtest>
