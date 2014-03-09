@@ -255,6 +255,7 @@ class ChooseDefaultPane extends JFrame {
   ButtonGroup bG;
 	JPanel okPanel;
 	JButton ok;
+	JPanel scenarioPanel;
   String cities;
 	String[] cities1;
 	Scenarios s;
@@ -262,11 +263,11 @@ class ChooseDefaultPane extends JFrame {
 		bG = new ButtonGroup();
 		this.setSize(new Dimension(795, 496));
 		this.setLocationRelativeTo(null);
-    this.setLayout(new GridLayout(0,3));
-    this.add(new JLabel());
     s = ScenarioLoader.load("./gameFiles/scenario1.json");
+		this.setLayout(new GridLayout(0, s.scenarios.length));
 		cities1 = new String[s.scenarios.length];
     for (int i = 0; i < s.scenarios.length; i++) {
+			scenarioPanel = new JPanel();
       for (int j = 0; j < s.scenarios[i].sites.length; j++) {
         if (j == 0) {
           cities = s.scenarios[i].sites[j].name;
@@ -277,16 +278,18 @@ class ChooseDefaultPane extends JFrame {
 			cities1[i] = cities;
       rB = new JRadioButton(cities);
       bG.add(rB);
-      add(rB);
-      this.add(new JLabel());
-      this.add(new JLabel());
+      scenarioPanel.add(rB);
+			for (int m = 0; m < s.scenarios[i].modules.length; m++) {
+				scenarioPanel.add(new JLabel("Name: " + s.scenarios[i].modules[m].name));
+				scenarioPanel.add(new JLabel("Hours: " + s.scenarios[i].modules[m].hours));
+				scenarioPanel.add(new JLabel("Sites:"));
+				for (int n = 0; n < s.scenarios[i].modules[m].sites.length; n++) {
+					scenarioPanel.add(new JLabel(s.scenarios[i].modules[m].sites[n]));
+				}
+			}
+			this.add(scenarioPanel);
     }
-		this.add(new JLabel());
 		okPanel = new JPanel();
-		okPanel.setLayout(new GridLayout(4, 0));
-		okPanel.add(new JLabel());
-		okPanel.add(new JLabel());
-		okPanel.add(new JLabel());
 		ok = new JButton("Ok");
 		okPanel.add(ok);
 		this.add(okPanel);

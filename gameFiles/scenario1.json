@@ -13,6 +13,22 @@
 				"timezone": 10,
 				"workers": 30
 			}
+			],
+			"modules": [
+			{
+				"name": "core",
+				"hours": "120",
+				"sites": [
+					"Dublin"
+				]
+			}, {
+				"name": "features",
+				"hours": "160",
+				"sites": [
+					"Eastern Europe",
+					"Dublin"
+				]
+			}
 			]
 		},
 		{
@@ -33,7 +49,23 @@
 				"timezone": 15,
 				"workers": 50
 			}
-			]
+			],
+		  "modules": [
+      {
+        "name": "core",
+        "hours": "120",
+        "sites": [
+          "Dublin"
+        ]
+      }, {
+        "name": "features",
+        "hours": "160",
+        "sites": [
+          "New York",
+          "Shanghai"
+        ]
+      }
+      ]
 		},
 		{
 			"sites": [
@@ -53,7 +85,23 @@
 				"timezone": 14,
 				"workers": 30
 			}
-			]
+			],
+      "modules": [
+      {
+        "name": "core",
+        "hours": "120",
+        "sites": [
+          "Dublin"
+        ]
+      }, {
+        "name": "features",
+        "hours": "160",
+        "sites": [
+          "San Francisco",
+          "Bangalore"
+        ]
+      }
+      ]
 		}	
 	]
 }
