@@ -336,7 +336,7 @@ public class FrontEndPane {
 	}
 	
 	public static void addSiteToCombo(Site toAdd) {
-		modules.addSite(toAdd);
+		modules.addSiteToCombo(toAdd);
 	}
 	
 	public Button getPauseButton() {

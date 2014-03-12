@@ -45,7 +45,7 @@ import game.swingFramework.FrontEndPane;
 @SuppressWarnings("serial")
 public abstract class Pane extends JComponent implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener, ComponentListener, KeyEventDispatcher {
 	Screen viewScreen;
-	VectorI windSize;
+	public VectorI windSize;
 	boolean resizeCalled = false;
 	FrontEndPane parentComp;
 	JTabbedPane frameWork;

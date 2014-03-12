@@ -52,7 +52,7 @@ public class SetModulesPane extends Pane {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void addSite(Site toAdd) {
+	public void addSiteToCombo(Site toAdd) {
 		this.dropDown.addItem(toAdd);
 		
 	}

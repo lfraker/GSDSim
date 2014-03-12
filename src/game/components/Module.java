@@ -23,7 +23,7 @@ public class Module {
 
 
 	float totalEstimate = 0.0f;
-	float origEstimate;
+	public float origEstimate;
 	int currentStage;
 	boolean complete = false;
 	
@@ -338,13 +338,13 @@ public class Module {
 
 	public int sectionsCompleted()
 	{
-		//Return number of incomplete sections for calculating division of labour in a module
+		//Return number of complete sections for calculating division of labour in a module
 
 		int res = 0;
 
 		for(int currentStep = 0; currentStep < 7; currentStep++)
 		{
-			if(this.stepEstimates[currentStep] == this.workDonePerSection[currentStep])
+			if(this.stepEstimates[currentStep] >= this.workDonePerSection[currentStep])
 			{
 				res++;
 			}
