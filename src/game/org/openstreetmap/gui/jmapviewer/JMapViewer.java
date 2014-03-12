@@ -667,7 +667,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		this.windSize = this.parentComp.getWindSize();
         g.setFont(new Font("serif", Font.BOLD, (this.windSize.x / 95)));
 		g.setColor(Color.BLACK);
-		float xT = (this.windSize.x * (6.5f/8.0f));
+		float xT = (this.windSize.x * (6.5f/8.0f)) - 40;
 		String toWrite1 = "Current Time: " + this.getDayTimer();
 		String toWrite2	= "Length of Day: " + (int)(this.getTotalTime() / 60) + ":" + (int)(this.getTotalTime() % 60);
 		String toWrite3 = "Day Count: " + this.getDays();

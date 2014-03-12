@@ -26,7 +26,13 @@ TO RUN THE GAME
 ****************
 
 
-First select the appropriate settings, difficulty, and time per day. Easy is the only difficulty level under which the pause feature is enabled. Next, select ‘Choose Default Sites’, pick a scenario and click ’Start Sim’. Until this point, neither the ‘Modules’ tab nor the ‘Sites’ tab has been activated, or able to be accessed. Once the scenario has been loaded, the ‘Settings’ tab will no longer be active or able to be accessed. After a scenario has been preloaded, only the ’Sites’ tab will be active. On the ’Sites’ tab, to get a sites info, click on the circle of the site and a pane with its infer will pop up.
+First select the appropriate settings, difficulty, and time per day. Easy is
+the only difficulty level under which the pause feature is enabled. Next, 
+select ‘Choose Default Sites’, pick a scenario and click ’Start Sim’. Once the
+scenario has been loaded, the ‘Settings’ tab will no longer be active or able 
+to be accessed. After a scenario has been preloaded, only the ’Sites’ tab will
+be active. On the ’Sites’ tab, to get a sites info, click on the circle of the
+site and a pane with its infer will pop up.
 
 
 
