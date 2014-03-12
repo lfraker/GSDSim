@@ -42,9 +42,9 @@ public class FrontEndPane {
 	
 	private JFrame window;
 	private JTabbedPane frames;
-	static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
-	static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
-	private static final int DEFAULT_DELAY_MILLIS = 1000 / 75;
+	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
+	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
+	private static final int DEFAULT_DELAY_MILLIS = 1000 / 5;
 	private long lastTickNanos;
 	private Timer timer;
 	private SettingsPane settings;
@@ -61,12 +61,14 @@ public class FrontEndPane {
 	private VectorI windSize;
 	public static SiteModuleController modSiteController = new SiteModuleController();
 	private int zoom;
+	private boolean timeStart = false;
+	private boolean loadedSim = false;
 	
 	
 	
 	public void setupFrame() {
 		this.setWindow(new JFrame("GSD Sim"));
-		this.frames = new JTabbedPane(JTabbedPane.LEFT);
+		this.frames = new JTabbedPane(JTabbedPane.TOP + JTabbedPane.HORIZONTAL);
 		this.frames.setMinimumSize(new Dimension(MINIMUM_WINDOW_SIZE.x, MINIMUM_WINDOW_SIZE.y));
 		this.frames.setPreferredSize(new Dimension(DEFAULT_WINDOW_SIZE.x, DEFAULT_WINDOW_SIZE.y));
 		this.settings = new SettingsPane(this);
@@ -80,10 +82,13 @@ public class FrontEndPane {
 //        MapMarkerDot ebersheim = new MapMarkerDot(null, "Ebersheim", 49.91, 8.24);
 //
 //		this.siteStatus.addMapMarker(ebersheim);
+		this.frames.add("Settings", this.settings);
+
 		this.frames.add("Sites", this.siteStatus);
 		this.settings.setupSwingPane();
-		this.frames.add("Modules", this.modules);
-		this.frames.add("Settings", this.settings);
+
+		//this.frames.add("Modules", this.modules);
+
 		this.modules.setupSwingPane();
 		this.getWindow().add(this.frames);
 		this.timer = new Timer(DEFAULT_DELAY_MILLIS, new ActionListener() {
@@ -97,13 +102,39 @@ public class FrontEndPane {
 		
 		this.getWindow().pack();
 		this.getWindow().setVisible(true);
-
-
+		
+		disableSites();
+		//disableModules();
 		doStart();
 	}
 	
 	public JTabbedPane getFrame() {
 		return this.frames;
+	}
+	
+	public void enableSettings() {
+		int tempInd = this.frames.indexOfTab("Settings");
+		this.frames.setEnabledAt(tempInd, true);	
+	}
+	public void disableSettings() {
+		int tempInd = this.frames.indexOfTab("Settings");
+		this.frames.setEnabledAt(tempInd, false);	
+	}
+	public void enableModules() {
+//		int tempInd = this.frames.indexOfTab("Modules");
+//		this.frames.setEnabledAt(tempInd, true);	
+	}
+	public void disableModules() {
+//		int tempInd = this.frames.indexOfTab("Modules");
+//		this.frames.setEnabledAt(tempInd, false);	
+	}
+	public void enableSites() {
+		int tempInd = this.frames.indexOfTab("Sites");
+		this.frames.setEnabledAt(tempInd, true);	
+	}
+	public void disableSites() {
+		int tempInd = this.frames.indexOfTab("Sites");
+		this.frames.setEnabledAt(tempInd, false);	
 	}
 	public long getTime() {
 		return this.currTime;
@@ -204,7 +235,7 @@ public class FrontEndPane {
 		int currID = this.frames.getSelectedIndex();
 		String currTab = this.frames.getTitleAt(currID);
 		//if (!currTab.equals("Settings")) {
-		if (!this.paused) {
+		if (!this.paused && this.timeStart) {
 				//System.out.println(this.paused);
 			this.currTime += delta;
 		}
@@ -315,6 +346,21 @@ public class FrontEndPane {
 	public boolean canPause() {
 		return this.canPause;
 	}
+
+	public void startLoadedSim() {
+		// TODO Auto-generated method stub
+		this.timeStart = true;
+		int tempInd = this.frames.indexOfTab("Sites");
+		this.frames.setSelectedIndex(tempInd);
+		this.disableSettings();
+	}
 	
+	public void loadedSim() {
+		this.loadedSim = true;
+	}
+	
+	public boolean isSimLoaded() {
+		return this.loadedSim;
+	}
 	
 }

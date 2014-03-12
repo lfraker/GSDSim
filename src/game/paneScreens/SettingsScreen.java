@@ -51,47 +51,47 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onTick(float nanosSincePreviousTick) {
 		
-		float percent = ((this.timePerDay - 15)/100.0f);
+		float percent = ((this.timePerDay - 30)/200.0f);
 		int tempX = this.lineLeft.x;
 		int diff = this.lineRight.x - this.lineLeft.x;
 		int toAdd = ((int)(diff * percent)); 
 		this.slide.updateX((tempX + toAdd));
-		String lC = ((SettingsPane)this.parentPane).laborCost.getText();
-		String fTS = ((SettingsPane)this.parentPane).followTheSun.getText();
-		if (lC.length() > 0) {
-			try {
-				this.laborCost = Float.parseFloat(lC);
-				if (this.laborCost < 1.0f) {
-					String message = "Please enter a positive number with no spaces, default value of 100.00 has been set";
-					this.parentPane.showMessage(message);
-					((SettingsPane)this.parentPane).laborCost.setText("100.00");
-
-				}
-
-			}
-			catch(NumberFormatException e) {
-				String message = "Please enter only numbers with no spaces, default value of 100.00 has been set";
-				this.parentPane.showMessage(message);
-				((SettingsPane)this.parentPane).laborCost.setText("100.00");
-
-			}
-		}
-		if (fTS.length() > 0) {
-			try {
-				this.FTSmin = Integer.parseInt(fTS);
-				if (this.FTSmin < 1 || this.FTSmin > 15) {
-					String message = "Please enter a number between 1-15, default value of 15 has been set";
-					this.parentPane.showMessage(message);
-					((SettingsPane)this.parentPane).followTheSun.setText("15");
-
-				}
-			}
-			catch(NumberFormatException e) {
-				String message = "Please enter a number between 1-15 with no spaces, default value of 15 has been set";
-				this.parentPane.showMessage(message);
-				((SettingsPane)this.parentPane).followTheSun.setText("15");
-			}
-		}
+//		String lC = ((SettingsPane)this.parentPane).laborCost.getText();
+//		String fTS = ((SettingsPane)this.parentPane).followTheSun.getText();
+//		if (lC.length() > 0) {
+//			try {
+//				this.laborCost = Float.parseFloat(lC);
+//				if (this.laborCost < 1.0f) {
+//					String message = "Please enter a positive number with no spaces, default value of 100.00 has been set";
+//					this.parentPane.showMessage(message);
+//					((SettingsPane)this.parentPane).laborCost.setText("100.00");
+//
+//				}
+//
+//			}
+//			catch(NumberFormatException e) {
+//				String message = "Please enter only numbers with no spaces, default value of 100.00 has been set";
+//				this.parentPane.showMessage(message);
+//				((SettingsPane)this.parentPane).laborCost.setText("100.00");
+//
+//			}
+//		}
+//		if (fTS.length() > 0) {
+//			try {
+//				this.FTSmin = Integer.parseInt(fTS);
+//				if (this.FTSmin < 1 || this.FTSmin > 15) {
+//					String message = "Please enter a number between 1-15, default value of 15 has been set";
+//					this.parentPane.showMessage(message);
+//					((SettingsPane)this.parentPane).followTheSun.setText("15");
+//
+//				}
+//			}
+//			catch(NumberFormatException e) {
+//				String message = "Please enter a number between 1-15 with no spaces, default value of 15 has been set";
+//				this.parentPane.showMessage(message);
+//				((SettingsPane)this.parentPane).followTheSun.setText("15");
+//			}
+//		}
 		writeSettings();
 	}
 
@@ -105,8 +105,12 @@ public class SettingsScreen extends Screen {
 		FontMetrics text = g.getFontMetrics();
 		int width = text.stringWidth("Difficulty:");
 		g.drawString("Difficulty:", ((this.screenSize.x/2.0f) - width/2.0f) , ((this.screenSize.y/7.0f)*1.0f));
-		int width2 = text.stringWidth("Length of Day: " + this.timePerDay + " minutes per day");
-		g.drawString("Length of Day: " + this.timePerDay + " minutes per day", ((this.screenSize.x/2.0f) - width2/2.0f) , ((this.screenSize.y/7.0f)*3.0f));
+		int minu = this.timePerDay / 60;
+		int seco = this.timePerDay % 60;
+		int width2 = text.stringWidth("Length of Day: " + minu + " minutes and " + seco  + " seconds per day");
+		
+		
+		g.drawString("Length of Day: " + minu + " minutes and " + seco  + " seconds per day", ((this.screenSize.x/2.0f) - width2/2.0f) , ((this.screenSize.y/7.0f)*3.0f));
 		this.easy.onDraw(g);
 		this.medium.onDraw(g);
 		this.hard.onDraw(g);
@@ -237,40 +241,40 @@ public class SettingsScreen extends Screen {
 						if (val[0].contains("Minutes Per Day")) {
 							int v1i = Integer.parseInt(val[1]);
 							this.timePerDay = Integer.parseInt(val[1]);
-							if (v1i < 15 || v1i > 115) {
+							if (v1i < 0 || v1i > 300) {
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
 							this.parentPane.setTimePerDay(this.timePerDay);
 						}
-						if (val[0].contains("Labor Cost")) {
-							float v1 = Float.parseFloat(val[1]);
-							((SettingsPane)this.parentPane).laborCost.setText(""+val[1]);
-							if (v1 < 1.0f || v1 > 100.0f) {
-								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
-								this.parentPane.showMessage(message);
-								((SettingsPane)this.parentPane).laborCost.setText("100.00");
-								
-							}
-						}
-						if (val[0].contains("Follow The Sun Handoff Time")) {
-							int v1i = Integer.parseInt(val[1]);
-							((SettingsPane)this.parentPane).followTheSun.setText(""+val[1]);
-							if (v1i < 0 || v1i > 15) {
-								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
-								this.parentPane.showMessage(message);
-								((SettingsPane)this.parentPane).followTheSun.setText("15");
-							}
-						}
+//						if (val[0].contains("Labor Cost")) {
+//							float v1 = Float.parseFloat(val[1]);
+//							((SettingsPane)this.parentPane).laborCost.setText(""+val[1]);
+//							if (v1 < 1.0f || v1 > 100.0f) {
+//								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+//								this.parentPane.showMessage(message);
+//								((SettingsPane)this.parentPane).laborCost.setText("100.00");
+//								
+//							}
+//						}
+//						if (val[0].contains("Follow The Sun Handoff Time")) {
+//							int v1i = Integer.parseInt(val[1]);
+//							((SettingsPane)this.parentPane).followTheSun.setText(""+val[1]);
+//							if (v1i < 0 || v1i > 15) {
+//								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+//								this.parentPane.showMessage(message);
+//								((SettingsPane)this.parentPane).followTheSun.setText("15");
+//							}
+//						}
 					} catch (NumberFormatException e) {
 						String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 						this.parentPane.showMessage(message);
 						this.difficulty = Difficulty.EASY;
 						this.parentPane.setDifficulty(Difficulty.EASY);	
 						this.timePerDay = 30;
-						((SettingsPane)this.parentPane).laborCost.setText("100.00");
-						((SettingsPane)this.parentPane).followTheSun.setText("15");
+//						((SettingsPane)this.parentPane).laborCost.setText("100.00");
+//						((SettingsPane)this.parentPane).followTheSun.setText("15");
 
 					}
 				}
@@ -316,9 +320,9 @@ public class SettingsScreen extends Screen {
 		"Do not add any spaces after the colon either, only add the desired value\n" +
 		"*****************************\n" +
 		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
-		"Minutes Per Day (enter a number between 15-115):"+this.timePerDay+"\n" +
-		"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
-		"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
+		"Minutes Per Day (enter a number between 15-115):"+this.timePerDay+"\n"; // +
+		//"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
+		//"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
 		
 		File dir = new File("gameFiles");
 		 
@@ -353,7 +357,7 @@ public class SettingsScreen extends Screen {
 				this.sliderPos = this.slide.getPos();
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
-				this.timePerDay = (((int)((pos/diff) * 100)) + 15);
+				this.timePerDay = (((int)((pos/diff) * 200)) + 30);
 				this.parentPane.setTimePerDay(this.timePerDay);
 
 			}

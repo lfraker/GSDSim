@@ -73,6 +73,25 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		return this.parentComp.isPaused();
 	}
 	
+	public void enableSettings() {
+		this.parentComp.enableSettings();	
+	}
+	public void disableSettings() {
+		this.parentComp.disableSettings();
+	}
+	public void enableModules() {
+		this.parentComp.enableModules();	
+	}
+	public void disableModules() {
+		this.parentComp.disableModules();	
+	}
+	public void enableSites() {
+		this.parentComp.enableSites();	
+	}
+	public void disableSites() {
+		this.parentComp.disableSites();	
+	}
+	
 	public void setTimePerDay(float time) {
 		this.parentComp.setTimePerDay(time);
 	}
@@ -144,8 +163,9 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		g.setFont(new Font("serif", Font.BOLD, (this.windSize.x / 95)));
 		g.setColor(Color.BLACK);
 		float x = (this.windSize.x * (6.5f/8.0f));
-		String toWrite1 = "Current Time: " + this.getDayTimer() + " minutes";
-		String toWrite2	= "Length of Day: " + this.getTotalTime() + " minutes";
+		
+		String toWrite1 = "Current Time: " + this.getDayTimer();
+		String toWrite2	= "Length of Day: " + (int)(this.getTotalTime() / 60) + ":" + (int)(this.getTotalTime() % 60);
 		String toWrite3 = "Day Count: " + this.getDays();
 		String toWrite4 = "";
 		switch (this.parentComp.getDifficulty()) {

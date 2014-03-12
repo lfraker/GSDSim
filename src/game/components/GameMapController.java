@@ -11,13 +11,17 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.List;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
+import game.org.openstreetmap.gui.jmapviewer.Coordinate;
 import game.org.openstreetmap.gui.jmapviewer.JMapController;
 import game.org.openstreetmap.gui.jmapviewer.JMapViewer;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import game.org.openstreetmap.gui.jmapviewer.OsmMercator;
+import game.org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 /**
  * Default map controller which implements map moving by pressing the right
@@ -73,16 +77,24 @@ MouseWheelListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-    	//System.out.println("CLICKED");
-    	if (this.mapPause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
+        Point center = this.parentComp.getCenter();
+
+     	int xi =e.getPoint().x + (center.x - (this.parentComp.getMapWidth() / 2));
+        int yi =e.getPoint().y +  (center.y - (this.parentComp.getMapHeight() / 2));
+
+
+     	double x = OsmMercator.XToLon(xi, this.parentComp.getZoom());
+        double y = OsmMercator.YToLat(yi, this.parentComp.getZoom());
+
+        if (this.mapPause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
     		this.parentComp.pauseUnpause();
     		
     	}
-    	else if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-            map.zoomIn(e.getPoint());
-        }
+//    	else if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+//            map.zoomIn(e.getPoint());
+//        }
         
-        else if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1) {
+        else if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1 && !this.parentComp.isSimLoaded()) {
         	//Use JDialog?
         	if (this.optionPane != null) {
         		this.optionPane.setVisible(false);
@@ -91,20 +103,20 @@ MouseWheelListener {
         	this.optionPane = new AddSiteOption(this.parentComp.getWindow(), "Add Site", this.parentComp.getSMController());
         	this.optionPane.setVisible(true);
         	//addSite.get
-            Point center = this.parentComp.getCenter();
-//        	System.out.println("BEFORE : " + e.getPoint().x + " x : y " + e.getPoint().y);
-
-        	int xi =e.getPoint().x + (center.x - (this.parentComp.getMapWidth() / 2));
-            int yi =e.getPoint().y +  (center.y - (this.parentComp.getMapHeight() / 2));
-
-//            System.out.println("AFTER : " + xi + " x : y " + yi);
-
-        	//-x = -e.x - center.x - getwidth / 2
-//        	x -= center.x - getWidth() / 2;
-//            y -= center.y - getHeight() / 2;
-
-        	double x = OsmMercator.XToLon(xi, this.parentComp.getZoom());
-            double y = OsmMercator.YToLat(yi, this.parentComp.getZoom());
+//            Point center = this.parentComp.getCenter();
+////        	System.out.println("BEFORE : " + e.getPoint().x + " x : y " + e.getPoint().y);
+//
+//        	int xi =e.getPoint().x + (center.x - (this.parentComp.getMapWidth() / 2));
+//            int yi =e.getPoint().y +  (center.y - (this.parentComp.getMapHeight() / 2));
+//
+////            System.out.println("AFTER : " + xi + " x : y " + yi);
+//
+//        	//-x = -e.x - center.x - getwidth / 2
+////        	x -= center.x - getWidth() / 2;
+////            y -= center.y - getHeight() / 2;
+//
+//        	double x = OsmMercator.XToLon(xi, this.parentComp.getZoom());
+//            double y = OsmMercator.YToLat(yi, this.parentComp.getZoom());
 //        	System.out.println("AFTER : " + x + " x : y " + y);
 //        	System.out.println("ZOOM HERE " + this.parentComp.getZoom());
 //            System.out.println("HERIE Center x " + center.x + " Center y " + center.y);
@@ -128,6 +140,22 @@ MouseWheelListener {
 
 
         }
+    	List<MapMarker> mDots = this.parentComp.getMapViewer().getMapMarkerList();
+
+    	for ( Site site : this.parentComp.getSMController().getSites()) {
+    		MapMarkerDot mDot = site.getMarker();
+    		Coordinate c = mDot.getCoordinate();
+    		int xT = OsmMercator.LonToX(c.getLon(), this.parentComp.getZoom());
+            int yT = OsmMercator.LatToY(c.getLat(), this.parentComp.getZoom());
+
+            xT -= center.x - (this.parentComp.getMapWidth() / 2);
+            yT -= center.y - (this.parentComp.getMapHeight() / 2);
+
+            if ((Math.abs(e.getX() - xT) <= 7) && (Math.abs(e.getY() - yT) <= 7)) {
+    			JFrame f = new SiteInfoPane(mDot.getName() + " Site Info");
+    		}
+    		
+    	}
     }
 
     public void mousePressed(MouseEvent e) {
@@ -228,6 +256,25 @@ MouseWheelListener {
     public void mouseMoved(MouseEvent e) {
         // Mac OSX simulates with  ctrl + mouse 1  the second mouse button hence no dragging events get fired.
         //
+//    	 for ( Site site : this.parentComp.getSMController().getSites()) {
+//     		MapMarkerDot mDot = site.getMarker();
+//     		Coordinate c = mDot.getCoordinate();
+//     		int xT = OsmMercator.LonToX(c.getLon(), this.parentComp.getZoom());
+//             int yT = OsmMercator.LatToY(c.getLat(), this.parentComp.getZoom());
+//
+//             xT -= this.parentComp.getCenter().x - (this.parentComp.getMapWidth() / 2);
+//             yT -= this.parentComp.getCenter().y - (this.parentComp.getMapHeight() / 2);
+//
+//             if ((Math.abs(e.getX() - xT) <= 100) && (Math.abs(e.getY() - yT) <= 100)) {
+//            	
+//            	 mDot.showClick();
+//             }
+//             else {
+//
+//            	// mDot.writeClick(false);
+//             }
+//     		
+//     	}
         if (isPlatformOsx()) {
             if (!movementEnabled || !isMoving)
                 return;
@@ -243,6 +290,7 @@ MouseWheelListener {
             }
 
         }
+       
 
     }
 

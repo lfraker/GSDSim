@@ -38,6 +38,24 @@ public abstract class Screen {
 		return this.parentPane.getDays();
 	}
 	
+	public void enableSettings() {
+		this.parentPane.enableSettings();	
+	}
+	public void disableSettings() {
+		this.parentPane.disableSettings();
+	}
+	public void enableModules() {
+		this.parentPane.enableModules();	
+	}
+	public void disableModules() {
+		this.parentPane.disableModules();	
+	}
+	public void enableSites() {
+		this.parentPane.enableSites();	
+	}
+	public void disableSites() {
+		this.parentPane.disableSites();	
+	}
 
 	
 	/**

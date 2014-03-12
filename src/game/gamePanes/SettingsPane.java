@@ -2,6 +2,7 @@ package game.gamePanes;
 
 import java.awt.Dimension;
 
+
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -111,7 +112,11 @@ public class SettingsPane extends Pane {
 		newPanel.setOpaque(false);
 		newPanel.add(this.laborCost);
 		//newPanel.setPreferredSize(new Dimension(50,50));
-		this.add(newPanel);
+		//this.add(newPanel);
+		this.add(new JLabel());
+
+		
+		
 		this.add(new JLabel());
 		this.add(new JLabel());
 
@@ -125,7 +130,12 @@ public class SettingsPane extends Pane {
 		newPanel2.setOpaque(false);
 		newPanel2.add(this.followTheSun);
 		//newPanel.setPreferredSize(new Dimension(50,50));
-		this.add(newPanel2);
+		//this.add(newPanel2);
+		this.add(new JLabel("<html>Make sure settings are correct now. Settings are not editable after loading presets.</html>"));
+
+
+		
+		
 		this.add(new JLabel());
 		this.add(new JLabel());
 		JPanel newPanel3 = new JPanel();
@@ -290,7 +300,7 @@ class ChooseDefaultPane extends JFrame {
 			this.add(scenarioPanel);
     }
 		okPanel = new JPanel();
-		ok = new JButton("Ok");
+		ok = new JButton("Start Sim");
 		okPanel.add(ok);
 		this.add(okPanel);
 		ok.addActionListener(new ActionListener() {
@@ -313,6 +323,9 @@ class ChooseDefaultPane extends JFrame {
 	          }
        		}
 					dispose();
+				parentComp.enableSites();
+				parentComp.startLoadedSim();
+				parentComp.loadedSim();
       	}
     });
 

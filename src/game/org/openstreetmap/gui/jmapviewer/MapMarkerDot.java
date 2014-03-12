@@ -24,31 +24,56 @@ public class MapMarkerDot extends MapMarkerCircle {
 
     public MapMarkerDot(Coordinate coord) {
         this(null, null, coord);
+        this.writeClick = false;
+    }
+    
+    public void showClick() {
+    	this.writeClick = true;
+    }
+    
+    public void hideClick() {
+    	this.writeClick = false;
     }
     public MapMarkerDot(String name, Coordinate coord) {
         this(null, name, coord);
+        this.writeClick = false;
+
     }
     public MapMarkerDot(Layer layer, Coordinate coord) {
         this(layer, null, coord);
+        this.writeClick = false;
+
     }
     public MapMarkerDot(Layer layer, String name, Coordinate coord) {
         this(layer, name, coord, getDefaultStyle());
+        this.writeClick = false;
+
     }
     public MapMarkerDot(Color color, double lat, double lon) {
         this(null, null, lat, lon);
         setColor(color);
+        this.writeClick = false;
+
     }
     public MapMarkerDot(double lat, double lon) {
         this(null, null, lat, lon);
+        this.writeClick = false;
+
     }
     public MapMarkerDot(Layer layer, double lat, double lon) {
         this(layer, null, lat, lon);
+        this.writeClick = false;
+
     }
     public MapMarkerDot(Layer layer, String name, double lat, double lon) {
         this(layer, name, new Coordinate(lat, lon), getDefaultStyle());
+        this.writeClick = false;
+
     }
     public MapMarkerDot(Layer layer, String name, Coordinate coord, Style style) {
         super(layer, name, coord, DOT_RADIUS, STYLE.FIXED, style);
+        this.writeClick = false;
+
     }
 
     public static Style getDefaultStyle(){

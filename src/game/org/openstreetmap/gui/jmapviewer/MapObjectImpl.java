@@ -14,10 +14,13 @@ public abstract class MapObjectImpl {
     private String name;
     private Style style;
     private Boolean visible;
-
+    public Boolean writeClick;
+    
     public MapObjectImpl(String name) {
         this(null, name, null);
     }
+    
+
     public MapObjectImpl(Layer layer) {
         this(layer, null, null);
     }
@@ -105,6 +108,9 @@ public abstract class MapObjectImpl {
             g.setColor(Color.DARK_GRAY);
             g.setFont(getFont());
             g.drawString(name, position.x+MapMarkerDot.DOT_RADIUS+2, position.y+MapMarkerDot.DOT_RADIUS);
+            g.drawString("Click the circle to get this site's status.", position.x+MapMarkerDot.DOT_RADIUS+2, position.y+MapMarkerDot.DOT_RADIUS + 15);
+
+
         }
     }
 }
