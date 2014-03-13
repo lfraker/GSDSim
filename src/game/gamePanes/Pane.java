@@ -108,7 +108,10 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		return this.parentComp.GetDayLength();
 	}
 	public String getDayTimer() {
-		return (TimeUnit.SECONDS.convert(this.parentComp.getTime(), TimeUnit.NANOSECONDS)/60) + ":" + (TimeUnit.SECONDS.convert(this.parentComp.getTime(), TimeUnit.NANOSECONDS) % 60);
+		double dayPercent = parentComp.getTime()/(double)parentComp.GetDayLength();
+		long time = (long)(dayPercent * (60*24*1e9));
+		long seconds = TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS) % 60;
+		return String.format("%02d:%02d", TimeUnit.MINUTES.convert(time, TimeUnit.NANOSECONDS) % 24, seconds - (seconds % 2));
 	}
 	
 	public int getDays() {
@@ -166,9 +169,9 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 
 		long secondsPerDay = (TimeUnit.SECONDS.convert(this.getTotalTime(), TimeUnit.NANOSECONDS));
 		
-		String toWrite1 = "Current Time: " + this.getDayTimer();
-		String toWrite2	= "Length of Day: " + (int)(secondsPerDay / 60) + ":" + (int)(secondsPerDay % 60);
-		String toWrite3 = "Day Count: " + this.parentComp.getDays();
+		String toWrite1 = "Time in Game: " + this.getDayTimer();
+		String toWrite2 = "Day " + this.getDays();
+		String toWrite3	= String.format("Simulation of day takes %02d:%02d", (int)(secondsPerDay / 60), (int)(secondsPerDay % 60));
 		String toWrite4 = "";
 		switch (this.parentComp.getDifficulty()) {
 			case EASY:	toWrite4 = "Difficulty: EASY (pause enabled)";

@@ -672,9 +672,9 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
         long secondsPerDay = (TimeUnit.SECONDS.convert(parentComp.GetDayLength(), TimeUnit.NANOSECONDS));
 
 		float xT = (this.windSize.x * (6.5f/8.0f)) - 40;
-		String toWrite1 = "Current Time: " + this.getDayTimer();
-		String toWrite2	= "Length of Day: " + (int)(secondsPerDay / 60) + ":" + (int)(secondsPerDay % 60);
-		String toWrite3 = "Day Count: " + this.getDays();
+		String toWrite1 = "Time in Game: " + this.getDayTimer();
+		String toWrite2 = "Day " + this.getDays();
+		String toWrite3	= String.format("Simulation of day takes %02d:%02d", (int)(secondsPerDay / 60), (int)(secondsPerDay % 60));
 		String toWrite4 = "";
 		switch (this.parentComp.getDifficulty()) {
 			case EASY:	toWrite4 = "Difficulty: EASY (pause enabled)";
@@ -712,8 +712,10 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 	}
 
 	private String getDayTimer() {
-		// TODO Auto-generated method stub
-		return TimeUnit.MINUTES.convert(this.parentComp.getTime(), TimeUnit.NANOSECONDS) + ":" + (TimeUnit.SECONDS.convert(this.parentComp.getTime(), TimeUnit.NANOSECONDS) % 60);
+		double dayPercent = parentComp.getTime()/(double)parentComp.GetDayLength();
+		long time = (long)(dayPercent * (60*24*1e9));
+		long seconds = TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS) % 60;
+		return String.format("%02d:%02d", TimeUnit.MINUTES.convert(time, TimeUnit.NANOSECONDS) % 24, seconds - (seconds % 2));
 	}
 
 	/**
