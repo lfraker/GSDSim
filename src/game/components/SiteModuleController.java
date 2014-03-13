@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SiteModuleController {
 	ProcessSimulator pSim;
-	private List<Site> allSites = new ArrayList<>();
+	public List<Site> allSites = new ArrayList<>();
 	
 	public SiteModuleController() {
 		this.pSim = new ProcessSimulator();
