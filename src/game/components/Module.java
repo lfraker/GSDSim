@@ -197,7 +197,6 @@ public class Module {
 
 			if(workLeftInModule <= workPoints) 
 			{
-				System.out.println("Completed Module " + this.modName);
 				this.complete();
 			} 
 			else 
@@ -261,7 +260,7 @@ public class Module {
 
 	public void complete() {
 		this.complete = true;
-		System.out.println("Completing module");
+		System.out.println("Completed Module " + this.modName);
 	}
 
 	public boolean isComplete()

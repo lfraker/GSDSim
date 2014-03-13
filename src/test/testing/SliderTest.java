@@ -19,7 +19,7 @@ public class SliderTest {
 	@Test
 	public void testClickedInside() {
 		assertTrue(true==(this.toTest.clickedInside(new Point(1,1))));
-		assertTrue(false==(this.toTest.clickedInside(new Point(7,4))));
+		assertTrue(false==(this.toTest.clickedInside(new Point(10,4))));
 
 	}
 
@@ -27,7 +27,7 @@ public class SliderTest {
 	public void testOnResize() {
 		this.toTest.onResize(new VectorI(1,1), new VectorI(10,10));
 		assertTrue(true==(this.toTest.clickedInside(new Point(11,11))));
-		assertTrue(false==(this.toTest.clickedInside(new Point(0,0))));
+		assertTrue(false==(this.toTest.clickedInside(new Point(20,0))));
 
 	}
 
@@ -36,7 +36,7 @@ public class SliderTest {
 		this.toTest.onResize(new VectorI(1,1), new VectorI(10,10));
 		this.toTest.updateX(5);
 		assertTrue(true==(this.toTest.clickedInside(new Point(15,5))));
-		assertTrue(false==(this.toTest.clickedInside(new Point(4,5))));
+		assertTrue(false==(this.toTest.clickedInside(new Point(1,5))));
 
 	}
 	

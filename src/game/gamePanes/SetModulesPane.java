@@ -136,9 +136,9 @@ public class SetModulesPane extends Pane {
 			public void actionPerformed(ActionEvent e) {
 				Site addTo = dropDown.getItemAt(dropDown.getSelectedIndex());
 				String name = moduleName.getText();
-				float hoursEst = 25;
+				long hoursEst = 25;
 				try {
-					hoursEst = Float.parseFloat(hoursEstimate.getText());
+					hoursEst = Long.parseLong(hoursEstimate.getText());
 					
 				} catch (NumberFormatException n) {
 					showMessage("Please enter only an integer. Default value of 25 set.");

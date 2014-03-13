@@ -61,8 +61,12 @@ public class Site {
 		}
 	}
 
-	int getTimezone() {
+	public int getTimezone() {
 		return timezone;
+	}
+
+	public void setTimezone(int t) {
+		timezone = t;
 	}
 
 	public ArrayList<Module> getModules() {

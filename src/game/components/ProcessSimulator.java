@@ -15,7 +15,7 @@ public class ProcessSimulator {
 
 	private List<Site> allSites = new ArrayList<Site>();
 	public long currentTime = 0; //Check out timing
-	public long dayLength;
+	public long dayLength = 24;
 
 //	public void addModule(Module m, String moduleSiteName) {
 //		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
@@ -48,6 +48,9 @@ public class ProcessSimulator {
 
 	public void SetDayLength(long d)
 	{
+		if (d == 0) {
+		   return;
+		}
 		this.dayLength = d;
 	}
 

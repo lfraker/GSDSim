@@ -23,6 +23,14 @@ public class ProcessSimulatorTest {
 	}
 
 	@Test
+	public void testSetDayLength() {
+		toTest.SetDayLength(0);
+		assertTrue(toTest.dayLength != 0);
+		toTest.SetDayLength(12);
+		assertTrue(toTest.dayLength == 12);
+	}
+
+	@Test
 	// this test simulates a module falling behind
 	public void testProcessSites() {
 		List<Site> sites = new ArrayList<Site>();
@@ -31,6 +39,7 @@ public class ProcessSimulatorTest {
 		Module m = new Module(1000, "test", null);
 		m.origEstimate = 0;
 		s.addModule(m);
+		s.setTimezone(10);
 		sites.add(s);
 		toTest.setSiteList(sites);
 
