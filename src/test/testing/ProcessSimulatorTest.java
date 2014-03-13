@@ -18,7 +18,7 @@ public class ProcessSimulatorTest {
 
 	@Test
 	public void testUpdateTime() {
-		toTest.updateTime(20);
+		toTest.UpdateTime(20);
 		assertTrue(toTest.currentTime == 20);
 	}
 
