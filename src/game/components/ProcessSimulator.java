@@ -137,6 +137,8 @@ public class ProcessSimulator {
 
 	  	}
 
+	  	NominalScheduleCalc();
+
   	}
 
   	public void RemoveSites()
@@ -169,6 +171,32 @@ public class ProcessSimulator {
 	public void LoadState(String filename)
 	{
 
+	}
+
+	public long NominalScheduleCalc()
+	{
+		//Returns total amount of work left over all modules
+
+		long totalEffort = 0;
+
+		for(Site currentSite : this.allSites)
+		{
+			ArrayList<Module> siteModules = currentSite.getModules();
+	  		
+	  		for(Module currentMod : siteModules)
+			{
+				if(currentMod.isComplete())
+				{
+					//Skip
+					continue;
+				}
+
+				totalEffort += (currentMod.totalWorkRequired() - currentMod.workDone());
+			}
+		}
+
+	//	System.out.println("TE: " + totalEffort);
+		return totalEffort;
 	}
 	
 //	
