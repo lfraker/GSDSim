@@ -282,6 +282,7 @@ class ChooseDefaultPane extends JFrame {
 		cities1 = new String[s.scenarios.length];
     for (int i = 0; i < s.scenarios.length; i++) {
 			scenarioPanel = new JPanel();
+			scenarioPanel.setLayout(new GridLayout(0,1));
       for (int j = 0; j < s.scenarios[i].sites.length; j++) {
         if (j == 0) {
           cities = s.scenarios[i].sites[j].name;
@@ -293,13 +294,12 @@ class ChooseDefaultPane extends JFrame {
       rB = new JRadioButton(cities);
       bG.add(rB);
       scenarioPanel.add(rB);
+			scenarioPanel.add(new JLabel());
 			for (int m = 0; m < s.scenarios[i].modules.length; m++) {
 				scenarioPanel.add(new JLabel("Name: " + s.scenarios[i].modules[m].name));
 				scenarioPanel.add(new JLabel("Hours: " + s.scenarios[i].modules[m].hours));
-				scenarioPanel.add(new JLabel("Sites:"));
-				for (int n = 0; n < s.scenarios[i].modules[m].sites.length; n++) {
-					scenarioPanel.add(new JLabel(s.scenarios[i].modules[m].sites[n]));
-				}
+				scenarioPanel.add(new JLabel("Site: " + s.scenarios[i].modules[m].sites[0]));
+				scenarioPanel.add(new JLabel());
 			}
 			this.add(scenarioPanel);
     }

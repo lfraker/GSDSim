@@ -25,7 +25,12 @@
 				"name": "features",
 				"hours": "160",
 				"sites": [
-					"Eastern Europe",
+					"Eastern Europe"
+				]
+			}, {
+				"name": "testing",
+				"hours": "300",
+				"sites": [
 					"Dublin"
 				]
 			}
@@ -61,11 +66,16 @@
         "name": "features",
         "hours": "160",
         "sites": [
-          "New York",
-          "Shanghai"
+          "New York"
         ]
+      }, {
+				"name": "testing",
+				"hours": "300",
+				"sites": [
+					"Shanghai"
+				]
       }
-      ]
+			]
 		},
 		{
 			"sites": [
@@ -97,10 +107,15 @@
         "name": "features",
         "hours": "160",
         "sites": [
-          "San Francisco",
-          "Bangalore"
+          "San Francisco"
         ]
-      }
+      }, {
+				"name": "testing",
+				"hours": "300",
+				"sites": [
+					"Bangalore"
+				]
+			}
       ]
 		}	
 	]
