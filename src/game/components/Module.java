@@ -8,12 +8,13 @@ import java.util.Random;
 //all the sites working on the modules, it's current phase stage, etc.
 public class Module {
 	List <Site> sites = new ArrayList<Site>();
-	float timeEstimate;
 	String modName;
 	Random numberGen = new Random();
 	float [] stepEstimates = new float [7];
 	float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
+
+	long deadline;
 
 	/* T */
 	DevelopmentMethod devMethod;
@@ -27,7 +28,8 @@ public class Module {
 	int currentStage;
 	boolean complete = false;
 	
-	public Module(float estimate, String name, List<Site> allSites) {
+	public Module(float estimate, String name, List<Site> allSites) 
+	{
 		this.currentStage = 0;
 		this.origEstimate = estimate;
 		this.sites = allSites;
@@ -39,14 +41,18 @@ public class Module {
 		this.origStepEstimates[4] = (estimate * 0.15f);
 		this.origStepEstimates[5] = (estimate * 0.15f);
 		this.origStepEstimates[6] = (estimate * 0.15f);
-		for (int i = 0; i < 7; i++) {
+
+		for (int i = 0; i < 7; i++) 
+		{
 			this.stepEstimates[i] = addSub(this.numberGen.nextInt(2), this.origStepEstimates[i]);
 			this.totalEstimate += this.stepEstimates[i]; 
 		}
 		
 		//Development type defaults to agile
 		this.devMethod = DevelopmentMethod.AGILE;
-		this.numWorkers = 5;
+		this.numWorkers = 1;
+
+		//this.deadline = 
 
 	}
 	
@@ -76,7 +82,7 @@ public class Module {
 	}
 	
 	public float getEstimate() {
-		return this.timeEstimate;
+		return this.origEstimate;
 	}
 
 	public void doWork() {
@@ -351,5 +357,10 @@ public class Module {
 		}
 
 		return res;
+	}
+
+	public boolean IsOnSchedule()
+	{
+		return true;
 	}
 }

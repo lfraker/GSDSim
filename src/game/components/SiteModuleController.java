@@ -22,6 +22,11 @@ public class SiteModuleController {
 		return pSim;
 	}
 
+	public void UpdateTime(long t)
+	{
+		this.pSim.updateTime(t);
+	}
+
 	public void hourlyUpdate()
 	{
 		this.pSim.ProcessSites();

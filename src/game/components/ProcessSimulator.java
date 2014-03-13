@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
@@ -12,7 +13,7 @@ public class ProcessSimulator {
 //	private List<ModuleWrapper> allModules = new ArrayList<>();
 
 	private List<Site> allSites;
-	public int currentTime = 10; //Check out timing
+	public long currentTime = 0; //Check out timing
 	
 
 //	public void addModule(Module m, String moduleSiteName) {
@@ -37,7 +38,7 @@ public class ProcessSimulator {
 		
 	}
 
-	public void updateTime(int newTime)
+	public void updateTime(long newTime)
 	{
 		this.currentTime = newTime;
 	}
@@ -70,8 +71,14 @@ public class ProcessSimulator {
 		
 		for(Site currentSite : this.allSites)
 		{
-			int localTime = (currentTime + currentSite.getTimezone());
+
+			//(currentTime % 24;
+
+
+			//int localTime = TimeUnit.NANOSECONDS.convert(currentTime, TimeUnit.MINUTES) + currentSite.getTimezone();
 			boolean behind = false;
+
+			//System.out.println("LT: " +localTime + ".");
 
 	  		//Check site is currently active - not all sites active at all times - timezones
 	  		//if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)

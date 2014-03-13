@@ -171,9 +171,12 @@ public class FrontEndPane {
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
 
+
+
 		if(!this.paused && this.timeStart) 
 		{
 			this.currTime += delta;
+			this.modSiteController.UpdateTime(currTime);
 
 			if ((currentNanos / hour) > hourCount) 
 			{
