@@ -12,7 +12,7 @@ import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 public class ProcessSimulator {
 //	private List<ModuleWrapper> allModules = new ArrayList<>();
 
-	private List<Site> allSites;
+	private List<Site> allSites = new ArrayList<Site>();
 	public long currentTime = 0; //Check out timing
 	
 
@@ -38,7 +38,7 @@ public class ProcessSimulator {
 		
 	}
 
-	public void updateTime(long newTime)
+	public void UpdateTime(long newTime)
 	{
 		this.currentTime = newTime;
 	}
@@ -129,10 +129,23 @@ public class ProcessSimulator {
 
 	  	}
 
+  	}
 
-  }
+  	public void RemoveSites()
+  	{
+  		this.allSites.clear();
+  	}
 	
+	public void AddSite(Site site)
+	{
+	  	this.allSites.add(site);
+	}
 	
+
+	public List<Site> GetSites() {
+		return this.allSites;
+	}
+		
 	
 //	
 //	private class ModuleComparator implements Comparator<ModuleWrapper> {

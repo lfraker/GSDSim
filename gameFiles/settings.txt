@@ -1,4 +1,4 @@
 This is the settings file. To change a setting, simply edit the value after the colon mark next to the field. Do not delete the colon, only edit the value after the colon the field.Do not add any spaces after the colon either, only add the desired value
 *****************************
 Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):MEDIUM
-Minutes Per Day (enter a number between 15-115):224
+Minutes Per Day (enter a number between 15-115):95

@@ -316,13 +316,15 @@ class ChooseDefaultPane extends JFrame {
                 if (button.getText().equals(cities1[k])) {
 									sites = s.scenarios[k].process();
 									game.swingFramework.FrontEndPane.modules.clearSites();
-								  game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
-									game.swingFramework.FrontEndPane.modSiteController.removeSites();
-    							for (int l = 0; l < sites.size(); l++) {
-     								game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
-     								game.swingFramework.FrontEndPane.modSiteController.addSite(sites.get(l));
-     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
-   								}
+								  	game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
+									game.swingFramework.FrontEndPane.processSimulator.RemoveSites();
+    								
+    								for (int l = 0; l < sites.size(); l++) 
+    								{
+	     								game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
+	     								game.swingFramework.FrontEndPane.processSimulator.AddSite(sites.get(l));
+	     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
+   									}
 								}
 							}
 	          }

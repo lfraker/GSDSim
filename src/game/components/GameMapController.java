@@ -100,7 +100,7 @@ MouseWheelListener {
         		this.optionPane.setVisible(false);
         		this.optionPane.dispose();
         	}
-        	this.optionPane = new AddSiteOption(this.parentComp.getWindow(), "Add Site", this.parentComp.getSMController());
+        	this.optionPane = new AddSiteOption(this.parentComp.getWindow(), "Add Site");
         	this.optionPane.setVisible(true);
         	//addSite.get
 //            Point center = this.parentComp.getCenter();
@@ -133,7 +133,7 @@ MouseWheelListener {
             	Site toAdd = new Site(name, nEmp, mDot, tZ);
 //            	System.out.println(x +" X : Y " + y);
             	this.parentComp.addSiteToCombo(toAdd);
-            	this.parentComp.getSMController().addSite(toAdd);
+            	this.parentComp.processSimulator.AddSite(toAdd);
             	this.parentComp.getMapViewer().addMapMarker(mDot);
             }
            // System.exit(0);
@@ -142,7 +142,7 @@ MouseWheelListener {
         }
     	List<MapMarker> mDots = this.parentComp.getMapViewer().getMapMarkerList();
 
-    	for ( Site site : this.parentComp.getSMController().getSites()) {
+    	for ( Site site : this.parentComp.processSimulator.GetSites()) {
     		MapMarkerDot mDot = site.getMarker();
     		Coordinate c = mDot.getCoordinate();
     		int xT = OsmMercator.LonToX(c.getLon(), this.parentComp.getZoom());

@@ -28,8 +28,6 @@ import game.components.Difficulty;
 import game.components.Module;
 import game.components.ProcessSimulator;
 import game.components.Site;
-import game.components.SiteModuleController;
-
 
 import game.backend.VectorI;
 
@@ -58,7 +56,10 @@ public class FrontEndPane {
 	boolean paused = false;
 	public static JMapViewer siteStatus;
 	private VectorI windSize;
-	public static SiteModuleController modSiteController = new SiteModuleController();
+
+	public static ProcessSimulator processSimulator = new ProcessSimulator();
+	//public static SiteModuleController modSiteController = new SiteModuleController(processSimulator);
+
 	private int zoom;
 	private boolean timeStart = false;
 	private boolean loadedSim = false;
@@ -176,12 +177,12 @@ public class FrontEndPane {
 		if(!this.paused && this.timeStart) 
 		{
 			this.currTime += delta;
-			this.modSiteController.UpdateTime(currTime);
+			this.processSimulator.UpdateTime(currTime);
 
 			if ((currentNanos / hour) > hourCount) 
 			{
 				this.hourCount = (int)(currentNanos / hour);
-				this.modSiteController.hourlyUpdate();
+				this.processSimulator.ProcessSites();
 				return;
 			}
 
@@ -267,11 +268,12 @@ public class FrontEndPane {
 		this.windSize = new VectorI(width, height);
 	}
 
+	/*
 	public SiteModuleController getSMController() {
 		// TODO Auto-generated method stub
 		return this.modSiteController;
 	}
-
+	*/
 	public JFrame getWindow() {
 		return window;
 	}

@@ -27,7 +27,7 @@ public class SiteInfoPane extends JFrame {
 		this.setTitle(name);
 		this.setMinimumSize(new Dimension(300, 300));
 		this.setPreferredSize(new Dimension(300, 300));
-		sites = game.swingFramework.FrontEndPane.modSiteController.allSites;
+		sites = game.swingFramework.FrontEndPane.processSimulator.GetSites();
 		modules = new JPanel();
 		modules.setLayout(new GridLayout(0,1));
 		for (Site s : sites) {

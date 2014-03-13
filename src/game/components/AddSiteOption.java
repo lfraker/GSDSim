@@ -25,7 +25,7 @@ public class AddSiteOption extends JDialog {
 	private boolean cancelled = true;
 	
 	
-	public AddSiteOption(Frame owner, String title, SiteModuleController smc) {
+	public AddSiteOption(Frame owner, String title) {
 		super(owner, title, Dialog.ModalityType.DOCUMENT_MODAL);
 		JPanel btnPanel = new JPanel();
 		JButton okBtn = new JButton("Accept");
