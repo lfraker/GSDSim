@@ -224,6 +224,7 @@ public class FrontEndPane {
 
 	public void setTimePerDay(long time) {
 		this.dayTime = time;
+		this.processSimulator.SetDayLength(time);
 	}
 	
 	public void setCanPause() {

@@ -242,18 +242,19 @@ public class SettingsScreen extends Screen {
 							}
 
 						}
-						if (val[0].contains("Seconds Per Day")) {
+						if (val[0].contains("Seconds Per Day")) 
+						{
 							int v1i = Integer.parseInt(val[1]);
 
 							this.timePerDay = Integer.parseInt(val[1]);
-							//this.timePerDay = TimeUnit.NANOSECONDS.convert(Integer.parseInt(val[1]), TimeUnit.SECONDS);
 
-							if (v1i < 30 || v1i > 230) {
+							if (v1i < 30 || v1i > 230) 
+							{
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
-
+							this.timePerDay = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
 							this.parentPane.setTimePerDay(this.timePerDay);
 						}
 //						if (val[0].contains("Labor Cost")) {

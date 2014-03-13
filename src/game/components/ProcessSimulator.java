@@ -15,7 +15,7 @@ public class ProcessSimulator {
 
 	private List<Site> allSites = new ArrayList<Site>();
 	public long currentTime = 0; //Check out timing
-	
+	public long dayLength;
 
 //	public void addModule(Module m, String moduleSiteName) {
 //		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
@@ -44,6 +44,11 @@ public class ProcessSimulator {
 	public void UpdateTime(long newTime)
 	{
 		this.currentTime = newTime;
+	}
+
+	public void SetDayLength(long d)
+	{
+		this.dayLength = d;
 	}
 
 	public void setSiteList(List<Site> sites)
@@ -75,15 +80,16 @@ public class ProcessSimulator {
 		for(Site currentSite : this.allSites)
 		{
 
+			long hour = (long)(this.dayLength / 24);
 
-			//int localTime = TimeUnit.NANOSECONDS.convert(currentTime, TimeUnit.MINUTES) + currentSite.getTimezone();
+			long localTime = ((this.currentTime / hour) % 24) + currentSite.getTimezone();//;
+			//System.out.println("LT: " + localTime + ".");
+
 			boolean behind = false;
 
-			//System.out.println("LT: " +localTime + ".");
-
 	  		//Check site is currently active - not all sites active at all times - timezones
-	  		//if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
-	  		//{
+	  		if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
+	  		{
 	
 				System.out.println("Performing work at site: " + currentSite.getName() + ".");
 
@@ -122,12 +128,12 @@ public class ProcessSimulator {
 					}
 					currentSite.mapMarker.setOnTime();
 				}
-			/*
+			
 	  		}
 	  		else
 	  		{
 	  			System.out.println("Site: " + currentSite.getName() + " currently closed.");
-	  		}*/
+	  		}
 
 	  	}
 

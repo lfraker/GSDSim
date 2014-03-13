@@ -354,6 +354,7 @@ public class Module {
 
 	public boolean IsOnSchedule()
 	{
+		//Returns true if the module is on schedule
 		if(this.devMethod == DevelopmentMethod.AGILE)
 		{
 			if(this.workDone() < this.origEstimate || this.isComplete())
