@@ -92,7 +92,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		this.parentComp.disableSites();	
 	}
 	
-	public void setTimePerDay(float time) {
+	public void setTimePerDay(long time) {
 		this.parentComp.setTimePerDay(time);
 	}
 	public void setDifficulty(Difficulty diff) {

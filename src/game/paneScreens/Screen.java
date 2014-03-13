@@ -23,7 +23,7 @@ public abstract class Screen {
 	Pane parentPane;
 	Font fontText;
 	VectorI screenSize;
-	int timePerDay;
+	long timePerDay;
 
 	
 	public Screen(Pane pP) {

@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import game.components.Button;
 import game.components.Difficulty;
@@ -105,8 +106,8 @@ public class SettingsScreen extends Screen {
 		FontMetrics text = g.getFontMetrics();
 		int width = text.stringWidth("Difficulty:");
 		g.drawString("Difficulty:", ((this.screenSize.x/2.0f) - width/2.0f) , ((this.screenSize.y/7.0f)*1.0f));
-		int minu = this.timePerDay / 60;
-		int seco = this.timePerDay % 60;
+		int minu = (int)(this.timePerDay / 60);
+		int seco = (int)(this.timePerDay % 60);
 		int width2 = text.stringWidth("Length of Day: " + minu + " minutes and " + seco  + " seconds per day");
 		
 		
@@ -240,13 +241,14 @@ public class SettingsScreen extends Screen {
 						}
 						if (val[0].contains("Minutes Per Day")) {
 							int v1i = Integer.parseInt(val[1]);
-							this.timePerDay = Integer.parseInt(val[1]);
+							this.timePerDay = Long.parseLong(val[1]);
 							if (v1i < 0 || v1i > 300) {
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
-							this.parentPane.setTimePerDay(this.timePerDay);
+
+							this.parentPane.setTimePerDay(TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS));
 						}
 //						if (val[0].contains("Labor Cost")) {
 //							float v1 = Float.parseFloat(val[1]);
