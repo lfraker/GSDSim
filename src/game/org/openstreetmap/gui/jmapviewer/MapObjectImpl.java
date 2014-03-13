@@ -108,7 +108,7 @@ public abstract class MapObjectImpl {
             g.setColor(Color.DARK_GRAY);
             g.setFont(getFont());
             g.drawString(name, position.x+MapMarkerDot.DOT_RADIUS+2, position.y+MapMarkerDot.DOT_RADIUS);
-            g.drawString("Click the circle to get this site's status.", position.x+MapMarkerDot.DOT_RADIUS+2, position.y+MapMarkerDot.DOT_RADIUS + 15);
+            g.drawString("(click marker for info)", position.x+MapMarkerDot.DOT_RADIUS+2, position.y+MapMarkerDot.DOT_RADIUS + 15);
 
 
         }

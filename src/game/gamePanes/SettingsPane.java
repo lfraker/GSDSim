@@ -3,6 +3,7 @@ package game.gamePanes;
 import java.awt.Dimension;
 
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -22,6 +23,9 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -275,14 +279,17 @@ public class SettingsPane extends Pane {
 		List<Site> sites;
 		public ChooseDefaultPane() {
 			bG = new ButtonGroup();
-			this.setSize(new Dimension(795, 496));
+			this.setSize(new Dimension(800, 520));
 			this.setLocationRelativeTo(null);
 			s = ScenarioLoader.load("./gameFiles/scenario1.json");
-			this.setLayout(new GridLayout(0, s.scenarios.length));
+			this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+			JPanel scenariosContainer = new JPanel();
+			scenariosContainer.setLayout(new GridLayout(0, s.scenarios.length));
+			scenariosContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			cities1 = new String[s.scenarios.length];
 			for (int i = 0; i < s.scenarios.length; i++) {
 				scenarioPanel = new JPanel();
-				scenarioPanel.setLayout(new GridLayout(0,1));
+				scenarioPanel.setLayout(new BoxLayout(scenarioPanel,BoxLayout.Y_AXIS));
 				for (int j = 0; j < s.scenarios[i].sites.length; j++) {
 					if (j == 0) {
 						cities = s.scenarios[i].sites[j].name;
@@ -294,19 +301,26 @@ public class SettingsPane extends Pane {
 				rB = new JRadioButton(cities);
 				bG.add(rB);
 				scenarioPanel.add(rB);
-				scenarioPanel.add(new JLabel());
+				scenarioPanel.add(Box.createRigidArea(new Dimension(0, 30)));
 				for (int m = 0; m < s.scenarios[i].modules.length; m++) {
 					scenarioPanel.add(new JLabel("Name: " + s.scenarios[i].modules[m].name));
 					scenarioPanel.add(new JLabel("Hours: " + s.scenarios[i].modules[m].hours));
 					scenarioPanel.add(new JLabel("Site: " + s.scenarios[i].modules[m].sites[0]));
-					scenarioPanel.add(new JLabel());
+					scenarioPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 				}
-				this.add(scenarioPanel);
+				scenariosContainer.add(scenarioPanel);
 			}
-			okPanel = new JPanel();
+			this.add(scenariosContainer);
+
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.X_AXIS));
+			buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 			ok = new JButton("Start Sim");
-			okPanel.add(ok);
-			this.add(okPanel);
+			buttonPane.add(Box.createHorizontalGlue());
+			buttonPane.add(ok);
+			this.add(buttonPane);
+
+			this.pack();
 			ok.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) {
