@@ -308,31 +308,38 @@ class ChooseDefaultPane extends JFrame {
 		okPanel.add(ok);
 		this.add(okPanel);
 		ok.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-				for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) {
-        	AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-							for (int k = 0; k < cities1.length; k++) {
-                if (button.getText().equals(cities1[k])) {
-									sites = s.scenarios[k].process();
-									game.swingFramework.FrontEndPane.modules.clearSites();
-								  	game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
-									game.swingFramework.FrontEndPane.processSimulator.RemoveSites();
-    								
-    								for (int l = 0; l < sites.size(); l++) 
-    								{
-	     								game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
-	     								game.swingFramework.FrontEndPane.processSimulator.AddSite(sites.get(l));
-	     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
-   									}
-								}
-							}
-	          }
+      	public void actionPerformed(ActionEvent e) 
+      	{
+				for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) 
+				{
+        			AbstractButton button = buttons.nextElement();
+
+		            if (button.isSelected()) 
+		            {
+									for (int k = 0; k < cities1.length; k++) 
+									{
+		                				if (button.getText().equals(cities1[k])) 
+		                				{
+											sites = s.scenarios[k].process();
+											game.swingFramework.FrontEndPane.modules.clearSites();
+										  	game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
+											game.swingFramework.FrontEndPane.processSimulator.RemoveSites();
+		    								
+		    								for (int l = 0; l < sites.size(); l++) 
+		    								{
+			     								game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
+			     								game.swingFramework.FrontEndPane.processSimulator.AddSite(sites.get(l));
+			     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
+		   									}
+										}
+									}
+			        }
+       		
        		}
-					dispose();
-				parentComp.enableSites();
-				parentComp.startLoadedSim();
-				parentComp.loadedSim();
+			dispose();
+			parentComp.enableSites();
+			parentComp.startLoadedSim();
+			parentComp.loadedSim();
       	}
     });
 

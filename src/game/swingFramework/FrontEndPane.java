@@ -139,7 +139,7 @@ public class FrontEndPane {
 	public long getTime() {
 		return this.currTime;
 	}
-	public float getDayTime() {
+	public long GetDayLength() {
 		return this.dayTime;
 	}
 	public int getDays() {
@@ -183,6 +183,10 @@ public class FrontEndPane {
 			{
 				this.hourCount = (int)(currentNanos / hour);
 				this.processSimulator.ProcessSites();
+
+				//this.processSimulator.SaveState();
+				//System.exit(0);
+
 				return;
 			}
 

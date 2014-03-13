@@ -669,7 +669,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		g.setColor(Color.BLACK);
 		float xT = (this.windSize.x * (6.5f/8.0f)) - 40;
 		String toWrite1 = "Current Time: " + this.getDayTimer();
-		String toWrite2	= "Length of Day: " + (int)(this.getTotalTime() / 60) + ":" + (int)(this.getTotalTime() % 60);
+		String toWrite2	= "Length of Day: " + (int)(TimeUnit.SECONDS.convert(parentComp.GetDayLength(), TimeUnit.NANOSECONDS) / 60) + ":" + (int)(TimeUnit.SECONDS.convert(parentComp.GetDayLength(), TimeUnit.NANOSECONDS) % 60);
 		String toWrite3 = "Day Count: " + this.getDays();
 		String toWrite4 = "";
 		switch (this.parentComp.getDifficulty()) {
@@ -702,9 +702,9 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		return this.parentComp.getDays();
 	}
 
-	private float getTotalTime() {
+	private long getTotalTime() {
 		// TODO Auto-generated method stub
-		return this.parentComp.getDayTime();
+		return this.parentComp.GetDayLength();
 	}
 
 	private String getDayTimer() {

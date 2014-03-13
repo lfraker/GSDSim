@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import com.google.gson.*;
 
 
 public class ProcessSimulator {
@@ -146,6 +147,22 @@ public class ProcessSimulator {
 		return this.allSites;
 	}
 		
+
+	public void SaveState()
+	{
+		//Creates a save file
+
+		/*
+		Gson gson = new Gson();
+		String json = gson.toJson(this.allSites);
+		System.out.println(json);
+		*/
+	}
+
+	public void LoadState(String filename)
+	{
+
+	}
 	
 //	
 //	private class ModuleComparator implements Comparator<ModuleWrapper> {

@@ -37,7 +37,6 @@ public class Scenario {
 				Site s = sitesMap.get(site);
 				if (s != null) {
 					moduleSites.add(s);
-					System.out.println("Module " + mi.name + " added at site " + site);
 				}
 			}
 			Module m = new Module(mi.hours, mi.name, moduleSites);

@@ -14,7 +14,7 @@ public class Module {
 	float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
 
-	long deadline;
+	long hoursToDeadline;
 
 	/* T */
 	DevelopmentMethod devMethod;
@@ -28,8 +28,9 @@ public class Module {
 	int currentStage;
 	boolean complete = false;
 	
-	public Module(float estimate, String name, List<Site> allSites) 
+	public Module(long estimate, String name, List<Site> allSites) 
 	{
+		this.hoursToDeadline = estimate;
 		this.currentStage = 0;
 		this.origEstimate = estimate;
 		this.sites = allSites;

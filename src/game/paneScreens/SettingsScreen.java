@@ -106,8 +106,8 @@ public class SettingsScreen extends Screen {
 		FontMetrics text = g.getFontMetrics();
 		int width = text.stringWidth("Difficulty:");
 		g.drawString("Difficulty:", ((this.screenSize.x/2.0f) - width/2.0f) , ((this.screenSize.y/7.0f)*1.0f));
-		int minu = (int)(this.timePerDay / 60);
-		int seco = (int)(this.timePerDay % 60);
+		int minu = (int)(TimeUnit.SECONDS.convert(this.parentPane.GetDayLength(), TimeUnit.NANOSECONDS) / 60);
+		int seco = (int)(TimeUnit.SECONDS.convert(this.parentPane.GetDayLength(), TimeUnit.NANOSECONDS) % 60);
 		int width2 = text.stringWidth("Length of Day: " + minu + " minutes and " + seco  + " seconds per day");
 		
 		
@@ -360,6 +360,8 @@ public class SettingsScreen extends Screen {
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
 				this.timePerDay = (((int)((pos/diff) * 200)) + 30);
+				this.timePerDay = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
+
 				this.parentPane.setTimePerDay(this.timePerDay);
 
 			}
