@@ -32,7 +32,10 @@
         <fileset dir="src/test" includes="lib/*.jar"/>
       </classpath>
     </javac>
-    <junit printsummary="on" fork="true" haltonfailure="yes">
+    <junit printsummary="on" fork="true" haltonerror="yes" haltonfailure="yes">
+<!--
+      <formatter type="plain" usefile="false" />
+-->
       <classpath path="bin"/>
       <classpath>
         <fileset dir="src/test" includes="lib/*.jar"/>

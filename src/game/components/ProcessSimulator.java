@@ -12,7 +12,7 @@ public class ProcessSimulator {
 //	private List<ModuleWrapper> allModules = new ArrayList<>();
 
 	private List<Site> allSites;
-	private int currentTime = 10; //Check out timing
+	public int currentTime = 10; //Check out timing
 	
 
 //	public void addModule(Module m, String moduleSiteName) {
