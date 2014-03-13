@@ -239,10 +239,10 @@ public class SettingsScreen extends Screen {
 							}
 
 						}
-						if (val[0].contains("Minutes Per Day")) {
+						if (val[0].contains("Seconds Per Day")) {
 							int v1i = Integer.parseInt(val[1]);
 							this.timePerDay = Long.parseLong(val[1]);
-							if (v1i < 0 || v1i > 300) {
+							if (v1i < 30 || v1i > 230) {
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
@@ -322,7 +322,7 @@ public class SettingsScreen extends Screen {
 		"Do not add any spaces after the colon either, only add the desired value\n" +
 		"*****************************\n" +
 		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
-		"Minutes Per Day (enter a number between 15-115):"+this.timePerDay+"\n"; // +
+		"Seconds Per Day (enter a number between 30-230):"+this.timePerDay+"\n"; // +
 		//"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
 		//"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
 		

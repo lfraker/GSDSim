@@ -35,8 +35,8 @@ public class Slider {
 	
 	
 	public boolean clickedInside(Point p) {
-		if(p.x >= this.topLeft.x && p.x <= (this.topLeft.x + this.dimens.x)) {
-			if(p.y >= this.topLeft.y && p.y <= (this.topLeft.y + this.dimens.y)) {
+		if(p.x >= (this.topLeft.x - 3) && p.x <= ((this.topLeft.x + this.dimens.x) + 3)) {
+			if(p.y >= (this.topLeft.y - 3) && p.y <= ((this.topLeft.y + this.dimens.y) + 3)) {
 				return true;
 			}
 		}
