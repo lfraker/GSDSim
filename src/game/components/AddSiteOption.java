@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 
 public class AddSiteOption extends JDialog {
 	private int numEmployees;
-	private SiteModuleController modSiteCont;
 	private JTextField siteN;
 	private String siteName;
 	private JTextField numEmp;

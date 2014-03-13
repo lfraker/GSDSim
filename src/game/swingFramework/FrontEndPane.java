@@ -42,7 +42,7 @@ public class FrontEndPane {
 	private JTabbedPane frames;
 	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
 	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
-	private static final int DEFAULT_DELAY_MILLIS = 1000 / 5;
+	private static final int DEFAULT_DELAY_MILLIS = 1000 / 15;
 	private long lastTickNanos;
 	private Timer timer;
 	private SettingsPane settings;
