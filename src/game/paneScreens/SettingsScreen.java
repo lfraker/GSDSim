@@ -246,7 +246,7 @@ public class SettingsScreen extends Screen {
 						{
 							int v1i = Integer.parseInt(val[1]);
 
-							this.timePerDay = Integer.parseInt(val[1]);
+							this.timePerDay = v1i;
 
 							if (v1i < 30 || v1i > 230) 
 							{
@@ -254,8 +254,8 @@ public class SettingsScreen extends Screen {
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
-							this.timePerDay = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
-							this.parentPane.setTimePerDay(this.timePerDay);
+							long timeNano = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
+							this.parentPane.setTimePerDay(timeNano);
 						}
 //						if (val[0].contains("Labor Cost")) {
 //							float v1 = Float.parseFloat(val[1]);
@@ -329,7 +329,7 @@ public class SettingsScreen extends Screen {
 		"Do not add any spaces after the colon either, only add the desired value\n" +
 		"*****************************\n" +
 		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
-		"Seconds Per Day (enter a number between 30-230):"+(TimeUnit.SECONDS.convert(this.timePerDay, TimeUnit.NANOSECONDS))+"\n"; // +
+		"Seconds Per Day (enter a number between 30-230):"+this.timePerDay+"\n"; // +
 		//"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
 		//"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
 		
@@ -367,8 +367,8 @@ public class SettingsScreen extends Screen {
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
 				this.timePerDay = (((long)((pos/diff) * 200)) + 30);
-				this.timePerDay = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
-				this.parentPane.setTimePerDay(this.timePerDay);
+				long timeNano = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
+				this.parentPane.setTimePerDay(timeNano);
 			}
 		}
 		
