@@ -184,6 +184,12 @@ public class FrontEndPane {
 				this.hourCount = (int)(currentNanos / hour);
 				this.processSimulator.ProcessSites();
 
+				if(hourCount % 24 == 0)
+				{
+					//New Day..
+					this.dayCount++;
+				}
+
 				//this.processSimulator.SaveState();
 				//System.exit(0);
 

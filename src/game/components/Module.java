@@ -16,7 +16,6 @@ public class Module {
 
 	long hoursToDeadline;
 
-	/* T */
 	DevelopmentMethod devMethod;
 	int numWorkers;
 	//Overall performance level - may be adjusted to simulate poor performance or exceptional performance
@@ -24,7 +23,7 @@ public class Module {
 
 
 	float totalEstimate = 0.0f;
-	public float origEstimate;
+	public long origEstimate;
 	int currentStage;
 	boolean complete = false;
 	
@@ -210,12 +209,11 @@ public class Module {
 			} 
 			else 
 			{
+				//Average number of man hours available for each section
+				float manHoursAvailableToSection = (workPoints / (7 - this.sectionsCompleted()));
+
 				while(workPoints > 0)
 				{
-
-					//Average number of man hours available for each section
-					float manHoursAvailableToSection = (workPoints / (7 - this.sectionsCompleted()));
-
 					for(int currentStep = 0; currentStep < 7; currentStep++) 
 					{
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
@@ -230,9 +228,10 @@ public class Module {
 							{
 								//Section complete.. Reallocate work to next section
 
-								/*
-								System.out.println(	"Allocated " + (stepEstimates[currentStep] - workDonePerSection[currentStep]) + 
-													" hours to section " + (currentStep+1));*/
+								//System.out.println("WP:" + workPoints);
+
+								//System.out.println(	"Allocated " + (stepEstimates[currentStep] - workDonePerSection[currentStep]) + 
+								//					" hours to section " + (currentStep+1));
 
 								workPoints -= (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 								
@@ -245,7 +244,9 @@ public class Module {
 								//Just allocate an equal amount of work for this section
 								workDonePerSection[currentStep] += manHoursAvailableToSection;
 								workPoints -= manHoursAvailableToSection;
+								//System.out.println("WP:" + workPoints);
 								//System.out.println("Allocated " + manHoursAvailableToSection + " hours to section " + (currentStep+1));
+							
 							}
 
 							if(workPoints <= 0) 
@@ -254,8 +255,6 @@ public class Module {
 							}
 						}
 					}
-
-
 
 				}
 
@@ -351,7 +350,7 @@ public class Module {
 
 		for(int currentStep = 0; currentStep < 7; currentStep++)
 		{
-			if(this.stepEstimates[currentStep] >= this.workDonePerSection[currentStep])
+			if(this.stepEstimates[currentStep] <= this.workDonePerSection[currentStep])
 			{
 				res++;
 			}
@@ -362,6 +361,17 @@ public class Module {
 
 	public boolean IsOnSchedule()
 	{
+		if(this.devMethod == DevelopmentMethod.AGILE)
+		{
+			if(this.workDone() < this.origEstimate || this.isComplete())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		return true;
 	}
 }

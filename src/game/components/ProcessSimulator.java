@@ -73,8 +73,6 @@ public class ProcessSimulator {
 		for(Site currentSite : this.allSites)
 		{
 
-			//(currentTime % 24;
-
 
 			//int localTime = TimeUnit.NANOSECONDS.convert(currentTime, TimeUnit.MINUTES) + currentSite.getTimezone();
 			boolean behind = false;
@@ -100,7 +98,8 @@ public class ProcessSimulator {
 					currentMod.doWork();
 					System.out.println("Completion level: " + (currentMod.getCompletionLevel() * 100));
 
-					if (currentMod.workDone() > currentMod.origEstimate) {
+					if (!currentMod.IsOnSchedule()) 
+					{
 						behind = true;
 					}
 

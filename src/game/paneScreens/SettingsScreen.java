@@ -106,8 +106,11 @@ public class SettingsScreen extends Screen {
 		FontMetrics text = g.getFontMetrics();
 		int width = text.stringWidth("Difficulty:");
 		g.drawString("Difficulty:", ((this.screenSize.x/2.0f) - width/2.0f) , ((this.screenSize.y/7.0f)*1.0f));
-		int minu = (int)(TimeUnit.SECONDS.convert(this.parentPane.GetDayLength(), TimeUnit.NANOSECONDS) / 60);
-		int seco = (int)(TimeUnit.SECONDS.convert(this.parentPane.GetDayLength(), TimeUnit.NANOSECONDS) % 60);
+
+		long secondsPerDay = (TimeUnit.SECONDS.convert(this.parentPane.getTotalTime(), TimeUnit.NANOSECONDS));
+
+		int minu = (int)(secondsPerDay / 60);
+		int seco = (int)(secondsPerDay % 60);
 		int width2 = text.stringWidth("Length of Day: " + minu + " minutes and " + seco  + " seconds per day");
 		
 		
@@ -322,7 +325,7 @@ public class SettingsScreen extends Screen {
 		"Do not add any spaces after the colon either, only add the desired value\n" +
 		"*****************************\n" +
 		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
-		"Seconds Per Day (enter a number between 30-230):"+this.timePerDay+"\n"; // +
+		"Seconds Per Day (enter a number between 30-230):"+(TimeUnit.SECONDS.convert(this.timePerDay, TimeUnit.NANOSECONDS))+"\n"; // +
 		//"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
 		//"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
 		
