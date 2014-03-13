@@ -263,91 +263,80 @@ public class SettingsPane extends Pane {
 	}	
 
 
-class ChooseDefaultPane extends JFrame {
-  JRadioButton rB;
-  ButtonGroup bG;
-	JPanel okPanel;
-	JButton ok;
-	JPanel scenarioPanel;
-  String cities;
-	String[] cities1;
-	Scenarios s;
-	List<Site> sites;
-  public ChooseDefaultPane() {
-		bG = new ButtonGroup();
-		this.setSize(new Dimension(795, 496));
-		this.setLocationRelativeTo(null);
-    s = ScenarioLoader.load("./gameFiles/scenario1.json");
-		this.setLayout(new GridLayout(0, s.scenarios.length));
-		cities1 = new String[s.scenarios.length];
-    for (int i = 0; i < s.scenarios.length; i++) {
-			scenarioPanel = new JPanel();
-			scenarioPanel.setLayout(new GridLayout(0,1));
-      for (int j = 0; j < s.scenarios[i].sites.length; j++) {
-        if (j == 0) {
-          cities = s.scenarios[i].sites[j].name;
-        } else {
-          cities += ", " + s.scenarios[i].sites[j].name;
-        }
-      }
-			cities1[i] = cities;
-      rB = new JRadioButton(cities);
-      bG.add(rB);
-      scenarioPanel.add(rB);
-			scenarioPanel.add(new JLabel());
-			for (int m = 0; m < s.scenarios[i].modules.length; m++) {
-				scenarioPanel.add(new JLabel("Name: " + s.scenarios[i].modules[m].name));
-				scenarioPanel.add(new JLabel("Hours: " + s.scenarios[i].modules[m].hours));
-				scenarioPanel.add(new JLabel("Site: " + s.scenarios[i].modules[m].sites[0]));
+	class ChooseDefaultPane extends JFrame {
+		JRadioButton rB;
+		ButtonGroup bG;
+		JPanel okPanel;
+		JButton ok;
+		JPanel scenarioPanel;
+		String cities;
+		String[] cities1;
+		Scenarios s;
+		List<Site> sites;
+		public ChooseDefaultPane() {
+			bG = new ButtonGroup();
+			this.setSize(new Dimension(795, 496));
+			this.setLocationRelativeTo(null);
+			s = ScenarioLoader.load("./gameFiles/scenario1.json");
+			this.setLayout(new GridLayout(0, s.scenarios.length));
+			cities1 = new String[s.scenarios.length];
+			for (int i = 0; i < s.scenarios.length; i++) {
+				scenarioPanel = new JPanel();
+				scenarioPanel.setLayout(new GridLayout(0,1));
+				for (int j = 0; j < s.scenarios[i].sites.length; j++) {
+					if (j == 0) {
+						cities = s.scenarios[i].sites[j].name;
+					} else {
+						cities += ", " + s.scenarios[i].sites[j].name;
+					}
+				}
+				cities1[i] = cities;
+				rB = new JRadioButton(cities);
+				bG.add(rB);
+				scenarioPanel.add(rB);
 				scenarioPanel.add(new JLabel());
+				for (int m = 0; m < s.scenarios[i].modules.length; m++) {
+					scenarioPanel.add(new JLabel("Name: " + s.scenarios[i].modules[m].name));
+					scenarioPanel.add(new JLabel("Hours: " + s.scenarios[i].modules[m].hours));
+					scenarioPanel.add(new JLabel("Site: " + s.scenarios[i].modules[m].sites[0]));
+					scenarioPanel.add(new JLabel());
+				}
+				this.add(scenarioPanel);
 			}
-			this.add(scenarioPanel);
-    }
-		okPanel = new JPanel();
-		ok = new JButton("Start Sim");
-		okPanel.add(ok);
-		this.add(okPanel);
-		ok.addActionListener(new ActionListener() {
-      	public void actionPerformed(ActionEvent e) 
-      	{
-				for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) 
-				{
-        			AbstractButton button = buttons.nextElement();
+			okPanel = new JPanel();
+			ok = new JButton("Start Sim");
+			okPanel.add(ok);
+			this.add(okPanel);
+			ok.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) {
+						AbstractButton button = buttons.nextElement();
 
-		            if (button.isSelected()) 
-		            {
-									for (int k = 0; k < cities1.length; k++) 
-									{
-		                				if (button.getText().equals(cities1[k])) 
-		                				{
-											sites = s.scenarios[k].process();
-											game.swingFramework.FrontEndPane.modules.clearSites();
-										  	game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
-											game.swingFramework.FrontEndPane.processSimulator.RemoveSites();
-		    								
-		    								for (int l = 0; l < sites.size(); l++) 
-		    								{
-			     								game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
-			     								game.swingFramework.FrontEndPane.processSimulator.AddSite(sites.get(l));
-			     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
-		   									}
-										}
+						if (button.isSelected()) {
+							for (int k = 0; k < cities1.length; k++) {
+								if (button.getText().equals(cities1[k])) {
+									sites = s.scenarios[k].process();
+									game.swingFramework.FrontEndPane.modules.clearSites();
+									game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
+									game.swingFramework.FrontEndPane.processSimulator.RemoveSites();
+
+									for (int l = 0; l < sites.size(); l++) {
+										game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
+										game.swingFramework.FrontEndPane.processSimulator.AddSite(sites.get(l));
+										game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
 									}
-			        }
-       		
-       		}
-			dispose();
-			parentComp.enableSites();
-			parentComp.startLoadedSim();
-			parentComp.loadedSim();
-      	}
-    });
+								}
+							}
+						}
 
-		
-  }
-}
-	
-	
-	
-	
+					}
+					dispose();
+					parentComp.enableSites();
+					parentComp.startLoadedSim();
+					parentComp.loadedSim();
+				}
+			});
+
+		}
+	}
 }
