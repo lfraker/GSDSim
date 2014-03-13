@@ -165,7 +165,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		float x = (this.windSize.x * (6.5f/8.0f)) - 40;
 		
 		String toWrite1 = "Current Time: " + this.getDayTimer();
-		String toWrite2	= "Length of Day: " + (int)(this.getTotalTime() / 60) + ":" + (int)(this.getTotalTime() % 60);
+		String toWrite2	= "Length of Day: " + (TimeUnit.SECONDS.convert(this.parentComp.getTime(), TimeUnit.NANOSECONDS) / 60) + ":" + (int)(this.getTotalTime() % 60);
 		String toWrite3 = "Day Count: " + this.getDays();
 		String toWrite4 = "";
 		switch (this.parentComp.getDifficulty()) {
