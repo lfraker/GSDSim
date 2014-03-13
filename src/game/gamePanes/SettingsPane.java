@@ -31,6 +31,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JFrame;
 
 import game.paneScreens.*;
+import game.components.Site;
 import game.components.Scenario;
 import game.components.Scenarios;
 import game.components.ScenarioLoader;
@@ -38,6 +39,7 @@ import game.swingFramework.FrontEndPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.util.Enumeration;
+import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 
@@ -47,6 +49,7 @@ public class SettingsPane extends Pane {
 	public JTextArea followTheSun;
 	public JButton loadDefaultSites;
 	public ChooseDefaultPane loadDefaultSitesP;
+	boolean added;
 //	private JButton easy;
 //	private JButton medium;
 //	private JButton hard;
@@ -257,7 +260,7 @@ public class SettingsPane extends Pane {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-	}
+	}	
 
 
 class ChooseDefaultPane extends JFrame {
@@ -269,6 +272,7 @@ class ChooseDefaultPane extends JFrame {
   String cities;
 	String[] cities1;
 	Scenarios s;
+	List<Site> sites;
   public ChooseDefaultPane() {
 		bG = new ButtonGroup();
 		this.setSize(new Dimension(795, 496));
@@ -310,13 +314,14 @@ class ChooseDefaultPane extends JFrame {
             if (button.isSelected()) {
 							for (int k = 0; k < cities1.length; k++) {
                 if (button.getText().equals(cities1[k])) {
+									sites = s.scenarios[k].process();
 									game.swingFramework.FrontEndPane.modules.clearSites();
 								  game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
 									game.swingFramework.FrontEndPane.modSiteController.removeSites();
-    							for (int l = 0; l < s.scenarios[k].sites.length; l++) {
-     								game.swingFramework.FrontEndPane.addSiteToCombo(s.scenarios[k].process().get(l));
-     								game.swingFramework.FrontEndPane.modSiteController.addSite(s.scenarios[k].process().get(l));
-     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(s.scenarios[k].process().get(l).getMarker());
+    							for (int l = 0; l < sites.size(); l++) {
+     								game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
+     								game.swingFramework.FrontEndPane.modSiteController.addSite(sites.get(l));
+     								game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
    								}
 								}
 							}
