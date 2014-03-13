@@ -163,9 +163,11 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		g.setFont(new Font("serif", Font.BOLD, (this.windSize.x / 95)));
 		g.setColor(Color.BLACK);
 		float x = (this.windSize.x * (6.5f/8.0f)) - 40;
+
+		long secondsPerDay = (TimeUnit.SECONDS.convert(this.getTotalTime(), TimeUnit.NANOSECONDS));
 		
 		String toWrite1 = "Current Time: " + this.getDayTimer();
-		String toWrite2	= "Length of Day: " + (int)(TimeUnit.SECONDS.convert(this.getTotalTime(), TimeUnit.NANOSECONDS) / 60) + ":" + (int)(this.getTotalTime() % 60);
+		String toWrite2	= "Length of Day: " + (int)(secondsPerDay / 60) + ":" + (int)(secondsPerDay % 60);
 		String toWrite3 = "Day Count: " + this.parentComp.getDays();
 		String toWrite4 = "";
 		switch (this.parentComp.getDifficulty()) {
