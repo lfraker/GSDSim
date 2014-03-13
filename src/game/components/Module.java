@@ -14,13 +14,10 @@ public class Module {
 	float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
 
-	long hoursToDeadline;
-
 	DevelopmentMethod devMethod;
 	int numWorkers;
 	//Overall performance level - may be adjusted to simulate poor performance or exceptional performance
 	float performanceLevel = 1;
-
 
 	float totalEstimate = 0.0f;
 	public long origEstimate;
@@ -29,7 +26,6 @@ public class Module {
 	
 	public Module(long estimate, String name, List<Site> allSites) 
 	{
-		this.hoursToDeadline = estimate;
 		this.currentStage = 0;
 		this.origEstimate = estimate;
 		this.sites = allSites;
@@ -51,9 +47,6 @@ public class Module {
 		//Development type defaults to agile
 		this.devMethod = DevelopmentMethod.AGILE;
 		this.numWorkers = 1;
-
-		//this.deadline = 
-
 	}
 	
 	public List<Site> getSites() {

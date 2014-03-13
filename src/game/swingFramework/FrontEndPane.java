@@ -168,23 +168,21 @@ public class FrontEndPane {
 	
 	final void doTick() {
 
-		long hour = this.dayTime / 24;
+		long hour = (long)(this.dayTime / 24);
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
-
-
 
 		if(!this.paused && this.timeStart) 
 		{
 			this.currTime += delta;
 			this.processSimulator.UpdateTime(currTime);
 
-			if ((currentNanos / hour) > hourCount) 
+			if ((this.currTime / hour) > hourCount) 
 			{
-				this.hourCount = (int)(currentNanos / hour);
+				this.hourCount = (int)(this.currTime / hour);
 				this.processSimulator.ProcessSites();
 
-				if(hourCount % 24 == 0)
+				if(hourCount >= 24 && hourCount % 24 == 0)
 				{
 					//New Day..
 					this.dayCount++;

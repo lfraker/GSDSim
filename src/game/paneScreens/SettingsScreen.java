@@ -109,8 +109,8 @@ public class SettingsScreen extends Screen {
 
 		long secondsPerDay = (TimeUnit.SECONDS.convert(this.parentPane.getTotalTime(), TimeUnit.NANOSECONDS));
 
-		int minu = (int)(secondsPerDay / 60);
-		int seco = (int)(secondsPerDay % 60);
+		long minu = (long)(secondsPerDay / 60);
+		long seco = (long)(secondsPerDay % 60);
 		int width2 = text.stringWidth("Length of Day: " + minu + " minutes and " + seco  + " seconds per day");
 		
 		
@@ -244,14 +244,17 @@ public class SettingsScreen extends Screen {
 						}
 						if (val[0].contains("Seconds Per Day")) {
 							int v1i = Integer.parseInt(val[1]);
-							this.timePerDay = Long.parseLong(val[1]);
+
+							this.timePerDay = Integer.parseInt(val[1]);
+							//this.timePerDay = TimeUnit.NANOSECONDS.convert(Integer.parseInt(val[1]), TimeUnit.SECONDS);
+
 							if (v1i < 30 || v1i > 230) {
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
 
-							this.parentPane.setTimePerDay(TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS));
+							this.parentPane.setTimePerDay(this.timePerDay);
 						}
 //						if (val[0].contains("Labor Cost")) {
 //							float v1 = Float.parseFloat(val[1]);
@@ -362,11 +365,9 @@ public class SettingsScreen extends Screen {
 				this.sliderPos = this.slide.getPos();
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
-				this.timePerDay = (((int)((pos/diff) * 200)) + 30);
+				this.timePerDay = (((long)((pos/diff) * 200)) + 30);
 				this.timePerDay = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
-
 				this.parentPane.setTimePerDay(this.timePerDay);
-
 			}
 		}
 		

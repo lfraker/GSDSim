@@ -23,10 +23,12 @@ public class ProcessSimulator {
 //	}
 	
 //	this is the simulator that runs at the end of the day, where random occurences are calculated
-	public void endOfDaySim(List<ModuleWrapper> mods) {
+	public void endOfDaySim(List<ModuleWrapper> mods) 
+	{
 		System.out.println("SIMULATING END OF DAY");
 		ModuleWrapper m = mods.get(0);
-		for (int i = 0; i < 7; i++) {	
+		for (int i = 0; i < 7; i++) 
+		{	
 			System.out.println(m.mod.stepEstimates[i]);
 		}
 		for (ModuleWrapper cModule: mods)
