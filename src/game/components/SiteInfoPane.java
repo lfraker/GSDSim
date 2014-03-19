@@ -35,7 +35,7 @@ public class SiteInfoPane extends JFrame {
 				if (name.split(" Site Info")[0].equals(s.siteName)) {
 					modules.add(new JLabel("Name: " + m.getName()));
 					modules.add(new JLabel("Work done: " + m.workDone() + " hours"));
-					modules.add(new JLabel("Sections completed: " + m.sectionsCompleted()));
+					modules.add(new JLabel("Sections completed: " + Integer.toString(m.sectionsCompleted())));
 				}
 			}
 		}

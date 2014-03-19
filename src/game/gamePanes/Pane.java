@@ -47,7 +47,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	Screen viewScreen;
 	public VectorI windSize;
 	boolean resizeCalled = false;
-	FrontEndPane parentComp;
+	public static FrontEndPane parentComp;
 	JTabbedPane frameWork;
 	private static final int MILLIS_TO_WAIT_FOR_REPEAT = 5;
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");

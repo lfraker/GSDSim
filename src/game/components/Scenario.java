@@ -28,7 +28,7 @@ public class Scenario {
         continue;
       }
       MapMarkerDot pos = new MapMarkerDot(null, si.name, si.location[0], si.location[1]);
-      Site s = new Site(si.name, si.workers, pos, si.timezone);
+      Site s = new Site(si.name, Integer.parseInt(si.workers), pos, si.timezone);
       sitesMap.put(si.name, s);
     }
 		for (ModuleInfo mi: modules) {
@@ -51,7 +51,7 @@ public class Scenario {
 		public String name;
 		float[] location;
 		int timezone;
-		int workers;
+		public String workers;
 	}
 	public class ModuleInfo {
 		public String name;

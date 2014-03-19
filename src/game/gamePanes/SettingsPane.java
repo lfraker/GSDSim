@@ -29,10 +29,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-import javax.swing.JFrame;
 
 import game.paneScreens.*;
 import game.components.Site;
@@ -40,12 +39,9 @@ import game.components.Scenario;
 import game.components.Scenarios;
 import game.components.ScenarioLoader;
 import game.swingFramework.FrontEndPane;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 import java.util.Enumeration;
 import java.util.List;
 import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
 
 @SuppressWarnings("serial")
 public class SettingsPane extends Pane {
@@ -53,7 +49,6 @@ public class SettingsPane extends Pane {
 	public JTextArea followTheSun;
 	public JButton loadDefaultSites;
 	public ChooseDefaultPane loadDefaultSitesP;
-	boolean added;
 //	private JButton easy;
 //	private JButton medium;
 //	private JButton hard;
@@ -266,91 +261,4 @@ public class SettingsPane extends Pane {
 		
 	}	
 
-
-	class ChooseDefaultPane extends JFrame {
-		JRadioButton rB;
-		ButtonGroup bG;
-		JPanel okPanel;
-		JButton ok;
-		JPanel scenarioPanel;
-		String cities;
-		String[] cities1;
-		Scenarios s;
-		List<Site> sites;
-		public ChooseDefaultPane() {
-			bG = new ButtonGroup();
-			this.setSize(new Dimension(800, 520));
-			this.setLocationRelativeTo(null);
-			s = ScenarioLoader.load("./gameFiles/scenario1.json");
-			this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-			JPanel scenariosContainer = new JPanel();
-			scenariosContainer.setLayout(new GridLayout(0, s.scenarios.length));
-			scenariosContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-			cities1 = new String[s.scenarios.length];
-			for (int i = 0; i < s.scenarios.length; i++) {
-				scenarioPanel = new JPanel();
-				scenarioPanel.setLayout(new BoxLayout(scenarioPanel,BoxLayout.Y_AXIS));
-				for (int j = 0; j < s.scenarios[i].sites.length; j++) {
-					if (j == 0) {
-						cities = s.scenarios[i].sites[j].name;
-					} else {
-						cities += ", " + s.scenarios[i].sites[j].name;
-					}
-				}
-				cities1[i] = cities;
-				rB = new JRadioButton(cities);
-				bG.add(rB);
-				scenarioPanel.add(rB);
-				scenarioPanel.add(Box.createRigidArea(new Dimension(0, 30)));
-				for (int m = 0; m < s.scenarios[i].modules.length; m++) {
-					scenarioPanel.add(new JLabel("Name: " + s.scenarios[i].modules[m].name));
-					scenarioPanel.add(new JLabel("Hours: " + s.scenarios[i].modules[m].hours));
-					scenarioPanel.add(new JLabel("Site: " + s.scenarios[i].modules[m].sites[0]));
-					scenarioPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-				}
-				scenariosContainer.add(scenarioPanel);
-			}
-			this.add(scenariosContainer);
-
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.X_AXIS));
-			buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-			ok = new JButton("Start Sim");
-			buttonPane.add(Box.createHorizontalGlue());
-			buttonPane.add(ok);
-			this.add(buttonPane);
-
-			this.pack();
-			ok.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for (Enumeration<AbstractButton> buttons = bG.getElements(); buttons.hasMoreElements();) {
-						AbstractButton button = buttons.nextElement();
-
-						if (button.isSelected()) {
-							for (int k = 0; k < cities1.length; k++) {
-								if (button.getText().equals(cities1[k])) {
-									sites = s.scenarios[k].process();
-									game.swingFramework.FrontEndPane.modules.clearSites();
-									game.swingFramework.FrontEndPane.siteStatus.removeAllMapMarkers();
-									game.swingFramework.FrontEndPane.processSimulator.RemoveSites();
-
-									for (int l = 0; l < sites.size(); l++) {
-										game.swingFramework.FrontEndPane.addSiteToCombo(sites.get(l));
-										game.swingFramework.FrontEndPane.processSimulator.AddSite(sites.get(l));
-										game.swingFramework.FrontEndPane.siteStatus.addMapMarker(sites.get(l).getMarker());
-									}
-								}
-							}
-						}
-
-					}
-					dispose();
-					parentComp.enableSites();
-					parentComp.startLoadedSim();
-					parentComp.loadedSim();
-				}
-			});
-
-		}
-	}
 }
