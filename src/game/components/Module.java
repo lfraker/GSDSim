@@ -198,16 +198,14 @@ public class Module {
 			if(workLeftInModule <= workPoints) 
 			{
 				this.complete();
+				workDonePerSection[6] = stepEstimates[6];
 			} 
 			else 
 			{
-				//Average number of man hours available for each section
-				float manHoursAvailableToSection = (workPoints / (7 - this.sectionsCompleted()));
 
-				while(workPoints > 0)
-				{
 					for(int currentStep = 0; currentStep < 7; currentStep++) 
 					{
+						System.out.println(""+ currentStep + " " +stepEstimates[currentStep] + " " + workDonePerSection[currentStep] + "\n");
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 
 						if(workLeftToDo > 0) 
@@ -216,7 +214,7 @@ public class Module {
 							//If the step hasn't been completed yet...
 							//Recalculated per section as we may have remaining work points from previous sections
 
-							if(workLeftToDo < manHoursAvailableToSection)
+							if(workLeftToDo < workPoints)
 							{
 								//Section complete.. Reallocate work to next section
 
@@ -234,20 +232,13 @@ public class Module {
 							else
 							{
 								//Just allocate an equal amount of work for this section
-								workDonePerSection[currentStep] += manHoursAvailableToSection;
-								workPoints -= manHoursAvailableToSection;
+								workDonePerSection[currentStep] += workPoints;
+								break;
 								//System.out.println("WP:" + workPoints);
 								//System.out.println("Allocated " + manHoursAvailableToSection + " hours to section " + (currentStep+1));
 							
 							}
-
-							if(workPoints <= 0) 
-							{
-								break;
-							}
 						}
-					}
-
 				}
 
 			System.out.println("Performed " + totalWork + " hours of work on " + this.modName);
