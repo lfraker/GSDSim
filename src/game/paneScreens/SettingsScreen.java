@@ -19,6 +19,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JWindow;
+
 import game.components.Button;
 import game.components.Difficulty;
 import game.components.Slider;
@@ -93,7 +95,7 @@ public class SettingsScreen extends Screen {
 //				((SettingsPane)this.parentPane).followTheSun.setText("15");
 //			}
 //		}
-		writeSettings();
+	//	writeSettings();
 	}
 
 	@Override
@@ -194,7 +196,7 @@ public class SettingsScreen extends Screen {
 			this.parentPane.setDifficulty(Difficulty.HARD);
 		}
 		
-		writeSettings();
+		//writeSettings();
 	}
 
 	@Override
@@ -236,7 +238,7 @@ public class SettingsScreen extends Screen {
 								break;
 							default:		this.difficulty = Difficulty.EASY;
 								this.parentPane.setDifficulty(Difficulty.EASY);	
-								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set. Edit the settings file so that it is correct.";
 								this.parentPane.showMessage(message);	
 								break;
 							}
@@ -250,12 +252,22 @@ public class SettingsScreen extends Screen {
 
 							if (v1i < 30 || v1i > 230) 
 							{
-								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set. Edit the settings file so that it is correct.";
 								this.parentPane.showMessage(message);
 								this.timePerDay = 30;
 							}
 							long timeNano = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
 							this.parentPane.setTimePerDay(timeNano);
+						}
+						if (val[0].contains("PCode")) {
+							String [] valInner = val[0].split("=");
+							String val1 = "4";
+							if (val.length > 1) {
+								val1 = val[1];
+							}
+							this.parentPane.updateGlobalParam(valInner[1], val1);
+
+
 						}
 //						if (val[0].contains("Labor Cost")) {
 //							float v1 = Float.parseFloat(val[1]);
@@ -277,7 +289,7 @@ public class SettingsScreen extends Screen {
 //							}
 //						}
 					} catch (NumberFormatException e) {
-						String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+						String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set. Edit the settings file so that it is correct.";
 						this.parentPane.showMessage(message);
 						this.difficulty = Difficulty.EASY;
 						this.parentPane.setDifficulty(Difficulty.EASY);	
@@ -292,7 +304,7 @@ public class SettingsScreen extends Screen {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			this.difficulty = Difficulty.EASY;
-			String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set.";
+			String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set. Edit the settings file so that it is correct.";
 			this.parentPane.showMessage(message);	
 			
 			//e.printStackTrace();
@@ -300,6 +312,9 @@ public class SettingsScreen extends Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.easy.release();
+		this.medium.release();
+		this.hard.release();
 		switch (difficulty) {
 			case EASY: this.easy.setPressed();
 				break;
@@ -312,50 +327,51 @@ public class SettingsScreen extends Screen {
 		
 	}
 	
-	public void writeSettings() {
-//		String diff="";
-//		switch (difficulty) {
-//			case 1: diff = "easy";
-//				break;
-//			case 2: diff = "medium";
-//				break;
-//			case 3: diff = "hard";
-//				break;
-//		}
-
-		String fileText = "This is the settings file. To change a setting, " +
-		"simply edit the value after the colon mark next to the field. " +
-		"Do not delete the colon, only edit the value after the colon the field." +
-		"Do not add any spaces after the colon either, only add the desired value\n" +
-		"*****************************\n" +
-		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
-		"Seconds Per Day (enter a number between 30-230):"+this.timePerDay+"\n"; // +
-		//"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
-		//"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
-		
-		File dir = new File("gameFiles");
-		 
-		if (!dir.exists()) {
-			dir.mkdir();
-		}
-		
-
-		File file = new File("./gameFiles/settings.txt");
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(file, false))){
-				buffWrite.write(fileText);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void writeSettings() {
+//		return;
+////		String diff="";
+////		switch (difficulty) {
+////			case 1: diff = "easy";
+////				break;
+////			case 2: diff = "medium";
+////				break;
+////			case 3: diff = "hard";
+////				break;
+////		}
+//
+////		String fileText = "This is the settings file. To change a setting, " +
+////		"simply edit the value after the colon mark next to the field. " +
+////		"Do not delete the colon, only edit the value after the colon the field." +
+////		"Do not add any spaces after the colon either, only add the desired value\n" +
+////		"*****************************\n" +
+////		"Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):"+this.difficulty +"\n" +
+////		"Seconds Per Day (enter a number between 30-230):"+this.timePerDay+"\n"; // +
+////		//"Labor Cost(enter a positive decimal):"+this.laborCost+"\n" +
+////		//"Follow The Sun Handoff Time(enter a number between 1-15):"+this.FTSmin;
+////		
+////		File dir = new File("gameFiles");
+////		 
+////		if (!dir.exists()) {
+////			dir.mkdir();
+////		}
+////		
+////
+////		File file = new File("./gameFiles/settings.txt");
+////		if (!file.exists()) {
+////			try {
+////				file.createNewFile();
+////			} catch (IOException e) {
+////				// TODO Auto-generated catch block
+////				e.printStackTrace();
+////			}
+////		}
+////		try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(file, false))){
+////				//buffWrite.write(fileText);
+////		} catch (IOException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+//	}
 
 	@Override
 	public void onMouseDragged(MouseEvent e) {

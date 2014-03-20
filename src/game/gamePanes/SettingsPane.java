@@ -22,6 +22,13 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -29,11 +36,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 import javax.swing.border.BevelBorder;
 
 import game.paneScreens.*;
+import game.components.Difficulty;
 import game.components.Site;
 import game.components.Scenario;
 import game.components.Scenarios;
@@ -49,6 +59,9 @@ public class SettingsPane extends Pane {
 	public JTextArea followTheSun;
 	public JButton loadDefaultSites;
 	public ChooseDefaultPane loadDefaultSitesP;
+	JFrame settingsConf;
+	JTextArea newTex;
+
 //	private JButton easy;
 //	private JButton medium;
 //	private JButton hard;
@@ -115,10 +128,101 @@ public class SettingsPane extends Pane {
 		newPanel.add(this.laborCost);
 		//newPanel.setPreferredSize(new Dimension(50,50));
 		//this.add(newPanel);
-		this.add(new JLabel());
+		JButton modifSett = new JButton("Modify Saved Global Settings File");
+		modifSett.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (settingsConf != null) {
+					settingsConf.dispose();
+					settingsConf = null;
+				}
+				if (settingsConf == null) {
+					settingsConf = new JFrame();
+					settingsConf.setMinimumSize(new Dimension(300, 300));
+					settingsConf.setPreferredSize(new Dimension(800, 500));
+					settingsConf.setLayout(new BorderLayout());
+					newTex = new JTextArea();
+					JScrollPane texWrap = new JScrollPane(newTex);
+					settingsConf.add(texWrap, BorderLayout.CENTER);
+					JPanel buttons = new JPanel();
+					buttons.setLayout(new FlowLayout());
+					JButton save = new JButton("Save Settings");
+					save.addActionListener(new ActionListener(){
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							File dir = new File("gameFiles");
+							 
+							if (!dir.exists()) {
+								dir.mkdir();
+							}
+							
+
+							File file = new File("./gameFiles/settings.txt");
+							if (!file.exists()) {
+								try {
+									file.createNewFile();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							try (BufferedWriter buffWrite = new BufferedWriter(new FileWriter(file, false))){
+									buffWrite.write(newTex.getText());
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							settingsConf.dispose();
+							settingsConf = null;
+							((SettingsScreen)viewScreen).readSettings();
+
+						}
+						
+					});
+					JButton cancel = new JButton("Cancel");
+					cancel.addActionListener(new ActionListener(){
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							settingsConf.dispose();
+							settingsConf = null;
+							
+						}
+						
+					});
+					buttons.add(save);
+					buttons.add(cancel);
+					settingsConf.add(buttons, BorderLayout.SOUTH);
+					
+					try (BufferedReader buffRead = new BufferedReader(new FileReader("./gameFiles/settings.txt"))) {
+						String setts = "";
+						String currLine;
+						while ((currLine = buffRead.readLine()) != null) {
+							setts = setts + currLine + "\n";
+						}
+						newTex.setText(setts);
+					}
+					 catch (FileNotFoundException e1) {
+						String message = "There was an error reading the settings file. Please make sure a settings file exists";
+						showMessage(message);	
+					
+					 } catch (IOException e1) {
+						 e1.printStackTrace();
+					 }
+					
+					
+					settingsConf.pack();
+					settingsConf.setVisible(true);
+				}
+				
+			}
+			
+		});
 		
-		
+		this.add(modifSett);
+
 		this.add(new JLabel());
 		this.add(new JLabel());
 
@@ -133,26 +237,40 @@ public class SettingsPane extends Pane {
 		newPanel2.add(this.followTheSun);
 		//newPanel.setPreferredSize(new Dimension(50,50));
 		//this.add(newPanel2);
-		this.add(new JLabel("<html>Make sure settings are correct now. Settings are not editable after loading presets.</html>"));
+		this.add(new JLabel("<html>Make sure settings are correct now. Settings are not editable after loading presets, or starting custom game.</html>"));
 
 
 		
 		
 		this.add(new JLabel());
-		this.add(new JLabel());
+	//	this.add(new JLabel());
 		JPanel newPanel3 = new JPanel();
-		newPanel3.setLayout(new GridLayout(3, 0));
-		newPanel3.add(new JLabel());
-		loadDefaultSites = new JButton("Choose Default Sites");
+//		newPanel3.setLayout(new GridLayout(3, 0));
+//		newPanel3.add(new JLabel());
+		loadDefaultSites = new JButton("Load Default Sites and Modules");
+		JButton selectSites = new JButton("Choose Custom Sites and Modules");
+		selectSites.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parentComp.pickSites();
+				
+			}
+			
+		});
 		loadDefaultSites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadDefaultSitesP = new ChooseDefaultPane();
 				loadDefaultSitesP.setVisible(true);
 			}
 		});
-		newPanel3.add(loadDefaultSites);
-		newPanel3.setOpaque(false);
-		this.add(newPanel3);
+//		newPanel3.add(loadDefaultSites);
+//		newPanel3.add(selectSites);
+//		newPanel3.setOpaque(false);
+		//this.add(newPanel3);
+		this.add(loadDefaultSites);
+		this.add(new JLabel());
+		//this.add(new JLabel());
+		this.add(selectSites);
 		this.startListening();
 		this.viewScreen = new SettingsScreen(this);
 		((SettingsScreen)this.viewScreen).readSettings();

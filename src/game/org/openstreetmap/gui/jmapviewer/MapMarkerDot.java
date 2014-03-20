@@ -16,7 +16,7 @@ import game.org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  *
  */
 public class MapMarkerDot extends MapMarkerCircle {
-    public enum Status { BEHIND, ONTIME, AHEAD };
+    public enum Status { BEHIND, ONTIME, AHEAD, FAILED };
 
     public Status status = Status.ONTIME;
 
@@ -81,7 +81,7 @@ public class MapMarkerDot extends MapMarkerCircle {
     }
     
     public void setBehind() {
-        this.getStyle().setBackColor(Color.RED);
+        this.getStyle().setBackColor(Color.YELLOW);
         this.status = Status.BEHIND;
     }
     
@@ -93,5 +93,9 @@ public class MapMarkerDot extends MapMarkerCircle {
     public void setAhead() {
         this.getStyle().setBackColor(new Color(0x00FFAA));
         this.status = Status.AHEAD;
+    }
+    public void setFailed() {
+        this.getStyle().setBackColor(Color.RED);
+        this.status = Status.FAILED;
     }
 }

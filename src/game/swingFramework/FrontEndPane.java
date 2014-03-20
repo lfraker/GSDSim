@@ -10,9 +10,12 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 
@@ -53,9 +56,11 @@ public class FrontEndPane {
 	Difficulty difficulty;
 	long dayTime;
 	boolean canPause = false;
+	boolean canStartSim = false;
 	boolean paused = false;
 	public static JMapViewer siteStatus;
 	private VectorI windSize;
+	private Map<String,String> globalParams = new HashMap<>();
 
 	public static ProcessSimulator processSimulator = new ProcessSimulator();
 	//public static SiteModuleController modSiteController = new SiteModuleController(processSimulator);
@@ -87,7 +92,7 @@ public class FrontEndPane {
 		this.frames.add("Sites", this.siteStatus);
 		this.settings.setupSwingPane();
 
-		//this.frames.add("Modules", this.modules);
+		this.frames.add("Modules", this.modules);
 
 		this.modules.setupSwingPane();
 		this.getWindow().add(this.frames);
@@ -104,7 +109,7 @@ public class FrontEndPane {
 		this.getWindow().setVisible(true);
 		
 		disableSites();
-		//disableModules();
+		disableModules();
 		doStart();
 	}
 	
@@ -121,12 +126,12 @@ public class FrontEndPane {
 		this.frames.setEnabledAt(tempInd, false);	
 	}
 	public void enableModules() {
-//		int tempInd = this.frames.indexOfTab("Modules");
-//		this.frames.setEnabledAt(tempInd, true);	
+		int tempInd = this.frames.indexOfTab("Modules");
+		this.frames.setEnabledAt(tempInd, true);	
 	}
 	public void disableModules() {
-//		int tempInd = this.frames.indexOfTab("Modules");
-//		this.frames.setEnabledAt(tempInd, false);	
+		int tempInd = this.frames.indexOfTab("Modules");
+		this.frames.setEnabledAt(tempInd, false);	
 	}
 	public void enableSites() {
 		int tempInd = this.frames.indexOfTab("Sites");
@@ -243,6 +248,14 @@ public class FrontEndPane {
 	public boolean isPaused() {
 		return this.paused;
 	}
+	
+	public void updateGlobalParam(String param, String val) {
+		this.globalParams.put(param, val);
+	}
+	
+	public String getGlobalParam(String param) {
+		return this.globalParams.get(param);
+	}
 
 	public void setDifficulty(Difficulty diff) {
 		switch (diff) {
@@ -337,6 +350,35 @@ public class FrontEndPane {
 	
 	public boolean isSimLoaded() {
 		return this.loadedSim;
+	}
+	
+	public void pickSites() {
+		int tempInd = this.frames.indexOfTab("Sites");
+		this.frames.setSelectedIndex(tempInd);
+		this.disableSettings();
+		this.enableModules();
+		this.enableSites();
+		this.canStartSim = true;
+	}
+
+	public void startCustomSim() {
+		// TODO Auto-generated method stub
+		if (this.processSimulator.GetSites().size() > 0) {
+			for (Site s : this.processSimulator.GetSites()) {
+				if (s.getModules().size() > 0) {
+					this.canStartSim = false;
+					this.timeStart = true;
+					return;
+				}
+			}
+		}
+		JOptionPane.showMessageDialog(this.window, "Pick at least one site and at least one module to start");
+
+		
+	}
+
+	public boolean canStartSim() {
+		return this.canStartSim;
 	}
 	
 }

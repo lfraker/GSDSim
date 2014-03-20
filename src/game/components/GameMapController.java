@@ -34,16 +34,18 @@ public class GameMapController extends JMapController implements MouseListener, 
 MouseWheelListener {
 
 	private Button mapPause;
+	private Button startSim;
     private static final int MOUSE_BUTTONS_MASK = MouseEvent.BUTTON3_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK
     | MouseEvent.BUTTON2_DOWN_MASK;
     
     FrontEndPane parentComp;
 
     private static final int MAC_MOUSE_BUTTON3_MASK = MouseEvent.CTRL_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK;
-    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause) {
+    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause, Button sSim) {
         super(map);
         this.parentComp = fP;
         this.mapPause = pause;
+        this.startSim = sSim;
     }
 
     private Point lastDragPoint;
@@ -88,13 +90,36 @@ MouseWheelListener {
 
         if (this.mapPause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
     		this.parentComp.pauseUnpause();
+    		return;
+    		
+    	}
+        if (this.startSim.clickedInside(e.getPoint()) && this.parentComp.canStartSim()) {
+    		this.parentComp.startCustomSim();
+    		return;
     		
     	}
 //    	else if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
 //            map.zoomIn(e.getPoint());
 //        }
+        List<MapMarker> mDots = this.parentComp.getMapViewer().getMapMarkerList();
+
+    	for ( Site site : this.parentComp.processSimulator.GetSites()) {
+    		MapMarkerDot mDot = site.getMarker();
+    		Coordinate c = mDot.getCoordinate();
+    		int xT = OsmMercator.LonToX(c.getLon(), this.parentComp.getZoom());
+            int yT = OsmMercator.LatToY(c.getLat(), this.parentComp.getZoom());
+
+            xT -= center.x - (this.parentComp.getMapWidth() / 2);
+            yT -= center.y - (this.parentComp.getMapHeight() / 2);
+
+            if ((Math.abs(e.getX() - xT) <= 7) && (Math.abs(e.getY() - yT) <= 7)) {
+    			JFrame f = new SiteInfoPane(mDot.getName() + " Site Info");
+    			return;
+    		}
+    		
+    	}
         
-        else if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1 && !this.parentComp.isSimLoaded()) {
+        if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1 && !this.parentComp.isSimLoaded()) {
         	//Use JDialog?
         	if (this.optionPane != null) {
         		this.optionPane.setVisible(false);
@@ -140,22 +165,7 @@ MouseWheelListener {
 
 
         }
-    	List<MapMarker> mDots = this.parentComp.getMapViewer().getMapMarkerList();
-
-    	for ( Site site : this.parentComp.processSimulator.GetSites()) {
-    		MapMarkerDot mDot = site.getMarker();
-    		Coordinate c = mDot.getCoordinate();
-    		int xT = OsmMercator.LonToX(c.getLon(), this.parentComp.getZoom());
-            int yT = OsmMercator.LatToY(c.getLat(), this.parentComp.getZoom());
-
-            xT -= center.x - (this.parentComp.getMapWidth() / 2);
-            yT -= center.y - (this.parentComp.getMapHeight() / 2);
-
-            if ((Math.abs(e.getX() - xT) <= 7) && (Math.abs(e.getY() - yT) <= 7)) {
-    			JFrame f = new SiteInfoPane(mDot.getName() + " Site Info");
-    		}
-    		
-    	}
+    	
     }
 
     public void mousePressed(MouseEvent e) {

@@ -48,20 +48,20 @@ public class SetModulesScreen extends Screen {
 
 	@Override
 	public void onDraw(Graphics2D g) {
-		List<Site> temp = ((SetModulesPane)this.parentPane).getSiteList();
-//		this.triggerDayEnd.onDraw(g);
-//		this.addModule.onDraw(g);
-		int height = this.parentPane.getHeight();
-		Font newF = new Font("serif", Font.BOLD, (height/30));
-		g.setFont(newF);
-		int y = (2 *(height/15));
-		//System.out.println(temp.size());
-		for (Site s : temp) {
-			int width = g.getFontMetrics().stringWidth(s.toString());
-			int x = ((this.parentPane.getWidth()/2) - (width/2));
-			g.drawString(s.toString(), x, y);
-			y += (height/30);
-		}
+//		List<Site> temp = ((SetModulesPane)this.parentPane).getSiteList();
+////		this.triggerDayEnd.onDraw(g);
+////		this.addModule.onDraw(g);
+//		int height = this.parentPane.getHeight();
+//		Font newF = new Font("serif", Font.BOLD, (height/30));
+//		g.setFont(newF);
+//		int y = (2 *(height/15));
+//		//System.out.println(temp.size());
+//		for (Site s : temp) {
+//			int width = g.getFontMetrics().stringWidth(s.toString());
+//			int x = ((this.parentPane.getWidth()/2) - (width/2));
+//			g.drawString(s.toString(), x, y);
+//			y += (height/30);
+//		}
 
 	}
 

@@ -49,6 +49,7 @@ public class SetModulesPane extends Pane {
 	
 	public SetModulesPane(FrontEndPane fP) {
 		super(fP);
+		this.dropDown.addItem(new Site("Select a Site", 0, null, 0));
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -59,6 +60,7 @@ public class SetModulesPane extends Pane {
 
 	public void clearSites() {
 		this.dropDown.removeAllItems();
+		this.dropDown.addItem(new Site("Select a Site", 0, null, 0));
 	}
 	
 	public List<Site> getSiteList() {
@@ -100,43 +102,49 @@ public class SetModulesPane extends Pane {
 		temp3.setOpaque(false);
 		temp4.setOpaque(false);
 		temp5.setOpaque(false);
-		JButton addSite = new JButton("Add Site To List");
-		addSite.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Site addTo = dropDown.getItemAt(dropDown.getSelectedIndex());
-				if (!modSites.contains(addTo)) {
-					modSites.add(addTo);
-				}
-			}
-			
-			
-		});
-		
-		JButton clearSites = new JButton("Clear Sites");
-		clearSites.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				modSites.clear();
-			}
-			
-			
-		});
+//		JButton addSite = new JButton("Add Site To List");
+//		addSite.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Site addTo = dropDown.getItemAt(dropDown.getSelectedIndex());
+//				if (!modSites.contains(addTo) && dropDown.getSelectedIndex() != 0) {
+//					modSites.add(addTo);
+//				}
+//			}
+//			
+//			
+//		});
+//		
+//		JButton clearSites = new JButton("Clear Sites");
+//		clearSites.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				modSites.clear();
+//			}
+//			
+//			
+//		});
 		temp3.setLayout(new GridLayout(4,0));
 		temp3.add(new JLabel());
 		temp3.add(new JLabel());
-		temp3.add(addSite);
+		//temp3.add(addSite);
 		
 		JButton submitModule = new JButton("Add Module");
 		submitModule.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				Site addTo = dropDown.getItemAt(dropDown.getSelectedIndex());
 				String name = moduleName.getText();
 				long hoursEst = 25;
+				if (name.length() == 0) {
+					showMessage("Please enter a module name. Default value of 'core' set.");
+					moduleName.setText("core");
+					return;
+				}
 				try {
 					hoursEst = Long.parseLong(hoursEstimate.getText());
 					
@@ -145,16 +153,20 @@ public class SetModulesPane extends Pane {
 					hoursEstimate.setText(hoursEst + "");
 					return;
 				}
+				
+				if (dropDown.getSelectedIndex() == 0) {
+					showMessage("Please Choose a Site");
+					return;
+				}
 				if (!modSites.contains(addTo)) {
 					modSites.add(addTo);
 				}
 				Module newMod = new Module(hoursEst, name, modSites);
-				for (Site s: modSites) {
-					s.addModule(newMod);
-				}
+				addTo.addModule(newMod);
+				showMessage("Module: " + name + " has been added to Site: " + addTo.getName());
 				moduleName.setText("");
 				hoursEstimate.setText("");
-				modSites.clear();
+				
 				
 			}
 			
@@ -168,41 +180,45 @@ public class SetModulesPane extends Pane {
 		temp5.setLayout(new GridLayout(4,0));
 		temp5.add(new JLabel());
 		temp5.add(new JLabel());
-		temp5.add(clearSites);
-		JButton simEndDay = new JButton("Test End of Day Sim");
-		simEndDay.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				parentComp.testDayEnd();
-			}
-			
-		});
+		//temp5.add(clearSites);
+//		JButton simEndDay = new JButton("Test End of Day Sim");
+//		simEndDay.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				parentComp.testDayEnd();
+//			}
+//			
+//		});
 		temp6.setLayout(new GridLayout(4,0));
 		temp6.add(new JLabel());
 		temp6.add(new JLabel());
-		temp6.add(simEndDay);
+//		temp6.add(simEndDay);
+		temp6.setOpaque(false);
 		
 		temp7.setLayout(new GridLayout(4,0));
 		temp7.add(new JLabel());
 		temp7.add(new JLabel());
 		temp7.add(dropDown);
+		temp7.setOpaque(false);
 
 		temp8.setLayout(new GridLayout(4,0));
 		temp8.add(new JLabel());
 		temp8.add(new JLabel());
 		temp8.add(new JLabel("Select Site:"));
+		temp8.setOpaque(false);
 		
 		temp9.setLayout(new GridLayout(4,0));
 		temp9.add(new JLabel());
 		temp9.add(new JLabel());
 		temp9.add(new JLabel("Module Name:"));
-		
+		temp9.setOpaque(false);
 		temp10.setLayout(new GridLayout(4,0));
 		temp10.add(new JLabel());
 		temp10.add(new JLabel());
 		temp10.add(new JLabel("Hours Estimate:"));
+		temp10.setOpaque(false);
 
 
 
@@ -212,11 +228,11 @@ public class SetModulesPane extends Pane {
 		this.add(temp7);
 		this.add(new JLabel());
 		this.add(new JLabel());
-		this.add(temp5);	
-		this.add(new JLabel());	
-		this.add(temp3);
-		this.add(new JLabel());	
-		this.add(new JLabel());
+		//this.add(temp5);	
+		//this.add(new JLabel());	
+		//this.add(temp3);
+		//this.add(new JLabel());	
+		//this.add(new JLabel());
 		this.add(temp9);
 		this.add(new JLabel());
 		this.add(temp1);
@@ -227,13 +243,14 @@ public class SetModulesPane extends Pane {
 		this.add(temp2);
 		this.add(new JLabel());
 		this.add(new JLabel());
+		this.add(new JLabel());
+
 		this.add(temp4);
 		this.add(new JLabel());
 		this.add(temp6);
 	
 	
 		this.startListening();
-
 		this.viewScreen = new SetModulesScreen(this);
 		
 	}

@@ -72,6 +72,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
     protected boolean mapRectanglesVisible;
     protected boolean mapPolygonsVisible;
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
+	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
 
 
     protected boolean tileGridVisible;
@@ -117,7 +118,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
      */
     public JMapViewer(FrontEndPane fP) {
         this(new MemoryTileCache(), 8);
-        new GameMapController(this, fP, pause);
+        new GameMapController(this, fP, this.pause, this.startSim);
         this.parentComp = fP;
     }
 
@@ -671,7 +672,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 
         long secondsPerDay = (TimeUnit.SECONDS.convert(parentComp.GetDayLength(), TimeUnit.NANOSECONDS));
 
-		float xT = (this.windSize.x * (6.5f/8.0f)) - 40;
+		float xT = (this.windSize.x * (6.5f/8.0f));
 		String toWrite1 = "Time in Game: " + this.getDayTimer();
 		String toWrite2 = "Day " + this.getDays();
 		String toWrite3	= String.format("Simulation of day takes %02d:%02d", (int)(secondsPerDay / 60), (int)(secondsPerDay % 60));
@@ -684,6 +685,8 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 			case HARD:	toWrite4 = "Difficulty: HARD (pause disabled)";
 				break;
 		}
+		g2.drawString("Right-click and drag to pan.", 0.0f, 200.0f);
+		g2.drawString("Scroll or use zoom bar to zoom.", 0.0f, 215.0f);
 		g2.drawString(toWrite1, xT, 30.0f);
 		g2.drawString(toWrite2, xT, 45.0f);
 		g2.drawString(toWrite3, xT, 60.0f);
@@ -697,6 +700,10 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 				this.pause.release();
 			}
 			this.pause.onDraw(g2);
+		}
+		if (this.parentComp.canStartSim()) {
+			this.startSim.onResize(new VectorI(((int)xT), (90 + (this.windSize.y / 14))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.startSim.onDraw(g2);
 		}
 		
     }

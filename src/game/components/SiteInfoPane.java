@@ -38,6 +38,9 @@ public class SiteInfoPane extends JFrame {
 					modules.add(new JLabel("Sections completed: " + Integer.toString(m.sectionsCompleted())));
 				}
 			}
+			if (s.modules.size() == 0) {
+				modules.add(new JLabel("No modules have been added to this site yet."));
+			}
 		}
 		this.add(modules);		
 		this.pack();

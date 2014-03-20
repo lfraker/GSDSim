@@ -51,6 +51,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	JTabbedPane frameWork;
 	private static final int MILLIS_TO_WAIT_FOR_REPEAT = 5;
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
+	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
 
 	
 	
@@ -99,6 +100,13 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		this.parentComp.setDifficulty(diff);
 	}
 	
+	public void updateGlobalParam(String param, String val) {
+		this.parentComp.updateGlobalParam(param, val);
+	}
+	
+	public String getGlobalParam(String param) {
+		return this.parentComp.getGlobalParam(param);
+	}
 	
 	public float getTime () {
 		return this.parentComp.getTime();
@@ -165,7 +173,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		this.viewScreen.onDraw(g);
 		g.setFont(new Font("serif", Font.BOLD, (this.windSize.x / 95)));
 		g.setColor(Color.BLACK);
-		float x = (this.windSize.x * (6.5f/8.0f)) - 40;
+		float x = (this.windSize.x * (6.5f/8.0f)) ;
 
 		long secondsPerDay = (TimeUnit.SECONDS.convert(this.getTotalTime(), TimeUnit.NANOSECONDS));
 		
@@ -195,17 +203,28 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 			}
 			this.pause.onDraw(g);
 		}
+		if (this.parentComp.canStartSim()) {
+			this.startSim.onResize(new VectorI(((int)x), (90 + (this.windSize.y / 14))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.startSim.onDraw(g);
+		}
 		
 
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+
 		if (this.pause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
     		this.parentComp.pauseUnpause();
     		
     	}
+		if (this.startSim.clickedInside(e.getPoint()) && this.parentComp.canStartSim()) {
+    		this.parentComp.startCustomSim();
+    		
+    	}
+		
 	}
+
 	
 	@Override
 	public void componentResized(ComponentEvent e) {
