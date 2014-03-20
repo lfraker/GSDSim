@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import game.org.openstreetmap.gui.jmapviewer.Coordinate;
 import game.org.openstreetmap.gui.jmapviewer.JMapController;
@@ -113,6 +114,9 @@ MouseWheelListener {
             yT -= center.y - (this.parentComp.getMapHeight() / 2);
 
             if ((Math.abs(e.getX() - xT) <= 7) && (Math.abs(e.getY() - yT) <= 7)) {
+            	if (!this.parentComp.isSimLoaded()) {
+            		return;
+            	}
     			JFrame f = new SiteInfoPane(mDot.getName() + " Site Info");
     			return;
     		}
@@ -153,14 +157,18 @@ MouseWheelListener {
            String name = this.optionPane.getSiteName();
            int nEmp = this.optionPane.getNumberEmployees();
            int tZ = this.optionPane.getTimeZone();
+           int cD = this.optionPane.getCostDev();
+           int eD = this.optionPane.getEffortDev();
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
             	MapMarkerDot mDot = new MapMarkerDot(null, name, y, x);
-            	Site toAdd = new Site(name, nEmp, mDot, tZ);
+            	Site toAdd = new Site(name, nEmp, mDot, tZ, cD, eD);
 //            	System.out.println(x +" X : Y " + y);
             	this.parentComp.addSiteToCombo(toAdd);
             	this.parentComp.processSimulator.AddSite(toAdd);
             	this.parentComp.getMapViewer().addMapMarker(mDot);
             }
+            this.optionPane.dispose();
+            this.optionPane = null;
            // System.exit(0);
 
 

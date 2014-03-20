@@ -131,7 +131,7 @@ public class SetModulesPane extends Pane {
 		temp3.add(new JLabel());
 		//temp3.add(addSite);
 		
-		JButton submitModule = new JButton("Add Module");
+		JButton submitModule = new JButton("Add Module To Site");
 		submitModule.addActionListener(new ActionListener(){
 
 			@Override
@@ -163,6 +163,7 @@ public class SetModulesPane extends Pane {
 				}
 				Module newMod = new Module(hoursEst, name, modSites);
 				addTo.addModule(newMod);
+				dropDown.setSelectedIndex(0);
 				showMessage("Module: " + name + " has been added to Site: " + addTo.getName());
 				moduleName.setText("");
 				hoursEstimate.setText("");

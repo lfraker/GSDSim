@@ -94,6 +94,9 @@ public class SettingsPane extends Pane {
 		this.add(new JLabel());
 		this.add(new JLabel());
 		this.add(new JLabel());
+		this.add(new JLabel("<html>To save difficulty and time per day values permanently in Settings file, you must edit them via the text editor, accessible by the button below.</html>"));
+		this.add(new JLabel());
+		this.add(new JLabel());
 		this.laborCost = new JTextArea();
 		//this.laborCost.setEnabled(false);
 //		this.laborCost.addMouseListener(new MouseAdapter()  
@@ -138,7 +141,7 @@ public class SettingsPane extends Pane {
 					settingsConf = null;
 				}
 				if (settingsConf == null) {
-					settingsConf = new JFrame();
+					settingsConf = new JFrame("Settings File");
 					settingsConf.setMinimumSize(new Dimension(300, 300));
 					settingsConf.setPreferredSize(new Dimension(800, 500));
 					settingsConf.setLayout(new BorderLayout());

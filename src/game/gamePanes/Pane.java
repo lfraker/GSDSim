@@ -193,6 +193,8 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		g.drawString(toWrite2, x, 45.0f);
 		g.drawString(toWrite3, x, 60.0f);
 		g.drawString(toWrite4, x, 75.0f);
+		
+
 		if (this.parentComp.canPause()) {
 			this.pause.onResize(new VectorI(((int)x), 90), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			if (this.parentComp.isPaused()) {
@@ -206,6 +208,8 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		if (this.parentComp.canStartSim()) {
 			this.startSim.onResize(new VectorI(((int)x), (90 + (this.windSize.y / 14))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			this.startSim.onDraw(g);
+			g.drawString("Sites and modules cannot be", x, (90 + (this.windSize.y / 6)));
+			g.drawString("added after sim is started.", x, (105 + (this.windSize.y / 6)));
 		}
 		
 

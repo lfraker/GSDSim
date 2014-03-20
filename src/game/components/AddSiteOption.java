@@ -19,8 +19,12 @@ public class AddSiteOption extends JDialog {
 	private JTextField siteN;
 	private String siteName;
 	private JTextField numEmp;
+	private JTextField effDev;
+	private JTextField costDev;
 	private int timeZoneDiff;
 	private JTextField timeZone;
+	private int effD;
+	private int costD;
 	private boolean cancelled = true;
 	
 	
@@ -46,6 +50,8 @@ public class AddSiteOption extends JDialog {
 		this.siteN = new JTextField();
 		this.numEmp = new JTextField();
 		this.timeZone = new JTextField();
+		this.effDev = new JTextField();
+		this.costDev = new JTextField();
 		inputPanel.add(new JLabel("Site Name:"));
 		inputPanel.add(this.siteN);
 		this.siteN.setText("Site 1");
@@ -53,6 +59,10 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(this.numEmp);
 		inputPanel.add(new JLabel("Time Zone Hours Difference:"));
 		inputPanel.add(this.timeZone);
+		inputPanel.add(new JLabel("Cost of Developer-Day:"));
+		inputPanel.add(this.costDev);
+		inputPanel.add(new JLabel("Effort Per Developer-Day:"));
+		inputPanel.add(this.effDev);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
 
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
@@ -71,12 +81,18 @@ public class AddSiteOption extends JDialog {
 			}
 			this.numEmployees = Integer.parseInt(this.numEmp.getText());
 			this.timeZoneDiff = Integer.parseInt(this.timeZone.getText());
+			this.costD = Integer.parseInt(this.costDev.getText());
+			this.effD = Integer.parseInt(this.effDev.getText());
 		}
 		catch (NumberFormatException e) {
 			this.numEmployees = 5;
 			this.timeZoneDiff = 0;
+			this.costD = 4;
+			this.effD = 10;
 			this.numEmp.setText(this.numEmployees+"");
 			this.timeZone.setText(this.timeZoneDiff+"");
+			this.effDev.setText(this.effD+"");
+			this.costDev.setText(this.costD+"");
 			return;
 		}
 		this.cancelled = false;
@@ -93,6 +109,14 @@ public class AddSiteOption extends JDialog {
 	
 	public boolean getCancelled() {
 		return this.cancelled;
+	}
+	
+	public int getCostDev() {
+		return this.costD;
+	}
+	
+	public int getEffortDev() {
+		return this.effD;
 	}
 	
 	public int getTimeZone() {

@@ -13,6 +13,8 @@ public class Site {
 	int timezone;
 	String siteName;
 	MapMarkerDot mapMarker;
+	int costDeveloperDay = 4;
+	int effortDeveloperDay = 10;
 
 	ArrayList<Module> modules = new ArrayList<>();
 	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone) {
@@ -21,6 +23,16 @@ public class Site {
 		this.noOfWorkers = noOfWorkers;
 		this.mapMarker = mDot;
 		this.timezone = tZone;
+	}
+	
+	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone, int cD, int eD) {
+		//this.modules = modules;
+		this.siteName = name;
+		this.noOfWorkers = noOfWorkers;
+		this.mapMarker = mDot;
+		this.timezone = tZone;
+		this.costDeveloperDay = cD;
+		this.effortDeveloperDay = eD;
 	}
 
 	public String getName() {

@@ -43,8 +43,8 @@ public class FrontEndPane {
 	
 	private JFrame window;
 	private JTabbedPane frames;
-	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(960, 540);
-	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(960, 540);
+	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(1100, 700);
+	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(1100, 700);
 	private static final int DEFAULT_DELAY_MILLIS = 1000 / 15;
 	private long lastTickNanos;
 	private Timer timer;
@@ -368,6 +368,11 @@ public class FrontEndPane {
 				if (s.getModules().size() > 0) {
 					this.canStartSim = false;
 					this.timeStart = true;
+					this.loadedSim = true;
+					int tempInd = this.frames.indexOfTab("Sites");
+					this.frames.setSelectedIndex(tempInd);
+					this.disableModules();
+		    		JOptionPane.showMessageDialog(this.window, "Sim is started.");
 					return;
 				}
 			}

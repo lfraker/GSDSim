@@ -704,6 +704,8 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		if (this.parentComp.canStartSim()) {
 			this.startSim.onResize(new VectorI(((int)xT), (90 + (this.windSize.y / 14))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			this.startSim.onDraw(g2);
+			g2.drawString("Sites and modules cannot be", xT, (90 + (this.windSize.y / 6)));
+			g2.drawString("added after sim is started.", xT, (105 + (this.windSize.y / 6)));
 		}
 		
     }
