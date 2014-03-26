@@ -11,37 +11,15 @@ import com.google.gson.*;
 
 
 public class ProcessSimulator {
-//	private List<ModuleWrapper> allModules = new ArrayList<>();
 
 	private List<Site> allSites = new ArrayList<Site>();
-	public long currentTime = 0; //Check out timing
+	public long currentTime = 0;
 	public long dayLength = 24;
 
-//	public void addModule(Module m, String moduleSiteName) {
-//		this.allModules.add(new ModuleWrapper(m, moduleSiteName));
-//		Collections.sort(this.allModules, new ModuleComparator());
-//	}
-	
-//	this is the simulator that runs at the end of the day, where random occurences are calculated
+	//This is the simulator that runs at the end of the day, where random occurences are calculated
 	public void endOfDaySim(List<ModuleWrapper> mods) 
 	{
 		System.out.println("SIMULATING END OF DAY");
-		//ModuleWrapper m = mods.get(0);
-		/*
-		for (int i = 0; i < 7; i++) 
-		{	
-			System.out.println(m.mod.stepEstimates[i]);
-		}*/
-		/*
-		for (ModuleWrapper cModule: mods)
-		{
-			for (Site cSite: cModule.mod.sites)
-			{
-				cSite.doWork();
-			}
-		}*/
-
-		
 	}
 
 	public void UpdateTime(long newTime)
@@ -77,10 +55,7 @@ public class ProcessSimulator {
 		* 	Run once an hour
 		*/
 
-
-		this.SaveState();
-
-
+		this.SaveState("tommy.json"); //Testing the save function
 
 		//Put these somewhere suitable
 	  	int startOfWorkingDay = 9; // 9am
@@ -88,37 +63,71 @@ public class ProcessSimulator {
 
 	  	ArrayList<Module> ftsModulesToMove = new ArrayList<Module>();
 
-	  	//Used to determine the most suitable site to move a fts module to.
+	  	//Used to determine the most suitable site to move a 'Follow The Sun' module to.
 	  	int ftsMaxOpenHours = 0;
+	  	int ftsMinHoursTilOpen = 24;
 	  	Site ftsSiteToMoveTo = null;
 
 	  	System.out.println("Performing hourly update.");
 		
-		for(Site currentSite : this.allSites)
+		for(int i = 0; i < this.allSites.size(); i++)
 		{
+			Site currentSite = this.allSites.get(i);
 			boolean behind = false;
 
 			long hour = (long)(this.dayLength / 24);
-			long localTime = ((this.currentTime / hour) % 24) + currentSite.getTimezone();//;
-			//System.out.println("LT: " + localTime + ".");
+			long localTime = ( ( (this.currentTime / hour) + currentSite.getTimezone()) % 24);
 
-			if((endOfWorkingDay - localTime) > ftsMaxOpenHours)
+			//Print the local time
+			//System.out.println("LT at " + currentSite.getName() + ": " + localTime);
+
+			//Determine best site to move a follow the sun module to.
+			if(localTime >= startOfWorkingDay && localTime < endOfWorkingDay)
 			{
-				ftsMaxOpenHours = (int)(endOfWorkingDay - localTime);
-				ftsSiteToMoveTo = currentSite;
+				//If this site is open
+				if((endOfWorkingDay - localTime) > 1 && (endOfWorkingDay - localTime) > ftsMaxOpenHours)
+				{
+					ftsMaxOpenHours = (int)(endOfWorkingDay - localTime);
+					ftsSiteToMoveTo = this.allSites.get(i);
+				}
 			}
+			else if(ftsMaxOpenHours == 0)
+			{
+				int hoursTilOpen;
 
-			System.out.println(currentSite.getMarker().toString());
+				if(localTime >= endOfWorkingDay)
+				{
+					//If the site is closed for the day..
+					hoursTilOpen = (int)(startOfWorkingDay + (24-localTime));
+				}
+				else
+				{
+					//If the site is not yet open..
+					hoursTilOpen = (int)(startOfWorkingDay - localTime);
+				}
 
-	  		//Check site is currently active - not all sites active at all times - timezones
+				if(hoursTilOpen < ftsMinHoursTilOpen)
+				{
+					ftsSiteToMoveTo = this.allSites.get(i);
+					ftsMinHoursTilOpen = hoursTilOpen;
+				}
+			}
+			
+
+			//Check site is currently active - not all sites active at all times due to timezones
 	  		if(localTime >= startOfWorkingDay && localTime < endOfWorkingDay)
 	  		{
-	
-				System.out.println("Performing work at site: " + currentSite.getName() + ".");
-
 				ArrayList<Module> siteModules = currentSite.getModules();
-	  			for(Module currentMod : siteModules)
+
+				if(siteModules.size() > 0)
 				{
+					System.out.println("Performing work at site: " + currentSite.getName() + ".");
+				}
+
+	  			for(int k = 0; k < siteModules.size(); k++)
+				{
+					Module currentMod = siteModules.get(k);
+
 					if(currentMod.isComplete())
 					{
 						//Skip complete modules or do something with them here..
@@ -163,20 +172,30 @@ public class ProcessSimulator {
 	  		}
 	  		else
 	  		{
-	  			System.out.println("Site: " + currentSite.getName() + " currently closed.");
+	  			//Site is closed
+	  			//System.out.println("Site: " + currentSite.getName() + " currently closed.");
 	  		}
 	  	}
 
-	  	for(Module modToBeMoved : ftsModulesToMove)
+	  	//Check if there are any fts modules to be handed over..
+	  	for(int i = 0; i < ftsModulesToMove.size(); i++)
 	  	{
-	  		ftsModulesToMove.remove(modToBeMoved);
-	  		ftsSiteToMoveTo.modules.add(modToBeMoved);
-	  		System.out.println("Handed over module '" + modToBeMoved.getName()  + "' to site '" + ftsSiteToMoveTo.getName() + "'.");
+	  		Module modToBeMoved = ftsModulesToMove.get(i);
+
+	  		if(ftsSiteToMoveTo == null)
+	  		{
+	  			//System.out.println("Couldn't find a suitable place for fts module.");
+	  		}
+	  		else
+	  		{
+	  			ftsModulesToMove.remove(modToBeMoved);
+	  			ftsSiteToMoveTo.addModule(modToBeMoved);
+	  			System.out.println("Handed over module '" + modToBeMoved.getName()  + "' to site '" + ftsSiteToMoveTo.getName() + "'.");
+	  		}
+	  		
 	  	}
 
-
 	  	NominalScheduleCalc();
-
   	}
 
   	public void RemoveSites()
@@ -195,19 +214,12 @@ public class ProcessSimulator {
 	}
 		
 
-	public void SaveState()
+	public void SaveState(String savefile)
 	{
 		//Creates a save file
 
-		/*
-		Gson gson = new Gson();
-		String json = gson.toJson(this.allSites);
-		System.out.println(json);
-		*/
-
 		GameState gs = new GameState(allSites);
-		gs.SaveState("tommy.json");
-
+		gs.SaveState(savefile);
 	}
 
 	public void LoadState(String filename)

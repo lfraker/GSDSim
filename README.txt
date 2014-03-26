@@ -59,7 +59,10 @@ T:
 Completely changed the way scenarios are loaded and saved. Entire game state can be saved at any time and reloaded later. 
 Gametime is not yet included.
 Scenarios are just saved program states. Any saved game placed in the Scenarios folder can be loaded as a scenario.
+The functionality needs to be added to the interface as of yet.
 
+Completed follow the sun code, with the first predefined scenario testing this. Load it as usual and wait for "Performing hourly update."
+to be printed around 9 times (The module begins at Dublin at 9.00 whereas the game clock starts at 0.00).
 
 
 

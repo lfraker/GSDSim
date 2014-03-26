@@ -1,6 +1,6 @@
 [
   {
-    "noOfWorkers": 10,
+    "noOfWorkers": 5,
     "timezone": 0,
     "siteName": "Dublin",
     "mapMarker": {
@@ -28,30 +28,67 @@
       },
       "writeClick": false
     },
-    "costDeveloperDay": 1,
-    "effortDeveloperDay": 1,
+    "costDeveloperDay": 4,
+    "effortDeveloperDay": 10,
     "coordinates": [
-      52.48278022207823,
-      -9.140625
+      52.696361078274485,
+      -7.03125
+    ],
+    "modules": []
+  },
+  {
+    "noOfWorkers": 5,
+    "timezone": 14,
+    "siteName": "China",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "China",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Dialog",
+          "style": 1,
+          "size": 12,
+          "pointSize": 12.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 4,
+    "effortDeveloperDay": 10,
+    "coordinates": [
+      27.994401411046145,
+      118.828125
     ],
     "modules": [
       {
-        "modName": "Game",
+        "modName": "Sunfollower",
         "numberGen": {
           "seed": {
-            "value": 92108480438373
+            "value": 115124645515747
           },
           "nextNextGaussian": 0.0,
           "haveNextNextGaussian": false
         },
         "stepEstimates": [
           150.0,
-          169.5,
-          117.0,
-          177.0,
+          187.5,
+          87.0,
+          172.5,
+          150.0,
           171.0,
-          115.5,
-          165.0
+          126.0
         ],
         "origStepEstimates": [
           150.0,
@@ -63,7 +100,7 @@
           150.0
         ],
         "workDonePerSection": [
-          20.0,
+          43.25002,
           0.0,
           0.0,
           0.0,
@@ -71,14 +108,51 @@
           0.0,
           0.0
         ],
-        "devMethod": "AGILE",
+        "devMethod": "FOLLOWTHESUN",
         "numWorkers": 1,
         "performanceLevel": 1.0,
-        "totalEstimate": 1065.0,
+        "totalEstimate": 1044.0,
         "origEstimate": 1000,
         "currentStage": 0,
         "complete": false
       }
     ]
+  },
+  {
+    "noOfWorkers": 5,
+    "timezone": 7,
+    "siteName": "Mexico",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Mexico",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Dialog",
+          "style": 1,
+          "size": 12,
+          "pointSize": 12.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 4,
+    "effortDeveloperDay": 10,
+    "coordinates": [
+      21.616579336740607,
+      -99.84375
+    ],
+    "modules": []
   }
 ]

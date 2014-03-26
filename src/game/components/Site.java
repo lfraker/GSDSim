@@ -112,5 +112,10 @@ public class Site {
 		return this.noOfWorkers;
 	}
 
+	public void Handover(Module m, Site s)
+	{
+		this.modules.remove(m);
+		s.addModule(m);
+	}
 
 }
