@@ -24,8 +24,6 @@ import game.org.openstreetmap.gui.jmapviewer.Layer;
 import game.org.openstreetmap.gui.jmapviewer.LayerGroup;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
-import game.components.Scenarios;
-import game.components.ScenarioLoader;
 import game.components.Button;
 import game.components.Difficulty;
 import game.components.Module;
