@@ -162,6 +162,8 @@ MouseWheelListener {
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
             	MapMarkerDot mDot = new MapMarkerDot(null, name, y, x);
             	Site toAdd = new Site(name, nEmp, mDot, tZ, cD, eD);
+
+                toAdd.SetCoordinates(y,x);
 //            	System.out.println(x +" X : Y " + y);
             	this.parentComp.addSiteToCombo(toAdd);
             	this.parentComp.processSimulator.AddSite(toAdd);

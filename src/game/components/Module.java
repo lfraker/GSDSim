@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//this is the module class, it contains arrays of step estimates, a list of
-//all the sites working on the modules, it's current phase stage, etc.
-public class Module {
-	List <Site> sites = new ArrayList<Site>();
+//this is the module class, it contains arrays of step estimates,
+//it's current phase stage, etc.
+
+public class Module 
+{
 	String modName;
 	Random numberGen = new Random();
 	float [] stepEstimates = new float [7];
@@ -24,11 +25,10 @@ public class Module {
 	int currentStage;
 	boolean complete = false;
 	
-	public Module(long estimate, String name, List<Site> allSites) 
+	public Module(long estimate, String name) 
 	{
 		this.currentStage = 0;
 		this.origEstimate = estimate;
-		this.sites = allSites;
 		this.modName = name;
 		this.origStepEstimates[0] = (estimate * 0.15f);
 		this.origStepEstimates[1] = (estimate * 0.15f);
@@ -49,16 +49,8 @@ public class Module {
 		this.numWorkers = 1;
 	}
 	
-	public List<Site> getSites() {
-		return this.sites;
-	}
-	
 	public String getName() {
 		return this.modName;
-	}
-	
-	public void addSite(Site newSite) {
-		this.sites.add(newSite);
 	}
 	
 	public float addSub(int addOrSub, float val) {
@@ -259,9 +251,16 @@ public class Module {
 		return this.complete;
 	}
 	
-	public void setDevelopmentMethod(DevelopmentMethod dm) {
+	public void setDevelopmentMethod(DevelopmentMethod dm) 
+	{
 		//T - Sets development style for the module.. Used when computing work done
 		this.devMethod = dm;
+	}
+
+	public DevelopmentMethod getDevelopmentMethod() 
+	{
+		//T - Gets development style for the module..
+		return this.devMethod;
 	}
 
 	public float workRemaining() {
@@ -358,4 +357,5 @@ public class Module {
 		}
 		return true;
 	}
+
 }

@@ -18,12 +18,16 @@ public class Scenario {
     System.out.println("" + sites.length + " sites loaded");
   }
 
-  // Associates modules to their sites, and returns finished list of sites
-  public List<Site> process() {
-    HashMap<String,Site> sitesMap = new HashMap<>();
+  // Associates modules to their site, and returns finished list of sites
+  public List<Site> process() 
+  {
+   
+  	HashMap<String,Site> sitesMap = new HashMap<>();
     List<Module> rModules = new ArrayList<>();
-    for (SiteInfo si: sites) {
-      if (si.location.length != 2) {
+    for (SiteInfo si: sites) 
+    {
+      if (si.location.length != 2) 
+      {
         System.err.println("Invalid location for site " + si.name);
         continue;
       }
@@ -31,20 +35,25 @@ public class Scenario {
       Site s = new Site(si.name, Integer.parseInt(si.workers), pos, si.timezone);
       sitesMap.put(si.name, s);
     }
-		for (ModuleInfo mi: modules) {
-			List<Site> moduleSites = new ArrayList<>();
-			for (String site: mi.sites) {
-				Site s = sitesMap.get(site);
-				if (s != null) {
-					moduleSites.add(s);
-				}
+		
+	for (ModuleInfo mi: modules) 
+	{
+		List<Site> moduleSites = new ArrayList<>();
+		for (String site: mi.sites) 
+		{
+			Site s = sitesMap.get(site);
+			if (s != null) {
+				moduleSites.add(s);
 			}
-			Module m = new Module(mi.hours, mi.name, moduleSites);
-			for (Site site: moduleSites) {
-				site.addModule(m);
-			}
-			rModules.add(m);
 		}
+		/*
+		Module m = new Module(mi.hours, mi.name);
+		for (Site site: moduleSites) {
+			site.addModule(m);
+		}*/
+		//rModules.add(m);
+	}
+
     return new ArrayList(sitesMap.values());
   }
 	public class SiteInfo {

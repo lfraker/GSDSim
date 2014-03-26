@@ -15,8 +15,9 @@ public class Site {
 	MapMarkerDot mapMarker;
 	int costDeveloperDay = 4;
 	int effortDeveloperDay = 10;
+	double coordinates[] = new double[2];
 
-	ArrayList<Module> modules = new ArrayList<>();
+	public ArrayList<Module> modules = new ArrayList<Module>();
 	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone) {
 		//this.modules = modules;
 		this.siteName = name;
@@ -41,6 +42,11 @@ public class Site {
 	
 	public MapMarkerDot getMarker() {
 		return mapMarker;
+	}
+
+	public void setMarker(MapMarkerDot m)
+	{
+		this.mapMarker = m;
 	}
 	
 	public void addModule(Module m) {
@@ -88,6 +94,22 @@ public class Site {
 	@Override
 	public String toString() {
 		return this.siteName;
+	}
+
+	public void SetCoordinates(double lat, double lon)
+	{
+		coordinates[0] = lat;
+		coordinates[1] = lon;
+	}
+
+	public double[] GetCoordinates()
+	{
+		return coordinates;
+	}
+
+	public int GetNumberWorkers()
+	{
+		return this.noOfWorkers;
 	}
 
 

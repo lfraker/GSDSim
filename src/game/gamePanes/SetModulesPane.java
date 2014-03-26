@@ -161,14 +161,12 @@ public class SetModulesPane extends Pane {
 				if (!modSites.contains(addTo)) {
 					modSites.add(addTo);
 				}
-				Module newMod = new Module(hoursEst, name, modSites);
+				Module newMod = new Module(hoursEst, name);
 				addTo.addModule(newMod);
 				dropDown.setSelectedIndex(0);
 				showMessage("Module: " + name + " has been added to Site: " + addTo.getName());
 				moduleName.setText("");
 				hoursEstimate.setText("");
-				
-				
 			}
 			
 		});

@@ -21,7 +21,7 @@ import game.org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  */
 public class MapMarkerCircle extends MapObjectImpl implements MapMarker {
 
-    Coordinate coord;
+    public Coordinate coord;
     double radius;
     STYLE markerStyle;
 

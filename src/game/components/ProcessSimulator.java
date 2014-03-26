@@ -26,18 +26,21 @@ public class ProcessSimulator {
 	public void endOfDaySim(List<ModuleWrapper> mods) 
 	{
 		System.out.println("SIMULATING END OF DAY");
-		ModuleWrapper m = mods.get(0);
+		//ModuleWrapper m = mods.get(0);
+		/*
 		for (int i = 0; i < 7; i++) 
 		{	
 			System.out.println(m.mod.stepEstimates[i]);
-		}
+		}*/
+		/*
 		for (ModuleWrapper cModule: mods)
 		{
 			for (Site cSite: cModule.mod.sites)
 			{
 				cSite.doWork();
 			}
-		}
+		}*/
+
 		
 	}
 
@@ -74,24 +77,41 @@ public class ProcessSimulator {
 		* 	Run once an hour
 		*/
 
+
+		this.SaveState();
+
+
+
 		//Put these somewhere suitable
 	  	int startOfWorkingDay = 9; // 9am
 	  	int endOfWorkingDay = 18; //6pm
+
+	  	ArrayList<Module> ftsModulesToMove = new ArrayList<Module>();
+
+	  	//Used to determine the most suitable site to move a fts module to.
+	  	int ftsMaxOpenHours = 0;
+	  	Site ftsSiteToMoveTo = null;
 
 	  	System.out.println("Performing hourly update.");
 		
 		for(Site currentSite : this.allSites)
 		{
+			boolean behind = false;
 
 			long hour = (long)(this.dayLength / 24);
-
 			long localTime = ((this.currentTime / hour) % 24) + currentSite.getTimezone();//;
 			//System.out.println("LT: " + localTime + ".");
 
-			boolean behind = false;
+			if((endOfWorkingDay - localTime) > ftsMaxOpenHours)
+			{
+				ftsMaxOpenHours = (int)(endOfWorkingDay - localTime);
+				ftsSiteToMoveTo = currentSite;
+			}
+
+			System.out.println(currentSite.getMarker().toString());
 
 	  		//Check site is currently active - not all sites active at all times - timezones
-	  		if(localTime >= startOfWorkingDay && localTime <= endOfWorkingDay)
+	  		if(localTime >= startOfWorkingDay && localTime < endOfWorkingDay)
 	  		{
 	
 				System.out.println("Performing work at site: " + currentSite.getName() + ".");
@@ -109,8 +129,16 @@ public class ProcessSimulator {
 					currentMod.doWork();
 					System.out.println("Completion level: " + (currentMod.getCompletionLevel() * 100));
 
-					if (!currentMod.IsOnSchedule()) 
+					if(currentMod.getDevelopmentMethod() == DevelopmentMethod.FOLLOWTHESUN && ((endOfWorkingDay - localTime) == 1))
+	  				{
+	  					//Check if there are any follow the sun modules to be moved
+	  					ftsModulesToMove.add(currentMod);
+	  					currentSite.modules.remove(currentMod);
+	  					System.out.println("Preparing module '" + currentMod.getName()  + "' for handover.");
+	  				}
+	  				else if (!currentMod.IsOnSchedule()) 
 					{
+						//Only applies if the module isn't about to be moved anyway..
 						behind = true;
 					}
 
@@ -137,8 +165,15 @@ public class ProcessSimulator {
 	  		{
 	  			System.out.println("Site: " + currentSite.getName() + " currently closed.");
 	  		}
-
 	  	}
+
+	  	for(Module modToBeMoved : ftsModulesToMove)
+	  	{
+	  		ftsModulesToMove.remove(modToBeMoved);
+	  		ftsSiteToMoveTo.modules.add(modToBeMoved);
+	  		System.out.println("Handed over module '" + modToBeMoved.getName()  + "' to site '" + ftsSiteToMoveTo.getName() + "'.");
+	  	}
+
 
 	  	NominalScheduleCalc();
 
@@ -169,6 +204,10 @@ public class ProcessSimulator {
 		String json = gson.toJson(this.allSites);
 		System.out.println(json);
 		*/
+
+		GameState gs = new GameState(allSites);
+		gs.SaveState("tommy.json");
+
 	}
 
 	public void LoadState(String filename)

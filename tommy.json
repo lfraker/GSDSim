@@ -1,0 +1,84 @@
+[
+  {
+    "noOfWorkers": 10,
+    "timezone": 0,
+    "siteName": "Dublin",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Dublin",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Dialog",
+          "style": 1,
+          "size": 12,
+          "pointSize": 12.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 1,
+    "effortDeveloperDay": 1,
+    "coordinates": [
+      52.48278022207823,
+      -9.140625
+    ],
+    "modules": [
+      {
+        "modName": "Game",
+        "numberGen": {
+          "seed": {
+            "value": 92108480438373
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          150.0,
+          169.5,
+          117.0,
+          177.0,
+          171.0,
+          115.5,
+          165.0
+        ],
+        "origStepEstimates": [
+          150.0,
+          150.0,
+          100.0,
+          150.0,
+          150.0,
+          150.0,
+          150.0
+        ],
+        "workDonePerSection": [
+          20.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "devMethod": "AGILE",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 1065.0,
+        "origEstimate": 1000,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  }
+]
