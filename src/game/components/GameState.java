@@ -4,48 +4,34 @@ import java.util.*;
 import java.io.*;
 import java.lang.reflect.*;
 
-import game.components.Site;
-import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-
 import com.google.gson.*;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-/*
-*	Saves or restores a game session.
-*
-*/
+
 
 public class GameState 
 {
+	/*
+	*	Saves or restores a game state.
+	*/
 
 	List<Site> siteList;
 
 	public GameState(List<Site> sites)
 	{
 		this.siteList = sites;
-
-		/*
-		System.out.println();
-
-		for(Site s : this.siteList)
-		{
-			System.out.println("Modules: " + s.modules.size());
-		}*/
 	}
 
 	public List<Site> LoadState(String filename)
 	{
-		
+		//Retrieves a saved game state (sites and modules) from the given filename.
 		try 
 		{
 			BufferedReader br = new BufferedReader(new FileReader(filename));
 			Gson gson = new Gson();
-			//List<Site> sites = gson.fromJson(br, Site.class);
-
 			Type siteListType = new TypeToken<ArrayList<Site>>(){}.getType();
  			List<Site> sites =  gson.fromJson(br, siteListType);
 			br.close();
-
 			return sites;
 		} 
 		catch (JsonSyntaxException e) 
@@ -58,25 +44,16 @@ public class GameState
 			System.err.println("Error loading scenario " + filename + "\n" + e);
 		}
 
-
 		return null;
-		/*
-
-		MapMarkerDot pos = new MapMarkerDot(null, si.name, si.location[0], si.location[1]);
-      	Site s = new Site(si.name, Integer.parseInt(si.workers), pos, si.timezone);
-	
-		*/
-
 	}
 
 
 	public void SaveState(String filename)
 	{
-		//Gson gson = new Gson();
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(siteList);  
-		//System.out.println(json);
+		//Will save current game state (sites and modules) to the given filename.
 
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(siteList); 
 		try
 		{
 			FileWriter writer = new FileWriter(filename);  
@@ -85,15 +62,14 @@ public class GameState
 		}
 		catch(Exception e)
 		{
-
+			System.out.println("Couldn't save state.");
 		}
-		  
 
 	}
 
 	public List<List<Site>> LoadScenarios()
 	{
-
+		//Loads multiple scenarios stored as seperate game state files in the 'Scenarios' directory
 		File folder = new File("Scenarios/");
 		File[] listOfFiles = folder.listFiles();
 
@@ -104,14 +80,10 @@ public class GameState
 		    if (listOfFiles[i].isFile()) 
 		    {
 		    	scenarios.add(this.LoadState("Scenarios/" + listOfFiles[i].getName()));
-
-		        //System.out.println("File " + listOfFiles[i].getName());
 		    } 
 	    }
 
 	    return scenarios;
 	}
-
-	//public 
 
 }
