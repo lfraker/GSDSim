@@ -55,6 +55,13 @@ I’ve added a button in the middle of the settings page that essentially opens 
 As we needed multiple more global parameters, I’ve added a hash map to the frontEndPane, that maps string to string. In the editable settings file you will see that aside from difficulty and time per day, the settings after that have a ‘PCode’. this ‘PCode’ is the key in each key/value pair of the hash map. The value the user inputs is then put into the hash map as the corresponding value to the ‘PCode’. It is put in as a string though, so you will have to parse it and handle input errors when you need it. To get these values, call FrontEndPane’s method, getGlobalParam(String param), and pass in the correct ‘PCode’ to the value you need.
 
 
+T: 
+Completely changed the way scenarios are loaded and saved. Entire game state can be saved at any time and reloaded later. 
+Gametime is not yet included.
+Scenarios are just saved program states. Any saved game placed in the Scenarios folder can be loaded as a scenario.
+
+
+
 
 *******
 CREDIT
