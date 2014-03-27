@@ -36,22 +36,26 @@ MouseWheelListener {
 
 	private Button mapPause;
 	private Button startSim;
+	private Button saveScen;
     private static final int MOUSE_BUTTONS_MASK = MouseEvent.BUTTON3_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK
     | MouseEvent.BUTTON2_DOWN_MASK;
     
     FrontEndPane parentComp;
 
     private static final int MAC_MOUSE_BUTTON3_MASK = MouseEvent.CTRL_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK;
-    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause, Button sSim) {
+    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause, Button sSim, Button sScen) {
         super(map);
         this.parentComp = fP;
         this.mapPause = pause;
         this.startSim = sSim;
+        this.saveScen = sScen;
     }
 
     private Point lastDragPoint;
     
     private AddSiteOption optionPane;
+    private SaveScenario savePane;
+
 
     private boolean isMoving = false;
 
@@ -98,6 +102,15 @@ MouseWheelListener {
     		this.parentComp.startCustomSim();
     		return;
     		
+    	}
+        if (this.saveScen.clickedInside(e.getPoint()) && this.parentComp.canStartSim()) {
+        	if (this.savePane != null) {
+        		this.savePane.setVisible(false);
+        		this.savePane.dispose();
+        	}
+        	this.savePane = new SaveScenario(this.parentComp.getWindow(), "Save Custom Scenario", this.parentComp);
+        	this.savePane.setVisible(true);
+        	return;
     	}
 //    	else if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
 //            map.zoomIn(e.getPoint());

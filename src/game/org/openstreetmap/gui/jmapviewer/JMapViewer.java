@@ -73,6 +73,9 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
     protected boolean mapPolygonsVisible;
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
 	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
+	private Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
+
+	
 
 
     protected boolean tileGridVisible;
@@ -118,7 +121,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
      */
     public JMapViewer(FrontEndPane fP) {
         this(new MemoryTileCache(), 8);
-        new GameMapController(this, fP, this.pause, this.startSim);
+        new GameMapController(this, fP, this.pause, this.startSim, this.saveScen);
         this.parentComp = fP;
     }
 
@@ -706,6 +709,8 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 			this.startSim.onDraw(g2);
 			g2.drawString("Sites and modules cannot be", xT, (90 + (this.windSize.y / 6)));
 			g2.drawString("added after sim is started.", xT, (105 + (this.windSize.y / 6)));
+			this.saveScen.onResize(new VectorI(((int)xT), (90 + (this.windSize.y / 5))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.saveScen.onDraw(g2);
 		}
 		
     }

@@ -1,0 +1,84 @@
+[
+  {
+    "noOfWorkers": 5,
+    "timezone": 0,
+    "siteName": "Site 1",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Site 1",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 4,
+    "effortDeveloperDay": 10,
+    "coordinates": [
+      58.99531118795094,
+      -10.8984375
+    ],
+    "modules": [
+      {
+        "modName": "core",
+        "numberGen": {
+          "seed": {
+            "value": 4656246330775
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          3.1125002,
+          3.5250003,
+          3.125,
+          4.2000003,
+          4.425,
+          3.0375001,
+          4.5000005
+        ],
+        "origStepEstimates": [
+          3.7500002,
+          3.7500002,
+          2.5,
+          3.7500002,
+          3.7500002,
+          3.7500002,
+          3.7500002
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "devMethod": "FOLLOWTHESUN",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 25.925001,
+        "origEstimate": 25,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  }
+]

@@ -29,6 +29,7 @@ import javax.swing.Timer;
 
 import game.components.Button;
 import game.components.Difficulty;
+import game.components.SaveScenario;
 
 import game.backend.VectorI;
 
@@ -52,6 +53,8 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	private static final int MILLIS_TO_WAIT_FOR_REPEAT = 5;
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
 	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
+	private Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
+    private SaveScenario savePane;
 
 	
 	
@@ -210,6 +213,8 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 			this.startSim.onDraw(g);
 			g.drawString("Sites and modules cannot be", x, (90 + (this.windSize.y / 6)));
 			g.drawString("added after sim is started.", x, (105 + (this.windSize.y / 6)));
+			this.saveScen.onResize(new VectorI(((int)x), (90 + (this.windSize.y / 5))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.saveScen.onDraw(g);
 		}
 		
 
@@ -225,6 +230,15 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		if (this.startSim.clickedInside(e.getPoint()) && this.parentComp.canStartSim()) {
     		this.parentComp.startCustomSim();
     		
+    	}
+		if (this.saveScen.clickedInside(e.getPoint()) && this.parentComp.canStartSim()) {
+			if (this.savePane != null) {
+        		this.savePane.setVisible(false);
+        		this.savePane.dispose();
+        	}
+        	this.savePane = new SaveScenario(this.parentComp.getWindow(), "Save Custom Scenario", this.parentComp);
+        	this.savePane.setVisible(true);
+        	return;
     	}
 		
 	}

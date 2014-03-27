@@ -30,6 +30,7 @@ import javax.swing.border.BevelBorder;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.components.DevelopmentMethod;
 import game.components.Module;
 import game.components.Site;
 
@@ -42,6 +43,7 @@ public class SetModulesPane extends Pane {
 	//public JTextArea moduleName = new JTextArea();
 //	public JTextArea hoursEstimate = new JTextArea();
 	public JComboBox<Site> dropDown = new JComboBox<>();
+	public JComboBox<String> devDropDown = new JComboBox<>();
 	List<Site> modSites = new ArrayList<>();
 //	private JButton medium;
 //	private JButton hard;
@@ -51,6 +53,11 @@ public class SetModulesPane extends Pane {
 		super(fP);
 		this.dropDown.addItem(new Site("Select a Site", 0, null, 0));
 		// TODO Auto-generated constructor stub
+		this.devDropDown.addItem("Select a Development Method");
+		this.devDropDown.addItem("Follow The Sun");
+		this.devDropDown.addItem("Waterfall");
+		this.devDropDown.addItem("Agile");
+
 	}
 	
 	public void addSiteToCombo(Site toAdd) {
@@ -88,6 +95,8 @@ public class SetModulesPane extends Pane {
 		JPanel temp8 = new JPanel();
 		JPanel temp9 = new JPanel();
 		JPanel temp10 = new JPanel();
+		JPanel temp11 = new JPanel();
+		JPanel temp12 = new JPanel();
 		temp1.setLayout(new GridLayout(4,0));
 		temp1.add(new JLabel());
 		temp1.add(new JLabel());
@@ -158,11 +167,25 @@ public class SetModulesPane extends Pane {
 					showMessage("Please Choose a Site");
 					return;
 				}
+				if (devDropDown.getSelectedIndex() == 0) {
+					showMessage("Please Choose a Development Method");
+					return;
+				}
 				if (!modSites.contains(addTo)) {
 					modSites.add(addTo);
 				}
+				
 				Module newMod = new Module(hoursEst, name);
+				switch (devDropDown.getSelectedIndex()) {
+					case 1: newMod.setDevelopmentMethod(DevelopmentMethod.FOLLOWTHESUN);
+							break;
+					case 2: newMod.setDevelopmentMethod(DevelopmentMethod.WATERFALL);
+							break;
+					case 3: newMod.setDevelopmentMethod(DevelopmentMethod.AGILE);
+							break;
+				}
 				addTo.addModule(newMod);
+				devDropDown.setSelectedIndex(0);
 				dropDown.setSelectedIndex(0);
 				showMessage("Module: " + name + " has been added to Site: " + addTo.getName());
 				moduleName.setText("");
@@ -218,6 +241,18 @@ public class SetModulesPane extends Pane {
 		temp10.add(new JLabel());
 		temp10.add(new JLabel("Hours Estimate:"));
 		temp10.setOpaque(false);
+		
+		temp11.setLayout(new GridLayout(4,0));
+		temp11.add(new JLabel());
+		temp11.add(new JLabel());
+		temp11.add(new JLabel("Development Method:"));
+		temp11.setOpaque(false);
+		
+		temp12.setLayout(new GridLayout(4,0));
+		temp12.add(new JLabel());
+		temp12.add(new JLabel());
+		temp12.add(devDropDown);
+		temp12.setOpaque(false);
 
 
 
@@ -225,6 +260,12 @@ public class SetModulesPane extends Pane {
 		this.add(temp8);
 		this.add(new JLabel());
 		this.add(temp7);
+		this.add(new JLabel());
+		
+		this.add(new JLabel());
+		this.add(temp11);
+		this.add(new JLabel());
+		this.add(temp12);
 		this.add(new JLabel());
 		this.add(new JLabel());
 		//this.add(temp5);	

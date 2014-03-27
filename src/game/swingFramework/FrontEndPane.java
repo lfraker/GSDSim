@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +28,7 @@ import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import game.components.Button;
 import game.components.Difficulty;
+import game.components.GameState;
 import game.components.Module;
 import game.components.ProcessSimulator;
 import game.components.Site;
@@ -384,4 +387,24 @@ public class FrontEndPane {
 		return this.canStartSim;
 	}
 	
+	public void saveCustomGameScen(String saveFileName) {
+		if (this.processSimulator.GetSites().size() > 0) {
+			for (Site s : this.processSimulator.GetSites()) {
+				if (s.getModules().size() > 0) {
+					GameState gs = new GameState(this.processSimulator.GetSites());
+					File dir = new File("customScenarios");
+				 
+					if (!dir.exists()) {
+						dir.mkdir();
+					}	
+				
+					gs.SaveState("./customScenarios/" + saveFileName);
+		    		JOptionPane.showMessageDialog(this.window, "Custom scenario was Saved.");
+					return;
+				}
+			}
+		}
+		JOptionPane.showMessageDialog(this.window, "Pick at least one site and at least one module to save a custom scenario");
+		
+	}
 }

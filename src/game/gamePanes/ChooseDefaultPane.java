@@ -1,15 +1,14 @@
 package game.gamePanes;
 
 import javax.swing.JFrame;
+
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import game.components.Scenarios;
 import java.util.*;
 import game.components.Site;
 import java.awt.Dimension;
-import game.components.ScenarioLoader;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;

@@ -3,6 +3,7 @@ package game.gamePanes;
 import java.awt.Dimension;
 
 
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -45,9 +46,7 @@ import javax.swing.border.BevelBorder;
 import game.paneScreens.*;
 import game.components.Difficulty;
 import game.components.Site;
-import game.components.Scenario;
-import game.components.Scenarios;
-import game.components.ScenarioLoader;
+
 import game.swingFramework.FrontEndPane;
 import java.util.Enumeration;
 import java.util.List;
