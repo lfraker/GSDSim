@@ -54,7 +54,7 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onTick(float nanosSincePreviousTick) {
 		
-		float percent = ((this.timePerDay - 30)/200.0f);
+		float percent = ((this.timePerDay - 1)/200.0f);
 		int tempX = this.lineLeft.x;
 		int diff = this.lineRight.x - this.lineLeft.x;
 		int toAdd = ((int)(diff * percent)); 
@@ -250,7 +250,7 @@ public class SettingsScreen extends Screen {
 
 							this.timePerDay = v1i;
 
-							if (v1i < 30 || v1i > 230) 
+							if (v1i < 1 || v1i > 200) 
 							{
 								String message = "Please follow the correct input instructions. Check that there are no extra spaces, default values have been set. Edit the settings file so that it is correct.";
 								this.parentPane.showMessage(message);
@@ -382,7 +382,7 @@ public class SettingsScreen extends Screen {
 				this.sliderPos = this.slide.getPos();
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
-				this.timePerDay = (((long)((pos/diff) * 200)) + 30);
+				this.timePerDay = (((long)((pos/diff) * 200)) + 1);
 				long timeNano = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
 				this.parentPane.setTimePerDay(timeNano);
 			}

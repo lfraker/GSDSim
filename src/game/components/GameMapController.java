@@ -5,7 +5,12 @@ package game.components;
 import game.swingFramework.FrontEndPane;
 
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -13,9 +18,14 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import game.org.openstreetmap.gui.jmapviewer.Coordinate;
 import game.org.openstreetmap.gui.jmapviewer.JMapController;
@@ -37,24 +47,31 @@ MouseWheelListener {
 	private Button mapPause;
 	private Button startSim;
 	private Button saveScen;
+	private Button interv;
     private static final int MOUSE_BUTTONS_MASK = MouseEvent.BUTTON3_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK
     | MouseEvent.BUTTON2_DOWN_MASK;
     
     FrontEndPane parentComp;
 
     private static final int MAC_MOUSE_BUTTON3_MASK = MouseEvent.CTRL_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK;
-    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause, Button sSim, Button sScen) {
+    public GameMapController(JMapViewer map, FrontEndPane fP, Button pause, Button sSim, Button sScen, Button inter) {
         super(map);
         this.parentComp = fP;
         this.mapPause = pause;
         this.startSim = sSim;
         this.saveScen = sScen;
+        this.interv = inter;
     }
 
     private Point lastDragPoint;
     
     private AddSiteOption optionPane;
+    private JFrame inquirPane;
     private SaveScenario savePane;
+    private InterventionOption iPane;
+    private Site currSiteQuer;
+	private JTextArea siteResponse;
+
 
 
     private boolean isMoving = false;
@@ -93,6 +110,9 @@ MouseWheelListener {
      	double x = OsmMercator.XToLon(xi, this.parentComp.getZoom());
         double y = OsmMercator.YToLat(yi, this.parentComp.getZoom());
 
+    	System.out.println("X : " + x);
+    	System.out.println("Y: " + y);
+        
         if (this.mapPause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
     		this.parentComp.pauseUnpause();
     		return;
@@ -112,6 +132,16 @@ MouseWheelListener {
         	this.savePane.setVisible(true);
         	return;
     	}
+        
+        if (this.interv.clickedInside(e.getPoint())) {
+    		if (this.iPane != null) {
+    			this.iPane.dispose();
+    			this.iPane = null;
+    		}
+    		this.iPane = new InterventionOption();
+    		return;
+    		
+    	}
 //    	else if (doubleClickZoomEnabled && e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
 //            map.zoomIn(e.getPoint());
 //        }
@@ -130,7 +160,7 @@ MouseWheelListener {
             	if (!this.parentComp.isSimLoaded()) {
             		return;
             	}
-    			JFrame f = new SiteInfoPane(mDot.getName() + " Site Info");
+            	setUpInquiry(site);
     			return;
     		}
     		
@@ -144,40 +174,38 @@ MouseWheelListener {
         	}
         	this.optionPane = new AddSiteOption(this.parentComp.getWindow(), "Add Site");
         	this.optionPane.setVisible(true);
-        	//addSite.get
-//            Point center = this.parentComp.getCenter();
-////        	System.out.println("BEFORE : " + e.getPoint().x + " x : y " + e.getPoint().y);
-//
-//        	int xi =e.getPoint().x + (center.x - (this.parentComp.getMapWidth() / 2));
-//            int yi =e.getPoint().y +  (center.y - (this.parentComp.getMapHeight() / 2));
-//
-////            System.out.println("AFTER : " + xi + " x : y " + yi);
-//
-//        	//-x = -e.x - center.x - getwidth / 2
-////        	x -= center.x - getWidth() / 2;
-////            y -= center.y - getHeight() / 2;
-//
-//        	double x = OsmMercator.XToLon(xi, this.parentComp.getZoom());
-//            double y = OsmMercator.YToLat(yi, this.parentComp.getZoom());
-//        	System.out.println("AFTER : " + x + " x : y " + y);
-//        	System.out.println("ZOOM HERE " + this.parentComp.getZoom());
-//            System.out.println("HERIE Center x " + center.x + " Center y " + center.y);
-//            System.out.println("HERIE Width : " + (this.parentComp.getMapWidth() / 2));
-//            System.out.println("HERIE Height : " + (this.parentComp.getMapHeight() / 2));
-//            System.exit(0);
-//            x += center.x + this.parentComp.getMapWidth() * 2;
-//            y += center.y + this.parentComp.getMapHeight() * 2;
+
            String name = this.optionPane.getSiteName();
            int nEmp = this.optionPane.getNumberEmployees();
            int tZ = this.optionPane.getTimeZone();
            int cD = this.optionPane.getCostDev();
            int eD = this.optionPane.getEffortDev();
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
+            	boolean isRA = false;
+            	if (x > 31.99 && y < 77.76 && y > 46.55) {
+            		isRA = true;
+            	}
+            	if (x < 150.82 && x > 32.69 && y < 46.55 && y > 28.92) {
+            		isRA = true;
+            	}
+            	if (x < 123.39 && x > 39.37 && y < 28.92 && y > 12.55) {
+            		isRA = true;
+            	}
+            	if (x < 164.88 && x > 72.42 && y < 12.55 && y > -10.48) {
+            		isRA = true;
+            	}
+            	if (x < 164.88 && x > 72.42 && y < 12.55 && y > -10.48) {
+            		isRA = true;
+            	}
+            	if (x < 169.10 && y < 71.85 && y > 61.77) {
+            		isRA = true;
+            	}
+            	
+            	System.out.println("RA : " + isRA);
             	MapMarkerDot mDot = new MapMarkerDot(null, name, y, x);
-            	Site toAdd = new Site(name, nEmp, mDot, tZ, cD, eD);
+            	Site toAdd = new Site(name, nEmp, mDot, tZ, cD, eD, isRA);
 
                 toAdd.SetCoordinates(y,x);
-//            	System.out.println(x +" X : Y " + y);
             	this.parentComp.addSiteToCombo(toAdd);
             	this.parentComp.processSimulator.AddSite(toAdd);
             	this.parentComp.getMapViewer().addMapMarker(mDot);
@@ -335,5 +363,128 @@ MouseWheelListener {
     public static boolean isPlatformOsx() {
         String os = System.getProperty("os.name");
         return os != null && os.toLowerCase().startsWith("mac os x");
+    }
+    
+    public void setUpInquiry(Site s) {
+    	if (this.inquirPane != null) {
+    		this.inquirPane.dispose();
+    		this.inquirPane = null;
+    		currSiteQuer = null;
+    		//this.siteResponse.disable();
+    		this.siteResponse = null;
+    	}
+    	currSiteQuer = s;
+    	this.inquirPane = new JFrame("Inquiry at Site: " + s.getName());
+    	this.inquirPane.setLayout(new GridLayout(0,2));
+    	this.inquirPane.setMinimumSize(new Dimension(500, 400));
+		this.inquirPane.setPreferredSize(new Dimension(500, 400));
+		this.inquirPane.setMaximumSize(new Dimension(500, 400));
+		
+    	JButton onSched = new JButton("Send Email");
+    	JButton repStat = new JButton("Send Email");
+    	JButton completTasks = new JButton("Send Email");
+    	JButton vidConf = new JButton("Start Conference");
+    	JButton makeVis = new JButton("Book Visit");
+    	this.siteResponse = new JTextArea();
+    	this.siteResponse.setEditable(false);
+    	JScrollPane scrollRes = new JScrollPane(this.siteResponse);
+    	onSched.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (currSiteQuer.isRussAsian) {
+					siteResponse.setText("yes");
+				}
+				else {
+					siteResponse.setText("not implemented yet for not Russia/Asia");
+				}
+				
+			}
+    		
+    	});
+    	
+    	onSched.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (currSiteQuer.isRussAsian) {
+					siteResponse.setText("yes");
+				}
+				else {
+					siteResponse.setText("not impl yet for not asian/russian");
+				}
+				
+			}
+    		
+    	});
+    	
+    	repStat.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (currSiteQuer.isRussAsian) {
+				}
+				else {
+				}
+				siteResponse.setText("not impl yet for report status");
+
+			}
+    		
+    	});
+    	
+    	completTasks.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				siteResponse.setText("not impl yet for completed tasks");
+
+				
+			}
+    		
+    	});
+    	
+    	vidConf.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (currSiteQuer.isRussAsian) {
+				}
+				else {
+				}
+				siteResponse.setText("not impl yet for vid conf");
+
+			}
+    		
+    	});
+    	
+    	makeVis.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				siteResponse.setText("not impl yet for make vis");
+			}
+    		
+    	});
+    	
+
+
+
+
+    	this.inquirPane.add(new JLabel("<html>Send 'are you on schedule' email. (Cost: 0 dev-days)</html>"));
+    	this.inquirPane.add(onSched);
+    	this.inquirPane.add(new JLabel("<html>Request status of modules email. (Cost: .1 dev-days)</html>"));
+    	this.inquirPane.add(repStat);
+    	this.inquirPane.add(new JLabel("<html>Request completed tasks list. (Cost: .5 dev-days)</html>"));
+    	this.inquirPane.add(completTasks);
+    	this.inquirPane.add(new JLabel("<html>Hold video conference. (Cost: 2.0 dev-days)</html>"));
+    	this.inquirPane.add(vidConf);
+    	this.inquirPane.add(new JLabel("<html>Visit site. (Cost: 7.0 dev-days)</html>"));
+    	this.inquirPane.add(makeVis);
+    	this.inquirPane.add(new JLabel("<html>Site " + s.getName() + "'s response:</html>"));
+    	this.inquirPane.add(scrollRes);
+
+
+    	this.inquirPane.pack();
+    	this.inquirPane.setVisible(true);
     }
 }

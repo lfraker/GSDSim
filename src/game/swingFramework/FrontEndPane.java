@@ -28,6 +28,7 @@ import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import game.components.Button;
 import game.components.Difficulty;
+import game.components.FinalReport;
 import game.components.GameState;
 import game.components.Module;
 import game.components.ProcessSimulator;
@@ -398,7 +399,7 @@ public class FrontEndPane {
 						dir.mkdir();
 					}	
 				
-					gs.SaveState("./customScenarios/" + saveFileName);
+					gs.SaveState("./Scenarios/" + saveFileName);
 		    		JOptionPane.showMessageDialog(this.window, "Custom scenario was Saved.");
 					return;
 				}
@@ -406,5 +407,10 @@ public class FrontEndPane {
 		}
 		JOptionPane.showMessageDialog(this.window, "Pick at least one site and at least one module to save a custom scenario");
 		
+	}
+	
+	public void endGame() {
+		this.getWindow().setVisible(false);
+		//FinalReport f = new FinalReport("REPORT WORKED DELETE");
 	}
 }

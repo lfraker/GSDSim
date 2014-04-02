@@ -1,6 +1,6 @@
 [
   {
-    "noOfWorkers": 5,
+    "noOfWorkers": 10,
     "timezone": 0,
     "siteName": "Dublin",
     "mapMarker": {
@@ -19,76 +19,40 @@
           "falpha": 0.0
         },
         "font": {
-          "name": "Dialog",
+          "name": "Lucida Grande",
           "style": 1,
-          "size": 12,
-          "pointSize": 12.0,
+          "size": 13,
+          "pointSize": 13.0,
           "fontSerializedDataVersion": 1
         }
       },
       "writeClick": false
     },
-    "costDeveloperDay": 4,
-    "effortDeveloperDay": 10,
+    "costDeveloperDay": 1,
+    "effortDeveloperDay": 1,
     "coordinates": [
-      52.696361078274485,
-      -7.03125
+      52.48278022207823,
+      -9.140625
     ],
-    "modules": []
-  },
-  {
-    "noOfWorkers": 5,
-    "timezone": 14,
-    "siteName": "China",
-    "mapMarker": {
-      "status": "ONTIME",
-      "coord": {},
-      "radius": 5.0,
-      "markerStyle": "FIXED",
-      "name": "China",
-      "style": {
-        "color": {
-          "value": -16777216,
-          "falpha": 0.0
-        },
-        "backColor": {
-          "value": -16711936,
-          "falpha": 0.0
-        },
-        "font": {
-          "name": "Dialog",
-          "style": 1,
-          "size": 12,
-          "pointSize": 12.0,
-          "fontSerializedDataVersion": 1
-        }
-      },
-      "writeClick": false
-    },
-    "costDeveloperDay": 4,
-    "effortDeveloperDay": 10,
-    "coordinates": [
-      27.994401411046145,
-      118.828125
-    ],
+    "isRussAsian": false,
     "modules": [
       {
-        "modName": "Sunfollower",
+        "modName": "Game",
         "numberGen": {
           "seed": {
-            "value": 115124645515747
+            "value": 92108480438373
           },
           "nextNextGaussian": 0.0,
           "haveNextNextGaussian": false
         },
         "stepEstimates": [
           150.0,
-          187.5,
-          87.0,
-          172.5,
-          150.0,
+          169.5,
+          117.0,
+          177.0,
           171.0,
-          126.0
+          115.5,
+          165.0
         ],
         "origStepEstimates": [
           150.0,
@@ -100,7 +64,7 @@
           150.0
         ],
         "workDonePerSection": [
-          20.450003,
+          18.0,
           0.0,
           0.0,
           0.0,
@@ -108,51 +72,14 @@
           0.0,
           0.0
         ],
-        "devMethod": "FOLLOWTHESUN",
+        "devMethod": "AGILE",
         "numWorkers": 1,
         "performanceLevel": 1.0,
-        "totalEstimate": 1044.0,
+        "totalEstimate": 1065.0,
         "origEstimate": 1000,
         "currentStage": 0,
         "complete": false
       }
     ]
-  },
-  {
-    "noOfWorkers": 5,
-    "timezone": 7,
-    "siteName": "Mexico",
-    "mapMarker": {
-      "status": "ONTIME",
-      "coord": {},
-      "radius": 5.0,
-      "markerStyle": "FIXED",
-      "name": "Mexico",
-      "style": {
-        "color": {
-          "value": -16777216,
-          "falpha": 0.0
-        },
-        "backColor": {
-          "value": -16711936,
-          "falpha": 0.0
-        },
-        "font": {
-          "name": "Dialog",
-          "style": 1,
-          "size": 12,
-          "pointSize": 12.0,
-          "fontSerializedDataVersion": 1
-        }
-      },
-      "writeClick": false
-    },
-    "costDeveloperDay": 4,
-    "effortDeveloperDay": 10,
-    "coordinates": [
-      21.616579336740607,
-      -99.84375
-    ],
-    "modules": []
   }
 ]

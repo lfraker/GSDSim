@@ -16,7 +16,9 @@ public class Site {
 	int costDeveloperDay = 4;
 	int effortDeveloperDay = 10;
 	double coordinates[] = new double[2];
-
+	public boolean isRussAsian;
+	
+	
 	public ArrayList<Module> modules = new ArrayList<Module>();
 	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone) {
 		//this.modules = modules;
@@ -26,7 +28,7 @@ public class Site {
 		this.timezone = tZone;
 	}
 	
-	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone, int cD, int eD) {
+	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone, int cD, int eD, boolean isRA) {
 		//this.modules = modules;
 		this.siteName = name;
 		this.noOfWorkers = noOfWorkers;
@@ -34,7 +36,9 @@ public class Site {
 		this.timezone = tZone;
 		this.costDeveloperDay = cD;
 		this.effortDeveloperDay = eD;
+		this.isRussAsian = isRA;
 	}
+	
 
 	public String getName() {
 		return this.siteName;

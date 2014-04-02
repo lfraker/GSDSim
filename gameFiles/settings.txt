@@ -7,6 +7,6 @@ Do not leave any values after the colon, if you do, default values
 will be set.
 *****************************
 Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):EASY
-Seconds Per Day (enter a number between 30-230):35
+Seconds Per Day (enter a number between 1-200):45
 Average Cost of Developer Day (enter a value greater than zero) PCode=AvgCostDevDay:10
 Average Effort per Developer Day (enter a value greater than zero) PCode=AvgEffDevDay:10

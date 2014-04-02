@@ -60,7 +60,6 @@ public class SaveScenario extends JDialog {
 			return;
 		}
 		else {
-			System.out.println(this.fP);
 			this.fP.saveCustomGameScen(this.fName);
 		}
 		this.setVisible(false);

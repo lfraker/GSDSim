@@ -74,6 +74,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
 	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
 	private Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
+	private Button intervene = new Button(new VectorI(5,5), new VectorI(5,5), "Interventions");
 
 	
 
@@ -121,7 +122,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
      */
     public JMapViewer(FrontEndPane fP) {
         this(new MemoryTileCache(), 8);
-        new GameMapController(this, fP, this.pause, this.startSim, this.saveScen);
+        new GameMapController(this, fP, this.pause, this.startSim, this.saveScen, this.intervene);
         this.parentComp = fP;
     }
 
@@ -694,8 +695,9 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		g2.drawString(toWrite2, xT, 45.0f);
 		g2.drawString(toWrite3, xT, 60.0f);
 		g2.drawString(toWrite4, xT, 75.0f);
+		int yH = 90;
 		if (this.parentComp.canPause()) {
-			this.pause.onResize(new VectorI(((int)xT), 90), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.pause.onResize(new VectorI(((int)xT), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			if (this.parentComp.isPaused()) {
 				this.pause.setPressed();
 			}
@@ -703,15 +705,22 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 				this.pause.release();
 			}
 			this.pause.onDraw(g2);
+			yH += (this.windSize.y / 14);
 		}
 		if (this.parentComp.canStartSim()) {
-			this.startSim.onResize(new VectorI(((int)xT), (90 + (this.windSize.y / 14))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.startSim.onResize(new VectorI(((int)xT), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			this.startSim.onDraw(g2);
-			g2.drawString("Sites and modules cannot be", xT, (90 + (this.windSize.y / 6)));
-			g2.drawString("added after sim is started.", xT, (105 + (this.windSize.y / 6)));
-			this.saveScen.onResize(new VectorI(((int)xT), (90 + (this.windSize.y / 5))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			yH += ((this.windSize.y / 12) + 5);
+			g2.drawString("Sites and modules cannot be", xT, yH);
+			yH += 15;
+			g2.drawString("added after sim is started.", xT, yH);
+			yH += (this.windSize.y / 52);
+			this.saveScen.onResize(new VectorI(((int)xT), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			this.saveScen.onDraw(g2);
+			yH += (this.windSize.y / 14);
 		}
+		this.intervene.onResize(new VectorI(((int)xT), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+		this.intervene.onDraw(g2);
 		
     }
 
