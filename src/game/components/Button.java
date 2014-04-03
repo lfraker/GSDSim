@@ -11,7 +11,7 @@ import game.backend.VectorI;
 
 public class Button {
 	
-	VectorI topLeft;
+	public VectorI topLeft;
 	VectorI dimens;
 	private boolean pressed = false;
 	String text;

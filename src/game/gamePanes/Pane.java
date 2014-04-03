@@ -18,6 +18,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -45,15 +46,15 @@ import game.swingFramework.FrontEndPane;
  */
 @SuppressWarnings("serial")
 public abstract class Pane extends JComponent implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener, ComponentListener, KeyEventDispatcher {
-	Screen viewScreen;
+	public Screen viewScreen;
 	public VectorI windSize;
 	boolean resizeCalled = false;
 	public static FrontEndPane parentComp;
-	JTabbedPane frameWork;
+	public JTabbedPane frameWork;
 	private static final int MILLIS_TO_WAIT_FOR_REPEAT = 5;
-	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
-	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
-	private Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
+	public Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
+	public Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
+	public Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
     private SaveScenario savePane;
 
 	
@@ -116,10 +117,10 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	}
 	
 	public long getTotalTime () {
-		return this.parentComp.GetDayLength();
+		return this.parentComp.getDayLength();
 	}
 	public String getDayTimer() {
-		double dayPercent = parentComp.getTime()/(double)parentComp.GetDayLength();
+		double dayPercent = parentComp.getTime()/(double)parentComp.getDayLength();
 		long time = (long)(dayPercent * (60*24*1e9));
 		long seconds = TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS) % 60;
 		return String.format("%02d:%02d", TimeUnit.MINUTES.convert(time, TimeUnit.NANOSECONDS) % 24, seconds - (seconds % 2));
@@ -140,9 +141,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 
 	}
 	
-	public void testDayEnd() {
-		this.parentComp.testDayEnd();
-	}
+
 	
 	void startListening() {
 		addMouseListener(this);
@@ -164,14 +163,11 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		this.resizeCalled = true;
 		VectorI newSize = new VectorI(width, height);
 		this.windSize = newSize;
-
-//		try {
 		this.viewScreen.onResize(newSize);
-//		} catch (Throwable t) {
-//			throwableGenerated("onResize", t);
-//		}
+
 	}
 	
+	//UNTESTED
 	public void doDraw(Graphics2D g) {
 		this.viewScreen.onDraw(g);
 		g.setFont(new Font("serif", Font.BOLD, (this.windSize.x / 95)));
@@ -242,20 +238,69 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
     	}
 		
 	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}	
 	
 	@Override
-	public void componentResized(ComponentEvent e) {
-		Dimension d = e.getComponent().getSize();
-		callOnResize(d.width, d.height);
-		this.parentComp.setWindSize(d.width, d.height);
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
 	
 	public abstract void doTick(long nanos);
 	
 	public abstract void setupSwingPane();
 
 
+	//UNTESTED
 	public void showMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
 		
@@ -263,14 +308,22 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-//		System.out.println(e.getKeyCode());
-//		if (e.getKeyCode() == KeyEvent.VK_P) {
-//
-//			if (!this.frameWork.getTitleAt(this.frameWork.getSelectedIndex()).equals("Settings")) { 
-//				this.parentComp.pauseUnpause();
-//			}
-//		}
+		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	/*
+	 * The below code was written by Zach Davis as a part of the support code, 
+	 * written for the Brown class, CS195n 2D GameEngines. Permission to use Zach's code in full
+	 * has been requested and granted by Zach, so long as he is credited and it is not used for revenue in anyway.
+	 */
+	
+	@Override
+	public void componentResized(ComponentEvent e) {
+		Dimension d = e.getComponent().getSize();
+		callOnResize(d.width, d.height);
+		this.parentComp.setWindSize(d.width, d.height);
 	}
 	
 	java.util.List<RealReleaseWaiter> waiters = new ArrayList<RealReleaseWaiter>();
@@ -341,10 +394,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		
 	}
 
-	public void testAddModule() {
-		 
-		
-	}
+	
 }
 	
 	

@@ -44,31 +44,32 @@ import game.backend.VectorI;
 public class FrontEndPane {
 	
 	private JFrame window;
-	private JTabbedPane frames;
+	public JTabbedPane frames;
 	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(1100, 700);
 	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(1100, 700);
 	private static final int DEFAULT_DELAY_MILLIS = 1000 / 15;
 	private long lastTickNanos;
-	private Timer timer;
-	private SettingsPane settings;
+	public Timer timer;
+	public SettingsPane settings;
 	public static SetModulesPane modules;
 	long currTime;
-	int dayCount;
+	public int dayCount;
 	int hourCount;
-	Difficulty difficulty;
-	long dayTime;
+	public Difficulty difficulty = Difficulty.HARD;
+	public long tem = (550000000 * 100);
+	public long dayTime = tem;
 	boolean canPause = false;
 	boolean canStartSim = false;
-	boolean paused = false;
+	public boolean paused = false;
 	public static JMapViewer siteStatus;
 	private VectorI windSize;
-	private Map<String,String> globalParams = new HashMap<>();
+	public Map<String,String> globalParams = new HashMap<>();
 
 	public static ProcessSimulator processSimulator = new ProcessSimulator();
 	//public static SiteModuleController modSiteController = new SiteModuleController(processSimulator);
 
 	private int zoom;
-	private boolean timeStart = false;
+	public boolean timeStart = false;
 	private boolean loadedSim = false;
 	
 	
@@ -146,7 +147,7 @@ public class FrontEndPane {
 	public long getTime() {
 		return this.currTime;
 	}
-	public long GetDayLength() {
+	public long getDayLength() {
 		return this.dayTime;
 	}
 	public int getDays() {
@@ -169,12 +170,8 @@ public class FrontEndPane {
 		return this.difficulty;
 	}
 	
-	public void testDayEnd() {
-		//this.currTime = TimeUnit.NANOSECONDS.convert((((long)this.dayTime) + 1), TimeUnit.MINUTES);
-	}
 	
-	final void doTick() {
-
+	public final void doTick() {
 		long hour = (long)(this.dayTime / 24);
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
@@ -274,13 +271,6 @@ public class FrontEndPane {
 		
 	}
 
-//	public ProcessSimulator getpSim() {
-//		return pSim;
-//	}
-
-//	public void setpSim(ProcessSimulator pSim) {
-//		this.pSim = pSim;
-//	}
 
 	public VectorI getWindSize() {
 		// TODO Auto-generated method stub
@@ -326,6 +316,7 @@ public class FrontEndPane {
 		return this.siteStatus;
 	}
 	
+	//UNTESTED
 	public static void addSiteToCombo(Site toAdd) {
 		modules.addSiteToCombo(toAdd);
 	}
@@ -363,6 +354,7 @@ public class FrontEndPane {
 		this.canStartSim = true;
 	}
 
+	//UNTESTED
 	public void startCustomSim() {
 		// TODO Auto-generated method stub
 		if (this.processSimulator.GetSites().size() > 0) {
@@ -388,6 +380,7 @@ public class FrontEndPane {
 		return this.canStartSim;
 	}
 	
+	//UNTESTED
 	public void saveCustomGameScen(String saveFileName) {
 		if (this.processSimulator.GetSites().size() > 0) {
 			for (Site s : this.processSimulator.GetSites()) {

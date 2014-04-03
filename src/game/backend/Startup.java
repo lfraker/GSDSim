@@ -4,7 +4,7 @@ import game.swingFramework.FrontEndPane;
 
 
 public class Startup {
-	FrontEndPane game;
+	public FrontEndPane game;
 	
 	
 	public void doStartup() {

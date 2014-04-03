@@ -288,57 +288,11 @@ public class SettingsPane extends Pane {
 		this.viewScreen.onTick(nanos);
 		
 	}
-	
-//	@Override
-//	public boolean dispatchKeyEvent(KeyEvent e) {
-//		return false;
-//	}
 
-//	@Override
-//	public void componentResized(ComponentEvent e) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		super.keyReleased(e);
-		
-	}
-
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -347,16 +301,7 @@ public class SettingsPane extends Pane {
 		
 	}
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		super.mouseClicked(e);
-	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -369,16 +314,6 @@ public class SettingsPane extends Pane {
 		this.viewScreen.onMouseReleased(e);
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}	
 
 }

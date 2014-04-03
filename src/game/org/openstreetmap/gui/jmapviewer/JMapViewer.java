@@ -674,7 +674,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 		g.setColor(Color.BLACK);
 
 
-        long secondsPerDay = (TimeUnit.SECONDS.convert(parentComp.GetDayLength(), TimeUnit.NANOSECONDS));
+        long secondsPerDay = (TimeUnit.SECONDS.convert(parentComp.getDayLength(), TimeUnit.NANOSECONDS));
 
 		float xT = (this.windSize.x * (6.5f/8.0f));
 		String toWrite1 = "Time in Game: " + this.getDayTimer();
@@ -731,11 +731,11 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 
 	private long getTotalTime() {
 		// TODO Auto-generated method stub
-		return this.parentComp.GetDayLength();
+		return this.parentComp.getDayLength();
 	}
 
 	private String getDayTimer() {
-		double dayPercent = parentComp.getTime()/(double)parentComp.GetDayLength();
+		double dayPercent = parentComp.getTime()/(double)parentComp.getDayLength();
 		long time = (long)(dayPercent * (60*24*1e9));
 		long seconds = TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS) % 60;
 		return String.format("%02d:%02d", TimeUnit.MINUTES.convert(time, TimeUnit.NANOSECONDS) % 24, seconds - (seconds % 2));

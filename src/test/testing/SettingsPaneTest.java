@@ -5,20 +5,66 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import game.gamePanes.SetModulesPane;
+import game.gamePanes.SettingsPane;
+import game.paneScreens.Screen;
+import game.paneScreens.SettingsScreen;
 import game.swingFramework.FrontEndPane;
 
 
 public class SettingsPaneTest {
-	SetModulesPane toTest = new SetModulesPane(new FrontEndPane());
+	FrontEndPane fPane = new FrontEndPane();
+	SettingsPane toTest;
 
+	
 	@Test
-	public void testCallOnResize() {
-		try {
-			toTest.callOnResize(10, 20);
-		} catch (Exception e) {
-		}
-		assertTrue(toTest.windSize.x == 10);
-		assertTrue(toTest.windSize.y == 20);
+	public void SettingsPaneTest() {
+		toTest = new SettingsPane(fPane);
+		assertTrue(toTest instanceof SettingsPane);
+		assertTrue(toTest.parentComp == fPane);
+	}
+	
+	
+	//Will be extended soon
+	@Test
+	public void setupSwingPaneTest() {
+		fPane.setupFrame();
+		toTest = new SettingsPane(fPane);
+		assertTrue(toTest.getComponents().length == 0);
+		toTest.setupSwingPane();
+		assertTrue(toTest.isVisible());
+		assertTrue(toTest.getComponents().length > 5);
+	}
+	
+	@Test
+	public void doTickTest() {
+		fPane.setupFrame();
+		toTest = new SettingsPane(fPane);
+		toTest.setupSwingPane();
+		assertFalse(toTest.viewScreen == null);
+	}
+	
+	@Test
+	public void mouseDraggedTest() {
+		fPane.setupFrame();
+		toTest = new SettingsPane(fPane);
+		toTest.setupSwingPane();
+		assertFalse(toTest.viewScreen == null);
+	}
+	
+	@Test
+	public void mousePressedTest() {
+		fPane.setupFrame();
+		toTest = new SettingsPane(fPane);
+		toTest.setupSwingPane();
+		assertFalse(toTest.viewScreen == null);
+	}
+	
+	@Test
+	public void mouseReleasedTest() {
+		fPane.setupFrame();
+		toTest = new SettingsPane(fPane);
+		toTest.setupSwingPane();
+		assertFalse(toTest.viewScreen == null);
 	}
 
 }

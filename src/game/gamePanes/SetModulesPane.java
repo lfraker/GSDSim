@@ -70,9 +70,9 @@ public class SetModulesPane extends Pane {
 		this.dropDown.addItem(new Site("Select a Site", 0, null, 0));
 	}
 	
-	public List<Site> getSiteList() {
-		return modSites;
-	}
+//	public List<Site> getSiteList() {
+//		return modSites;
+//	}
 
 	@Override
 	public void setupSwingPane() {
@@ -299,65 +299,14 @@ public class SetModulesPane extends Pane {
 	
 	@Override
 	public void doTick(long nanos) {
-		// TODO Auto-generated method stub
 		
 		this.viewScreen.onTick(nanos);
 		
 	}
-	
-//	@Override
-//	public boolean dispatchKeyEvent(KeyEvent e) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 
-//	@Override
-//	public void componentResized(ComponentEvent e) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -366,16 +315,8 @@ public class SetModulesPane extends Pane {
 		
 	}
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		super.mouseClicked(e);
-	}
+
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -388,33 +329,7 @@ public class SetModulesPane extends Pane {
 		this.viewScreen.onMouseReleased(e);
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-//	@Override
-//	public void testAddModule() {
-//	//	String text = this.numberOfModules.getText();
-//		try {
-//			float val = Float.parseFloat(text);
-//			Module m = new Module(val);
-//			ArrayList<Module> modules = new ArrayList<Module>();
-//			modules.add(m);
-//			//m.addSite(new Site(modules, 1));
-//			this.parentComp.getSMController().addModule(m, "Site1");
-//		}
-//		catch (NumberFormatException e) {
-//			System.out.println("ONLY ENTER NUMBER VALUES");
-//		}
-//	}
 
 
 

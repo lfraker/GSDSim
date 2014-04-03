@@ -24,8 +24,8 @@ import game.components.*;
 import game.org.openstreetmap.gui.jmapviewer.Coordinate;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
-
-class ChooseDefaultPane extends JFrame {
+//UNTESTED
+public class ChooseDefaultPane extends JFrame {
 	JRadioButton rB;
 	ButtonGroup bG;
 	JPanel okPanel;
@@ -114,7 +114,7 @@ class ChooseDefaultPane extends JFrame {
 		buttonPane.add(Box.createHorizontalGlue());
 		buttonPane.add(ok);
 		this.add(buttonPane);
-
+		this.setVisible(true);
 		this.pack();
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

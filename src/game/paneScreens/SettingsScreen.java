@@ -31,18 +31,18 @@ import game.backend.VectorI;
 public class SettingsScreen extends Screen {
 	
 
-	Button easy = new Button(new VectorI(0,0), new VectorI(0,0), "easy");
-	Button medium = new Button(new VectorI(0,0), new VectorI(0,0), "medium");
-	Button hard = new Button(new VectorI(0,0), new VectorI(0,0), "hard");
-	Difficulty difficulty;
+	public Button easy = new Button(new VectorI(0,0), new VectorI(0,0), "easy");
+	public Button medium = new Button(new VectorI(0,0), new VectorI(0,0), "medium");
+	public Button hard = new Button(new VectorI(0,0), new VectorI(0,0), "hard");
+	public Difficulty difficulty;
 	VectorI sliderPos;
-	Slider slide = new Slider(new VectorI(0,0), new VectorI(0,0));
+	public Slider slide = new Slider(new VectorI(0,0), new VectorI(0,0));
 	VectorI lineLeft;
 	VectorI lineRight;
 	VectorI dragDimens;
 	int FTSmin;
 	float laborCost;
-	boolean dragging;
+	public boolean dragging;
 
 	public SettingsScreen(Pane pP) {
 		super(pP);
@@ -98,6 +98,7 @@ public class SettingsScreen extends Screen {
 	//	writeSettings();
 	}
 
+	//UNTESTED
 	@Override
 	public void onDraw(Graphics2D g) {
 		g.setColor(Color.LIGHT_GRAY);
@@ -199,24 +200,7 @@ public class SettingsScreen extends Screen {
 		//writeSettings();
 	}
 
-	@Override
-	public void onKeyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void onKeyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onKeyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-	
-		
-	}
 	public void readSettings() {
 		try (BufferedReader buffRead = new BufferedReader(new FileReader("./gameFiles/settings.txt"))) {
 			String currLine;
@@ -393,12 +377,14 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onMousePressed(MouseEvent e) {
 		if (this.slide.clickedInside(e.getPoint())) {
-			//this.initialDragPos = new VectorI(e.getPoint().x, e.getPoint().y);
-			//this.
+
 			this.dragging = true;
 		}
 		
 	}
+
+
+
 	
 
 	

@@ -20,10 +20,10 @@ import game.backend.VectorI;
  *
  */
 public abstract class Screen {
-	Pane parentPane;
-	Font fontText;
-	VectorI screenSize;
-	long timePerDay;
+	public Pane parentPane;
+	public Font fontText;
+	public VectorI screenSize;
+	public long timePerDay;
 
 	
 	public Screen(Pane pP) {
@@ -62,47 +62,65 @@ public abstract class Screen {
 	 * Method defining what to do on each tick recieved.
 	 * @param nanosSincePreviousTick - time elapsed since last tick recieved.
 	 */
-	public abstract void onTick(float nanosSincePreviousTick);
+	public void onTick(float nanosSincePreviousTick) {
+		
+	}
 	
 	/**
 	 * Method defining what to do on each draw recieved.
 	 * @param g - brush to draw with.
 	 */
-	public abstract void onDraw(Graphics2D g);
+	public void onDraw(Graphics2D g) {
+		
+	}
 	
 	
 	/**
 	 * Method defining what to do on each resize.
 	 * @param newSize - the new screen Size.
 	 */
-	public abstract void onResize(VectorI newSize);
+	public void onResize(VectorI newSize) {
+		
+	}
 	
 	/**
 	 * Method defining what to do on each mouse click.
 	 * @param e - mouse event fired from clicking of mouse.
 	 */
-	public abstract void onMouseReleased(MouseEvent e);
+	public void onMouseReleased(MouseEvent e) {
+		
+	}
 	
 	/**
 	 * Method defining what to do for each key typed.
 	 * @param e - keyboard event fired from typing key.
 	 */
-	public abstract void onKeyTyped(KeyEvent e);
+	public void onKeyTyped(KeyEvent e) {
+		
+	}
 	
 	/**
 	 * Method defining what to do for each key released.
 	 * @param e - keyboard event fired from releasing key.
 	 */
-	public abstract void onKeyReleased(KeyEvent e);
+	public void onKeyReleased(KeyEvent e) {
+		
+	}
 	
 	/**
 	 * Method defining what to do for each key pressed.
 	 * @param e - keyboard event fired from releasing key.
 	 */
-	public abstract void onKeyPressed(KeyEvent e);
+	public void onKeyPressed(KeyEvent e) {
+		
+	}
 	
-	public abstract void onMouseDragged(MouseEvent e);
+	public void onMouseDragged(MouseEvent e) {
+		
+	}
 	
-	public abstract void onMousePressed(MouseEvent e);
+	public void onMousePressed(MouseEvent e) {
+		
+	}
 	
 }
