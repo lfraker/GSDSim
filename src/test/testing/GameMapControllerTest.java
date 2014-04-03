@@ -19,6 +19,7 @@ import game.components.AddSiteOption;
 import game.components.FinalReport;
 import game.components.GameMapController;
 import game.components.InterventionOption;
+import game.components.Site;
 import game.gamePanes.SetModulesPane;
 import game.gamePanes.SettingsPane;
 import game.paneScreens.Screen;
@@ -35,6 +36,10 @@ public class GameMapControllerTest {
 		System.out.println("TEST: mouseClickedTest is not yet implemented in GameMapControllerTest.java");
 	}
 	
+	@Test
+	public void setUpInquiryTest() {
+		System.out.println("TEST: setUpInquiryTest is not yet implemented in GameMapControllerTest.java");
+	}
 	
 	
 }

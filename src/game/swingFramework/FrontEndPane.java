@@ -61,6 +61,7 @@ public class FrontEndPane {
 	boolean canPause = false;
 	boolean canStartSim = false;
 	public boolean paused = false;
+	public boolean gameEnded = false;
 	public static JMapViewer siteStatus;
 	private VectorI windSize;
 	public Map<String,String> globalParams = new HashMap<>();
@@ -172,6 +173,12 @@ public class FrontEndPane {
 	
 	
 	public final void doTick() {
+		if (!this.gameEnded) {
+			endGame();
+		}
+		else {
+			return;
+		}
 		long hour = (long)(this.dayTime / 24);
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
@@ -403,7 +410,49 @@ public class FrontEndPane {
 	}
 	
 	public void endGame() {
+		if (!timeStart) {
+			return;
+		}
+		for (Site s: this.processSimulator.GetSites()) {
+			for (Module m: s.getModules()) {
+				if (!m.isComplete()) {
+					return;
+				}
+			}
+		}
+		this.gameEnded = true;
 		this.getWindow().setVisible(false);
-		//FinalReport f = new FinalReport("REPORT WORKED DELETE");
+		String rep = "";
+		for (Site s: this.processSimulator.GetSites()) {
+			for (Module m: s.getModules()) {
+				rep += "\nModule " + m.getName() + " (Development Method: " + m.getDevelopmentMethod()+")";
+				for (int i = 0; i < 7; i++) {
+					switch (i) {
+						case 0: rep += "\n\tDesign:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+						case 1: rep += "\tImplementation:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+						case 2: rep += "\tUnit test:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+						case 3: rep += "\tIntegration:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+						case 4: rep += "\tSystem test:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+						case 5: rep += "\tDeployment:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+						case 6: rep += "\tAcceptance test:\n" +
+								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+							break;
+					}	
+				}
+			}
+		}
+		FinalReport f = new FinalReport(rep);
 	}
 }

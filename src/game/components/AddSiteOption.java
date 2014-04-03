@@ -64,7 +64,6 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(new JLabel("Effort Per Developer-Day:"));
 		inputPanel.add(this.effDev);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
-		this.setVisible(true);
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
 		pack();
 		
@@ -74,25 +73,40 @@ public class AddSiteOption extends JDialog {
 	}
 	
 	public void okButton() {
+		this.siteName = this.siteN.getText();
+		if (this.siteName.length() == 0) {
+			return;
+		}
 		try {
-			this.siteName = this.siteN.getText();
-			if (this.siteName.length() == 0) {
-				return;
-			}
 			this.numEmployees = Integer.parseInt(this.numEmp.getText());
-			this.timeZoneDiff = Integer.parseInt(this.timeZone.getText());
-			this.costD = Integer.parseInt(this.costDev.getText());
-			this.effD = Integer.parseInt(this.effDev.getText());
 		}
 		catch (NumberFormatException e) {
 			this.numEmployees = 5;
-			this.timeZoneDiff = 0;
-			this.costD = 4;
-			this.effD = 10;
 			this.numEmp.setText(this.numEmployees+"");
+			return;
+		}
+		try {
+			this.timeZoneDiff = Integer.parseInt(this.timeZone.getText());
+		}
+		catch (NumberFormatException e) {
+			this.timeZoneDiff = 0;
 			this.timeZone.setText(this.timeZoneDiff+"");
-			this.effDev.setText(this.effD+"");
+			return;
+		}
+		try {
+			this.costD = Integer.parseInt(this.costDev.getText());
+		}
+		catch (NumberFormatException e) {
+			this.costD = 4;
 			this.costDev.setText(this.costD+"");
+			return;
+		}
+		try {
+			this.effD = Integer.parseInt(this.effDev.getText());
+		}
+		catch (NumberFormatException e) {
+			this.effD = 10;
+			this.effDev.setText(this.effD+"");
 			return;
 		}
 		this.cancelled = false;

@@ -11,8 +11,8 @@ public class Module
 {
 	String modName;
 	Random numberGen = new Random();
-	float [] stepEstimates = new float [7];
-	float [] origStepEstimates = new float [7];
+	public float [] stepEstimates = new float [7];
+	public float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
 
 	DevelopmentMethod devMethod;

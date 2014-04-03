@@ -35,7 +35,52 @@
       86.8359375
     ],
     "isRussAsian": true,
-    "modules": []
+    "modules": [
+      {
+        "modName": "FrontEnd",
+        "numberGen": {
+          "seed": {
+            "value": 202787527984831
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          8.1,
+          6.3750005,
+          5.7,
+          6.3,
+          5.925,
+          8.85,
+          8.625001
+        ],
+        "origStepEstimates": [
+          7.5000005,
+          7.5000005,
+          5.0,
+          7.5000005,
+          7.5000005,
+          7.5000005,
+          7.5000005
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "devMethod": "FOLLOWTHESUN",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 49.875,
+        "origEstimate": 50,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
   },
   {
     "noOfWorkers": 7,
@@ -102,13 +147,13 @@
           11.25
         ],
         "workDonePerSection": [
-          10.125,
-          12.0375,
-          7.05,
-          11.3625,
-          9.1125,
-          11.3625,
-          8.949999
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
         ],
         "devMethod": "AGILE",
         "numWorkers": 1,
@@ -117,50 +162,6 @@
         "origEstimate": 75,
         "currentStage": 0,
         "complete": false
-      },
-      {
-        "modName": "FrontEnd",
-        "numberGen": {
-          "seed": {
-            "value": 202787527984831
-          },
-          "nextNextGaussian": 0.0,
-          "haveNextNextGaussian": false
-        },
-        "stepEstimates": [
-          8.1,
-          6.3750005,
-          5.7,
-          6.3,
-          5.925,
-          8.85,
-          8.625001
-        ],
-        "origStepEstimates": [
-          7.5000005,
-          7.5000005,
-          5.0,
-          7.5000005,
-          7.5000005,
-          7.5000005,
-          7.5000005
-        ],
-        "workDonePerSection": [
-          8.1,
-          6.3750005,
-          5.7,
-          6.3,
-          5.925,
-          8.85,
-          8.149996
-        ],
-        "devMethod": "FOLLOWTHESUN",
-        "numWorkers": 1,
-        "performanceLevel": 1.0,
-        "totalEstimate": 49.875,
-        "origEstimate": 50,
-        "currentStage": 0,
-        "complete": true
       }
     ]
   }

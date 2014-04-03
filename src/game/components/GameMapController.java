@@ -17,6 +17,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -71,6 +72,7 @@ MouseWheelListener {
     private InterventionOption iPane;
     private Site currSiteQuer;
 	private JTextArea siteResponse;
+	private Random numberGen = new Random();
 
 
 
@@ -370,6 +372,8 @@ MouseWheelListener {
         return os != null && os.toLowerCase().startsWith("mac os x");
     }
     
+    
+    //UNTESTED
     public void setUpInquiry(Site s) {
     	if (this.inquirPane != null) {
     		this.inquirPane.dispose();
@@ -381,9 +385,11 @@ MouseWheelListener {
     	currSiteQuer = s;
     	this.inquirPane = new JFrame("Inquiry at Site: " + s.getName());
     	this.inquirPane.setLayout(new GridLayout(0,2));
-    	this.inquirPane.setMinimumSize(new Dimension(500, 400));
-		this.inquirPane.setPreferredSize(new Dimension(500, 400));
-		this.inquirPane.setMaximumSize(new Dimension(500, 400));
+    	this.inquirPane.setMinimumSize(new Dimension(600, 700));
+		this.inquirPane.setPreferredSize(new Dimension(600, 700));
+		this.inquirPane.setMaximumSize(new Dimension(600, 700));
+		
+
 		
     	JButton onSched = new JButton("Send Email");
     	JButton repStat = new JButton("Send Email");
@@ -397,26 +403,21 @@ MouseWheelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(currSiteQuer.getModules().size() == 0) {
+					siteResponse.setText("No Modules currently at this site");
+					return;
+				}
+				Module mod = currSiteQuer.getModules().get(0);
 				if (currSiteQuer.isRussAsian) {
 					siteResponse.setText("yes");
 				}
 				else {
-					siteResponse.setText("not implemented yet for not Russia/Asia");
-				}
-				
-			}
-    		
-    	});
-    	
-    	onSched.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (currSiteQuer.isRussAsian) {
-					siteResponse.setText("yes");
-				}
-				else {
-					siteResponse.setText("not impl yet for not asian/russian");
+					if (mod.IsOnSchedule()) {
+						siteResponse.setText("yes");
+					}
+					else {
+						siteResponse.setText("no");
+					}
 				}
 				
 			}
@@ -427,11 +428,27 @@ MouseWheelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(currSiteQuer.getModules().size() == 0) {
+					siteResponse.setText("No Modules currently at this site");
+					return;
+				}
+				String rep = "";
 				if (currSiteQuer.isRussAsian) {
+					for (Module m : currSiteQuer.getModules()) {
+						rep += "Module " + m.getName() + ": On Schedule\n";
+					}
 				}
 				else {
+					for (Module m : currSiteQuer.getModules()) {
+						if (m.IsOnSchedule()) {
+							rep += m.getName() + ": On Schedule\n";
+						}
+						else {
+							rep += m.getName() + ": Behind Schedule\n";
+						}
+					}
 				}
-				siteResponse.setText("not impl yet for report status");
+				siteResponse.setText(rep);
 
 			}
     		
@@ -441,8 +458,34 @@ MouseWheelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				siteResponse.setText("not impl yet for completed tasks");
-
+				if(currSiteQuer.getModules().size() == 0) {
+					siteResponse.setText("No Modules currently at this site");
+					return;
+				}
+				String rep = "";
+				
+				for (Module m: currSiteQuer.getModules()) {
+					rep +=  "Module: " + m.getName()+ "\n";
+					for (int i = 0; i < m.sectionsCompleted(); i++) {
+						switch (i) {
+							case 0: rep += "\tDesign: Completed\n";
+								break;
+							case 1: rep += "\tImplementation: Completed\n";
+								break;
+							case 2: rep += "\tUnit test: Completed\n";
+								break;
+							case 3: rep += "\tIntegration: Completed\n";
+								break;
+							case 4: rep += "\tSystem test: Completed\n";
+								break;
+							case 5: rep += "\tDeployment: Completed\n";
+								break;
+							case 6: rep += "\tAcceptance test: Completed\n";
+								break;
+						}	
+					}
+				}
+				siteResponse.setText(rep);
 				
 			}
     		
@@ -452,11 +495,71 @@ MouseWheelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (currSiteQuer.isRussAsian) {
+				if(currSiteQuer.getModules().size() == 0) {
+					siteResponse.setText("No Modules currently at this site");
+					return;
 				}
-				else {
+				String rep = "";
+				
+				for (Module m: currSiteQuer.getModules()) {
+					rep +=  "Module: " + m.getName()+ "\n";
+					for (int i = 0; i < m.sectionsCompleted(); i++) {
+						switch (i) {
+							case 0: rep += "\tDesign: Completed\n";
+								break;
+							case 1: rep += "\tImplementation: Completed\n";
+								break;
+							case 2: rep += "\tUnit test: Completed\n";
+								break;
+							case 3: rep += "\tIntegration: Completed\n";
+								break;
+							case 4: rep += "\tSystem test: Completed\n";
+								break;
+							case 5: rep += "\tDeployment: Completed\n";
+								break;
+							case 6: rep += "\tAcceptance test: Completed\n";
+								break;
+						}	
+					}
+					for (int i = m.sectionsCompleted(); i < 7; i++) {
+						switch (i) {
+							case 0: rep += "\tDesign: ";
+								break;
+							case 1: rep += "\tImplementation: ";
+								break;
+							case 2: rep += "\tUnit test: ";
+								break;
+							case 3: rep += "\tIntegration: ";
+								break;
+							case 4: rep += "\tSystem test: ";
+								break;
+							case 5: rep += "\tDeployment: ";
+								break;
+							case 6: rep += "\tAcceptance test: ";
+								break;
+						}
+						String truth = "";
+						if (m.IsOnSchedule()) {
+							truth = "On Schedule";
+						}
+						else {
+							truth = "Behind Schedule";
+						}
+						if (currSiteQuer.isRussAsian) {
+							int tem = numberGen.nextInt(2);
+							if (tem == 0) {
+								rep += "On Schedule\n";
+							}
+							else {
+								rep += truth + "\n";
+							}
+						}
+						else {
+							rep += truth + "\n";
+						}
+					}
 				}
-				siteResponse.setText("not impl yet for vid conf");
+				siteResponse.setText(rep);
 
 			}
     		
@@ -466,7 +569,61 @@ MouseWheelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				siteResponse.setText("not impl yet for make vis");
+				if(currSiteQuer.getModules().size() == 0) {
+					siteResponse.setText("No Modules currently at this site");
+					return;
+				}
+				String rep = "";
+				
+				for (Module m: currSiteQuer.getModules()) {
+					rep +=  "Module: " + m.getName()+ "\n";
+					for (int i = 0; i < m.sectionsCompleted(); i++) {
+						switch (i) {
+							case 0: rep += "\tDesign: Completed\n";
+								break;
+							case 1: rep += "\tImplementation: Completed\n";
+								break;
+							case 2: rep += "\tUnit test: Completed\n";
+								break;
+							case 3: rep += "\tIntegration: Completed\n";
+								break;
+							case 4: rep += "\tSystem test: Completed\n";
+								break;
+							case 5: rep += "\tDeployment: Completed\n";
+								break;
+							case 6: rep += "\tAcceptance test: Completed\n";
+								break;
+						}	
+					}
+					for (int i = m.sectionsCompleted(); i < 7; i++) {
+						switch (i) {
+							case 0: rep += "\tDesign: ";
+								break;
+							case 1: rep += "\tImplementation: ";
+								break;
+							case 2: rep += "\tUnit test: ";
+								break;
+							case 3: rep += "\tIntegration: ";
+								break;
+							case 4: rep += "\tSystem test: ";
+								break;
+							case 5: rep += "\tDeployment: ";
+								break;
+							case 6: rep += "\tAcceptance test: ";
+								break;
+						}
+						String truth = "";
+						if (m.IsOnSchedule()) {
+							truth = "On Schedule";
+						}
+						else {
+							truth = "Behind Schedule";
+						}
+						rep += truth + "\n";
+					}
+				}
+				siteResponse.setText(rep);
+
 			}
     		
     	});

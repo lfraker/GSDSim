@@ -54,7 +54,7 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void onTick(float nanosSincePreviousTick) {
 		
-		float percent = ((this.timePerDay - 1)/200.0f);
+		float percent = ((this.timePerDay - 6)/200.0f);
 		int tempX = this.lineLeft.x;
 		int diff = this.lineRight.x - this.lineLeft.x;
 		int toAdd = ((int)(diff * percent)); 
@@ -366,7 +366,7 @@ public class SettingsScreen extends Screen {
 				this.sliderPos = this.slide.getPos();
 				float diff = (this.lineRight.x - this.lineLeft.x);
 				float pos = (this.sliderPos.x - this.lineLeft.x);
-				this.timePerDay = (((long)((pos/diff) * 200)) + 1);
+				this.timePerDay = (((long)((pos/diff) * 200)) + 6);
 				long timeNano = TimeUnit.NANOSECONDS.convert(this.timePerDay, TimeUnit.SECONDS);
 				this.parentPane.setTimePerDay(timeNano);
 			}
