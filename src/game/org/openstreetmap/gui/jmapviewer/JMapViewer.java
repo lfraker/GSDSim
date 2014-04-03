@@ -689,13 +689,16 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
 			case HARD:	toWrite4 = "Difficulty: HARD (pause disabled)";
 				break;
 		}
+		String toWrite5 = "Money Remaining: " + this.parentComp.getGlobalParam("UsrMoney") + " Euros";
 		g2.drawString("Right-click and drag to pan.", 0.0f, 200.0f);
 		g2.drawString("Scroll or use zoom bar to zoom.", 0.0f, 215.0f);
 		g2.drawString(toWrite1, xT, 30.0f);
 		g2.drawString(toWrite2, xT, 45.0f);
 		g2.drawString(toWrite3, xT, 60.0f);
 		g2.drawString(toWrite4, xT, 75.0f);
-		int yH = 90;
+		g2.drawString(toWrite5, xT, 90.0f);
+
+		int yH = 105;
 		if (this.parentComp.canPause()) {
 			this.pause.onResize(new VectorI(((int)xT), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			if (this.parentComp.isPaused()) {

@@ -33,14 +33,14 @@ public class AddSiteOptionTest {
 	public void AddSiteOptionTest() {
 		fPane.setupFrame();
 		assertTrue(toTest == null);
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		assertTrue(toTest.getComponentCount() > 0);
 	}
 		
 	@Test
 	public void noButtonTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.noButton();
 		assertFalse(toTest.isVisible());
 	}
@@ -48,7 +48,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void okButtonTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.okButton();
 		assertFalse(toTest.isVisible());
 		assertTrue(toTest.cancelled);
@@ -58,7 +58,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void getNumberEmployeesTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.numEmployees = 5;
 		assertTrue(toTest.getNumberEmployees() == 5);
 
@@ -67,7 +67,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void getSiteNameTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test1");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.siteName = "test1";
 		assertTrue(toTest.getSiteName().equals("test1"));
 
@@ -76,7 +76,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void getCancelledTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.cancelled = true;
 		assertTrue(toTest.getCancelled());
 		
@@ -85,7 +85,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void getCostDevTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.costD = 105;
 		assertTrue(toTest.getCostDev() == 105);
 	}
@@ -93,7 +93,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void getEffortDevTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.effD = 55;
 		assertTrue(toTest.getEffortDev() == 55);
 	}
@@ -101,7 +101,7 @@ public class AddSiteOptionTest {
 	@Test
 	public void getTimeZoneTest() {
 		fPane.setupFrame();
-		toTest = new AddSiteOption(fPane.getWindow(), "test");
+		toTest = new AddSiteOption(fPane, "test");
 		toTest.timeZoneDiff = -2;
 		assertTrue(toTest.getTimeZone() == -2);
 	}

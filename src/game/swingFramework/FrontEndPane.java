@@ -415,7 +415,13 @@ public class FrontEndPane {
 		}
 		for (Site s: this.processSimulator.GetSites()) {
 			for (Module m: s.getModules()) {
-				if (!m.isComplete()) {
+				try {
+					if (!m.isComplete() && Float.parseFloat(this.globalParams.get("UsrMoney")) >= 0) {
+						return;
+					}
+				}
+				catch (NumberFormatException e) {
+					this.globalParams.put("UsrMoney", "1000000.0");
 					return;
 				}
 			}
@@ -426,7 +432,7 @@ public class FrontEndPane {
 		for (Site s: this.processSimulator.GetSites()) {
 			for (Module m: s.getModules()) {
 				rep += "\nModule " + m.getName() + " (Development Method: " + m.getDevelopmentMethod()+")";
-				for (int i = 0; i < 7; i++) {
+				for (int i = 0; i < m.sectionsCompleted(); i++) {
 					switch (i) {
 						case 0: rep += "\n\tDesign:\n" +
 								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
@@ -454,5 +460,8 @@ public class FrontEndPane {
 			}
 		}
 		FinalReport f = new FinalReport(rep);
+		if (Float.parseFloat(this.globalParams.get("UsrMoney")) <= 0) {
+			JOptionPane.showMessageDialog(this.getWindow(), "You have run out of money. Your developers refuse to work for you anymore. Your project is finished");
+		}
 	}
 }

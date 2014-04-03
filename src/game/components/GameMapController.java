@@ -179,7 +179,7 @@ MouseWheelListener {
         		this.optionPane.setVisible(false);
         		this.optionPane.dispose();
         	}
-        	this.optionPane = new AddSiteOption(this.parentComp.getWindow(), "Add Site");
+        	this.optionPane = new AddSiteOption(this.parentComp, "Add Site");
         	this.optionPane.setVisible(true);
 
            String name = this.optionPane.getSiteName();
@@ -432,6 +432,10 @@ MouseWheelListener {
 					siteResponse.setText("No Modules currently at this site");
 					return;
 				}
+				float mon = Float.parseFloat(parentComp.getGlobalParam("UsrMoney"));
+				int devday = currSiteQuer.costDeveloperDay;
+				float newMon = mon - ( 0.1f * devday);
+				parentComp.updateGlobalParam("UsrMoney", newMon+"");
 				String rep = "";
 				if (currSiteQuer.isRussAsian) {
 					for (Module m : currSiteQuer.getModules()) {
@@ -462,6 +466,10 @@ MouseWheelListener {
 					siteResponse.setText("No Modules currently at this site");
 					return;
 				}
+				float mon = Float.parseFloat(parentComp.getGlobalParam("UsrMoney"));
+				int devday = currSiteQuer.costDeveloperDay;
+				float newMon = mon - ( 0.5f * devday);
+				parentComp.updateGlobalParam("UsrMoney", newMon+"");
 				String rep = "";
 				
 				for (Module m: currSiteQuer.getModules()) {
@@ -499,6 +507,10 @@ MouseWheelListener {
 					siteResponse.setText("No Modules currently at this site");
 					return;
 				}
+				float mon = Float.parseFloat(parentComp.getGlobalParam("UsrMoney"));
+				int devday = currSiteQuer.costDeveloperDay;
+				float newMon = mon - ( 2.0f * devday);
+				parentComp.updateGlobalParam("UsrMoney", newMon+"");
 				String rep = "";
 				
 				for (Module m: currSiteQuer.getModules()) {
@@ -573,6 +585,10 @@ MouseWheelListener {
 					siteResponse.setText("No Modules currently at this site");
 					return;
 				}
+				float mon = Float.parseFloat(parentComp.getGlobalParam("UsrMoney"));
+				int devday = currSiteQuer.costDeveloperDay;
+				float newMon = mon - ( 7.0f * devday);
+				parentComp.updateGlobalParam("UsrMoney", newMon+"");
 				String rep = "";
 				
 				for (Module m: currSiteQuer.getModules()) {

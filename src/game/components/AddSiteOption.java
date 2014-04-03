@@ -4,6 +4,7 @@ import game.swingFramework.FrontEndPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -25,14 +26,19 @@ public class AddSiteOption extends JDialog {
 	public JTextField timeZone;
 	public int effD;
 	public int costD;
+	private FrontEndPane owne;
 	public boolean cancelled = true;
 	
 	
-	public AddSiteOption(Frame owner, String title) {
-		super(owner, title, Dialog.ModalityType.DOCUMENT_MODAL);
+	public AddSiteOption(FrontEndPane owner, String title) {
+		super(owner.getWindow(), title, Dialog.ModalityType.DOCUMENT_MODAL);
+		this.owne = owner;
 		JPanel btnPanel = new JPanel();
 		JButton okBtn = new JButton("Accept");
 		JButton noBtn = new JButton("Cancel");
+		this.setMinimumSize(new Dimension(700, 300));
+		this.setPreferredSize(new Dimension(700, 300));
+		this.setMaximumSize(new Dimension(700, 300));
 		btnPanel.add(okBtn);
 		okBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -59,9 +65,9 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(this.numEmp);
 		inputPanel.add(new JLabel("Time Zone Hours Difference:"));
 		inputPanel.add(this.timeZone);
-		inputPanel.add(new JLabel("Cost of Developer-Day:"));
+		inputPanel.add(new JLabel("<html>Cost of Developer-Day measured in Euros: enter a positive number or default values will be set</html>"));
 		inputPanel.add(this.costDev);
-		inputPanel.add(new JLabel("Effort Per Developer-Day:"));
+		inputPanel.add(new JLabel("<html>Effort Per Developer-Day measured as the percentage per day the developer actually works: enter a number from 1-100 or default values will be set</html>"));
 		inputPanel.add(this.effDev);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
@@ -97,7 +103,15 @@ public class AddSiteOption extends JDialog {
 			this.costD = Integer.parseInt(this.costDev.getText());
 		}
 		catch (NumberFormatException e) {
-			this.costD = 4;
+			try {
+				this.costD = Integer.parseInt(this.owne.getGlobalParam("AvgCostDevDay"));
+			}
+			catch (NumberFormatException e2) {
+				this.costD = 4;
+			}
+			if (this.costD < 0) {
+				this.costD = 4;
+			}
 			this.costDev.setText(this.costD+"");
 			return;
 		}
@@ -105,7 +119,15 @@ public class AddSiteOption extends JDialog {
 			this.effD = Integer.parseInt(this.effDev.getText());
 		}
 		catch (NumberFormatException e) {
-			this.effD = 10;
+			try {
+				this.effD = Integer.parseInt(this.owne.getGlobalParam("AvgEffDevDay"));
+			}
+			catch (NumberFormatException e2) {
+				this.effD = 90;
+			}
+			if (this.effD < 1 || this.effD > 100) {
+				this.effD = 90;
+			}
 			this.effDev.setText(this.effD+"");
 			return;
 		}

@@ -195,10 +195,13 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		g.drawString(toWrite2, x, 45.0f);
 		g.drawString(toWrite3, x, 60.0f);
 		g.drawString(toWrite4, x, 75.0f);
-		
+		String toWrite5 = "Money Remaining: " + this.parentComp.getGlobalParam("UsrMoney") + " Euros";
+		g.drawString(toWrite5, x, 90.0f);
 
+		
+		int yH = 105;
 		if (this.parentComp.canPause()) {
-			this.pause.onResize(new VectorI(((int)x), 90), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.pause.onResize(new VectorI(((int)x), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			if (this.parentComp.isPaused()) {
 				this.pause.setPressed();
 			}
@@ -206,13 +209,18 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 				this.pause.release();
 			}
 			this.pause.onDraw(g);
+			yH += (this.windSize.y / 14);
 		}
+
 		if (this.parentComp.canStartSim()) {
-			this.startSim.onResize(new VectorI(((int)x), (90 + (this.windSize.y / 14))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			this.startSim.onResize(new VectorI(((int)x), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			this.startSim.onDraw(g);
-			g.drawString("Sites and modules cannot be", x, (90 + (this.windSize.y / 6)));
-			g.drawString("added after sim is started.", x, (105 + (this.windSize.y / 6)));
-			this.saveScen.onResize(new VectorI(((int)x), (90 + (this.windSize.y / 5))), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
+			yH += ((this.windSize.y / 12) + 5);
+			g.drawString("Sites and modules cannot be", x, yH);
+			yH += 15;
+			g.drawString("added after sim is started.", x, yH);
+			yH += (this.windSize.y / 52);
+			this.saveScen.onResize(new VectorI(((int)x), yH), new VectorI((this.windSize.x/8),(this.windSize.y/15)));
 			this.saveScen.onDraw(g);
 		}
 		
