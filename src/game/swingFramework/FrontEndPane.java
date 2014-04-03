@@ -386,7 +386,7 @@ public class FrontEndPane {
 			for (Site s : this.processSimulator.GetSites()) {
 				if (s.getModules().size() > 0) {
 					GameState gs = new GameState(this.processSimulator.GetSites());
-					File dir = new File("customScenarios");
+					File dir = new File("Scenarios");
 				 
 					if (!dir.exists()) {
 						dir.mkdir();

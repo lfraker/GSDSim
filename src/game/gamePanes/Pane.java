@@ -129,6 +129,8 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	public int getDays() {
 		return this.parentComp.getDays();
 	}
+	
+	//UNTESTED
 	@Override
 	public void paint(Graphics g) {
 		Rectangle r = g.getClipBounds();
@@ -142,7 +144,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	}
 	
 
-	
+	//UNTESTED
 	void startListening() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -151,6 +153,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
 	}
 	
+	//UNTESTED
 	void stopListening() {
 		removeMouseListener(this);
 		removeMouseMotionListener(this);

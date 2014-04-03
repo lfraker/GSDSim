@@ -32,7 +32,7 @@ public class SettingsPaneTest {
 		assertTrue(toTest.getComponents().length == 0);
 		toTest.setupSwingPane();
 		assertTrue(toTest.isVisible());
-		assertTrue(toTest.getComponents().length > 5);
+		assertTrue(toTest.getComponentCount() > 5);
 	}
 	
 	@Test

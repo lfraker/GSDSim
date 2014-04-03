@@ -15,17 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AddSiteOption extends JDialog {
-	private int numEmployees;
-	private JTextField siteN;
-	private String siteName;
-	private JTextField numEmp;
-	private JTextField effDev;
-	private JTextField costDev;
-	private int timeZoneDiff;
-	private JTextField timeZone;
-	private int effD;
-	private int costD;
-	private boolean cancelled = true;
+	public int numEmployees;
+	public JTextField siteN;
+	public String siteName;
+	public JTextField numEmp;
+	public JTextField effDev;
+	public JTextField costDev;
+	public int timeZoneDiff;
+	public JTextField timeZone;
+	public int effD;
+	public int costD;
+	public boolean cancelled = true;
 	
 	
 	public AddSiteOption(Frame owner, String title) {
@@ -64,16 +64,16 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(new JLabel("Effort Per Developer-Day:"));
 		inputPanel.add(this.effDev);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
-
+		this.setVisible(true);
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
 		pack();
 		
 	}
-	private void noButton() {
+	public void noButton() {
 		this.setVisible(false);
 	}
 	
-	private void okButton() {
+	public void okButton() {
 		try {
 			this.siteName = this.siteN.getText();
 			if (this.siteName.length() == 0) {

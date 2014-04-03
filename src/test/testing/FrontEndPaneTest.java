@@ -363,4 +363,16 @@ public class FrontEndPaneTest {
 		toTest.endGame();
 		assertFalse(toTest.getWindow().isVisible());
 	}
+	
+	
+	@Test
+	public void startCustomSimTest() {
+		System.out.println("TEST: startCustomSimTest is not yet implemented in FrontEndPaneTest.java");
+	}
+	
+	
+	@Test
+	public void saveCustomGameScenTest() {
+		System.out.println("TEST: saveCustomGameScenTest is not yet implemented in FrontEndPaneTest.java");
+	}
 }

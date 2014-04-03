@@ -24,6 +24,8 @@ public class Button {
 		this.text = tex;
 	}
 	
+	
+	//UNTESTED
 	public void onDraw(Graphics2D g) {
 		g.setColor(Color.WHITE);
 
@@ -50,7 +52,7 @@ public class Button {
 	}
 	
 	public void release() {
-		this.setPressed(false);
+		this.pressed = false;
 	}
 	
 	public boolean clickedInside(Point p) {
@@ -73,9 +75,6 @@ public class Button {
 		return pressed;
 	}
 
-	public void setPressed(boolean pressed) {
-		this.pressed = pressed;
-	}
-	
+
 	
 }

@@ -21,6 +21,7 @@ public class Slider {
 		this.dimens = dim;
 	}
 	
+	//UNTESTED
 	public void onDraw(Graphics2D g) {
 		g.setColor(Color.WHITE);
 		g.fillRoundRect((this.topLeft.x - 8), (this.topLeft.y - 8), this.dimens.x, this.dimens.y, 15, 15);

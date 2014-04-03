@@ -100,6 +100,11 @@ MouseWheelListener {
         }
     }
 
+    
+    //UNTESTED
+    /*
+     * Only method in this class that is not a library method.
+     */
     public void mouseClicked(MouseEvent e) {
         Point center = this.parentComp.getCenter();
 
