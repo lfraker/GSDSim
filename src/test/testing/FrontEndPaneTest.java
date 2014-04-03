@@ -119,7 +119,7 @@ public class FrontEndPaneTest {
 	@Test
 	public void getDayLengthTest() {
 		toTest.setupFrame();
-		assertTrue((toTest.getDayLength()/100) == 450000000);
+		assertTrue((toTest.getDayLength()/100) > 50000000 && (toTest.getDayLength()/1000) < 300000000);
 	}
 	
 	@Test
@@ -361,7 +361,7 @@ public class FrontEndPaneTest {
 	public void endGameTest() {
 		toTest.setupFrame();
 		toTest.endGame();
-		assertFalse(toTest.getWindow().isVisible());
+		assertTrue(toTest.getWindow().isVisible());
 	}
 	
 	

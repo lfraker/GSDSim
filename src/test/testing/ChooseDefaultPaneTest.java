@@ -15,12 +15,13 @@ import game.gamePanes.ChooseDefaultPane;
 public class ChooseDefaultPaneTest {
 	ChooseDefaultPane toTest;
 	
-	@Test
-	public void ChooseDefaultPaneTest() {
-		System.out.println("TEST: ChooseDefaultPaneTest is not yet implemented in ChooseDefaultPaneTest.java");
-	}
+    @Test
+    public void ChooseDefaultPaneTest() {
+        System.out.println("ChooseDefaultPaneTest not implemented yet in class ChooseDefaultPaneTest.java");
+    }
+
 	
-	//Will be extended soon
+//	//Will be extended soon
 //	@Test
 //	public void ChooseDefaultPaneTest() {
 //		assertTrue(toTest == null);

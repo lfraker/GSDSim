@@ -24,6 +24,9 @@ public class GameState
 
 	public List<Site> LoadState(String filename)
 	{
+		if (filename.contains("DS")) {
+			return null;
+		}
 		//Retrieves a saved game state (sites and modules) from the given filename.
 		try 
 		{

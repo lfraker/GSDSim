@@ -58,52 +58,55 @@ public class ChooseDefaultPane extends JFrame {
 			scenarioPanel.setLayout(new BoxLayout(scenarioPanel,BoxLayout.Y_AXIS));
 
 			List<Site> currentSites = scenarios.get(i);
+			if (currentSites != null) {
+			
+		
 
-			for (int j = 0; j < currentSites.size(); j++) 
-			{
-				if (j == 0) 
+				for (int j = 0; j < currentSites.size(); j++) 
 				{
-					workers = Integer.toString(currentSites.get(j).GetNumberWorkers());
-					cities = currentSites.get(j).getName();
-				} 
-				else 
-				{
-					cities += ", " + currentSites.get(j).getName();
-					workers += ", " + currentSites.get(j).GetNumberWorkers();
+					if (j == 0) 
+					{
+						workers = Integer.toString(currentSites.get(j).GetNumberWorkers());
+						cities = currentSites.get(j).getName();
+					} 
+					else 
+					{
+						cities += ", " + currentSites.get(j).getName();
+						workers += ", " + currentSites.get(j).GetNumberWorkers();
+					}
 				}
-			}
-
-			cities1[i] = cities;
-			rB = new JRadioButton("Scenario " + (i+1));
-			scenarioPanel.add(rB);
-			scenarioPanel.add(new JLabel("Sites: " + cities));
-			scenarioPanel.add(new JLabel("Workers: " + workers));
-			bG.add(rB);
-			scenarioPanel.add(Box.createRigidArea(new Dimension(0, 30)));
-
-			ArrayList<Module> modules = new ArrayList<Module>();
-
-			for(Site s : currentSites)
-			{
-
-				ArrayList<Module>sitemodules = s.getModules();
-				for(Module m : sitemodules)
+	
+				cities1[i] = cities;
+				rB = new JRadioButton("Scenario " + (i+1));
+				scenarioPanel.add(rB);
+				scenarioPanel.add(new JLabel("Sites: " + cities));
+				scenarioPanel.add(new JLabel("Workers: " + workers));
+				bG.add(rB);
+				scenarioPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+	
+				ArrayList<Module> modules = new ArrayList<Module>();
+	
+				for(Site s : currentSites)
 				{
-					modules.add(m);
+	
+					ArrayList<Module>sitemodules = s.getModules();
+					for(Module m : sitemodules)
+					{
+						modules.add(m);
+					}
+				}	
+	
+				for (int m = 0; m < modules.size(); m++) 
+				{
+					scenarioPanel.add(new JLabel("Name: " + modules.get(m).getName()));
+					scenarioPanel.add(new JLabel("Hours: " + modules.get(m).getEstimate()));
+					//scenarioPanel.add(new JLabel("Site: " + scenarios.get(i).modules[m].sites[0]));
+					scenarioPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 				}
-			}	
-
-			for (int m = 0; m < modules.size(); m++) 
-			{
-				scenarioPanel.add(new JLabel("Name: " + modules.get(m).getName()));
-				scenarioPanel.add(new JLabel("Hours: " + modules.get(m).getEstimate()));
-				//scenarioPanel.add(new JLabel("Site: " + scenarios.get(i).modules[m].sites[0]));
-				scenarioPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+	
+				scenariosContainer.add(scenarioPanel);
 			}
-
-			scenariosContainer.add(scenarioPanel);
 		}
-
 
 		this.add(scenariosContainer);
 
