@@ -10,4 +10,4 @@ Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):EASY
 Seconds Per Day (enter a number between 1-200):6
 Average Cost of Developer Day measured in Euros (enter a value greater than zero) PCode=AvgCostDevDay:10
 Average Effort per Developer Day measured as a percentage of the day that the developer is actually working (enter a value from 1-100) PCode=AvgEffDevDay:10
-User's Money Supply measured in Euros (enter a value greater than zero) PCode=UsrMoney:100
+User's Money Supply measured in Euros (enter a value greater than zero) PCode=UsrMoney:100000

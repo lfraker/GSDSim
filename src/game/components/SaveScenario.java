@@ -4,6 +4,7 @@ import game.swingFramework.FrontEndPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -21,6 +22,9 @@ public class SaveScenario extends JDialog {
 	
 	public SaveScenario(Frame owner, String title, FrontEndPane f) {
 		super(owner, title, Dialog.ModalityType.DOCUMENT_MODAL);
+		this.setMinimumSize(new Dimension(300, 100));
+		this.setPreferredSize(new Dimension(300, 100));
+		this.setMaximumSize(new Dimension(300, 100));
 		JPanel btnPanel = new JPanel();
 		JButton okBtn = new JButton("Save");
 		JButton noBtn = new JButton("Cancel");

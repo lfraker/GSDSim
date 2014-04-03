@@ -47,7 +47,7 @@ public class FrontEndPane {
 	public JTabbedPane frames;
 	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(1100, 700);
 	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(1100, 700);
-	private static final int DEFAULT_DELAY_MILLIS = 1000 / 15;
+	private static final int DEFAULT_DELAY_MILLIS = 1000 / 50;
 	private long lastTickNanos;
 	public Timer timer;
 	public SettingsPane settings;
@@ -197,6 +197,14 @@ public class FrontEndPane {
 				{
 					//New Day..
 					this.dayCount++;
+					
+					for (Site s: this.processSimulator.GetSites()) {
+						if (s.getModules().size() > 0) {
+							float mon = Float.parseFloat(this.getGlobalParam("UsrMoney"));
+							float newMon = (mon - s.costDeveloperDay);
+							this.updateGlobalParam("UsrMoney", newMon+"");
+						}
+					}
 				}
 
 				//this.processSimulator.SaveState();

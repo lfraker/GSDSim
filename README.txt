@@ -47,15 +47,15 @@ FEATURES OVERVIEW
 
 	Module Completion Calculator - 
 
-	End of Game Report - 
+	End of Game Report - When the game ends, and all modules complete, or the user runs out of money, the game window will close and the end of game report will open. This report will show the original estimates alongside the actual time taken for each module. The user has the ability to save this report by entering a file name at the bottom and clicking save.
 
 	Game Score Calculator - 
 
 	Problem Simulator - 
 
-	Intervention Interface - 
+	Intervention Interface - To use the intervention interface, when you are on the map tab, click the intervention button to open up the intervention tab. The different interventions are listed here. along with buttons to ‘enact the intervention’.
 
-	Inquiry Interface - 	
+	Inquiry Interface - Once the simulation has started and you are viewing the status screen, click on any site’s dot to open the query interface. In the query interface, click on any of the button’s to query the site, and the output will be displayed in the text area at the bottom.
 
 
 

@@ -13,7 +13,7 @@ public class Site {
 	int timezone;
 	String siteName;
 	MapMarkerDot mapMarker;
-	int costDeveloperDay = 4;
+	public int costDeveloperDay = 4;
 	int effortDeveloperDay = 10;
 	double coordinates[] = new double[2];
 	public boolean isRussAsian;
