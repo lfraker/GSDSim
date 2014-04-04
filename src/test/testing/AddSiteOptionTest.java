@@ -94,8 +94,8 @@ public class AddSiteOptionTest {
 	public void getEffortDevTest() {
 		fPane.setupFrame();
 		toTest = new AddSiteOption(fPane, "test");
-		toTest.effD = 55;
-		assertTrue(toTest.getEffortDev() == 55);
+		toTest.effD = 1.0f;
+		assertTrue(toTest.getEffortDev() == 1.0);
 	}
 	
 	@Test

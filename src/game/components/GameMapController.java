@@ -186,7 +186,7 @@ MouseWheelListener {
            int nEmp = this.optionPane.getNumberEmployees();
            int tZ = this.optionPane.getTimeZone();
            int cD = this.optionPane.getCostDev();
-           int eD = this.optionPane.getEffortDev();
+           float eD = this.optionPane.getEffortDev();
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
             	boolean isRA = false;
             	if (x > 31.99 && y < 77.76 && y > 46.55) {

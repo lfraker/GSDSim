@@ -24,7 +24,7 @@ public class AddSiteOption extends JDialog {
 	public JTextField costDev;
 	public int timeZoneDiff;
 	public JTextField timeZone;
-	public int effD;
+	public float effD;
 	public int costD;
 	private FrontEndPane owne;
 	public boolean cancelled = true;
@@ -67,7 +67,7 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(this.timeZone);
 		inputPanel.add(new JLabel("<html>Cost of Developer-Day measured in Euros: enter a positive number or default values will be set</html>"));
 		inputPanel.add(this.costDev);
-		inputPanel.add(new JLabel("<html>Effort Per Developer-Day measured as the percentage per day the developer actually works: enter a number from 1-100 or default values will be set</html>"));
+		inputPanel.add(new JLabel("<html>Effort Per Developer-Day: Efficiency of developers. 1.0 is normal.</html>"));
 		inputPanel.add(this.effDev);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
@@ -116,17 +116,17 @@ public class AddSiteOption extends JDialog {
 			return;
 		}
 		try {
-			this.effD = Integer.parseInt(this.effDev.getText());
+			this.effD = Float.parseFloat(this.effDev.getText());
 		}
 		catch (NumberFormatException e) {
 			try {
-				this.effD = Integer.parseInt(this.owne.getGlobalParam("AvgEffDevDay"));
+				this.effD = Float.parseFloat(this.owne.getGlobalParam("AvgEffDevDay"));
 			}
 			catch (NumberFormatException e2) {
-				this.effD = 90;
+				this.effD = 0.9f;
 			}
-			if (this.effD < 1 || this.effD > 100) {
-				this.effD = 90;
+			if (this.effD < 0 || this.effD > 3) {
+				this.effD = 0.9f;
 			}
 			this.effDev.setText(this.effD+"");
 			return;
@@ -151,7 +151,7 @@ public class AddSiteOption extends JDialog {
 		return this.costD;
 	}
 	
-	public int getEffortDev() {
+	public float getEffortDev() {
 		return this.effD;
 	}
 	

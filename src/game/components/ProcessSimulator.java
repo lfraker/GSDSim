@@ -15,11 +15,33 @@ public class ProcessSimulator {
 	private List<Site> allSites = new ArrayList<Site>();
 	public long currentTime = 0;
 	public long dayLength = 24;
+	public int hoursSinceStartOfDay = 0;
+
+	private int startOfWorkingDay = 9; // 9am
+	private int endOfWorkingDay = 18; //6pm
 
 	//This is the simulator that runs at the end of the day, where random occurences are calculated
-	public void endOfDaySim(List<ModuleWrapper> mods) 
+	public void endOfDaySim() 
 	{
 		System.out.println("SIMULATING END OF DAY");
+
+		for(int i = 0; i < this.allSites.size(); i++)
+		{
+			Site currentSite = this.allSites.get(i);
+			
+			//Calculate costs from each site and subtracts it from the balance.
+
+			float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
+
+
+
+
+
+
+		}
+
+
+
 	}
 
 	public void UpdateTime(long newTime)
@@ -40,13 +62,6 @@ public class ProcessSimulator {
 		// Sets the list of sites to be used
 		this.allSites = sites;
 	}
-	
-
-//  public void addSite(Site site)
-//  {
-//	  this.allSites.add(site);
-//  }
-
 
   	public void ProcessSites()
   	{	
@@ -54,12 +69,12 @@ public class ProcessSimulator {
 		*	Loop through all the sites and update
 		* 	Run once an hour
 		*/
+		
 
-		this.SaveState("tommy.json"); //Testing the save function
+		//this.SaveState("tommy.json"); //Testing the save function
 
 		//Put these somewhere suitable
-	  	int startOfWorkingDay = 9; // 9am
-	  	int endOfWorkingDay = 18; //6pm
+	  
 
 	  	ArrayList<Module> ftsModulesToMove = new ArrayList<Module>();
 
@@ -74,20 +89,21 @@ public class ProcessSimulator {
 		{
 			Site currentSite = this.allSites.get(i);
 			boolean behind = false;
-
 			long hour = (long)(this.dayLength / 24);
 			long localTime = ( ( (this.currentTime / hour) + currentSite.getTimezone()) % 24);
 
-			//Print the local time
-			//System.out.println("LT at " + currentSite.getName() + ": " + localTime);
+			float effortPerDeveloperDay = currentSite.GetEffortPerDeveloperDay();
+
+
+
 
 			//Determine best site to move a follow the sun module to.
-			if(localTime >= startOfWorkingDay && localTime < endOfWorkingDay)
+			if(localTime >= this.startOfWorkingDay && localTime < this.endOfWorkingDay)
 			{
 				//If this site is open
-				if((endOfWorkingDay - localTime) > 1 && (endOfWorkingDay - localTime) > ftsMaxOpenHours)
+				if((this.endOfWorkingDay - localTime) > 1 && (this.endOfWorkingDay - localTime) > ftsMaxOpenHours)
 				{
-					ftsMaxOpenHours = (int)(endOfWorkingDay - localTime);
+					ftsMaxOpenHours = (int)(this.endOfWorkingDay - localTime);
 					ftsSiteToMoveTo = this.allSites.get(i);
 				}
 			}
@@ -95,15 +111,15 @@ public class ProcessSimulator {
 			{
 				int hoursTilOpen;
 
-				if(localTime >= endOfWorkingDay)
+				if(localTime >= this.endOfWorkingDay)
 				{
 					//If the site is closed for the day..
-					hoursTilOpen = (int)(startOfWorkingDay + (24-localTime));
+					hoursTilOpen = (int)(this.startOfWorkingDay + (24-localTime));
 				}
 				else
 				{
 					//If the site is not yet open..
-					hoursTilOpen = (int)(startOfWorkingDay - localTime);
+					hoursTilOpen = (int)(this.startOfWorkingDay - localTime);
 				}
 
 				if(hoursTilOpen < ftsMinHoursTilOpen)
@@ -115,7 +131,7 @@ public class ProcessSimulator {
 			
 
 			//Check site is currently active - not all sites active at all times due to timezones
-	  		if(localTime >= startOfWorkingDay && localTime < endOfWorkingDay)
+	  		if(localTime >= this.startOfWorkingDay && localTime < this.endOfWorkingDay)
 	  		{
 				ArrayList<Module> siteModules = currentSite.getModules();
 
@@ -128,6 +144,8 @@ public class ProcessSimulator {
 				{
 					Module currentMod = siteModules.get(k);
 
+					currentMod.setPerformanceModifier(effortPerDeveloperDay);
+
 					if(currentMod.isComplete())
 					{
 						//Skip complete modules or do something with them here..
@@ -138,7 +156,7 @@ public class ProcessSimulator {
 					currentMod.doWork();
 					System.out.println("Completion level: " + (currentMod.getCompletionLevel() * 100));
 
-					if(currentMod.getDevelopmentMethod() == DevelopmentMethod.FOLLOWTHESUN && ((endOfWorkingDay - localTime) == 1))
+					if(currentMod.getDevelopmentMethod() == DevelopmentMethod.FOLLOWTHESUN && ((this.endOfWorkingDay - localTime) == 1))
 	  				{
 	  					//Check if there are any follow the sun modules to be moved
 	  					ftsModulesToMove.add(currentMod);
@@ -164,7 +182,7 @@ public class ProcessSimulator {
 				{
 					if (currentSite.mapMarker.status == MapMarkerDot.Status.BEHIND)
 					{
-						System.out.println("Module has somehow caught up!");
+						System.out.println("Module has caught up!");
 					}
 					currentSite.mapMarker.setOnTime();
 				}
@@ -193,6 +211,14 @@ public class ProcessSimulator {
 	  			System.out.println("Handed over module '" + modToBeMoved.getName()  + "' to site '" + ftsSiteToMoveTo.getName() + "'.");
 	  		}
 	  		
+	  	}
+
+	  	this.hoursSinceStartOfDay++;
+
+	  	if(this.hoursSinceStartOfDay == 24)
+	  	{
+	  		this.endOfDaySim();
+	  		this.hoursSinceStartOfDay = 0;
 	  	}
 
 	  	NominalScheduleCalc();

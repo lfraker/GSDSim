@@ -13,8 +13,10 @@ public class Site {
 	int timezone;
 	String siteName;
 	MapMarkerDot mapMarker;
-	public int costDeveloperDay = 4;
-	int effortDeveloperDay = 10;
+	public int costDeveloperDay = 60;
+
+	//Percentage performance - normal = 1;
+	float effortDeveloperDay = 1;
 	double coordinates[] = new double[2];
 	public boolean isRussAsian;
 	
@@ -28,7 +30,7 @@ public class Site {
 		this.timezone = tZone;
 	}
 	
-	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone, int cD, int eD, boolean isRA) {
+	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone, int cD, float eD, boolean isRA) {
 		//this.modules = modules;
 		this.siteName = name;
 		this.noOfWorkers = noOfWorkers;
@@ -55,32 +57,6 @@ public class Site {
 	
 	public void addModule(Module m) {
 		this.modules.add(m);
-	}
-
-	public void doWork() {
-		float effortUnits = 100;
-		Module x = modules.get(0);
-		while (effortUnits > 0 && x != null) {
-			float stepRemaining = x.stepEstimates[x.currentStage];
-			if (stepRemaining > effortUnits) {
-				x.stepEstimates[x.currentStage] -= effortUnits;
-				x.totalEstimate -= effortUnits;
-				effortUnits = 0;
-			} else {
-				x.totalEstimate -= stepRemaining;
-				effortUnits -= stepRemaining;
-				x.stepEstimates[x.currentStage] = 0;
-				System.out.println("Completing stage " + x.currentStage);
-				x.currentStage++;
-				if (x.getEstimate() == 0) {
-					x.complete();
-					modules.remove(0);
-					if (!modules.isEmpty()) {
-						x = modules.get(0);
-					}
-				}
-			}
-		}
 	}
 
 	public int getTimezone() {
@@ -120,6 +96,26 @@ public class Site {
 	{
 		this.modules.remove(m);
 		s.addModule(m);
+	}
+
+	public void SetCostDeveloperDay(int cdd)
+	{
+		this.costDeveloperDay = cdd; 
+	}
+
+	public int GetCostDeveloperDay()
+	{
+		return this.costDeveloperDay;
+	}
+
+	public void SetEffortPerDeveloperDay(float edd)
+	{
+		this.effortDeveloperDay = edd;
+	}
+
+	public float GetEffortPerDeveloperDay()
+	{
+		return this.effortDeveloperDay;
 	}
 
 }
