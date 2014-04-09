@@ -2,6 +2,7 @@ package game.gamePanes;
 
 import javax.swing.JFrame;
 
+import javax.swing.JDialog;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -25,7 +26,7 @@ import game.org.openstreetmap.gui.jmapviewer.Coordinate;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 //UNTESTED
-public class ChooseDefaultPane extends JFrame {
+public class ChooseDefaultPane extends JDialog {
 	JRadioButton rB;
 	ButtonGroup bG;
 	JPanel okPanel;

@@ -47,7 +47,7 @@ public class FrontEndPane {
 	public JTabbedPane frames;
 	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(1100, 700);
 	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(1100, 700);
-	private static final int DEFAULT_DELAY_MILLIS = 1000 / 50;
+	private static final int DEFAULT_DELAY_MILLIS = 1000 / 400;
 	private long lastTickNanos;
 	public Timer timer;
 	public SettingsPane settings;
@@ -72,6 +72,7 @@ public class FrontEndPane {
 	private int zoom;
 	public boolean timeStart = false;
 	private boolean loadedSim = false;
+	private FinalReport finReport;
 	
 	
 	
@@ -80,6 +81,8 @@ public class FrontEndPane {
 		this.frames = new JTabbedPane(JTabbedPane.TOP + JTabbedPane.HORIZONTAL);
 		this.frames.setMinimumSize(new Dimension(MINIMUM_WINDOW_SIZE.x, MINIMUM_WINDOW_SIZE.y));
 		this.frames.setPreferredSize(new Dimension(DEFAULT_WINDOW_SIZE.x, DEFAULT_WINDOW_SIZE.y));
+		this.getWindow().setMinimumSize(new Dimension(DEFAULT_WINDOW_SIZE.x - 100, DEFAULT_WINDOW_SIZE.y - 100));
+		this.getWindow().setPreferredSize(new Dimension(DEFAULT_WINDOW_SIZE.x, DEFAULT_WINDOW_SIZE.y));
 		this.settings = new SettingsPane(this);
 		this.modules = new SetModulesPane(this);
 		this.siteStatus = new JMapViewer(this);
@@ -177,6 +180,10 @@ public class FrontEndPane {
 			endGame();
 		}
 		else {
+			if (!this.finReport.isVisible()) {
+				System.exit(0);
+			}
+
 			return;
 		}
 		long hour = (long)(this.dayTime / 24);
@@ -201,7 +208,7 @@ public class FrontEndPane {
 					for (Site s: this.processSimulator.GetSites()) {
 						if (s.getModules().size() > 0) {
 							float mon = Float.parseFloat(this.getGlobalParam("UsrMoney"));
-							float newMon = (mon - s.costDeveloperDay);
+							float newMon = (mon - (s.costDeveloperDay * s.GetNumberWorkers()));
 							this.updateGlobalParam("UsrMoney", newMon+"");
 						}
 					}
@@ -467,7 +474,7 @@ public class FrontEndPane {
 				}
 			}
 		}
-		FinalReport f = new FinalReport(rep);
+		this.finReport = new FinalReport(rep, this);
 		if (Float.parseFloat(this.globalParams.get("UsrMoney")) <= 0) {
 			JOptionPane.showMessageDialog(this.getWindow(), "You have run out of money. Your developers refuse to work for you anymore. Your project is finished");
 		}

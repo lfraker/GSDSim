@@ -36,6 +36,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -58,7 +59,7 @@ public class SettingsPane extends Pane {
 	public JTextArea followTheSun;
 	public JButton loadDefaultSites;
 	public ChooseDefaultPane loadDefaultSitesP;
-	JFrame settingsConf;
+	JDialog settingsConf;
 	JTextArea newTex;
 
 //	private JButton easy;
@@ -140,9 +141,10 @@ public class SettingsPane extends Pane {
 					settingsConf = null;
 				}
 				if (settingsConf == null) {
-					settingsConf = new JFrame("Settings File");
-					settingsConf.setMinimumSize(new Dimension(300, 300));
-					settingsConf.setPreferredSize(new Dimension(800, 500));
+					settingsConf = new JDialog(parentComp.getWindow(),"Settings File");
+					settingsConf.setMinimumSize(new Dimension(400, 300));
+					settingsConf.setPreferredSize(new Dimension(600, 400));
+					settingsConf.setMaximumSize(new Dimension(800, 500));
 					settingsConf.setLayout(new BorderLayout());
 					newTex = new JTextArea();
 					JScrollPane texWrap = new JScrollPane(newTex);

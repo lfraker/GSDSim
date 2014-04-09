@@ -13,12 +13,14 @@ import game.swingFramework.FrontEndPane;
 
 
 public class InterventionOptionTest {
+	FrontEndPane fPane = new FrontEndPane();
 	InterventionOption toTest;
 
 	//Will be extended soon
 	@Test
 	public void InterventionOptionTest() {
-		toTest = new InterventionOption();
+		fPane.setupFrame();
+		toTest = new InterventionOption(fPane);
 		assertTrue(toTest instanceof InterventionOption);
 		assertTrue(toTest.isVisible());
 		assertTrue(toTest.getComponentCount() > 0);
