@@ -19,7 +19,10 @@ public class Site {
 	float effortDeveloperDay = 1;
 	double coordinates[] = new double[2];
 	public boolean isRussAsian;
+<<<<<<< HEAD
 
+=======
+>>>>>>> mergingFix
 	public int geographicDistance, culturalDistance, temporalDistance;
 	
 	
@@ -150,6 +153,44 @@ public class Site {
 	public float GetEffortPerDeveloperDay()
 	{
 		return this.effortDeveloperDay;
+	}
+
+	public void SetTemporalDistance(int td)
+	{
+		this.temporalDistance = td;
+	}
+
+	public int GetTemporalDistance()
+	{
+		return this.temporalDistance;
+	}
+
+	public void SetCulturalDistance(int cd)
+	{
+		this.culturalDistance = cd;
+	}
+
+	public int GetCulturalDistance()
+	{
+		return this.culturalDistance;
+	}
+
+	public void SetGeographicDistance(int gd)
+	{
+		this.geographicDistance = gd;
+	}
+
+	public int GetGlobalDistance()
+	{
+		//Calculates and returns global distance
+		return this.geographicDistance + this.culturalDistance + this.temporalDistance;
+	}
+
+	public float GetFailureProbability()
+	{
+		int difficulty = 1;
+		int globalDistance = GetGlobalDistance();
+		return (float)(difficulty * (globalDistance / (globalDistance + 1)));
 	}
 
 }
