@@ -7,8 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import java.awt.*;
+import java.awt.event.*;
+
 
 public class InterventionOption extends JFrame {
+
+	public Site site;
 	
 	
 	
@@ -22,6 +27,25 @@ public class InterventionOption extends JFrame {
     	JButton cultAmbass = new JButton("Enact Intervention");
     	JButton depArch = new JButton("Enact Intervention");
     	
+
+    	kickOff.addActionListener(new ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					HoldMeeting();
+				}
+		});
+
+		cultAmbass.addActionListener(new ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					PlaceAmbassador();
+				}
+		});
+
+		depArch.addActionListener(new ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					AllocateDeputyArchitect();
+				}
+		});
+
     	
     	this.add(new JLabel("Hold kick-off meeting (Cost: )"));
     	this.add(kickOff);
@@ -35,8 +59,20 @@ public class InterventionOption extends JFrame {
 		
 		
 	}
+
+	public void HoldMeeting()
+	{
+		
+	}
 	
+	public void PlaceAmbassador()
+	{
+
+	}
 	
-	
+	public void AllocateDeputyArchitect()
+	{
+
+	}
 	
 }

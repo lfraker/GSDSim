@@ -30,7 +30,6 @@ public class ProcessSimulator {
 			Site currentSite = this.allSites.get(i);
 			
 			//Calculate costs from each site and subtracts it from the balance.
-
 			float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
 
 
