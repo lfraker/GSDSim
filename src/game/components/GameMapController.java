@@ -67,7 +67,7 @@ MouseWheelListener {
     private Point lastDragPoint;
     
     private AddSiteOption optionPane;
-    private JFrame inquirPane;
+    private JDialog inquirPane;
     private SaveScenario savePane;
     private InterventionOption iPane;
     private Site currSiteQuer;
@@ -145,7 +145,7 @@ MouseWheelListener {
     			this.iPane.dispose();
     			this.iPane = null;
     		}
-    		this.iPane = new InterventionOption();
+    		this.iPane = new InterventionOption(this.parentComp);
     		return;
     		
     	}
@@ -383,11 +383,11 @@ MouseWheelListener {
     		this.siteResponse = null;
     	}
     	currSiteQuer = s;
-    	this.inquirPane = new JFrame("Inquiry at Site: " + s.getName());
+    	this.inquirPane = new JDialog(this.parentComp.getWindow(), ("Inquiry at Site: " + s.getName()));
     	this.inquirPane.setLayout(new GridLayout(0,2));
-    	this.inquirPane.setMinimumSize(new Dimension(600, 700));
+    	this.inquirPane.setMinimumSize(new Dimension(500, 600));
 		this.inquirPane.setPreferredSize(new Dimension(600, 700));
-		this.inquirPane.setMaximumSize(new Dimension(600, 700));
+		this.inquirPane.setMaximumSize(new Dimension(700, 750));
 		
 
 		
@@ -645,19 +645,47 @@ MouseWheelListener {
     	});
     	
 
-
+    	JPanel onSchePan = new JPanel();
+    	onSchePan.setLayout(new GridLayout(3,0));
+    	onSchePan.add(new JLabel());
+    	onSchePan.add(onSched);
+    	onSchePan.setOpaque(false);
+    	
+    	JPanel repStatPan = new JPanel();
+    	repStatPan.setLayout(new GridLayout(3,0));
+    	repStatPan.add(new JLabel());
+    	repStatPan.add(repStat);
+    	repStatPan.setOpaque(false);
+    	
+    	JPanel completTasksPan = new JPanel();
+    	completTasksPan.setLayout(new GridLayout(3,0));
+    	completTasksPan.add(new JLabel());
+    	completTasksPan.add(completTasks);
+    	completTasksPan.setOpaque(false);
+    	
+    	JPanel vidConfPan = new JPanel();
+    	vidConfPan.setLayout(new GridLayout(3,0));
+    	vidConfPan.add(new JLabel());
+    	vidConfPan.add(vidConf);
+    	vidConfPan.setOpaque(false);
+    	
+    	JPanel makeVisPan = new JPanel();
+    	makeVisPan.setLayout(new GridLayout(3,0));
+    	makeVisPan.add(new JLabel());
+    	makeVisPan.add(makeVis);
+    	makeVisPan.setOpaque(false);
 
 
     	this.inquirPane.add(new JLabel("<html>Send 'are you on schedule' email. (Cost: 0 dev-days)</html>"));
-    	this.inquirPane.add(onSched);
+    	this.inquirPane.add(onSchePan);
     	this.inquirPane.add(new JLabel("<html>Request status of modules email. (Cost: .1 dev-days)</html>"));
-    	this.inquirPane.add(repStat);
+    	this.inquirPane.add(repStatPan);
     	this.inquirPane.add(new JLabel("<html>Request completed tasks list. (Cost: .5 dev-days)</html>"));
-    	this.inquirPane.add(completTasks);
+    	this.inquirPane.add(completTasksPan);
     	this.inquirPane.add(new JLabel("<html>Hold video conference. (Cost: 2.0 dev-days)</html>"));
-    	this.inquirPane.add(vidConf);
+    	this.inquirPane.add(vidConfPan);
     	this.inquirPane.add(new JLabel("<html>Visit site. (Cost: 7.0 dev-days)</html>"));
-    	this.inquirPane.add(makeVis);
+    	this.inquirPane.add(makeVisPan);
     	this.inquirPane.add(new JLabel("<html>Site " + s.getName() + "'s response:</html>"));
     	this.inquirPane.add(scrollRes);
 

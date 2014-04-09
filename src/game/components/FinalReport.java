@@ -1,5 +1,7 @@
 package game.components;
 
+import game.swingFramework.FrontEndPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,17 +23,18 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 
-public class FinalReport extends JFrame {
+public class FinalReport extends JDialog {
 	public JTextArea report;
 	public JTextArea fileName;
-	public JFrame curr;
+	public JDialog curr;
 	
-	public FinalReport (String temp) {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FinalReport (String temp, FrontEndPane f) {
+		super(f.getWindow(), "Final Game Report");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		curr = this;
-		this.setMinimumSize(new Dimension(700, 750));
-		this.setPreferredSize(new Dimension(700, 750));
+		this.setMinimumSize(new Dimension(500, 550));
+		this.setPreferredSize(new Dimension(600, 650));
 		this.setMaximumSize(new Dimension(700, 750));
 		JPanel bottomPan = new JPanel();
 		JButton save = new JButton("Save Report");
@@ -43,7 +47,6 @@ public class FinalReport extends JFrame {
 		JScrollPane repScroll = new JScrollPane(report);
 		repScroll.setBorder(new LineBorder(Color.BLACK));
 
-		this.add(repScroll, BorderLayout.CENTER);
 
 		
 		save.addActionListener(new ActionListener(){
@@ -89,7 +92,9 @@ public class FinalReport extends JFrame {
 		bottomPan.setLayout(new GridLayout(0,2));
 		bottomPan.add(this.fileName);
 		bottomPan.add(save);
-		this.add(bottomPan, BorderLayout.SOUTH);
+		this.add(bottomPan, BorderLayout.NORTH);
+		this.add(repScroll, BorderLayout.CENTER);
+
 		
 		this.pack();
 		this.setVisible(true);

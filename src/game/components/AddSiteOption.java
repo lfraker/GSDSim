@@ -36,9 +36,9 @@ public class AddSiteOption extends JDialog {
 		JPanel btnPanel = new JPanel();
 		JButton okBtn = new JButton("Accept");
 		JButton noBtn = new JButton("Cancel");
-		this.setMinimumSize(new Dimension(700, 300));
-		this.setPreferredSize(new Dimension(700, 300));
-		this.setMaximumSize(new Dimension(700, 300));
+		this.setMinimumSize(new Dimension(550, 300));
+		this.setPreferredSize(new Dimension(600, 325));
+		this.setMaximumSize(new Dimension(700, 325));
 		btnPanel.add(okBtn);
 		okBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -65,7 +65,7 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(this.numEmp);
 		inputPanel.add(new JLabel("Time Zone Hours Difference:"));
 		inputPanel.add(this.timeZone);
-		inputPanel.add(new JLabel("<html>Cost of Developer-Day measured in Euros: enter a positive number or default values will be set</html>"));
+		inputPanel.add(new JLabel("<html>Cost Per Developer Per Day measured in Euros: enter a positive number or default values will be set</html>"));
 		inputPanel.add(this.costDev);
 		inputPanel.add(new JLabel("<html>Effort Per Developer-Day: Efficiency of developers. 1.0 is normal.</html>"));
 		inputPanel.add(this.effDev);

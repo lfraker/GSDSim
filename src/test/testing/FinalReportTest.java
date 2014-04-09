@@ -14,12 +14,14 @@ import game.swingFramework.FrontEndPane;
 
 
 public class FinalReportTest {
+	FrontEndPane fPane = new FrontEndPane();
 	FinalReport toTest;
 
 	//Will be extended soon
 	@Test
 	public void FinalReportTest() {
-		toTest = new FinalReport("test");
+		fPane.setupFrame();
+		toTest = new FinalReport("test", fPane);
 		assertTrue(toTest instanceof FinalReport);
 		assertTrue(toTest.isVisible());
 		assertTrue(toTest.getComponentCount() > 0);
