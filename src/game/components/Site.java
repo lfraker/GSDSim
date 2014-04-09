@@ -150,4 +150,11 @@ public class Site {
 		return this.geographicDistance + this.culturalDistance + this.temporalDistance;
 	}
 
+	public float GetFailureProbability()
+	{
+		int difficulty = 1;
+		int globalDistance = GetGlobalDistance();
+		return (float)(difficulty * (globalDistance / (globalDistance + 1)));
+	}
+
 }

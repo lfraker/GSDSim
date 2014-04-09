@@ -31,7 +31,9 @@ public class ProcessSimulator {
 			
 			//Calculate costs from each site and subtracts it from the balance.
 
-			float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
+			//float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
+
+
 
 
 
@@ -252,6 +254,20 @@ public class ProcessSimulator {
 	{
 
 	}
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	
 
 	public long NominalScheduleCalc()
 	{
