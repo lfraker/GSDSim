@@ -53,7 +53,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 	public JTabbedPane frameWork;
 	private static final int MILLIS_TO_WAIT_FOR_REPEAT = 5;
 	public Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
-	public Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
+	public Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "Start Sim");
 	public Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
     private SaveScenario savePane;
 

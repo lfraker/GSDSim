@@ -187,7 +187,7 @@ public class FrontEndPane {
 			endGame();
 		}
 		else {
-			if (!this.finReport.isVisible()) {
+			if (this.finReport == null || !this.finReport.isVisible()) {
 				System.exit(0);
 			}
 

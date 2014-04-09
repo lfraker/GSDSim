@@ -72,7 +72,7 @@ public class JMapViewer extends JPanel implements TileLoaderListener {
     protected boolean mapRectanglesVisible;
     protected boolean mapPolygonsVisible;
 	private Button pause = new Button(new VectorI(5,5), new VectorI(5,5), "Pause");
-	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "StartSim");
+	private Button startSim = new Button(new VectorI(5,5), new VectorI(5,5), "Start Sim");
 	private Button saveScen = new Button(new VectorI(5,5), new VectorI(5,5), "Save Scenario");
 	private Button intervene = new Button(new VectorI(5,5), new VectorI(5,5), "Interventions");
 

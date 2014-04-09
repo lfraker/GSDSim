@@ -6,10 +6,12 @@ import static org.junit.Assert.*;
 import game.components.Button;
 import game.components.Difficulty;
 import game.components.GameState;
+import game.components.Module;
 import game.components.Site;
 import game.gamePanes.SetModulesPane;
 import game.gamePanes.SettingsPane;
 import game.org.openstreetmap.gui.jmapviewer.JMapViewer;
+import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import game.swingFramework.FrontEndPane;
 import game.backend.VectorI;
 
@@ -196,6 +198,7 @@ public class FrontEndPaneTest {
 	
 	@Test
 	public void isPausedTest() {
+
 		toTest.setupFrame();
 		toTest.paused = false;
 		toTest.setCanPause();
@@ -306,6 +309,7 @@ public class FrontEndPaneTest {
 	
 	@Test
 	public void startLoadedSimTest() {
+
 		toTest.setupFrame();
 		assertFalse(toTest.timeStart);	
 		int tempInd = toTest.frames.indexOfTab("Settings");
@@ -317,6 +321,7 @@ public class FrontEndPaneTest {
 	
 	@Test
 	public void loadedSimTest() {
+
 		toTest.setupFrame();
 		toTest.loadedSim();
 		assertTrue(toTest.isSimLoaded());
@@ -324,14 +329,17 @@ public class FrontEndPaneTest {
 	
 	@Test
 	public void isSimLoadedTest() {
+
 		toTest.setupFrame();
 		assertFalse(toTest.isSimLoaded());
 		toTest.loadedSim();
 		assertTrue(toTest.isSimLoaded());
+
 	}
 	
 	@Test
 	public void pickSitesTest() {
+
 		toTest.setupFrame();
 		int tempInd = toTest.frames.indexOfTab("Settings");
 		int tempInd2 = toTest.frames.indexOfTab("Sites");
@@ -362,17 +370,9 @@ public class FrontEndPaneTest {
 		toTest.setupFrame();
 		toTest.endGame();
 		assertTrue(toTest.getWindow().isVisible());
+		toTest.doClose();
 	}
 	
 	
-	@Test
-	public void startCustomSimTest() {
-		System.out.println("TEST: startCustomSimTest is not yet implemented in FrontEndPaneTest.java");
-	}
-	
-	
-	@Test
-	public void saveCustomGameScenTest() {
-		System.out.println("TEST: saveCustomGameScenTest is not yet implemented in FrontEndPaneTest.java");
-	}
+
 }
