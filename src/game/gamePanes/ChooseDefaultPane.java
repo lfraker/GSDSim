@@ -24,6 +24,7 @@ import game.gamePanes.SettingsPane;
 import game.components.*;
 import game.org.openstreetmap.gui.jmapviewer.Coordinate;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import game.swingFramework.FrontEndPane;
 
 //UNTESTED
 public class ChooseDefaultPane extends JDialog {
@@ -38,7 +39,8 @@ public class ChooseDefaultPane extends JDialog {
 	List<Site> sites;
 	List<List<Site>> scenarios;
 
-	public ChooseDefaultPane() {
+	public ChooseDefaultPane(FrontEndPane fP) {
+		super(fP.getWindow(), "Choose Default Scenarios");
 		bG = new ButtonGroup();
 		this.setSize(new Dimension(800, 520));
 		this.setLocationRelativeTo(null);

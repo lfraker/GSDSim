@@ -59,7 +59,7 @@ public class SettingsPane extends Pane {
 	public JTextArea followTheSun;
 	public JButton loadDefaultSites;
 	public ChooseDefaultPane loadDefaultSitesP;
-	JDialog settingsConf;
+	public JDialog settingsConf;
 	JTextArea newTex;
 
 //	private JButton easy;
@@ -263,7 +263,7 @@ public class SettingsPane extends Pane {
 		});
 		loadDefaultSites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadDefaultSitesP = new ChooseDefaultPane();
+				loadDefaultSitesP = new ChooseDefaultPane(parentComp);
 				loadDefaultSitesP.setVisible(true);
 			}
 		});

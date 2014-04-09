@@ -27,6 +27,7 @@ public class Module
 	
 	public Module(long estimate, String name) 
 	{
+		System.out.println("EST +  " + estimate);
 		this.currentStage = 0;
 		this.origEstimate = estimate;
 		this.modName = name;
@@ -37,12 +38,14 @@ public class Module
 		this.origStepEstimates[4] = (estimate * 0.15f);
 		this.origStepEstimates[5] = (estimate * 0.15f);
 		this.origStepEstimates[6] = (estimate * 0.15f);
-
+		float test = 0;
 		for (int i = 0; i < 7; i++) 
 		{
-			this.stepEstimates[i] = addSub(this.numberGen.nextInt(2), this.origStepEstimates[i]);
+			test += this.origStepEstimates[i];
+			this.stepEstimates[i] = addSub(this.numberGen.nextInt(100), this.origStepEstimates[i]);
 			this.totalEstimate += this.stepEstimates[i]; 
 		}
+		System.out.println("EST AFFT  : " + test);
 		
 		//Development type defaults to agile
 		this.devMethod = DevelopmentMethod.AGILE;
@@ -57,11 +60,11 @@ public class Module
 		float valToChange = 0.0f;
 		int numChange = this.numberGen.nextInt(26);
 		float nVal = (numChange/100.0f);
-		switch (addOrSub) {
-			case 0:	valToChange = (val * nVal);
-				break;
-			case 1: valToChange = (val * -nVal);
-				break;
+		if (addOrSub < 50){
+			valToChange = (val * nVal);
+		}
+		else {
+			valToChange = (val * -nVal);
 		}
 		return (val + valToChange);
 	}
