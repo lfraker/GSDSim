@@ -463,7 +463,7 @@ public class FrontEndPane {
 				for (int i = 0; i < 7; i++) {
 					mWork = m.getNumberWorkers();
 					expEffTot += m.origStepEstimates[i];
-					actEffTot += m.stepEstimates[i];
+					//actEffTot += m.stepEstimates[i];
 					temMaxExp += (m.origStepEstimates[i] / m.getNumberWorkers());
 				//	temMaxAct += m.stepEstimates[i];
 //					expBudg += (m.origStepEstimates[i] * (s.GetCostDeveloperDay() * s.GetNumberWorkers()));
@@ -492,6 +492,7 @@ public class FrontEndPane {
 							break;
 					}	
 				}
+				actEffTot += m.ActualWorkDone();
 				temMaxAct += m.GetHoursElapsed();
 			}
 
