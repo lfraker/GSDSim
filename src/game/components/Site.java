@@ -221,16 +221,14 @@ public class Site {
 		}
 
 
-		// = (40075 / geographicDistance); //Circumference of the earth / distance
+		//Calculate Cultural Distance
 
-		//normalisedGeoDist = Math.min(normalisedGeoDist, 4);
+		double culturalDistance = 0;
+
 		
 
 
-
-		//return (double) (temporalDifference + geographicDistance);
-
-		return (double)(normalisedGeoDist + temporalDifference);
+		return (double)(normalisedGeoDist + temporalDifference + culturalDistance);
 	}
 
 	public static double toRad(double deg)

@@ -15,7 +15,9 @@ public class Module
 	public float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
 
-	//Time wasted due to errors
+	public int hoursElapsed;
+
+	//Time wasted due to problems
 	float wastedTime = 0;
 
 	DevelopmentMethod devMethod;
@@ -53,6 +55,7 @@ public class Module
 		//Development type defaults to agile
 		this.devMethod = DevelopmentMethod.AGILE;
 		this.numWorkers = 1;
+		this.hoursElapsed = 0;
 	}
 	
 	public String getName() {
@@ -78,6 +81,8 @@ public class Module
 
 	public void doWork() {
 		/* T - Computes work done based on number of workers, development methodology, etc */
+
+		this.hoursElapsed++;
 
 		//Example... 
 		float methodologyModifier = 1; //Can be used to dictate efficiency based on methodology
@@ -203,7 +208,7 @@ public class Module
 
 					for(int currentStep = 0; currentStep < 7; currentStep++) 
 					{
-						System.out.println(""+ currentStep + " " +stepEstimates[currentStep] + " " + workDonePerSection[currentStep] + "\n");
+						//System.out.println(""+ currentStep + " " +stepEstimates[currentStep] + " " + workDonePerSection[currentStep] + "\n");
 						workLeftToDo = (stepEstimates[currentStep] - workDonePerSection[currentStep]);
 
 						if(workLeftToDo > 0) 
@@ -325,7 +330,8 @@ public class Module
 		return this.numWorkers;
 	}
 	
-	public void setPerformanceModifier(float mod) {
+	public void setPerformanceModifier(float mod) 
+	{
 		this.performanceLevel = mod;
 	}
 
@@ -357,18 +363,47 @@ public class Module
 
 	public boolean IsOnSchedule()
 	{
+
+		if(this.isComplete())
+		{
+			return true;
+		}
+
 		//Returns true if the module is on schedule
 		if(this.devMethod == DevelopmentMethod.AGILE)
 		{
-			if(this.workDone() < this.origEstimate || this.isComplete())
-			{
-				return true;
-			}
-			else
+			if(this.hoursElapsed > this.origEstimate)
 			{
 				return false;
 			}
+
+			return false;
 		}
+		else if(this.devMethod == DevelopmentMethod.WATERFALL || this.devMethod == DevelopmentMethod.FOLLOWTHESUN)
+		{
+			int timeElapsed = this.hoursElapsed;
+			int targetSection = 0;
+
+			for(int i = 0; i < this.origStepEstimates.length; i++)
+			{
+				if(this.origStepEstimates[i] > timeElapsed)
+				{
+					break;
+				}
+
+				timeElapsed -= this.origStepEstimates[i];
+				targetSection++;
+			}
+
+
+			if(this.sectionsCompleted() >= targetSection)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		return true;
 	}
 

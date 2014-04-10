@@ -40,9 +40,24 @@ public class ProcessSimulator {
 
 			float failProb = currentSite.GetFailureProbability();
 			float r = this.rnd.nextFloat();
-			//System.out.println("Prob Sim:" + r + " : " + failProb );
+			
 
 			ArrayList currentSiteModules = currentSite.getModules();
+
+			float totalHoursEffortRequired = 0;
+
+			for(int k = 0; k < currentSiteModules.size(); k++)
+			{
+				Module currentMod = (Module)currentSiteModules.get(k);
+				totalHoursEffortRequired += currentMod.totalWorkRequired();
+			}
+
+			float averageHoursPerModule = (totalHoursEffortRequired / currentSiteModules.size());
+
+			failProb = (float)(failProb * 0.1);
+
+
+			System.out.println("Prob Sim:" + r + " : " + failProb );
 
 			if(r <= failProb && currentSiteModules.size() > 0)
 			{
