@@ -31,7 +31,7 @@ public class ModuleTest {
 		float result = toTest.addSub(0, 100f); 
 		assertTrue(result >= 100 && result <= 125f);
 		result = toTest.addSub(1, 100f); 
-		assertTrue(result <= 100f && result >= 75f);
+		assertTrue(result <= 125f && result >= 75f);
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class ModuleTest {
 	public void testPerformanceModifier()
 	{
 		toTest.setPerformanceModifier((float)1.2);
-		assertTrue(toTest.performanceLevel == 1.2);
+		assertTrue(toTest.performanceLevel == 1.2f);
 	}
 
 
