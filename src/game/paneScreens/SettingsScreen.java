@@ -1,5 +1,6 @@
 package game.paneScreens;
 
+import game.gamePanes.ChooseDefaultPane;
 import game.gamePanes.Pane;
 import game.gamePanes.SettingsPane;
 
@@ -32,8 +33,11 @@ public class SettingsScreen extends Screen {
 	
 
 	public Button easy = new Button(new VectorI(0,0), new VectorI(0,0), "easy");
-	public Button medium = new Button(new VectorI(0,0), new VectorI(0,0), "medium");
+	//public Button medium = new Button(new VectorI(0,0), new VectorI(0,0), "medium");
 	public Button hard = new Button(new VectorI(0,0), new VectorI(0,0), "hard");
+	public Button chooseCust = new Button(new VectorI(0,0), new VectorI(0,0), "Choose Custom Scenario");
+	public Button loadDef = new Button(new VectorI(0,0), new VectorI(0,0), "Pick Predefined Scenario");
+
 	public Difficulty difficulty;
 	VectorI sliderPos;
 	public Slider slide = new Slider(new VectorI(0,0), new VectorI(0,0));
@@ -119,8 +123,10 @@ public class SettingsScreen extends Screen {
 		
 		g.drawString("Length of Day: " + minu + " minutes and " + seco  + " seconds per day", ((this.screenSize.x/2.0f) - width2/2.0f) , ((this.screenSize.y/7.0f)*3.0f));
 		this.easy.onDraw(g);
-		this.medium.onDraw(g);
+		//this.medium.onDraw(g);
 		this.hard.onDraw(g);
+		this.loadDef.onDraw(g);
+		this.chooseCust.onDraw(g);
 		g.drawLine(this.lineLeft.x, this.lineLeft.y, this.lineRight.x, this.lineRight.y);
 		this.slide.onDraw(g);
 	}
@@ -146,9 +152,14 @@ public class SettingsScreen extends Screen {
 		int xCoord = (newSize.x/12);
 		int width = (newSize.x/7);
 		int height = (newSize.y/7);
-		this.easy.onResize(new VectorI((xCoord * 3),yCoord), new VectorI(width,height));
-		this.medium.onResize(new VectorI((xCoord * 5),yCoord), new VectorI(width,height));
-		this.hard.onResize(new VectorI((xCoord * 7),yCoord), new VectorI(width,height));
+		int widthBott = ((newSize.x/2) - 5);
+		int heightBott = (newSize.y/7);
+		int yCoordBott = ((newSize.y/14) * 12);
+		this.easy.onResize(new VectorI((xCoord * 4),yCoord), new VectorI(width,height));
+		//this.medium.onResize(new VectorI((xCoord * 5),yCoord), new VectorI(width,height));
+		this.hard.onResize(new VectorI((xCoord * 6),yCoord), new VectorI(width,height));
+		this.chooseCust.onResize(new VectorI(2,yCoordBott), new VectorI(widthBott,heightBott));
+		this.loadDef.onResize(new VectorI(((newSize.x / 2) + 2),yCoordBott), new VectorI(widthBott,heightBott));
 		this.lineLeft = new VectorI((this.screenSize.x/4), ((this.screenSize.y/7)*4));
 		this.lineRight = new VectorI(((this.screenSize.x/4)*3), ((this.screenSize.y/7)*4));
 		int xP = this.sliderPos.x;
@@ -175,26 +186,33 @@ public class SettingsScreen extends Screen {
 		if (this.easy.clickedInside(e.getPoint())) {
 			this.difficulty = Difficulty.EASY;
 			this.easy.setPressed();
-			this.medium.release();
+			//this.medium.release();
 			this.hard.release();
 			this.parentPane.setDifficulty(Difficulty.EASY);
 			this.parentPane.setCanPause();
 
 		}
-		if (this.medium.clickedInside(e.getPoint())) {
-			this.difficulty = Difficulty.MEDIUM;
-			this.medium.setPressed();
-			this.easy.release();
-			this.hard.release();
-			this.parentPane.setDifficulty(Difficulty.MEDIUM);
-
-		}
+//		if (this.medium.clickedInside(e.getPoint())) {
+//			this.difficulty = Difficulty.MEDIUM;
+//			this.medium.setPressed();
+//			this.easy.release();
+//			this.hard.release();
+//			this.parentPane.setDifficulty(Difficulty.MEDIUM);
+//
+//		}
 		if (this.hard.clickedInside(e.getPoint())) {
 			this.difficulty = Difficulty.HARD;
 			this.hard.setPressed();
-			this.medium.release();
+		//	this.medium.release();
 			this.easy.release();
 			this.parentPane.setDifficulty(Difficulty.HARD);
+		}
+		if (this.loadDef.clickedInside(e.getPoint())) {
+			((SettingsPane)this.parentPane).loadDefaultSitesP = new ChooseDefaultPane((this.parentPane).parentComp);
+			((SettingsPane)this.parentPane).loadDefaultSitesP.setVisible(true);
+		}
+		if (this.chooseCust.clickedInside(e.getPoint())) {
+			(this.parentPane).parentComp.pickSites();
 		}
 		
 		//writeSettings();
@@ -214,9 +232,9 @@ public class SettingsScreen extends Screen {
 								this.parentPane.setDifficulty(Difficulty.EASY);	
 								this.parentPane.setCanPause();
 								break;
-							case "MEDIUM":	this.difficulty = Difficulty.MEDIUM;
-								this.parentPane.setDifficulty(Difficulty.MEDIUM);	
-								break;
+//							case "MEDIUM":	this.difficulty = Difficulty.MEDIUM;
+//								this.parentPane.setDifficulty(Difficulty.MEDIUM);	
+//								break;
 							case "HARD":	this.difficulty = Difficulty.HARD;
 								this.parentPane.setDifficulty(Difficulty.HARD);	
 								break;
@@ -297,13 +315,13 @@ public class SettingsScreen extends Screen {
 			e.printStackTrace();
 		}
 		this.easy.release();
-		this.medium.release();
+	//	this.medium.release();
 		this.hard.release();
 		switch (difficulty) {
 			case EASY: this.easy.setPressed();
 				break;
-			case MEDIUM: this.medium.setPressed();
-				break;
+//			case MEDIUM: this.medium.setPressed();
+//				break;
 			case HARD: this.hard.setPressed();
 				break;
 		}

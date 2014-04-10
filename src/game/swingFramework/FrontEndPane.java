@@ -185,6 +185,12 @@ public class FrontEndPane {
 	
 	
 	public final void doTick() {
+		if (this.globalParams.get("UsrMoney").length() == 0) {
+			this.updateGlobalParam("UsrMoney", "100000");
+		}
+		if (this.globalParams.get("Rev6Month").length() == 0) {
+			this.updateGlobalParam("Rev6Month", "500000");
+		}
 		if (!this.gameEnded) {
 			endGame();
 		}
@@ -291,9 +297,9 @@ public class FrontEndPane {
 		switch (diff) {
 			case EASY: this.canPause = true;
 				break;
-			case MEDIUM: this.canPause = false;
-						this.paused = false;
-				break;
+//			case MEDIUM: this.canPause = false;
+//						this.paused = false;
+//				break;
 			case HARD: this.canPause = false;
 						this.paused = false;
 				break;

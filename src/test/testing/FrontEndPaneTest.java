@@ -149,8 +149,8 @@ public class FrontEndPaneTest {
 	@Test
 	public void getDifficultyTest() {
 		toTest.setupFrame();
-		toTest.difficulty = Difficulty.MEDIUM;
-		assertTrue(toTest.getDifficulty() == Difficulty.MEDIUM);
+		toTest.difficulty = Difficulty.HARD;
+		assertTrue(toTest.getDifficulty() == Difficulty.HARD);
 	}
 	
 	@Test

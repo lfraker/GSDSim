@@ -82,11 +82,11 @@ public class SettingsScreenTest {
 		toTest = new SettingsScreen(sPane);
 		toTest.onResize(new VectorI(150,175));
 
-		VectorI tL = toTest.medium.topLeft;
+		VectorI tL = toTest.hard.topLeft;
 		Point in = new Point((tL.x + 2), (tL.y + 2));
 		Point out = new Point((tL.x - 2), (tL.y - 2));
-		assertTrue(toTest.medium.clickedInside(in));
-		assertFalse(toTest.medium.clickedInside(out));
+		assertTrue(toTest.hard.clickedInside(in));
+		assertFalse(toTest.hard.clickedInside(out));
 
 
 	}
@@ -101,7 +101,7 @@ public class SettingsScreenTest {
 		assertTrue(toTest.difficulty == null);
 		assertTrue(toTest.timePerDay == 0);
 		toTest.readSettings();
-		assertTrue(toTest.difficulty == Difficulty.EASY || toTest.difficulty == Difficulty.MEDIUM || toTest.difficulty == Difficulty.HARD);
+		assertTrue(toTest.difficulty == Difficulty.EASY || toTest.difficulty == Difficulty.HARD);
 		assertTrue(toTest.timePerDay > 0);
 	}
 	

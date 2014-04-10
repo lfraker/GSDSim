@@ -175,8 +175,8 @@ public class PaneTest {
 		toTest = new SettingsPane(fPane);
 		fPane.difficulty = Difficulty.HARD;
 		assertTrue(fPane.getDifficulty() == Difficulty.HARD);
-		toTest.setDifficulty(Difficulty.MEDIUM);
-		assertTrue(fPane.getDifficulty() == Difficulty.MEDIUM);
+		toTest.setDifficulty(Difficulty.EASY);
+		assertTrue(fPane.getDifficulty() == Difficulty.EASY);
 	}
 	
 	
