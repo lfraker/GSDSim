@@ -25,7 +25,20 @@ public class ProcessSimulator {
 	private int startOfWorkingDay = 9; // 9am
 	private int endOfWorkingDay = 18; //6pm
 
+	public double interventionEffects = 0;
+
 	private Random rnd = new Random();
+
+
+	public double GetInterventionEffects()
+	{
+		return this.interventionEffects;
+	}
+
+	public void SetInterventionEffects(double interventionEff)
+	{
+		this.interventionEffects = interventionEff;
+	}
 
 	//This is the simulator that runs at the end of the day, where random occurences are calculated
 	public void endOfDaySim() 
@@ -42,7 +55,9 @@ public class ProcessSimulator {
 
 			//Check if a failure should occur
 
-			float failProb = currentSite.GetFailureProbability();
+			double adjustedInterventionEffects = (this.interventionEffects / (1 + this.interventionEffects));
+
+			float failProb = (float)(currentSite.GetFailureProbability() * (1 - adjustedInterventionEffects));
 			float r = this.rnd.nextFloat();
 			
 

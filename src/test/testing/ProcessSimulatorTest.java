@@ -94,5 +94,13 @@ public class ProcessSimulatorTest
 		assertTrue(toTest.NominalScheduleCalc() > 0);
 	}
 
+	@Test
+	public void testInterventionEffects() 
+	{
+		toTest.SetInterventionEffects(5.0d);
+		assertTrue(toTest.GetInterventionEffects() == 5.0d);
+	}
+
+
 
 }
