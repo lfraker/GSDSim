@@ -149,7 +149,7 @@ public class FrontEndPaneTest {
 	@Test
 	public void getDifficultyTest() {
 		toTest.setupFrame();
-		toTest.difficulty = Difficulty.HARD;
+		FrontEndPane.difficulty = Difficulty.HARD;
 		assertTrue(toTest.getDifficulty() == Difficulty.HARD);
 	}
 	
@@ -225,7 +225,7 @@ public class FrontEndPaneTest {
 	@Test
 	public void setDifficultyTest() {
 		toTest.setupFrame();
-		toTest.difficulty = Difficulty.EASY;
+		FrontEndPane.difficulty = Difficulty.EASY;
 		assertTrue(toTest.getDifficulty() == Difficulty.EASY);
 		toTest.setDifficulty(Difficulty.HARD);
 		assertTrue(toTest.getDifficulty() == Difficulty.HARD);
