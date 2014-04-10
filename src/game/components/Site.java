@@ -180,6 +180,24 @@ public class Site {
 
 		int temporalDifference = Math.abs(this.timezone - s.getTimezone());
 
+		//Check these
+		if(temporalDifference < 4)
+		{
+			temporalDifference = 1;
+		}
+		else if(temporalDifference < 6)
+		{
+			temporalDifference = 2;
+		}
+		else if(temporalDifference < 7)
+		{
+			temporalDifference = 3;
+		}
+		else
+		{
+			temporalDifference = 4;
+		}
+
 		//Geographical distance
 
 		double geographicDistance = this.GeoDistanceToSite(s);
@@ -212,7 +230,7 @@ public class Site {
 
 		//return (double) (temporalDifference + geographicDistance);
 
-		return (double)normalisedGeoDist;
+		return (double)(normalisedGeoDist + temporalDifference);
 	}
 
 	public static double toRad(double deg)

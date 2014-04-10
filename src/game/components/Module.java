@@ -15,6 +15,9 @@ public class Module
 	public float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
 
+	//Time wasted due to errors
+	float wastedTime = 0;
+
 	DevelopmentMethod devMethod;
 	int numWorkers;
 	//Overall performance level - may be adjusted to simulate poor performance or exceptional performance
@@ -291,6 +294,14 @@ public class Module
 		return workDone;
 	}
 
+	public float ActualWorkDone()
+	{
+		//All work done including wasted time
+
+
+		return (this.workDone() + this.wastedTime);
+	}
+
 	public float totalWorkRequired()
 	{
 		//Total work required from start to finish in man hours
@@ -359,6 +370,18 @@ public class Module
 			}
 		}
 		return true;
+	}
+
+	public void RestartFromStage(int stage)
+	{
+		//Simulates a delay by undoing all work from a certain stage onwards
+
+		for(int i = stage; i < workDonePerSection.length; i++)
+		{
+			this.wastedTime += this.workDonePerSection[i];
+			this.workDonePerSection[i] = 0;
+		}
+		
 	}
 
 }

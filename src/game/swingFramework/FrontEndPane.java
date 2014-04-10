@@ -496,7 +496,7 @@ public class FrontEndPane {
 //			actBudgTot += actBudg;
 		}
 		rep+= "\n\nTotal Effort Statistics:\n" +
-				"\n\tExpected Effor Hours for Entire Project: " + expEffTot + " Hours\n\n" +
+				"\n\tExpected Effort Hours for Entire Project: " + expEffTot + " Hours\n\n" +
 				"\tActual Effort Hours for Entire Project: " + actEffTot + " Hours\n\n";
 		int expDay = ((int)(maxExpEff / 9));
 		int actDay = ((int)(maxActEff / 9));

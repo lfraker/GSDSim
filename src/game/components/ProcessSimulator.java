@@ -36,26 +36,60 @@ public class ProcessSimulator {
 
 			float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
 
-
-			//float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
-
-
-
 			//Check if a failure should occur
 
 			float failProb = currentSite.GetFailureProbability();
-
 			float r = this.rnd.nextFloat();
+			//System.out.println("Prob Sim:" + r + " : " + failProb );
 
-			System.out.println("Prob Sim:" + r + " : " + failProb );
+			ArrayList currentSiteModules = currentSite.getModules();
 
-
-
-			if(r <= failProb)
+			if(r <= failProb && currentSiteModules.size() > 0)
 			{
 				//Problem occurs
 
-				System.out.println("Problem");
+				//Choose a random module to experience a problem
+				Module problemMod = (Module)currentSiteModules.get(this.rnd.nextInt(currentSiteModules.size()));
+
+				//Current task in module
+				int currentTask = problemMod.sectionsCompleted();
+
+				/*
+				*	Problems
+				*
+				*	a site falls behind more than 25% on a task 	Design 	Repeat Design 	15%
+				*	a site falls behind more than 25% on a task 	Implementation 	Repeat Implementation 	15%
+				*	module fails unit tests 						Unit Test 	Go back to beginning of Implementation task 	25%
+				*	module fails to integrate properly 				Integration 	Go back to beginning of Implementation task 	40%
+				*	module fails system tests 						System test 	Go back to beginning of Integration task 	55%
+				*	module fails to deploy correctly 				Deployment 	Go back to beginning of System test task 	70%
+				*	module or product fails acceptance tests (fails to meet real requirements) 	Acceptance test 	Go back to beginning of Design task 	100%
+				*	team reports progress inaccurately, according to cultural norms 	any 	If site is located in Russia or Asia, status will be green regardless 	n/a
+				*/
+
+				switch(currentTask)
+				{
+					case 0 : 	problemMod.RestartFromStage(0); //Repeat Design
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Design.");
+								break;
+					case 1 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
+								break;
+					case 2 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
+								break;
+					case 3 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
+								break;
+					case 4 : 	problemMod.RestartFromStage(3); //Repeat From Integration
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Integration.");
+								break;
+					case 5 : 	problemMod.RestartFromStage(4); //Repeat From System Test
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting System Test.");
+								break;
+					case 6 : 	problemMod.RestartFromStage(0); //Repeat From Design
+								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Design.");
+				}
 
 
 			}
