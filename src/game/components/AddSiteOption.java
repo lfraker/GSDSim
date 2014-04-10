@@ -3,6 +3,7 @@ package game.components;
 import game.swingFramework.FrontEndPane;
 
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -22,6 +23,12 @@ public class AddSiteOption extends JDialog {
 	public JTextField numEmp;
 	public JTextField effDev;
 	public JTextField costDev;
+	public Checkbox oneLack;
+	public Checkbox twoUneven;
+	public Checkbox threeEast;
+	public Checkbox fourHigh;
+	public Checkbox fiveDiff;
+	public Checkbox sixDiff;
 	public int timeZoneDiff;
 	public JTextField timeZone;
 	public float effD;
@@ -36,9 +43,9 @@ public class AddSiteOption extends JDialog {
 		JPanel btnPanel = new JPanel();
 		JButton okBtn = new JButton("Accept");
 		JButton noBtn = new JButton("Cancel");
-		this.setMinimumSize(new Dimension(550, 300));
-		this.setPreferredSize(new Dimension(600, 325));
-		this.setMaximumSize(new Dimension(700, 325));
+		this.setMinimumSize(new Dimension(550, 550));
+		this.setPreferredSize(new Dimension(600, 600));
+		this.setMaximumSize(new Dimension(700, 650));
 		btnPanel.add(okBtn);
 		okBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -58,6 +65,12 @@ public class AddSiteOption extends JDialog {
 		this.timeZone = new JTextField();
 		this.effDev = new JTextField();
 		this.costDev = new JTextField();
+		this.oneLack = new Checkbox();
+		this.twoUneven = new Checkbox();
+		this.threeEast = new Checkbox();
+		this.fourHigh = new Checkbox();
+		this.fiveDiff = new Checkbox();
+		this.sixDiff = new Checkbox();
 		inputPanel.add(new JLabel("Site Name:"));
 		inputPanel.add(this.siteN);
 		this.siteN.setText("Site 1");
@@ -69,6 +82,18 @@ public class AddSiteOption extends JDialog {
 		inputPanel.add(this.costDev);
 		inputPanel.add(new JLabel("<html>Effort Per Developer-Day: Efficiency of developers. 1.0 is normal.</html>"));
 		inputPanel.add(this.effDev);
+		inputPanel.add(new JLabel("<html>Lack of a common language</html>"));
+		inputPanel.add(this.oneLack);
+		inputPanel.add(new JLabel("<html>Uneven language skills</html>"));
+		inputPanel.add(this.twoUneven);
+		inputPanel.add(new JLabel("<html>East/West divide in culture</html>"));
+		inputPanel.add(this.threeEast);
+		inputPanel.add(new JLabel("<html>High versus Low context cultures</html>"));
+		inputPanel.add(this.fourHigh);
+		inputPanel.add(new JLabel("<html>Different national culture</html>"));
+		inputPanel.add(this.fiveDiff);
+		inputPanel.add(new JLabel("<html>Different organizational culture</html>"));
+		inputPanel.add(this.sixDiff);
 		getContentPane().add(inputPanel, BorderLayout.CENTER);
 		getContentPane().add(btnPanel, BorderLayout.SOUTH);
 		pack();
@@ -78,6 +103,16 @@ public class AddSiteOption extends JDialog {
 		this.setVisible(false);
 	}
 	
+	public boolean [] getChecks() {
+		boolean [] toRet = new boolean[6];
+		toRet[0] = this.oneLack.getState();
+		toRet[1] = this.twoUneven.getState();
+		toRet[2] = this.threeEast.getState();
+		toRet[3] = this.fourHigh.getState();
+		toRet[4] = this.fiveDiff.getState();
+		toRet[5] = this.sixDiff.getState();
+		return toRet;
+	}
 	public void okButton() {
 		this.siteName = this.siteN.getText();
 		if (this.siteName.length() == 0) {

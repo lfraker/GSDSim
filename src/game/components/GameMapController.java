@@ -186,6 +186,7 @@ MouseWheelListener {
            int tZ = this.optionPane.getTimeZone();
            int cD = this.optionPane.getCostDev();
            float eD = this.optionPane.getEffortDev();
+           boolean [] chec = this.optionPane.getChecks();
             if (!this.optionPane.getCancelled() && !(e.getPoint().x < 0 || e.getPoint().y < 0 || e.getPoint().x > this.parentComp.getMapWidth() || e.getPoint().y > this.parentComp.getMapHeight())) {
             	boolean isRA = false;
             	if (x > 31.99 && y < 77.76 && y > 46.55) {
@@ -207,9 +208,9 @@ MouseWheelListener {
             		isRA = true;
             	}
             	
-            	System.out.println("RA : " + isRA);
             	MapMarkerDot mDot = new MapMarkerDot(null, name, y, x);
             	Site toAdd = new Site(name, nEmp, mDot, tZ, cD, eD, isRA);
+            	toAdd.setCultureDifferences(chec);
 
                 toAdd.SetCoordinates(y,x);
             	this.parentComp.addSiteToCombo(toAdd);
