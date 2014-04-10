@@ -368,12 +368,10 @@ public class Module
 		//Returns true if the module is on schedule
 		if(this.devMethod == DevelopmentMethod.AGILE)
 		{
-			if(this.hoursElapsed > this.origEstimate)
+			if(this.hoursElapsed <= this.origEstimate)
 			{
-				return false;
+				return true;
 			}
-
-			return true;
 		}
 		else if(this.devMethod == DevelopmentMethod.WATERFALL || this.devMethod == DevelopmentMethod.FOLLOWTHESUN)
 		{
@@ -391,16 +389,14 @@ public class Module
 				targetSection++;
 			}
 
-
 			if(this.sectionsCompleted() >= targetSection)
 			{
 				return true;
 			}
 
-			return false;
 		}
 
-		return true;
+		return false;
 	}
 
 	public void RestartFromStage(int stage)

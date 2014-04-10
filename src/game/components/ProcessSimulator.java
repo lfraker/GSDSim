@@ -56,9 +56,6 @@ public class ProcessSimulator {
 
 			failProb = (float)(failProb * 0.1);
 
-
-			System.out.println("Prob Sim:" + r + " : " + failProb );
-
 			if(r <= failProb && currentSiteModules.size() > 0)
 			{
 				//Problem occurs
@@ -322,32 +319,13 @@ public class ProcessSimulator {
 	}
 		
 
-	public void SaveState(String savefile)
+	public boolean SaveState(String savefile)
 	{
 		//Creates a save file
 
 		GameState gs = new GameState(allSites);
-		gs.SaveState(savefile);
+		return gs.SaveState(savefile);
 	}
-
-	public void LoadState(String filename)
-	{
-
-	}
-
-
-	
-
-
-
-
-
-
-
-
-
-
-	
 
 	public long NominalScheduleCalc()
 	{

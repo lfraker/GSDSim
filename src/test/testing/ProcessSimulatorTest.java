@@ -50,4 +50,33 @@ public class ProcessSimulatorTest
 		assertTrue(marker.status == MapMarkerDot.Status.BEHIND);
 	}
 
+	@Test
+	public void testAddGetRemoveSites() 
+	{
+		List<Site> sites = new ArrayList<Site>();
+		MapMarkerDot marker = new MapMarkerDot(0, 0);
+		Site s = new Site("test", 10, marker, 0);
+		
+		toTest.AddSite(s);
+
+		assertTrue(toTest.GetSites().size() > 0);
+
+		toTest.RemoveSites();
+
+		assertTrue(toTest.GetSites().size() == 0);
+	}
+
+
+
+	/*
+
+	public boolean SaveState(String savefile)
+
+	public long NominalScheduleCalc()
+
+	*/
+
+
+
+
 }
