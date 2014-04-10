@@ -30,10 +30,7 @@ public class Site {
 	float effortDeveloperDay = 1;
 	double coordinates[] = new double[2];
 	public boolean isRussAsian;
-
 	public double globalDistance;
-
-
 	
 	public ArrayList<Module> modules = new ArrayList<Module>();
 	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone) {
@@ -96,33 +93,6 @@ public class Site {
 	public void setTimezone(int t) {
 		timezone = t;
 	}
-
-	/*
-	public void SetTemporalDistance(int td)
-	{
-		this.temporalDistance = td;
-	}
-
-	public int GetTemporalDistance()
-	{
-		return this.temporalDistance;
-	}
-
-	public void SetCulturalDistance(int cd)
-	{
-		this.culturalDistance = cd;
-	}
-
-	public int GetCulturalDistance()
-	{
-		return this.culturalDistance;
-	}
-
-	public void SetGeographicDistance(int gd)
-	{
-		this.geographicDistance = gd;
-	}
-	*/
 
 	public void SetGlobalDistance(double gd)
 	{
@@ -197,7 +167,6 @@ public class Site {
 	{
 		//Calculate Global Distance to site
 
-
 		int temporalDifference = Math.abs(this.timezone - s.getTimezone());
 
 		//Check these
@@ -244,9 +213,6 @@ public class Site {
 		//Calculate Cultural Distance
 
 		double culturalDistance = 0;
-
-		
-
 
 		return (double)(normalisedGeoDist + temporalDifference + culturalDistance);
 	}

@@ -80,16 +80,19 @@ public class ProcessSimulatorTest
 	}
 
 
-
-	/*
-
-	public boolean SaveState(String savefile)
-
-	public long NominalScheduleCalc()
-
-	*/
-
-
+	@Test
+	public void testNominalSchedCalc() 
+	{
+		List<Site> sites = new ArrayList<Site>();
+		MapMarkerDot marker = new MapMarkerDot(0, 0);
+		Site s = new Site("test", 10, marker, 0);
+		Module m = new Module(1000, "test");
+		s.addModule(m);
+		s.setTimezone(10);
+		sites.add(s);
+		toTest.setSiteList(sites);
+		assertTrue(toTest.NominalScheduleCalc() > 0);
+	}
 
 
 }
