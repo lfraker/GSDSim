@@ -34,17 +34,26 @@ public class InterventionOption extends JDialog {
     	
 
     	kickOff.addActionListener(new ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+				public void actionPerformed(java.awt.event.ActionEvent e) 
+				{
+					//HoldMeeting();
+
 				}
 		});
 
-		cultAmbass.addActionListener(new ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+		cultAmbass.addActionListener(new ActionListener() 
+		{
+				public void actionPerformed(java.awt.event.ActionEvent e) 
+				{
+					//PlaceAmbassador();
 				}
 		});
 
-		depArch.addActionListener(new ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+		depArch.addActionListener(new ActionListener() 
+		{
+				public void actionPerformed(java.awt.event.ActionEvent e) 
+				{
+					//AllocateDeputyArchitect();
 				}
 		});
 

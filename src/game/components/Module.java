@@ -297,7 +297,7 @@ public class Module
 
 	public float ActualWorkDone()
 	{
-		//All work done including wasted time
+		//All work done including wasted time in 
 
 
 		return (this.workDone() + this.wastedTime);
@@ -373,7 +373,7 @@ public class Module
 				return false;
 			}
 
-			return false;
+			return true;
 		}
 		else if(this.devMethod == DevelopmentMethod.WATERFALL || this.devMethod == DevelopmentMethod.FOLLOWTHESUN)
 		{

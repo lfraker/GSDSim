@@ -25,6 +25,12 @@ public class ModuleTest {
 		assertTrue("test".equals(toTest.getName()));
 	}
 
+	@Test 
+	public void testSectionsCompleted()
+	{
+		assertTrue(toTest.sectionsCompleted() == 0);
+	}
+
 	@Test
 	public void testAddSub() 
 	{
@@ -59,9 +65,13 @@ public class ModuleTest {
 	@Test
 	public void testWork() 
 	{
-		//TODO: more than just agile
+		toTest.setDevelopmentMethod(DevelopmentMethod.WATERFALL);
 		toTest.doWork();
 		assertTrue(toTest.workDone() > 0f);
+		assertTrue(toTest.ActualWorkDone() > 0f);
+		assertTrue(toTest.getCompletionLevel() > 0f);
+		assertTrue(toTest.GetHoursElapsed() == 1);
+		assertTrue(toTest.IsOnSchedule());
 	}
 
 	@Test 
@@ -80,29 +90,27 @@ public class ModuleTest {
 	}
 
 
+	@Test 
+	public void testIsOnSchedule()
+	{
+		
+	}
 
 
-	/*
-	* 	Functions for testing
+	@Test 
+	public void testRestartFromStage()
+	{
 
-	public float ActualWorkDone()
+		toTest.RestartFromStage(0);
+		assertTrue(toTest.workDone() == 0);
+	}
 
-	public float getCompletionLevel()
-
-	public int sectionsCompleted()
-
-	public boolean IsOnSchedule()
-
-	public void RestartFromStage(int stage)
-
-	*/
-	/*
 	@Test
 	public void testComplete() 
 	{
 		toTest.complete();
 		assertTrue(toTest.isComplete());
-	}*/
+	}
 
 
 
