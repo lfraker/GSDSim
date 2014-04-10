@@ -23,7 +23,7 @@ public class Module
 	DevelopmentMethod devMethod;
 	int numWorkers;
 	//Overall performance level - may be adjusted to simulate poor performance or exceptional performance
-	float performanceLevel = 1;
+	public float performanceLevel = 1;
 
 	float totalEstimate = 0.0f;
 	public long origEstimate;
@@ -417,6 +417,11 @@ public class Module
 			this.workDonePerSection[i] = 0;
 		}
 		
+	}
+
+	public int GetHoursElapsed()
+	{
+		return this.hoursElapsed;
 	}
 
 }
