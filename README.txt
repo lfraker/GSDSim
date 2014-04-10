@@ -36,7 +36,11 @@ FEATURES OVERVIEW
 Release 2 Features:
 
 	1. feat. 40: Eye candy 3.50 (3.50):
-		
+
+		-Settings screen now only contains buttons of one type
+			*Removed JButtons to give scene a better themed look
+			*Removed medium setting as there was not much difference
+			between medium and hard
 
 
 	2. feat. 14: End of game report 20.00 (23.50):
@@ -114,9 +118,33 @@ Release 2 Features:
 
 	4. feat. 11: Problem simulator 30.50 (68.00):
 
+		-While simulation is running, any of the 7 possible problems occur with a probability
+		calculated by the given formula on the backlog
+		-When a problem occurs, the user is presented with a popup message alerting them
+		of the problem
+			*If the game is in EASY mode, and pause is enabled, the user is encouraged
+			to pause and enact an intervention
+			*If the game is in HARD mode, and pause is disabled, the user is simply
+			encouraged to enact an intervention
+			*The user is warned that if the same problem occurs three times, then
+			the site will fail and they will lose the game
+				-It was unclear as to what the site failing might entail, and to
+				us it made the most sense to have it result in a game over with
+				no final game report or game score. This is due to the fact that
+				a site failing for a module in general would usually result in
+				a real program falling apart. Moreover, without this ‘Game Over’
+				state, there is no chance of losing, and the game is not as
+				exciting
+
 		
 	5. feat. 16: Intervention interface 12.00 (80.00):
 
+		-While the simulation is running, an intervention can be enacted by clicking
+		the intervention button
+		-Interventions are also encouraged via a prompt to the user when a site has
+		encountered a problem
+			*Enacting an intervention will result in a decrement to the user’s budget
+			as well as benefits to the sites’ productivity
 
 	6. feat. 7: Inquiry interface 40.00 (120.00):
 
@@ -176,7 +204,7 @@ Release 1 Features:
 
 	Default Scenario - Once you have started the game, at the bottom there is a button ‘Load Default Sites and Modules’. click this button, select a default scenario, and click ’Start Sim’.
 
-	Nominal Schedule Calculator - 
+	Nominal Schedule Calculator - This can be seen in the process simulators console output.
 
 	Module Completion Calculator - 
 

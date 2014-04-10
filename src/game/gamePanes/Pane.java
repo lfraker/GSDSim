@@ -186,8 +186,8 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		switch (this.parentComp.getDifficulty()) {
 			case EASY:	toWrite4 = "Difficulty: EASY (pause enabled)";
 				break;
-			case MEDIUM:	toWrite4 = "Difficulty: MEDIUM (pause disabled)";
-				break;
+//			case MEDIUM:	toWrite4 = "Difficulty: MEDIUM (pause disabled)";
+//				break;
 			case HARD:	toWrite4 = "Difficulty: HARD (pause disabled)";
 				break;
 		}
@@ -195,7 +195,7 @@ public abstract class Pane extends JComponent implements MouseListener, MouseMot
 		g.drawString(toWrite2, x, 45.0f);
 		g.drawString(toWrite3, x, 60.0f);
 		g.drawString(toWrite4, x, 75.0f);
-		String toWrite5 = "Money Remaining: " + this.parentComp.getGlobalParam("UsrMoney") + " Euros";
+		String toWrite5 = "Budget Remaining: " + this.parentComp.getGlobalParam("UsrMoney") + " Euros";
 		g.drawString(toWrite5, x, 90.0f);
 
 		
