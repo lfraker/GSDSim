@@ -17,6 +17,14 @@ public class Site {
 	String language;
 	MapMarkerDot mapMarker;
 	public int costDeveloperDay = 60;
+	boolean lackCommLang = false;
+	boolean unevLangSkills = false;
+	boolean eastWestDiv = false;
+	boolean highLowContexCults = false;
+	boolean diffNatCult = false;
+	boolean diffOrgCult = false;
+	
+	
 
 	//Percentage performance - normal = 1;
 	float effortDeveloperDay = 1;
@@ -44,6 +52,18 @@ public class Site {
 		this.isRussAsian = isRA;
 	}
 	
+	
+	public void setCultureDifferences(boolean [] diffs) {
+		if (diffs.length != 6) {
+			return;
+		}
+		this.lackCommLang = diffs[0];
+		this.unevLangSkills = diffs[1];
+		this.eastWestDiv = diffs[2];
+		this.highLowContexCults = diffs[3];
+		this.diffNatCult = diffs[4];
+		this.diffOrgCult = diffs[5];
+	}
 	public boolean isRussAsian()
 	{
 		return this.isRussAsian;
