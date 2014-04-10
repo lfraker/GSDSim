@@ -10,5 +10,5 @@ Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):EASY
 Seconds Per Day (enter a number between 6-200):6
 Average Cost per Developer per Day measured in Euros (enter a value greater than zero) PCode=AvgCostDevDay:10
 Average Effort per Developer Day as a float value where 1.0 is normal productivity, 0.5 is half productivity PCode=AvgEffDevDay:1.0
-Project budget measured in Euros(enter a value greater than zero) PCode=UsrMoney:100
-Projected revenue for 6 months after release measured in Euros (enter a value greater than zero) PCode=Rev6Month:500000
+Project budget measured in Euros(enter a value greater than zero) PCode=UsrMoney:400000000
+Projected revenue for 6 months after release measured in Euros (enter a value greater than zero) PCode=Rev6Month:500000000

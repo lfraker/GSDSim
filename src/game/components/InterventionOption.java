@@ -29,9 +29,9 @@ public class InterventionOption extends JDialog {
 		super(f.getWindow(), "Intervention Options");
 		this.parentfP = f;
 		this.setLayout(new GridLayout(0,2));
-    	this.setMinimumSize(new Dimension(500, 150));
-		this.setPreferredSize(new Dimension(600, 200));
-		this.setMaximumSize(new Dimension(700, 250));
+    	this.setMinimumSize(new Dimension(750, 650));
+		this.setPreferredSize(new Dimension(800, 700));
+		this.setMaximumSize(new Dimension(900, 900));
 
 		this.ps = this.parentfP.processSimulator;
 
@@ -66,7 +66,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 4);
-
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 500000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//500,000 
 				}
 		});
@@ -76,6 +84,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 4);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 500000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//500,000 
 				}
 		});
@@ -85,6 +102,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 3);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 125000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//125,000 
 				}
 		});
@@ -93,6 +119,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 2);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 25000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//25,000 
 
 				}
@@ -103,6 +138,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 2);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 25000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//25,000 
 				}
 		});
@@ -112,6 +156,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 4);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 500000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//500,000 
 				}
 		});
@@ -120,6 +173,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 4);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 500000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//500,000 
 
 				}
@@ -130,6 +192,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 3);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 125000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//125,000 
 				}
 		});
@@ -139,6 +210,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 4);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 500000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//500,000 
 				}
 		});
@@ -147,6 +227,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 3);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 125000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//125,000 
 
 				}
@@ -157,6 +246,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 3);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 125000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//125,000 
 				}
 		});
@@ -167,6 +265,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 2);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 25000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					//25,000
 				}
 		});
@@ -176,6 +283,15 @@ public class InterventionOption extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) 
 				{
 					ps.SetInterventionEffects(ps.GetInterventionEffects() + 1);
+					float currMon = 0.0f;
+					try {
+						currMon = Float.parseFloat(parentfP.getGlobalParam("UsrMoney"));
+					}
+					catch (NumberFormatException e2) {
+						currMon = FrontEndPane.budgStart;
+					}
+					currMon -= 5000.0f;
+					parentfP.updateGlobalParam("UsrMoney", currMon+"");
 					// 5,000
 				}
 		});
@@ -259,31 +375,31 @@ public class InterventionOption extends JDialog {
     	reduceCrossCultIntPan.add(reduceCrossCultInt);
     	reduceCrossCultIntPan.setOpaque(false);
     	
-    	this.add(new JLabel("Hold Face-to-face meeting (Cost: 500,000)"));
+    	this.add(new JLabel("Hold Face-to-face meeting (Cost: 500,000 Euros)"));
     	this.add(ftf1Pan);
-    	this.add(new JLabel("Exchange program (Cost: 500,000)"));
+    	this.add(new JLabel("Exchange program (Cost: 500,000 Euros)"));
     	this.add(xchgPan);
-    	this.add(new JLabel("Synchronous communication possibilities (Cost: 125,000)"));
+    	this.add(new JLabel("Synchronous communication possibilities (Cost: 125,000 Euros)"));
     	this.add(syncComPan);
-    	this.add(new JLabel("Support for video conferencing (Cost: 25,000)"));
+    	this.add(new JLabel("Support for video conferencing (Cost: 25,000 Euros)"));
     	this.add(vidConfPan);
-    	this.add(new JLabel("Suitable selection of communication tools (Cost: 25,000)"));
+    	this.add(new JLabel("Suitable selection of communication tools (Cost: 25,000 Euros)"));
     	this.add(commtoolsPan);
-    	this.add(new JLabel("Relocate to adjacent time zone (Cost: 500,000)"));
+    	this.add(new JLabel("Relocate to adjacent time zone (Cost: 500,000 Euros)"));
     	this.add(relocatePan);
-    	this.add(new JLabel("Adopt Follow the Sun development (Cost: 500,000)"));
+    	this.add(new JLabel("Adopt Follow the Sun development (Cost: 500,000 Euros)"));
     	this.add(adoptFTSPan);
-    	this.add(new JLabel("Create bridging team (Cost: 125,000)"));
+    	this.add(new JLabel("Create bridging team (Cost: 125,000 Euros)"));
     	this.add(bridgingTeamPan);
-    	this.add(new JLabel("Face-to-face meeting (Cost: 500,000)"));
+    	this.add(new JLabel("Face-to-face meeting (Cost: 500,000 Euros)"));
     	this.add(ftf2Pan);
-    	this.add(new JLabel("Cultural Training (Cost: 125,000)"));
+    	this.add(new JLabel("Cultural Training (Cost: 125,000 Euros)"));
     	this.add(culturalTrainingPan);
-    	this.add(new JLabel("Cultural Ambassador (Cost: 125,000)"));
+    	this.add(new JLabel("Cultural Ambassador (Cost: 125,000 Euros)"));
     	this.add(cultAmbassPan);
-    	this.add(new JLabel("Adopt low-context communication style (Cost: 25,000)"));
+    	this.add(new JLabel("Adopt low-context communication style (Cost: 25,000 Euros)"));
     	this.add(lowContextPan);
-    	this.add(new JLabel("Reduce cross cultural interaction (Cost: 5,000)"));
+    	this.add(new JLabel("Reduce cross cultural interaction (Cost: 5,000 Euros)"));
     	this.add(reduceCrossCultIntPan);
     	this.pack();
     	this.setVisible(true);

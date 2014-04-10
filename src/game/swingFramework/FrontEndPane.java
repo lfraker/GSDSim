@@ -48,6 +48,9 @@ public class FrontEndPane {
 	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(1100, 700);
 	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(1100, 700);
 	private static final int DEFAULT_DELAY_MILLIS = 1000 / 50;
+	public static final float revPredict = 500000000.0f;
+	public static final float budgStart = 400000000.0f;
+
 	private long lastTickNanos;
 	public Timer timer;
 	public SettingsPane settings;
@@ -119,8 +122,8 @@ public class FrontEndPane {
 			this.expectedTotalBudge = Float.parseFloat(this.globalParams.get("UsrMoney"));
 		}
 		catch (NumberFormatException e) {
-			this.expectedTotalBudge = 100000;
-			this.globalParams.put("UsrMoney", "100000");
+			this.expectedTotalBudge = this.budgStart;
+			this.globalParams.put("UsrMoney", this.budgStart+"");
 		}
 		disableSites();
 		disableModules();
@@ -186,10 +189,10 @@ public class FrontEndPane {
 	
 	public final void doTick() {
 		if (this.globalParams.get("UsrMoney").length() == 0) {
-			this.updateGlobalParam("UsrMoney", "100000");
+			this.updateGlobalParam("UsrMoney", this.budgStart+"");
 		}
 		if (this.globalParams.get("Rev6Month").length() == 0) {
-			this.updateGlobalParam("Rev6Month", "500000");
+			this.updateGlobalParam("Rev6Month", this.revPredict+"");
 		}
 		if (!this.gameEnded) {
 			endGame();
@@ -541,7 +544,7 @@ public class FrontEndPane {
 			rep += "\n\n\tProject finished " + dayDiff + " days early.\n\n";
 		}
 		
-		float currBudg = 100000.0f;
+		float currBudg = this.budgStart;
 		try {
 			currBudg = Float.parseFloat(this.globalParams.get("UsrMoney"));
 		}
@@ -561,13 +564,13 @@ public class FrontEndPane {
 			rep += "\n\n\tProject finished with " + leftBudg + " Euros leftover budget.\n\n";
 		}
 		
-		float expRev = 500000.0f;
+		float expRev = this.revPredict;
 		try {
 			expRev = Float.parseFloat(this.globalParams.get("Rev6Month"));
 		}
 		catch (NumberFormatException e) {
-			expRev = 500000.0f;
-			this.globalParams.put("Rev6Month", "500000");
+			expRev = this.revPredict;
+			this.globalParams.put("Rev6Month", this.revPredict+"");
 		}
 		float moneyPerDay = expRev / (30 * 6);
 		float revDiff = (dayDiff * moneyPerDay);
