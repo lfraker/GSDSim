@@ -183,11 +183,36 @@ public class Site {
 		//Geographical distance
 
 		double geographicDistance = this.GeoDistanceToSite(s);
+		double normalisedGeoDist;
+
+		if(geographicDistance < 200)
+		{
+			normalisedGeoDist = 1;
+		}
+		else if(geographicDistance < 3000)
+		{
+			normalisedGeoDist = 2;
+		}
+		else if(geographicDistance < 10000)
+		{
+			normalisedGeoDist = 3;
+		}
+		else
+		{
+			normalisedGeoDist = 4;
+		}
+
+
+		// = (40075 / geographicDistance); //Circumference of the earth / distance
+
+		//normalisedGeoDist = Math.min(normalisedGeoDist, 4);
+		
+
 
 
 		//return (double) (temporalDifference + geographicDistance);
 
-		return geographicDistance;
+		return (double)normalisedGeoDist;
 	}
 
 	public static double toRad(double deg)

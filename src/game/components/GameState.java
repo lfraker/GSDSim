@@ -35,6 +35,21 @@ public class GameState
 			Type siteListType = new TypeToken<ArrayList<Site>>(){}.getType();
  			List<Site> sites =  gson.fromJson(br, siteListType);
 			br.close();
+
+			Site homeSite = null;
+
+			if(sites.size() > 0)
+			{
+				homeSite = sites.get(0);
+			}
+
+			for(int i = 1; i < sites.size(); i++)
+			{
+				Site currentSite = sites.get(i);
+				currentSite.SetGlobalDistance(homeSite.CalcGlobalDistanceToSite(currentSite));
+				System.out.println("Added site " + currentSite.getName() + " with distance " + currentSite.GetGlobalDistance());
+			}
+
 			return sites;
 		} 
 		catch (JsonSyntaxException e) 

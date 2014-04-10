@@ -259,7 +259,7 @@ public class ProcessSimulator {
 			Site homeSite = this.allSites.get(0);
 			site.SetGlobalDistance(homeSite.CalcGlobalDistanceToSite(site));
 
-			System.out.println("Added site " + homeSite.getName() + " with distance " + site.GetGlobalDistance() + "km");
+			System.out.println("Added site " + site.getName() + " with distance " + site.GetGlobalDistance());
 
 
 		}
