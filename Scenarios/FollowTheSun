@@ -1,0 +1,280 @@
+[
+  {
+    "noOfWorkers": 10,
+    "timezone": -5,
+    "siteName": "Boston",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Boston",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Dialog",
+          "style": 1,
+          "size": 12,
+          "pointSize": 12.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 300,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 1.0,
+    "coordinates": [
+      42.36666166373275,
+      -71.070556640625
+    ],
+    "isRussAsian": false,
+    "globalDistance": 0.0,
+    "modules": [
+      {
+        "modName": "Follow The Sun Module",
+        "numberGen": {
+          "seed": {
+            "value": 248547625595520
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          118.5,
+          127.5,
+          115.0,
+          183.0,
+          162.0,
+          163.5,
+          127.5
+        ],
+        "origStepEstimates": [
+          150.0,
+          150.0,
+          100.0,
+          150.0,
+          150.0,
+          150.0,
+          150.0
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "FOLLOWTHESUN",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 997.0,
+        "origEstimate": 1000,
+        "currentStage": 0,
+        "complete": false
+      },
+      {
+        "modName": "Agile Module",
+        "numberGen": {
+          "seed": {
+            "value": 203364844525994
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          60.000004,
+          66.00001,
+          41.2,
+          49.800003,
+          48.000004,
+          63.600002,
+          64.8
+        ],
+        "origStepEstimates": [
+          60.000004,
+          60.000004,
+          40.0,
+          60.000004,
+          60.000004,
+          60.000004,
+          60.000004
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "AGILE",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 393.40002,
+        "origEstimate": 400,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  },
+  {
+    "noOfWorkers": 10,
+    "timezone": 0,
+    "siteName": "Dublin",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Dublin",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Dialog",
+          "style": 1,
+          "size": 12,
+          "pointSize": 12.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 300,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 1.0,
+    "coordinates": [
+      53.38332836757155,
+      -6.30615234375
+    ],
+    "isRussAsian": false,
+    "globalDistance": 5.0,
+    "modules": [
+      {
+        "modName": "Waterfall Module",
+        "numberGen": {
+          "seed": {
+            "value": 10215679039705
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          124.95001,
+          79.8,
+          53.9,
+          118.65001,
+          97.65001,
+          109.200005,
+          131.25002
+        ],
+        "origStepEstimates": [
+          105.00001,
+          105.00001,
+          70.0,
+          105.00001,
+          105.00001,
+          105.00001,
+          105.00001
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "WATERFALL",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 715.4001,
+        "origEstimate": 700,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  },
+  {
+    "noOfWorkers": 10,
+    "timezone": 9,
+    "siteName": "Australia",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Australia",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Dialog",
+          "style": 1,
+          "size": 12,
+          "pointSize": 12.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 500,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": true,
+    "effortDeveloperDay": 1.0,
+    "coordinates": [
+      -12.726084296948184,
+      131.30859375
+    ],
+    "isRussAsian": false,
+    "globalDistance": 8.0,
+    "modules": []
+  }
+]
