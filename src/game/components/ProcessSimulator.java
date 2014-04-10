@@ -433,12 +433,5 @@ public class ProcessSimulator {
 		return totalEffort;
 	}
 	
-//	
-//	private class ModuleComparator implements Comparator<ModuleWrapper> {
-//	    @Override
-//	    public int compare(ModuleWrapper m1, ModuleWrapper m2) {
-//	        return m1.getNumber().compareTo(m2.getNumber());
-//	    }
-//	}
 	
 }

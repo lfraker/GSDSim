@@ -17,12 +17,12 @@ public class Site {
 	String language;
 	MapMarkerDot mapMarker;
 	public int costDeveloperDay = 60;
-	boolean lackCommLang = false;
-	boolean unevLangSkills = false;
-	boolean eastWestDiv = false;
-	boolean highLowContexCults = false;
-	boolean diffNatCult = false;
-	boolean diffOrgCult = false;
+	public boolean lackCommLang = false;
+	public boolean unevLangSkills = false;
+	public boolean eastWestDiv = false;
+	public boolean highLowContexCults = false;
+	public boolean diffNatCult = false;
+	public boolean diffOrgCult = false;
 	
 	
 
@@ -212,7 +212,38 @@ public class Site {
 
 		//Calculate Cultural Distance
 
-		double culturalDistance = 0;
+		int culturalDistance = 0;
+
+
+		if(this.lackCommLang)
+		{
+			culturalDistance += 4;
+		}
+
+		if(this.unevLangSkills)
+		{
+			culturalDistance += 3;
+		}
+
+		if(this.eastWestDiv)
+		{
+			culturalDistance += 3;
+		}
+
+		if(this.highLowContexCults)
+		{
+			culturalDistance += 3;
+		}
+
+		if(this.diffNatCult)
+		{
+			culturalDistance += 2;
+		}
+
+		if(this.diffOrgCult)
+		{
+			culturalDistance += 1;
+		}
 
 		return (double)(normalisedGeoDist + temporalDifference + culturalDistance);
 	}
