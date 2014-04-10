@@ -58,7 +58,7 @@ public class FrontEndPane {
 	long currTime;
 	public int dayCount;
 	int hourCount;
-	public Difficulty difficulty = Difficulty.HARD;
+	public static Difficulty difficulty = Difficulty.HARD;
 	public long tem = (550000000 * 100);
 	public long dayTime = tem;
 	boolean canPause = false;
