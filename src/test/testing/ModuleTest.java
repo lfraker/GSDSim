@@ -33,7 +33,7 @@ public class ModuleTest {
 		result = toTest.addSub(1, 100f); 
 		assertTrue(result <= 100f && result >= 75f);
 	}
-	/*
+	
 	@Test
 	public void testWorkRemaining() 
 	{
@@ -64,18 +64,20 @@ public class ModuleTest {
 		assertTrue(toTest.workDone() > 0f);
 	}
 
-	@Test void testDevelopmentMethod()
+	@Test 
+	public void testDevelopmentMethod()
 	{
 		toTest.setDevelopmentMethod(DevelopmentMethod.WATERFALL);
 		assertTrue(toTest.getDevelopmentMethod() == DevelopmentMethod.WATERFALL);
 	}
 
 	
-	@Test void testPerformanceModifier()
+	@Test 
+	public void testPerformanceModifier()
 	{
 		toTest.setPerformanceModifier((float)1.2);
 		assertTrue(toTest.performanceLevel == 1.2);
-	}*/
+	}
 
 
 
