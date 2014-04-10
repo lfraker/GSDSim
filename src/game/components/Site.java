@@ -17,12 +17,12 @@ public class Site {
 	String language;
 	MapMarkerDot mapMarker;
 	public int costDeveloperDay = 60;
-	boolean lackCommLang = false;
-	boolean unevLangSkills = false;
-	boolean eastWestDiv = false;
-	boolean highLowContexCults = false;
-	boolean diffNatCult = false;
-	boolean diffOrgCult = false;
+	public boolean lackCommLang = false;
+	public boolean unevLangSkills = false;
+	public boolean eastWestDiv = false;
+	public boolean highLowContexCults = false;
+	public boolean diffNatCult = false;
+	public boolean diffOrgCult = false;
 	
 	
 
