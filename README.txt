@@ -119,7 +119,7 @@ Release 2 Features:
 	4. feat. 11: Problem simulator 30.50 (68.00):
 
 		-While simulation is running, any of the 7 possible problems occur with a probability
-		calculated by the given formula on the backlog
+		calculated by the given formula on the backlog, adjusted to factor in daily updates.
 		-When a problem occurs, the user is presented with a popup message alerting them
 		of the problem
 			*If the game is in EASY mode, and pause is enabled, the user is encouraged

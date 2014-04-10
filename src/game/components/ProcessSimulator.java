@@ -24,6 +24,7 @@ public class ProcessSimulator {
 	public FrontEndPane fPane;
 	private int startOfWorkingDay = 9; // 9am
 	private int endOfWorkingDay = 18; //6pm
+	private Difficulty difficulty = FrontEndPane.difficulty;
 
 	public double interventionEffects = 0;
 
@@ -57,9 +58,22 @@ public class ProcessSimulator {
 
 			//Check if a failure should occur
 
+			//Adjust depending on difficulty
+
+			double difficultyModifier;
+
+			if(this.difficulty == Difficulty.EASY)
+			{
+				difficultyModifier = 0.7;
+			}
+			else
+			{
+				difficultyModifier = 1;
+			}
+
 			double adjustedInterventionEffects = (this.interventionEffects / (1 + this.interventionEffects));
 
-			float failProb = (float)(currentSite.GetFailureProbability() * (1 - adjustedInterventionEffects));
+			float failProb = (float)((difficultyModifier * currentSite.GetFailureProbability()) * (1 - adjustedInterventionEffects));
 			float r = this.rnd.nextFloat();
 			
 
@@ -76,6 +90,7 @@ public class ProcessSimulator {
 			float averageHoursPerModule = (totalHoursEffortRequired / currentSiteModules.size());
 
 			failProb = (float)(failProb * 0.1);
+			
 
 			if(r <= failProb && currentSiteModules.size() > 0)
 			{
