@@ -451,6 +451,8 @@ public class FrontEndPane {
 //		float actBudgTot = 0.0f;
 		float maxExpEff = 0.0f;
 		float maxActEff = 0.0f;
+		Module largestMod = null;
+		int mWork = 0;
 		for (Site s: this.processSimulator.GetSites()) {
 //			float expBudg = 0.0f;
 //			float actBudg = 0.0f;
@@ -459,50 +461,76 @@ public class FrontEndPane {
 			for (Module m: s.getModules()) {
 				rep += "\nModule " + m.getName() + " (Development Method: " + m.getDevelopmentMethod()+")";
 				for (int i = 0; i < 7; i++) {
+					mWork = m.getNumberWorkers();
 					expEffTot += m.origStepEstimates[i];
 					actEffTot += m.stepEstimates[i];
-					temMaxExp += m.origStepEstimates[i];
-					temMaxAct += m.stepEstimates[i];
+					temMaxExp += (m.origStepEstimates[i] / m.getNumberWorkers());
+				//	temMaxAct += m.stepEstimates[i];
 //					expBudg += (m.origStepEstimates[i] * (s.GetCostDeveloperDay() * s.GetNumberWorkers()));
 //					actBudg += ((m.stepEstimates[i] * (1.0f - s.GetEffortPerDeveloperDay())) + (m.stepEstimates[i] * (s.GetCostDeveloperDay() * s.GetNumberWorkers())));
 					switch (i) {
 						case 0: rep += "\n\tDesign:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " man hours\t|\tActual: " + m.stepEstimates[i] + " man hours\n";
 							break;
 						case 1: rep += "\tImplementation:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " Man Hours\t|\tActual: " + m.stepEstimates[i] + " Man Hours\n";
 							break;
 						case 2: rep += "\tUnit test:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " Man Hours\t|\tActual: " + m.stepEstimates[i] + " Man Hours\n";
 							break;
 						case 3: rep += "\tIntegration:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " Man Hours\t|\tActual: " + m.stepEstimates[i] + " Man Hours\n";
 							break;
 						case 4: rep += "\tSystem test:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " Man Hours\t|\tActual: " + m.stepEstimates[i] + " Man Hours\n";
 							break;
 						case 5: rep += "\tDeployment:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " Man Hours\t|\tActual: " + m.stepEstimates[i] + " Man Hours\n";
 							break;
 						case 6: rep += "\tAcceptance test:\n" +
-								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
+								"\t\tEstimate: " + m.origStepEstimates[i] + " Man Hours\t|\tActual: " + m.stepEstimates[i] + " Man Hours\n";
 							break;
 					}	
 				}
+				temMaxAct += m.GetHoursElapsed();
 			}
+
 			maxExpEff = Math.max(maxExpEff, temMaxExp);
 			maxActEff = Math.max(maxActEff, temMaxAct);
 //			expBudgTot += expBudg;
 //			actBudgTot += actBudg;
 		}
+		//actualworkdone
 		rep+= "\n\nTotal Effort Statistics:\n" +
-				"\n\tExpected Effort Hours for Entire Project: " + expEffTot + " Hours\n\n" +
-				"\tActual Effort Hours for Entire Project: " + actEffTot + " Hours\n\n";
-		int expDay = ((int)(maxExpEff / 9));
-		int actDay = ((int)(maxActEff / 9));
+				"\n\tExpected Effort for Entire Project: " + expEffTot + " Man Hours\n\n" +
+				"\tActual Effort for Entire Project: " + actEffTot  + " Man Hours\n\n";
+		int expDay = 0;
+		int actDay = 0;
+		if ((maxExpEff % 9) > 0 && (maxExpEff % 9) < 9) {
+			expDay = (((int)(maxExpEff / 9)) + 1);
+		}
+		else {
+			expDay = ((int)(maxExpEff / 9));
+		}
+		
+		if ((maxActEff % 9) > 0 && (maxActEff % 9) < 9) {
+			actDay = (((int)(maxActEff / 9)) + 1);
+		}
+		else {
+			actDay = ((int)(maxActEff / 9));
+		}
+
 		rep+= "\n\nTotal Day Statistics:\n" +
 				"\n\tExpected Days for Entire Project: " + expDay + " Days\n\n" +
 				"\tActual Days for Entire Project: " + actDay + " Days\n\n";
+		float dayDiff = expDay - actDay;
+
+		if (dayDiff < 0) {
+			rep += "\n\n\tProject finished " + dayDiff + " days late.\n\n";
+		}
+		else {
+			rep += "\n\n\tProject finished " + dayDiff + " days early.\n\n";
+		}
 		
 		float currBudg = 100000.0f;
 		try {
@@ -512,9 +540,18 @@ public class FrontEndPane {
 
 		}
 		float actBudgTot = (this.expectedTotalBudge - currBudg);
+		float leftBudg = (this.expectedTotalBudge - actBudgTot);
 		rep += "\n\nBudget Statistics:\n" +
 				"\n\tExpected Budget Used for Entire Project: "  + this.expectedTotalBudge + " Euros\n\n" +
 				"\tActual Budget Used for Entire Project: " + actBudgTot + " Euros\n\n";
+		
+		if (leftBudg < 0) {
+			rep += "\n\n\tProject finished " + Math.abs(leftBudg) + " Euros over budget.\n\n";
+		}
+		else {
+			rep += "\n\n\tProject finished with " + leftBudg + " Euros leftover budget.\n\n";
+		}
+		
 		float expRev = 500000.0f;
 		try {
 			expRev = Float.parseFloat(this.globalParams.get("Rev6Month"));
@@ -524,14 +561,15 @@ public class FrontEndPane {
 			this.globalParams.put("Rev6Month", "500000");
 		}
 		float moneyPerDay = expRev / (30 * 6);
-		float dayDiff = expDay - actDay;
 		float revDiff = (dayDiff * moneyPerDay);
 		float actRev = (expRev + revDiff);
+		
+		
+		
 		rep += "\n\nRevenue Statistics:\n" +
 				"\n\tExpected Revenue Six Months After Release: " + expRev + " Euros\n\n" +
 				"\tActual Revenue Six Months After Release: " + actRev + " Euros\n\n";
 		
-		float leftBudg = (this.expectedTotalBudge - actBudgTot);
 		rep += "\n\nGame Score:\n" +
 				"\n\tExpected Game Score: " + expRev + " Points\n\n" +
 				"\tActual Game Score: " + (actRev + leftBudg)  + " Points\n\n";
