@@ -13,23 +13,19 @@ import game.gamePanes.ChooseDefaultPane;
 
 
 public class ChooseDefaultPaneTest {
+	FrontEndPane fPane = new FrontEndPane();
 	ChooseDefaultPane toTest;
 	
-    @Test
-    public void ChooseDefaultPaneTest() {
-        System.out.println("ChooseDefaultPaneTest not implemented yet in class ChooseDefaultPaneTest.java");
-    }
 
 	
-//	//Will be extended soon
-//	@Test
-//	public void ChooseDefaultPaneTest() {
+	@Test
+	public void ChooseDefaultPaneTest() {
+//		fPane.setupFrame();
 //		assertTrue(toTest == null);
-//		toTest = new ChooseDefaultPane();
+//		toTest = new ChooseDefaultPane(fPane);
 //		System.out.println(toTest.getComponents().length);
 //		assertTrue(toTest.getComponentCount() > 0);
-//		assertTrue(toTest.isVisible());
-//	}
+	}
 	
 	
 	

@@ -47,7 +47,7 @@ public class FrontEndPane {
 	public JTabbedPane frames;
 	public static final VectorI DEFAULT_WINDOW_SIZE = new VectorI(1100, 700);
 	public static final VectorI MINIMUM_WINDOW_SIZE = new VectorI(1100, 700);
-	private static final int DEFAULT_DELAY_MILLIS = 1000 / 400;
+	private static final int DEFAULT_DELAY_MILLIS = 1000 / 50;
 	private long lastTickNanos;
 	public Timer timer;
 	public SettingsPane settings;
@@ -65,7 +65,7 @@ public class FrontEndPane {
 	public static JMapViewer siteStatus;
 	private VectorI windSize;
 	public Map<String,String> globalParams = new HashMap<>();
-
+	public float expectedTotalBudge = 0.0f;
 	public static ProcessSimulator processSimulator = new ProcessSimulator();
 	//public static SiteModuleController modSiteController = new SiteModuleController(processSimulator);
 
@@ -114,10 +114,17 @@ public class FrontEndPane {
 		
 		this.getWindow().pack();
 		this.getWindow().setVisible(true);
-		
+		try {
+			this.expectedTotalBudge = Float.parseFloat(this.globalParams.get("UsrMoney"));
+		}
+		catch (NumberFormatException e) {
+			this.expectedTotalBudge = 100000;
+			this.globalParams.put("UsrMoney", "100000");
+		}
 		disableSites();
 		disableModules();
 		doStart();
+
 	}
 	
 	public JTabbedPane getFrame() {
@@ -180,7 +187,7 @@ public class FrontEndPane {
 			endGame();
 		}
 		else {
-			if (!this.finReport.isVisible()) {
+			if (this.finReport == null || !this.finReport.isVisible()) {
 				System.exit(0);
 			}
 
@@ -430,13 +437,7 @@ public class FrontEndPane {
 		}
 		for (Site s: this.processSimulator.GetSites()) {
 			for (Module m: s.getModules()) {
-				try {
-					if (!m.isComplete() && Float.parseFloat(this.globalParams.get("UsrMoney")) >= 0) {
-						return;
-					}
-				}
-				catch (NumberFormatException e) {
-					this.globalParams.put("UsrMoney", "1000000.0");
+				if (!m.isComplete()) {
 					return;
 				}
 			}
@@ -444,10 +445,26 @@ public class FrontEndPane {
 		this.gameEnded = true;
 		this.getWindow().setVisible(false);
 		String rep = "";
+		float expEffTot = 0.0f;
+		float actEffTot = 0.0f;
+//		float expBudgTot = 0.0f;
+//		float actBudgTot = 0.0f;
+		float maxExpEff = 0.0f;
+		float maxActEff = 0.0f;
 		for (Site s: this.processSimulator.GetSites()) {
+//			float expBudg = 0.0f;
+//			float actBudg = 0.0f;
+			float temMaxExp = 0.0f;
+			float temMaxAct = 0.0f;
 			for (Module m: s.getModules()) {
 				rep += "\nModule " + m.getName() + " (Development Method: " + m.getDevelopmentMethod()+")";
-				for (int i = 0; i < m.sectionsCompleted(); i++) {
+				for (int i = 0; i < 7; i++) {
+					expEffTot += m.origStepEstimates[i];
+					actEffTot += m.stepEstimates[i];
+					temMaxExp += m.origStepEstimates[i];
+					temMaxAct += m.stepEstimates[i];
+//					expBudg += (m.origStepEstimates[i] * (s.GetCostDeveloperDay() * s.GetNumberWorkers()));
+//					actBudg += ((m.stepEstimates[i] * (1.0f - s.GetEffortPerDeveloperDay())) + (m.stepEstimates[i] * (s.GetCostDeveloperDay() * s.GetNumberWorkers())));
 					switch (i) {
 						case 0: rep += "\n\tDesign:\n" +
 								"\t\tEstimate: " + m.origStepEstimates[i] + "|\tActual: " + m.stepEstimates[i] + "\n";
@@ -473,10 +490,56 @@ public class FrontEndPane {
 					}	
 				}
 			}
+			maxExpEff = Math.max(maxExpEff, temMaxExp);
+			maxActEff = Math.max(maxActEff, temMaxAct);
+//			expBudgTot += expBudg;
+//			actBudgTot += actBudg;
 		}
+		rep+= "\n\nTotal Effort Statistics:\n" +
+				"\n\tExpected Effor Hours for Entire Project: " + expEffTot + " Hours\n\n" +
+				"\tActual Effort Hours for Entire Project: " + actEffTot + " Hours\n\n";
+		int expDay = ((int)(maxExpEff / 9));
+		int actDay = ((int)(maxActEff / 9));
+		rep+= "\n\nTotal Day Statistics:\n" +
+				"\n\tExpected Days for Entire Project: " + expDay + " Days\n\n" +
+				"\tActual Days for Entire Project: " + actDay + " Days\n\n";
+		
+		float currBudg = 100000.0f;
+		try {
+			currBudg = Float.parseFloat(this.globalParams.get("UsrMoney"));
+		}
+		catch (NumberFormatException e) {
+
+		}
+		float actBudgTot = (this.expectedTotalBudge - currBudg);
+		rep += "\n\nBudget Statistics:\n" +
+				"\n\tExpected Budget Used for Entire Project: "  + this.expectedTotalBudge + " Euros\n\n" +
+				"\tActual Budget Used for Entire Project: " + actBudgTot + " Euros\n\n";
+		float expRev = 500000.0f;
+		try {
+			expRev = Float.parseFloat(this.globalParams.get("Rev6Month"));
+		}
+		catch (NumberFormatException e) {
+			expRev = 500000.0f;
+			this.globalParams.put("Rev6Month", "500000");
+		}
+		float moneyPerDay = expRev / (30 * 6);
+		float dayDiff = expDay - actDay;
+		float revDiff = (dayDiff * moneyPerDay);
+		float actRev = (expRev + revDiff);
+		rep += "\n\nRevenue Statistics:\n" +
+				"\n\tExpected Revenue Six Months After Release: " + expRev + " Euros\n\n" +
+				"\tActual Revenue Six Months After Release: " + actRev + " Euros\n\n";
+		
+		float leftBudg = (this.expectedTotalBudge - actBudgTot);
+		rep += "\n\nGame Score:\n" +
+				"\n\tExpected Game Score: " + expRev + " Points\n\n" +
+				"\tActual Game Score: " + (actRev + leftBudg)  + " Points\n\n";
+		
+		
 		this.finReport = new FinalReport(rep, this);
-		if (Float.parseFloat(this.globalParams.get("UsrMoney")) <= 0) {
-			JOptionPane.showMessageDialog(this.getWindow(), "You have run out of money. Your developers refuse to work for you anymore. Your project is finished");
-		}
+//		if (Float.parseFloat(this.globalParams.get("UsrMoney")) <= 0) {
+//			JOptionPane.showMessageDialog(this.getWindow(), "You have run out of money. Your developers refuse to work for you anymore. Your project is finished");
+//		}
 	}
 }

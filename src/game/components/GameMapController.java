@@ -66,11 +66,11 @@ MouseWheelListener {
 
     private Point lastDragPoint;
     
-    private AddSiteOption optionPane;
-    private JDialog inquirPane;
+    public AddSiteOption optionPane;
+    public JDialog inquirPane;
     private SaveScenario savePane;
     private InterventionOption iPane;
-    private Site currSiteQuer;
+    public Site currSiteQuer;
 	private JTextArea siteResponse;
 	private Random numberGen = new Random();
 
@@ -117,9 +117,8 @@ MouseWheelListener {
      	double x = OsmMercator.XToLon(xi, this.parentComp.getZoom());
         double y = OsmMercator.YToLat(yi, this.parentComp.getZoom());
 
-    	System.out.println("X : " + x);
-    	System.out.println("Y: " + y);
-        
+ 
+
         if (this.mapPause.clickedInside(e.getPoint()) && this.parentComp.canPause()) {
     		this.parentComp.pauseUnpause();
     		return;
@@ -172,7 +171,7 @@ MouseWheelListener {
     		}
     		
     	}
-        
+
         if (e.getButton() == this.adSiteMouseButton && e.getClickCount() == 1 && !this.parentComp.isSimLoaded()) {
         	//Use JDialog?
         	if (this.optionPane != null) {

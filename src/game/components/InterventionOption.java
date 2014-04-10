@@ -15,15 +15,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-<<<<<<< HEAD
-public class InterventionOption extends JFrame {
-
-	public Site site;
 	
-=======
 public class InterventionOption extends JDialog {
 	FrontEndPane parentfP;
->>>>>>> dbf875563fa5cf7d4296d13a35c7c16a70e58d13
+	public Site site;
 	
 	
 	public InterventionOption(FrontEndPane f) {
@@ -37,7 +32,6 @@ public class InterventionOption extends JDialog {
     	JButton cultAmbass = new JButton("Enact Intervention");
     	JButton depArch = new JButton("Enact Intervention");
     	
-<<<<<<< HEAD
 
     	kickOff.addActionListener(new ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -57,7 +51,6 @@ public class InterventionOption extends JDialog {
 				}
 		});
 
-=======
     	JPanel kickPan = new JPanel();
     	kickPan.setLayout(new GridLayout(3,0));
     	kickPan.add(new JLabel());
@@ -78,7 +71,6 @@ public class InterventionOption extends JDialog {
     	depPan.add(depArch);
     	depPan.setOpaque(false);
     	
->>>>>>> dbf875563fa5cf7d4296d13a35c7c16a70e58d13
     	
     	this.add(new JLabel("Hold kick-off meeting (Cost: )"));
     	this.add(kickPan);

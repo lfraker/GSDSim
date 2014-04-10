@@ -25,8 +25,7 @@ public class Site {
 
 	public double globalDistance;
 
-	//public int geographicDistance, culturalDistance, temporalDistance;
-	
+
 	
 	public ArrayList<Module> modules = new ArrayList<Module>();
 	public Site(String name, int noOfWorkers, MapMarkerDot mDot, int tZone) {
@@ -77,8 +76,6 @@ public class Site {
 	public void setTimezone(int t) {
 		timezone = t;
 	}
-
-
 
 	/*
 	public void SetTemporalDistance(int td)

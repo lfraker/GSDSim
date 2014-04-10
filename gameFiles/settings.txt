@@ -7,13 +7,8 @@ Do not leave any values after the colon, if you do, default values
 will be set.
 *****************************
 Difficulty (EASY for easy, MEDIUM for medium, HARD for hard):EASY
-Seconds Per Day (enter a number between 1-200):6
-<<<<<<< HEAD
-Average Cost of Developer Day measured in Euros (enter a value greater than zero) PCode=AvgCostDevDay:10
-Average Effort per Developer Day as a float value where 1.0 is normal productivity, 0.5 is half productivity. 
-PCode=AvgEffDevDay:1.0
-=======
-Average Cost Per Developer Per Day measured in Euros (enter a value greater than zero) PCode=AvgCostDevDay:10
-Average Effort per Developer Day measured as a percentage of the day that the developer is actually working (enter a value from 1-100) PCode=AvgEffDevDay:10
->>>>>>> dbf875563fa5cf7d4296d13a35c7c16a70e58d13
-User's Money Supply measured in Euros (enter a value greater than zero) PCode=UsrMoney:100000
+Seconds Per Day (enter a number between 6-200):6
+Average Cost per Developer per Day measured in Euros (enter a value greater than zero) PCode=AvgCostDevDay:10
+Average Effort per Developer Day as a float value where 1.0 is normal productivity, 0.5 is half productivity PCode=AvgEffDevDay:1.0
+Project budget measured in Euros(enter a value greater than zero) PCode=UsrMoney:100
+Projected revenue for 6 months after release measured in Euros (enter a value greater than zero) PCode=Rev6Month:500000
