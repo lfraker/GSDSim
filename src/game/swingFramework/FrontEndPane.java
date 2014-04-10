@@ -198,9 +198,11 @@ public class FrontEndPane {
 			JOptionPane.showMessageDialog(this.window, "A site has encountered too many problmes and failed.\n" +
 					"It was not able to recover, and caused the project to fail.\n" +
 					"The game has ended. Restart to start a new game.");
+					System.exit(0);
 		}
 		if (!this.gameEnded) {
 			endGame();
+
 		}
 		else {
 			if (this.finReport == null || !this.finReport.isVisible()) {
