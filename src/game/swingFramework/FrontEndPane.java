@@ -194,6 +194,11 @@ public class FrontEndPane {
 		if (this.globalParams.get("Rev6Month").length() == 0) {
 			this.updateGlobalParam("Rev6Month", this.revPredict+"");
 		}
+		if (this.processSimulator.HasFailed) {
+			JOptionPane.showMessageDialog(this.window, "A site has encountered too many problmes and failed.\n" +
+					"It was not able to recover, and caused the project to fail.\n" +
+					"The game has ended. Restart to start a new game.");
+		}
 		if (!this.gameEnded) {
 			endGame();
 		}
