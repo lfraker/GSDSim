@@ -126,7 +126,7 @@ Release 2 Features:
 			to pause and enact an intervention
 			*If the game is in HARD mode, and pause is disabled, the user is simply
 			encouraged to enact an intervention
-			*The user is warned that if the same problem occurs three times, then
+			*The user is warned that if the same problem occurs five times, then
 			the site will fail and they will lose the game
 				-It was unclear as to what the site failing might entail, and to
 				us it made the most sense to have it result in a game over with
@@ -135,7 +135,7 @@ Release 2 Features:
 				a real program falling apart. Moreover, without this ‘Game Over’
 				state, there is no chance of losing, and the game is not as
 				exciting
-
+		-Problems are more likely to occur when the game is set to a harder difficulty level.
 		
 	5. feat. 16: Intervention interface 12.00 (80.00):
 
