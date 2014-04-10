@@ -37,6 +37,17 @@ public class AddSiteOptionTest {
 		assertTrue(toTest.getComponentCount() > 0);
 	}
 		
+	
+	@Test
+	public void getChecks() {
+		fPane.setupFrame();
+		toTest = new AddSiteOption(fPane, "test");
+		toTest.getChecks();
+		for (boolean b : toTest.getChecks()) {
+			assertFalse(b);
+		}
+	}
+	
 	@Test
 	public void noButtonTest() {
 		fPane.setupFrame();

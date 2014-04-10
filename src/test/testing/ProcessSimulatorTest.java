@@ -12,6 +12,7 @@ import game.components.Site;
 import game.components.ProcessSimulator;
 //
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import game.swingFramework.FrontEndPane;
 //
 public class ProcessSimulatorTest 
 {
@@ -32,6 +33,18 @@ public class ProcessSimulatorTest
 		toTest.SetDayLength(12);
 		assertTrue(toTest.dayLength == 12);
 	}
+	
+	@Test
+	public void setFPTest() 
+	{
+		FrontEndPane fP = new FrontEndPane();
+		fP.setupFrame();
+		toTest.setFP(fP);
+		assertFalse(toTest.fPane == null);
+		assertTrue(toTest.fPane instanceof FrontEndPane);
+		
+	}
+
 
 	@Test
 	// this test simulates a module falling behind

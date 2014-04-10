@@ -67,6 +67,7 @@ public class FrontEndPane {
 	public Map<String,String> globalParams = new HashMap<>();
 	public float expectedTotalBudge = 0.0f;
 	public static ProcessSimulator processSimulator = new ProcessSimulator();
+	
 	//public static SiteModuleController modSiteController = new SiteModuleController(processSimulator);
 
 	private int zoom;
@@ -123,6 +124,7 @@ public class FrontEndPane {
 		}
 		disableSites();
 		disableModules();
+		processSimulator.setFP(this);
 		doStart();
 
 	}

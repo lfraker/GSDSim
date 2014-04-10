@@ -7,9 +7,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import game.swingFramework.FrontEndPane;
+
 import com.google.gson.*;
 
 import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 public class ProcessSimulator {
 
@@ -17,7 +21,7 @@ public class ProcessSimulator {
 	public long currentTime = 0;
 	public long dayLength = 24;
 	public int hoursSinceStartOfDay = 0;
-
+	public FrontEndPane fPane;
 	private int startOfWorkingDay = 9; // 9am
 	private int endOfWorkingDay = 18; //6pm
 
@@ -26,7 +30,7 @@ public class ProcessSimulator {
 	//This is the simulator that runs at the end of the day, where random occurences are calculated
 	public void endOfDaySim() 
 	{
-		System.out.println("SIMULATING END OF DAY");
+		//System.out.println("SIMULATING END OF DAY");
 
 		for(int i = 0; i < this.allSites.size(); i++)
 		{
@@ -83,27 +87,100 @@ public class ProcessSimulator {
 				{
 					case 0 : 	problemMod.RestartFromStage(0); //Repeat Design
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Design.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
 								break;
 					case 1 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
 								break;
 					case 2 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
 								break;
 					case 3 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
 								break;
 					case 4 : 	problemMod.RestartFromStage(3); //Repeat From Integration
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Integration.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
 								break;
 					case 5 : 	problemMod.RestartFromStage(4); //Repeat From System Test
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting System Test.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
 								break;
 					case 6 : 	problemMod.RestartFromStage(0); //Repeat From Design
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Design.");
+								if (this.fPane.difficulty == Difficulty.EASY) {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to pause the game and enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								else {
+									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
+											" It is recommended to enact an intervention, \notherwise if the problem repeats three times, the site will fail" +
+											" and you will lose");
+								}
+								break;
 				}
+				
+				
 
-
+				
 			}
 
 
@@ -111,6 +188,9 @@ public class ProcessSimulator {
 
 
 
+	}
+	public void setFP(FrontEndPane fp) {
+		this.fPane = fp;
 	}
 
 	public void UpdateTime(long newTime)

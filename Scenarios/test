@@ -1,0 +1,186 @@
+[
+  {
+    "noOfWorkers": 5,
+    "timezone": 0,
+    "siteName": "Russia",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Russia",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 5,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 0.8,
+    "coordinates": [
+      64.92354174306496,
+      84.0234375
+    ],
+    "isRussAsian": true,
+    "globalDistance": 0.0,
+    "modules": [
+      {
+        "modName": "M2",
+        "numberGen": {
+          "seed": {
+            "value": 114589596716287
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          37.35,
+          47.7,
+          27.3,
+          37.8,
+          48.15,
+          41.4,
+          35.1
+        ],
+        "origStepEstimates": [
+          45.0,
+          45.0,
+          30.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "FOLLOWTHESUN",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 274.80002,
+        "origEstimate": 300,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  },
+  {
+    "noOfWorkers": 4,
+    "timezone": -5,
+    "siteName": "America",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "America",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 4,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 0.5,
+    "coordinates": [
+      42.811521745097906,
+      -108.6328125
+    ],
+    "isRussAsian": false,
+    "globalDistance": 5.0,
+    "modules": [
+      {
+        "modName": "m2",
+        "numberGen": {
+          "seed": {
+            "value": 189346906027623
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          58.800003,
+          52.800003,
+          38.8,
+          49.800003,
+          45.600002,
+          63.000004,
+          45.000004
+        ],
+        "origStepEstimates": [
+          60.000004,
+          60.000004,
+          40.0,
+          60.000004,
+          60.000004,
+          60.000004,
+          60.000004
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "AGILE",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 353.80002,
+        "origEstimate": 400,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  }
+]
