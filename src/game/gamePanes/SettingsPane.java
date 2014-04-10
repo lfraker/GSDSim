@@ -319,8 +319,8 @@ public class SettingsPane extends Pane {
 		}
 		catch (NumberFormatException e2) {
 			if (this.startingBudg.getText().length() > 0) {
-				this.parentComp.updateGlobalParam("UsrMoney", "100000");
-				this.startingBudg.setText("100000");
+				this.parentComp.updateGlobalParam("UsrMoney", FrontEndPane.budgStart + "");
+				this.startingBudg.setText(FrontEndPane.budgStart + "");
 			}
 		}
 		try {
@@ -328,8 +328,8 @@ public class SettingsPane extends Pane {
 		}
 		catch (NumberFormatException e2) {
 			if (this.projRev.getText().length() > 0) {
-				this.parentComp.updateGlobalParam("Rev6Month", "500000");
-				this.projRev.setText("500000");
+				this.parentComp.updateGlobalParam("Rev6Month", FrontEndPane.revPredict + "");
+				this.projRev.setText(FrontEndPane.revPredict + "");
 			}
 		}
 		
