@@ -212,7 +212,38 @@ public class Site {
 
 		//Calculate Cultural Distance
 
-		double culturalDistance = 0;
+		int culturalDistance = 0;
+
+
+		if(this.lackCommLang)
+		{
+			culturalDistance += 4;
+		}
+
+		if(this.unevLangSkills)
+		{
+			culturalDistance += 3;
+		}
+
+		if(this.eastWestDiv)
+		{
+			culturalDistance += 3;
+		}
+
+		if(this.highLowContexCults)
+		{
+			culturalDistance += 3;
+		}
+
+		if(this.diffNatCult)
+		{
+			culturalDistance += 2;
+		}
+
+		if(this.diffOrgCult)
+		{
+			culturalDistance += 1;
+		}
 
 		return (double)(normalisedGeoDist + temporalDifference + culturalDistance);
 	}
