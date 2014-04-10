@@ -15,6 +15,8 @@ public class Module
 	public float [] origStepEstimates = new float [7];
 	float [] workDonePerSection = new float [7];
 
+	private int killSwitch = 5;
+
 	public int hoursElapsed;
 
 	//Time wasted due to problems
@@ -399,7 +401,7 @@ public class Module
 		return false;
 	}
 
-	public void RestartFromStage(int stage)
+	public boolean RestartFromStage(int stage)
 	{
 		//Simulates a delay by undoing all work from a certain stage onwards
 
@@ -409,6 +411,15 @@ public class Module
 			this.workDonePerSection[i] = 0;
 		}
 		
+		this.killSwitch--;
+
+		if(this.killSwitch == 0)
+		{
+			//Returns true if module has failed
+			return true;
+		}
+
+		return false;
 	}
 
 	public int GetHoursElapsed()

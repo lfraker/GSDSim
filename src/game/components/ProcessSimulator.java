@@ -27,6 +27,8 @@ public class ProcessSimulator {
 
 	public double interventionEffects = 0;
 
+	public boolean HasFailed = false;
+
 	private Random rnd = new Random();
 
 
@@ -100,7 +102,7 @@ public class ProcessSimulator {
 
 				switch(currentTask)
 				{
-					case 0 : 	problemMod.RestartFromStage(0); //Repeat Design
+					case 0 : 	this.HasFailed = problemMod.RestartFromStage(0); //Repeat Design
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Design.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -113,7 +115,7 @@ public class ProcessSimulator {
 											" and you will lose");
 								}
 								break;
-					case 1 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
+					case 1 : 	this.HasFailed = problemMod.RestartFromStage(1); //Repeat From Implementation
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -126,7 +128,7 @@ public class ProcessSimulator {
 											" and you will lose");
 								}
 								break;
-					case 2 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
+					case 2 : 	this.HasFailed = problemMod.RestartFromStage(1); //Repeat From Implementation
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -139,7 +141,7 @@ public class ProcessSimulator {
 											" and you will lose");
 								}
 								break;
-					case 3 : 	problemMod.RestartFromStage(1); //Repeat From Implementation
+					case 3 : 	this.HasFailed = problemMod.RestartFromStage(1); //Repeat From Implementation
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Implementation.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -152,7 +154,7 @@ public class ProcessSimulator {
 											" and you will lose");
 								}
 								break;
-					case 4 : 	problemMod.RestartFromStage(3); //Repeat From Integration
+					case 4 : 	this.HasFailed = problemMod.RestartFromStage(3); //Repeat From Integration
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Integration.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -165,7 +167,7 @@ public class ProcessSimulator {
 											" and you will lose");
 								}
 								break;
-					case 5 : 	problemMod.RestartFromStage(4); //Repeat From System Test
+					case 5 : 	this.HasFailed = problemMod.RestartFromStage(4); //Repeat From System Test
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting System Test.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -178,7 +180,7 @@ public class ProcessSimulator {
 											" and you will lose");
 								}
 								break;
-					case 6 : 	problemMod.RestartFromStage(0); //Repeat From Design
+					case 6 : 	this.HasFailed = problemMod.RestartFromStage(0); //Repeat From Design
 								System.out.println("Problem with module " + problemMod.getName() + ". Restarting Design.");
 								if (this.fPane.difficulty == Difficulty.EASY) {
 									JOptionPane.showMessageDialog(this.fPane.getWindow(), "Problem with module " + problemMod.getName() + ". Restarting Design.\n" +
@@ -192,10 +194,14 @@ public class ProcessSimulator {
 								}
 								break;
 				}
+
+				if(this.HasFailed)
+				{
+					currentSite.mapMarker.setFailed();
+				}
 				
 				
 
-				
 			}
 
 
