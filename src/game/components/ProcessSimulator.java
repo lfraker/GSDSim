@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import game.org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import com.google.gson.*;
 
+import java.util.Random;
 
 public class ProcessSimulator {
 
@@ -20,6 +21,8 @@ public class ProcessSimulator {
 	private int startOfWorkingDay = 9; // 9am
 	private int endOfWorkingDay = 18; //6pm
 
+	private Random rnd = new Random();
+
 	//This is the simulator that runs at the end of the day, where random occurences are calculated
 	public void endOfDaySim() 
 	{
@@ -30,18 +33,29 @@ public class ProcessSimulator {
 			Site currentSite = this.allSites.get(i);
 			
 			//Calculate costs from each site and subtracts it from the balance.
-<<<<<<< HEAD
-			float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
-=======
 
 			//float siteCostPerDay = (float)(currentSite.GetCostDeveloperDay() * currentSite.GetNumberWorkers());
 
 
->>>>>>> mergingFix
+
+			//Check if a failure should occur
+
+			float failProb = currentSite.GetFailureProbability();
+
+			float r = this.rnd.nextFloat();
+
+			System.out.println("Prob Sim:" + r + " : " + failProb );
 
 
 
+			if(r <= failProb)
+			{
+				//Problem occurs
 
+				System.out.println("Problem");
+
+
+			}
 
 
 		}
@@ -237,6 +251,16 @@ public class ProcessSimulator {
 	
 	public void AddSite(Site site)
 	{
+		if(this.allSites.size() > 0)
+		{
+			Site homeSite = this.allSites.get(0);
+			site.SetGlobalDistance(homeSite.CalcGlobalDistanceToSite(site));
+
+			System.out.println("Added site " + homeSite.getName() + " with distance " + site.GetGlobalDistance() + "km");
+
+
+		}
+
 	  	this.allSites.add(site);
 	}
 	
