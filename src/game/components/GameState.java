@@ -66,7 +66,7 @@ public class GameState
 	}
 
 
-	public void SaveState(String filename)
+	public boolean SaveState(String filename)
 	{
 		//Will save current game state (sites and modules) to the given filename.
 
@@ -81,7 +81,10 @@ public class GameState
 		catch(Exception e)
 		{
 			System.out.println("Couldn't save state.");
+			return false;
 		}
+
+		return true;
 
 	}
 

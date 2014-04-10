@@ -319,12 +319,12 @@ public class ProcessSimulator {
 	}
 		
 
-	public void SaveState(String savefile)
+	public boolean SaveState(String savefile)
 	{
 		//Creates a save file
 
 		GameState gs = new GameState(allSites);
-		gs.SaveState(savefile);
+		return gs.SaveState(savefile);
 	}
 
 	public long NominalScheduleCalc()
