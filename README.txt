@@ -117,8 +117,53 @@ Release 2 Features:
 		
 	5. feat. 16: Intervention interface 12.00 (80.00):
 
-	
 
+	6. feat. 7: Inquiry interface 40.00 (120.00):
+
+		-While simulation is running, click on any site’s dot to display inquiry interface
+			*Interface will appear with each inquiry option on the left hand side, and
+			corresponding buttons to enact inquiry on the right hand side
+			*Each inquiry has a cost in developer days (dev-days)
+				-Dev-day cost represents the number of developer days that inquiry
+				uses up
+				-Cost is calculated by multiplying the number of developers at the
+				site by the cost per developer day, then multiplying this resulting
+				value by the given dev-day cost. This value is then subtracted from
+				the users budget as the Euros used on the inquiry
+			*The sites response to any inquiry can be viewed in the text box at the bottom
+			of the screen
+			*Inquiries are as follows:
+				-Send are you on schedule email - cost of 0 dev-days
+					*Russian/Asian sites always report yes, regardless of whether
+					or not their sites map marker is yellow
+					*All other sites will report yes if their map marker is green
+					and no otherwise
+				-Request status of modules - cost of 0.1 dev-days
+					*Russian/Asian sites will report all modules current being
+					worked on at the site as ‘On Schedule’
+					*All other sites will report ‘On Schedule’ if the modules being
+					worked on at the site are on schedule and the site’s map marker
+					is green, or they will report ‘Behind Schedule’ if the modules
+					being worked on at the site are behind schedule and the site’s
+					map marker is yellow
+				-Request completed tasks - cost of 0.5 dev-days
+					*All sites will list the current phases completed for each module
+					but they will not lest any information about not completed phases
+				-Hold video conference - 2.0 dev-days
+					*All sites will list the current phases completed for each module
+					*Asian/Russian sites will list whether or not the other phases
+					for each module are behind or on schedule with 50% accuracy
+					*All other sites will list the phases for other modules as ‘Behind
+					Schedule’ if the map marker is yellow and the site is behind schedule,
+					or ‘On Schedule’ if the map marker is green and the site is on schedule
+				-Visit site - 7.0 dev-days
+					*All sites list completed module phases, on schedule phases
+					and behind schedule phases accurately.
+			
+
+		
+	
+Release 1 Features:
 
 
 	Master Config - the master settings configuration file can be found under GSDSim/gameFiles/settings.txt. Instructions for how to appropriately edit the file can be found there as well.
@@ -134,18 +179,6 @@ Release 2 Features:
 	Nominal Schedule Calculator - 
 
 	Module Completion Calculator - 
-
-	End of Game Report - When the game ends, and all modules complete, or the user runs out of money, the game window will close and the end of game report will open. This report will show the original estimates alongside the actual time taken for each module. The user has the ability to save this report by entering a file name at the bottom and clicking save.
-
-	Game Score Calculator - 
-
-	Problem Simulator - 
-
-	Intervention Interface - To use the intervention interface, when you are on the map tab, click the intervention button to open up the intervention tab. The different interventions are listed here. along with buttons to ‘enact the intervention’.
-
-	Inquiry Interface - Once the simulation has started and you are viewing the status screen, click on any site’s dot to open the query interface. In the query interface, click on any of the button’s to query the site, and the output will be displayed in the text area at the bottom.
-
-
 
 
 
