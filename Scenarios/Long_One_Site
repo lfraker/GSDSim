@@ -1,0 +1,95 @@
+[
+  {
+    "noOfWorkers": 5,
+    "timezone": 0,
+    "siteName": "Dublin",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Dublin",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 250,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 0.7,
+    "coordinates": [
+      53.32431151982718,
+      -6.3720703125
+    ],
+    "isRussAsian": false,
+    "globalDistance": 0.0,
+    "modules": [
+      {
+        "modName": "Core",
+        "numberGen": {
+          "seed": {
+            "value": 196192951161687
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          1275.0,
+          1395.0,
+          1180.0,
+          1590.0,
+          1770.0,
+          1305.0,
+          1680.0
+        ],
+        "origStepEstimates": [
+          1500.0,
+          1500.0,
+          1000.0,
+          1500.0,
+          1500.0,
+          1500.0,
+          1500.0
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "WATERFALL",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 10195.0,
+        "origEstimate": 10000,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  }
+]

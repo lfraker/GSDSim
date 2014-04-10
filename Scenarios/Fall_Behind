@@ -1,0 +1,188 @@
+[
+  {
+    "noOfWorkers": 4,
+    "timezone": -5,
+    "siteName": "United States",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "United States",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 300,
+    "lackCommLang": true,
+    "unevLangSkills": true,
+    "eastWestDiv": true,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 0.6,
+    "coordinates": [
+      38.272688535980976,
+      -85.4296875
+    ],
+    "isRussAsian": false,
+    "globalDistance": 0.0,
+    "modules": [
+      {
+        "modName": "Core",
+        "numberGen": {
+          "seed": {
+            "value": 168103518791631
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          25.2,
+          27.300001,
+          18.8,
+          37.2,
+          32.4,
+          36.9,
+          34.2
+        ],
+        "origStepEstimates": [
+          30.000002,
+          30.000002,
+          20.0,
+          30.000002,
+          30.000002,
+          30.000002,
+          30.000002
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "FOLLOWTHESUN",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 211.99998,
+        "origEstimate": 200,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  },
+  {
+    "noOfWorkers": 8,
+    "timezone": 0,
+    "siteName": "Russia",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Russia",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 200,
+    "lackCommLang": true,
+    "unevLangSkills": true,
+    "eastWestDiv": true,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 0.7,
+    "coordinates": [
+      59.88893689676585,
+      95.9765625
+    ],
+    "isRussAsian": true,
+    "globalDistance": 15.0,
+    "modules": [
+      {
+        "modName": "Backend",
+        "numberGen": {
+          "seed": {
+            "value": 98554930961351
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          53.4,
+          48.600002,
+          46.4,
+          50.4,
+          48.600002,
+          55.800003,
+          51.000004
+        ],
+        "origStepEstimates": [
+          60.000004,
+          60.000004,
+          40.0,
+          60.000004,
+          60.000004,
+          60.000004,
+          60.000004
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "WATERFALL",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 354.2,
+        "origEstimate": 400,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  }
+]
