@@ -188,6 +188,8 @@ public class FrontEndPane {
 	
 	
 	public final void doTick() {
+		
+
 		if (this.globalParams.get("UsrMoney").length() == 0) {
 			this.updateGlobalParam("UsrMoney", this.budgStart+"");
 		}
@@ -198,6 +200,7 @@ public class FrontEndPane {
 			JOptionPane.showMessageDialog(this.window, "A site has encountered too many problmes and failed.\n" +
 					"It was not able to recover, and caused the project to fail.\n" +
 					"The game has ended. Restart to start a new game.");
+			System.exit(0);
 		}
 		if (!this.gameEnded) {
 			endGame();
@@ -213,6 +216,15 @@ public class FrontEndPane {
 		long currentNanos = System.nanoTime();
 		long delta = currentNanos - lastTickNanos;
 
+		int currID = this.frames.getSelectedIndex();
+		String currTab = this.frames.getTitleAt(currID);
+		//if (!currTab.equals("Settings")) {
+		
+	//	}
+//		if (!currTab.equals("Sites")) {
+//			((Pane)this.frames.getComponent(currID)).doTick(delta);
+//		}
+		this.frames.getComponent(currID).repaint();
 		if(!this.paused && this.timeStart) 
 		{
 			this.currTime += delta;
@@ -256,12 +268,12 @@ public class FrontEndPane {
 //			throwableGenerated("onTick", t);
 //		}
 		//System.out.println("THIS PAUSED : " + this.paused);
-		//System.out.println("THIS CAN PAUSE : " + this.canPause);
-		int currID = this.frames.getSelectedIndex();
-		String currTab = this.frames.getTitleAt(currID);
-		//if (!currTab.equals("Settings")) {
-		
-	//	}
+//		//System.out.println("THIS CAN PAUSE : " + this.canPause);
+//		int currID = this.frames.getSelectedIndex();
+//		String currTab = this.frames.getTitleAt(currID);
+//		//if (!currTab.equals("Settings")) {
+//		
+//	//	}
 		if (!currTab.equals("Sites")) {
 			((Pane)this.frames.getComponent(currID)).doTick(delta);
 		}

@@ -1,0 +1,188 @@
+[
+  {
+    "noOfWorkers": 7,
+    "timezone": -5,
+    "siteName": "America",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "America",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 300,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 1.0,
+    "coordinates": [
+      36.03133177633187,
+      -83.3203125
+    ],
+    "isRussAsian": false,
+    "globalDistance": 0.0,
+    "modules": [
+      {
+        "modName": "core",
+        "numberGen": {
+          "seed": {
+            "value": 75296863015879
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          6.8250003,
+          6.5250006,
+          5.25,
+          6.9000006,
+          8.475,
+          8.700001,
+          6.0000005
+        ],
+        "origStepEstimates": [
+          7.5000005,
+          7.5000005,
+          5.0,
+          7.5000005,
+          7.5000005,
+          7.5000005,
+          7.5000005
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "AGILE",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 48.675,
+        "origEstimate": 50,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  },
+  {
+    "noOfWorkers": 5,
+    "timezone": 0,
+    "siteName": "Europe",
+    "mapMarker": {
+      "status": "ONTIME",
+      "coord": {},
+      "radius": 5.0,
+      "markerStyle": "FIXED",
+      "name": "Europe",
+      "style": {
+        "color": {
+          "value": -16777216,
+          "falpha": 0.0
+        },
+        "backColor": {
+          "value": -16711936,
+          "falpha": 0.0
+        },
+        "font": {
+          "name": "Lucida Grande",
+          "style": 1,
+          "size": 13,
+          "pointSize": 13.0,
+          "fontSerializedDataVersion": 1
+        }
+      },
+      "writeClick": false
+    },
+    "costDeveloperDay": 250,
+    "lackCommLang": false,
+    "unevLangSkills": false,
+    "eastWestDiv": false,
+    "highLowContexCults": false,
+    "diffNatCult": false,
+    "diffOrgCult": false,
+    "effortDeveloperDay": 1.0,
+    "coordinates": [
+      49.1529696561704,
+      11.953125
+    ],
+    "isRussAsian": false,
+    "globalDistance": 5.0,
+    "modules": [
+      {
+        "modName": "frontend",
+        "numberGen": {
+          "seed": {
+            "value": 22273745236471
+          },
+          "nextNextGaussian": 0.0,
+          "haveNextNextGaussian": false
+        },
+        "stepEstimates": [
+          13.3875,
+          12.4875,
+          8.1,
+          11.25,
+          10.125,
+          8.4375,
+          13.725
+        ],
+        "origStepEstimates": [
+          11.25,
+          11.25,
+          7.5,
+          11.25,
+          11.25,
+          11.25,
+          11.25
+        ],
+        "workDonePerSection": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "killSwitch": 5,
+        "hoursElapsed": 0,
+        "wastedTime": 0.0,
+        "devMethod": "FOLLOWTHESUN",
+        "numWorkers": 1,
+        "performanceLevel": 1.0,
+        "totalEstimate": 77.5125,
+        "origEstimate": 75,
+        "currentStage": 0,
+        "complete": false
+      }
+    ]
+  }
+]
